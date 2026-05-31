@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proxima &mdash; L'associazione pi&ugrave; giovane di Gorgonzola</title>
+<link rel="icon" href="img/logo-neg.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding:calc(var(--nav-h) + 6vh) 5vw calc(56px + 6vh);
+  background:radial-gradient(circle at 82% 22%,rgba(74,60,236,.55),transparent 50%),
+             radial-gradient(circle at 12% 85%,rgba(255,106,43,.22),transparent 45%),
+             radial-gradient(circle at 55% 60%,rgba(155,60,255,.16),transparent 55%)}
+.hero .kicker{font-family:'Space Grotesk';color:var(--yellow);text-transform:uppercase;letter-spacing:3px;font-size:.82rem;font-weight:700;margin-bottom:20px;opacity:0;animation:rise .8s .1s forwards}
+.hero h1{font-family:var(--display);font-size:clamp(2.6rem,10vw,8rem);line-height:.98;text-transform:uppercase;letter-spacing:-1px}
+.hero h1 span{display:block;opacity:0;animation:rise .9s forwards}
+.hero h1 span:nth-child(1){animation-delay:.15s}
+.hero h1 span:nth-child(2){animation-delay:.3s;color:var(--violet)}   /* titolo accento BLU */
+.hero h1 span:nth-child(3){animation-delay:.45s}
+.hero .sub{max-width:540px;margin-top:26px;font-size:1.15rem;font-weight:300;opacity:0;animation:rise .9s .6s forwards}
+.hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s .75s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.marquee{position:absolute;bottom:0;left:0;right:0;background:var(--violet);color:#fff;overflow:hidden;white-space:nowrap;padding:10px 0;font-family:var(--display);font-size:1rem;text-transform:uppercase;letter-spacing:1px}
+.marquee span{display:inline-block;animation:scroll 20s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.up-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+.up-head a.seeall{font-family:'Space Grotesk';font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);border-bottom:2px solid var(--yellow);padding-bottom:3px;white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:30px}
+.card{display:block;color:inherit;border:1px solid rgba(246,245,239,.16);padding:28px;transition:.3s;position:relative;overflow:hidden;background:rgba(255,255,255,.025);border-radius:24px 24px 24px 4px}
+.card:hover{transform:translateY(-6px);border-color:var(--yellow)}
+.card .date{font-family:'Space Grotesk';font-size:.76rem;color:var(--yellow);text-transform:uppercase;letter-spacing:2px;font-weight:700}
+.card h3{font-family:'Sora';font-weight:800;font-size:1.35rem;margin:10px 0}
+.card p{font-weight:300;opacity:.8;margin-bottom:14px;font-size:.93rem}
+.card .place{font-family:'Space Grotesk';font-size:.76rem;opacity:.6}
+.card .badge{position:absolute;top:15px;right:-34px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.64rem;padding:5px 40px;transform:rotate(35deg);text-transform:uppercase}
+/* temi colore evento */
+.card.t-orange{border-color:rgba(255,106,43,.4)} .card.t-orange:hover{border-color:var(--orange)}
+.card.t-orange .date{color:var(--orange)} .card.t-orange .badge{background:var(--orange)}
+.card.t-blue{border-color:rgba(74,60,236,.45)} .card.t-blue:hover{border-color:var(--violet)}
+.card.t-blue .date{color:#8aa0ff} .card.t-blue .badge{background:var(--violet)}
+
+.league{background:linear-gradient(165deg,var(--violet-deep),var(--ink));border-top:1px solid rgba(246,245,239,.1)}
+.gironi{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
+@media(max-width:760px){.gironi{grid-template-columns:1fr}}
+.girone{background:rgba(255,255,255,.04);border:1px solid rgba(246,245,239,.12);border-radius:20px 20px 20px 4px;overflow:hidden}
+.girone .gt{font-family:var(--display);text-transform:uppercase;font-size:1.05rem;letter-spacing:1px;padding:14px 18px;background:var(--violet);display:flex;align-items:center;gap:10px}
+.girone .gt .dot{width:12px;height:12px;border-radius:50%}
+.g1 .dot{background:var(--yellow)} .g2 .dot{background:var(--orange)} .g3 .dot{background:var(--grape)} .g4 .dot{background:#3dd6ff}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 18px;text-align:left;font-size:.9rem}
+thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12)}
+tbody tr{border-top:1px solid rgba(246,245,239,.07)}
+tbody tr:hover{background:rgba(221,235,0,.05)}
+td.pos{font-family:var(--display);width:42px;opacity:.8}
+tbody tr:nth-child(1) td.pos{color:var(--yellow);opacity:1}
+td.team{font-weight:600}
+td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
+.lgnote{font-family:'Space Grotesk';font-size:.76rem;opacity:.6;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="nav-scrim" onclick="closeMenu()"></div>
+<nav>
+  <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:30px"></a>
+  <button class="burger" aria-label="Menu" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+  <div class="links" id="navlinks">
+    <a href="index.html" class="active">Home</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="eventi.html">Eventi</a>
+    <a href="archivio.html">Archivio</a>
+    <a href="trasparenza.html">Trasparenza</a>
+    <a href="contatti.html">Contatti</a>
+  </div>
+</nav>
+<header class="hero">
+  <div class="kicker">L'associazione pi&ugrave; giovane di Gorgonzola</div>
+  <h1><span>Lo spazio</span><span>dei giovani</span><span>&egrave; adesso.</span></h1>
+  <p class="sub">Proxima crea eventi, musica, sport e cultura per i ragazzi di Gorgonzola e della Martesana. Un posto dove succedono cose.</p>
+  <div class="cta">
+    <a href="chi-siamo.html" class="btn fill">Chi siamo</a>
+    <a href="contatti.html" class="btn">Contattaci</a>
+  </div>
+  <div class="marquee"><span>EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span></div>
+</header>
+
+<section class="section">
+  <div class="up-head"><div><div class="tag">In arrivo</div><h2>Prossimi eventi</h2></div>
+    <a class="seeall" href="eventi.html">Tutti gli eventi &rarr;</a></div>
+  <p class="lead">Un assaggio di quello che bolle in pentola. Sulla pagina Eventi trovi il calendario completo e l'archivio delle edizioni passate.</p>
+  <div class="cards">
+    <a class="card t-orange" href="evento.html?e=gorgo-jam"><span class="badge">Iscrizioni aperte</span>
+      <div class="date">Giugno 2026</div><h3>Gorgo Jam 2026</h3>
+      <p>Torneo di basket 3vs3 con musica e street food al centro sportivo.</p>
+      <div class="place">&#128205; Gorgonzola</div></a>
+    <a class="card t-blue" href="evento.html?e=summer-league"><span class="badge">In corso</span>
+      <div class="date">Giu &mdash; Ago 2026</div><h3>Gorgo Summer League</h3>
+      <p>Il campionato estivo a gironi. Classifiche e calendario partite.</p>
+      <div class="place">&#128205; Gorgonzola</div></a>
+    <a class="card" href="evento.html?e=summer-live">
+      <div class="date">Luglio 2026</div><h3>Summer Live Sessions</h3>
+      <p>Serate di musica dal vivo: hip-hop, funk e band emergenti.</p>
+      <div class="place">&#128205; Parco comunale</div></a>
+  </div>
+</section>
+
+<section class="section league">
+  <div class="tag">Sport &middot; estate 2026</div>
+  <h2>Gorgo Summer League</h2>
+  <div class="league-brand">
+    <div class="league-logo-slot"><img src="img/summer-league-logo.svg" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='Logo Summer League'"></div>
+    <p class="lead" style="margin:0">Il campionato estivo di Proxima: 16 squadre divise in 4 gironi, partite ogni settimana. Ecco le classifiche aggiornate.</p>
+  </div>
+  <div class="gironi"><div class="girone g1"><div class="gt"><span class="dot"></span>Girone A</div>
+  <table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th style="text-align:right">Pt</th></tr></thead>
+  <tbody><tr><td class="pos">1</td><td class="team">Martesana Ballers</td><td>4</td><td>4</td><td class="pts">12</td></tr><tr><td class="pos">2</td><td class="team">Gorgo Wolves</td><td>4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">3</td><td class="team">Naviglio Kings</td><td>4</td><td>1</td><td class="pts">3</td></tr><tr><td class="pos">4</td><td class="team">Centro Storico FC</td><td>4</td><td>0</td><td class="pts">0</td></tr></tbody></table></div><div class="girone g2"><div class="gt"><span class="dot"></span>Girone B</div>
+  <table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th style="text-align:right">Pt</th></tr></thead>
+  <tbody><tr><td class="pos">1</td><td class="team">Proxima Stars</td><td>4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">2</td><td class="team">East Side Crew</td><td>4</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">3</td><td class="team">Villa Sola Team</td><td>4</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">4</td><td class="team">I Soliti Ignoti</td><td>4</td><td>1</td><td class="pts">3</td></tr></tbody></table></div><div class="girone g3"><div class="gt"><span class="dot"></span>Girone C</div>
+  <table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th style="text-align:right">Pt</th></tr></thead>
+  <tbody><tr><td class="pos">1</td><td class="team">Stazione Crew</td><td>4</td><td>4</td><td class="pts">12</td></tr><tr><td class="pos">2</td><td class="team">Bastogi Ballers</td><td>4</td><td>2</td><td class="pts">6</td></tr><tr><td class="pos">3</td><td class="team">Argentia All Stars</td><td>4</td><td>1</td><td class="pts">3</td></tr><tr><td class="pos">4</td><td class="team">Quartiere Nord</td><td>4</td><td>1</td><td class="pts">3</td></tr></tbody></table></div><div class="girone g4"><div class="gt"><span class="dot"></span>Girone D</div>
+  <table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th style="text-align:right">Pt</th></tr></thead>
+  <tbody><tr><td class="pos">1</td><td class="team">Officine Giovani</td><td>4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">2</td><td class="team">Pertini Squad</td><td>4</td><td>3</td><td class="pts">9</td></tr><tr><td class="pos">3</td><td class="team">Rockfeller Boys</td><td>4</td><td>1</td><td class="pts">3</td></tr><tr><td class="pos">4</td><td class="team">Cascina United</td><td>4</td><td>0</td><td class="pts">0</td></tr></tbody></table></div></div>
+  <p class="lgnote">G = giocate &middot; V = vittorie &middot; Pt = punti. Aggiorna le righe in index.html. Il logo va in img/summer-league-logo.svg (o .png).</p>
+</section>
+<footer>
+  <div class="col">
+    <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:34px"></a>
+    <p>L'associazione pi&ugrave; giovane di Gorgonzola (MI)</p>
+    <div class="social">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.21 8.8 2.2 12 2.2m0 1.95c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.22-.94.47-1.35.88-.41.41-.66.8-.88 1.35-.16.41-.35 1.03-.4 2.17-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.22.55.47.94.88 1.35.41.41.8.66 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.22.94-.47 1.35-.88.41-.41.66-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.41-.16-1.03-.35-2.17-.4-1.24-.06-1.59-.07-4.74-.07m0 3.32a4.53 4.53 0 1 0 0 9.06 4.53 4.53 0 0 0 0-9.06m0 7.47a2.94 2.94 0 1 1 0-5.88 2.94 2.94 0 0 1 0 5.88m5.77-7.67a1.06 1.06 0 1 1-2.12 0 1.06 1.06 0 0 1 2.12 0"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.67 5.67 0 0 0-.8-.06 5.66 5.66 0 1 0 5.66 5.66V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.22-1.48"/></svg></a>
+    </div>
+  </div>
+  <div class="col">
+    <nav class="fnav">
+      <a href="chi-siamo.html">Chi siamo</a><a href="eventi.html">Eventi</a>
+      <a href="archivio.html">Archivio</a>
+      <a href="trasparenza.html">Trasparenza</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <p style="margin-top:14px;font-family:'Space Grotesk';font-size:.75rem">&copy; 2026 Associazione Proxima &middot; C.F. 91603100156</p>
+  </div>
+</footer>
+<script>
+function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+</script>
+</body>
+</html>

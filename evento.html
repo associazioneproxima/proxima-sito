@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evento &mdash; Proxima</title>
+<link rel="icon" href="img/logo-neg.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.ev{padding:calc(var(--nav-h) + 40px) 5vw 80px}
+.ev-back{font-family:'Space Grotesk';font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;opacity:.7}
+.ev-back:hover{opacity:1;color:var(--theme,var(--yellow))}
+.ev-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:48px;align-items:start;margin-top:28px}
+@media(max-width:860px){.ev-grid{grid-template-columns:1fr;gap:30px}}
+.poster-slot{aspect-ratio:3/4;border-radius:24px 24px 24px 4px;background:linear-gradient(150deg,var(--theme,var(--violet)),var(--ink));border:1px solid rgba(246,245,239,.14);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.poster-slot img{width:100%;height:100%;object-fit:cover}
+.poster-slot .ph{font-family:var(--display);text-transform:uppercase;opacity:.5;letter-spacing:1px;font-size:.9rem}
+.ev-cat{display:inline-block;font-family:'Space Grotesk';font-weight:700;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:#fff;background:var(--theme,var(--violet));padding:6px 14px;border-radius:50px;margin-bottom:18px}
+.ev h1{font-family:var(--display);font-size:clamp(2.2rem,6vw,4rem);line-height:1;text-transform:uppercase;letter-spacing:-1px;margin-bottom:18px}
+.ev-meta{display:flex;flex-direction:column;gap:12px;margin:24px 0}
+.ev-meta div{display:flex;gap:12px;align-items:flex-start;font-size:1rem}
+.ev-meta .k{font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;font-size:.72rem;letter-spacing:1px;opacity:.6;min-width:90px;padding-top:3px}
+.ev-desc{font-weight:300;font-size:1.05rem;opacity:.9;margin:8px 0 28px}
+.ev-desc p{margin-bottom:12px}
+.btn.theme{background:var(--theme,var(--yellow));border-color:var(--theme,var(--yellow));color:#fff}
+.btn.theme:hover{box-shadow:6px 6px 0 rgba(0,0,0,.4)}
+.ev-extra{margin-top:54px;border-top:1px solid rgba(246,245,239,.12);padding-top:30px}
+</style>
+</head>
+<body>
+<div class="nav-scrim" onclick="closeMenu()"></div>
+<nav>
+  <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:30px"></a>
+  <button class="burger" aria-label="Menu" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+  <div class="links" id="navlinks">
+    <a href="index.html">Home</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="eventi.html" class="active">Eventi</a>
+    <a href="archivio.html">Archivio</a>
+    <a href="trasparenza.html">Trasparenza</a>
+    <a href="contatti.html">Contatti</a>
+  </div>
+</nav>
+<section class="ev" id="ev">
+  <a href="eventi.html" class="ev-back">&larr; Tutti gli eventi</a>
+  <div class="ev-grid">
+    <div class="poster-slot" id="poster"><span class="ph">Locandina</span></div>
+    <div>
+      <span class="ev-cat" id="cat">Evento</span>
+      <h1 id="title">Evento</h1>
+      <div class="ev-meta">
+        <div><span class="k">Quando</span><span id="when">&mdash;</span></div>
+        <div><span class="k">Dove</span><span id="where">&mdash;</span></div>
+        <div><span class="k">Per chi</span><span id="who">&mdash;</span></div>
+      </div>
+      <div class="ev-desc" id="desc"></div>
+      <a class="btn theme" id="cta" href="contatti.html">Iscriviti</a>
+    </div>
+  </div>
+  <div class="ev-extra" id="extra"></div>
+</section>
+<footer>
+  <div class="col">
+    <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:34px"></a>
+    <p>L'associazione pi&ugrave; giovane di Gorgonzola (MI)</p>
+    <div class="social">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.21 8.8 2.2 12 2.2m0 1.95c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.22-.94.47-1.35.88-.41.41-.66.8-.88 1.35-.16.41-.35 1.03-.4 2.17-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.22.55.47.94.88 1.35.41.41.8.66 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.22.94-.47 1.35-.88.41-.41.66-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17a3.6 3.6 0 0 0-.88-1.35 3.6 3.6 0 0 0-1.35-.88c-.41-.16-1.03-.35-2.17-.4-1.24-.06-1.59-.07-4.74-.07m0 3.32a4.53 4.53 0 1 0 0 9.06 4.53 4.53 0 0 0 0-9.06m0 7.47a2.94 2.94 0 1 1 0-5.88 2.94 2.94 0 0 1 0 5.88m5.77-7.67a1.06 1.06 0 1 1-2.12 0 1.06 1.06 0 0 1 2.12 0"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.67 5.67 0 0 0-.8-.06 5.66 5.66 0 1 0 5.66 5.66V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.22-1.48"/></svg></a>
+    </div>
+  </div>
+  <div class="col">
+    <nav class="fnav">
+      <a href="chi-siamo.html">Chi siamo</a><a href="eventi.html">Eventi</a>
+      <a href="archivio.html">Archivio</a>
+      <a href="trasparenza.html">Trasparenza</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <p style="margin-top:14px;font-family:'Space Grotesk';font-size:.75rem">&copy; 2026 Associazione Proxima &middot; C.F. 91603100156</p>
+  </div>
+</footer>
+<script>
+function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+</script><script>
+var EVENTS={
+  "gorgo-jam":{cat:"Sport &middot; Basket",theme:"#ff6a2b",title:"Gorgo Jam 2026",
+    when:"Giugno 2026, dalle 10:00 alle 22:00",where:"Centro sportivo comunale, Gorgonzola",who:"Under 25 &middot; squadre 3vs3",
+    desc:["Una giornata intera dedicata al basket di strada: tornei 3vs3, musica dal vivo, street food e premi per le squadre vincenti.","Un appuntamento aperto a tutti i ragazzi del territorio, dai principianti agli agonisti. Iscrizioni a squadre gi&agrave; formate o come singoli giocatori."],
+    cta:"Iscrivi la tua squadra",poster:"img/gorgo-jam.jpg"},
+  "summer-league":{cat:"Sport &middot; Campionato",theme:"#4a3cec",title:"Gorgo Summer League",
+    when:"Giugno &mdash; Agosto 2026, partite settimanali",where:"Centro sportivo comunale, Gorgonzola",who:"16 squadre &middot; 4 gironi",
+    desc:["Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutta l'estate. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.","Le classifiche dei gironi sono consultabili sulla home del sito."],
+    cta:"Iscrivi una squadra",poster:"img/summer-league.jpg",extra:'<h2 style="font-family:var(--display);text-transform:uppercase;font-size:1.6rem;margin-bottom:10px">Classifiche</h2><p class="lead">Trovi le classifiche dei 4 gironi aggiornate nella sezione dedicata in <a href="index.html" style="color:#8aa0ff;border-bottom:2px solid #8aa0ff">home</a>.</p>'},
+  "summer-live":{cat:"Musica &middot; Live",theme:"#9b3cff",title:"Summer Live Sessions",
+    when:"Luglio 2026, serate ore 21:00",where:"Parco comunale, Gorgonzola",who:"Ingresso libero",
+    desc:["Serate di musica dal vivo nel parco: hip-hop, funk e band emergenti del territorio salgono sul palco di Proxima.","Ingresso gratuito, area food e drink sul posto."],
+    cta:"Vuoi suonare? Scrivici",poster:"img/summer-live.jpg"}
+};
+function qp(n){return new URLSearchParams(location.search).get(n);}
+var key=qp("e")||"gorgo-jam";
+var e=EVENTS[key]||EVENTS["gorgo-jam"];
+document.documentElement.style.setProperty("--theme",e.theme);
+document.getElementById("cat").innerHTML=e.cat;
+document.getElementById("title").innerHTML=e.title;
+document.title=e.title.replace(/&[a-z]+;/g,"")+" — Proxima";
+document.getElementById("when").innerHTML=e.when;
+document.getElementById("where").innerHTML=e.where;
+document.getElementById("who").innerHTML=e.who;
+document.getElementById("desc").innerHTML=e.desc.map(function(p){return "<p>"+p+"</p>"}).join("");
+var cta=document.getElementById("cta");cta.innerHTML=e.cta;cta.href="contatti.html";
+if(e.extra)document.getElementById("extra").innerHTML=e.extra;
+// locandina: prova a caricare l'immagine, altrimenti placeholder
+var img=new Image();
+img.onload=function(){var p=document.getElementById("poster");p.innerHTML="";p.appendChild(img);};
+img.onerror=function(){};
+img.alt=e.title;img.src=e.poster;
+</script>
+</body>
+</html>
