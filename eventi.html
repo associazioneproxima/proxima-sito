@@ -46,34 +46,12 @@
   <h1 class="page-h">Eventi</h1>
   <p class="lead">Il calendario completo delle nostre iniziative. Clicca una scheda per i dettagli e l'iscrizione.</p>
   <h2 style="margin-top:54px">Prossimi</h2>
-  <div class="cards">
-    <a class="card t-orange" href="evento.html?e=gorgo-jam"><span class="badge">Iscrizioni aperte</span>
-      <div class="date">Giugno 2026</div><h3>Gorgo Jam 2026</h3>
-      <p>Torneo di basket giovanile 3vs3 con musica e street food al centro sportivo.</p>
-      <div class="place">&#128205; Gorgonzola</div></a>
-    <a class="card t-blue" href="evento.html?e=summer-league"><span class="badge">In corso</span>
-      <div class="date">Giu &mdash; Ago 2026</div><h3>Gorgo Summer League</h3>
-      <p>Il campionato estivo a gironi. Classifiche e calendario partite.</p>
-      <div class="place">&#128205; Gorgonzola</div></a>
-    <a class="card" href="evento.html?e=summer-live">
-      <div class="date">Luglio 2026</div><h3>Summer Live Sessions</h3>
-      <p>Serate di musica dal vivo: hip-hop, funk e band emergenti del territorio.</p>
-      <div class="place">&#128205; Parco comunale</div></a>
-    <a class="card" href="evento.html?e=summer-live">
-      <div class="date">Settembre 2026</div><h3>Lab Creativi</h3>
-      <p>Workshop gratuiti di grafica, produzione musicale e fotografia per under 25.</p>
-      <div class="place">&#128205; Centro giovani</div></a>
-  </div>
+  <div class="cards" id="cards-prossimi"></div>
   <div class="divider"></div>
   <div class="past">
     <h2>Eventi passati</h2>
     <p class="lead">Cosa abbiamo gi&agrave; portato in citt&agrave;. Locandine e foto nell'<a href="archivio.html" style="color:var(--yellow);border-bottom:2px solid var(--yellow)">Archivio</a>.</p>
-    <div class="cards">
-      <div class="card"><div class="tagline">2025</div><h3>Gorgo Jam 2025</h3><p>Oltre 200 ragazzi, 24 squadre, una giornata intera di basket e musica.</p></div>
-      <div class="card"><div class="tagline">2025</div><h3>Summer Live 2025</h3><p>Tre serate di concerti nel parco con artisti della scena locale.</p></div>
-      <div class="card"><div class="tagline">2024</div><h3>Lab Creativi 2024</h3><p>Sei workshop gratuiti tra grafica, video e produzione musicale.</p></div>
-      <div class="card"><div class="tagline">2023</div><h3>Notte Bianca 2023</h3><p>Il primo grande evento di Proxima: il debutto in piazza.</p></div>
-    </div>
+    <div class="cards" id="cards-passati"></div>
   </div>
 </section>
 <footer>
@@ -99,6 +77,32 @@
 function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+</script>
+<!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
+<script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  var STATI={"iscrizioni":"Iscrizioni aperte","in-corso":"In corso","in-programma":"In programma","archivio":""};
+  fetch("data/eventi.json").then(function(r){return r.json()}).then(function(d){
+    var ev=(d.eventi||[]).slice().sort(function(a,b){return (a.ordine||0)-(b.ordine||0)});
+    var pross=document.getElementById("cards-prossimi");
+    var pass=document.getElementById("cards-passati");
+    ev.forEach(function(e){
+      var tema=e.tema&&e.tema!=="neutro"?(" t-"+e.tema):"";
+      var badge=STATI[e.stato]?('<span class="badge">'+STATI[e.stato]+'</span>'):"";
+      var card='<a class="card'+tema+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+
+               '<div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
+               '<p>'+(e.descrizione||"").slice(0,120)+((e.descrizione||"").length>120?"…":"")+'</p>'+
+               (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</a>';
+      if(e.stato==="archivio"){ pass.insertAdjacentHTML("beforeend",card); }
+      else { pross.insertAdjacentHTML("beforeend",card); }
+    });
+    if(!pross.children.length) pross.innerHTML='<p style="opacity:.6">Nessun evento in programma al momento.</p>';
+    if(!pass.children.length) pass.innerHTML='<p style="opacity:.6">Ancora nessun evento in archivio.</p>';
+  }).catch(function(){
+    document.getElementById("cards-prossimi").innerHTML='<p style="opacity:.6">Impossibile caricare gli eventi.</p>';
+  });
+})();
 </script>
 </body>
 </html>

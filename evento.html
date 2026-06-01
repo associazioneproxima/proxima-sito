@@ -86,38 +86,34 @@ function toggleMenu(btn){var l=document.getElementById('navlinks');var s=documen
 function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
 </script><script>
-var EVENTS={
-  "gorgo-jam":{cat:"Sport &middot; Basket",theme:"#ff6a2b",title:"Gorgo Jam 2026",
-    when:"Giugno 2026, dalle 10:00 alle 22:00",where:"Centro sportivo comunale, Gorgonzola",who:"Under 25 &middot; squadre 3vs3",
-    desc:["Una giornata intera dedicata al basket di strada: tornei 3vs3, musica dal vivo, street food e premi per le squadre vincenti.","Un appuntamento aperto a tutti i ragazzi del territorio, dai principianti agli agonisti. Iscrizioni a squadre gi&agrave; formate o come singoli giocatori."],
-    cta:"Iscrivi la tua squadra",poster:"img/gorgo-jam.jpg"},
-  "summer-league":{cat:"Sport &middot; Campionato",theme:"#4a3cec",title:"Gorgo Summer League",
-    when:"Giugno &mdash; Agosto 2026, partite settimanali",where:"Centro sportivo comunale, Gorgonzola",who:"16 squadre &middot; 4 gironi",
-    desc:["Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutta l'estate. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.","Le classifiche dei gironi sono consultabili sulla home del sito."],
-    cta:"Iscrivi una squadra",poster:"img/summer-league.jpg",extra:'<h2 style="font-family:var(--display);text-transform:uppercase;font-size:1.6rem;margin-bottom:10px">Classifiche</h2><p class="lead">Trovi le classifiche dei 4 gironi aggiornate nella sezione dedicata in <a href="index.html" style="color:#8aa0ff;border-bottom:2px solid #8aa0ff">home</a>.</p>'},
-  "summer-live":{cat:"Musica &middot; Live",theme:"#9b3cff",title:"Summer Live Sessions",
-    when:"Luglio 2026, serate ore 21:00",where:"Parco comunale, Gorgonzola",who:"Ingresso libero",
-    desc:["Serate di musica dal vivo nel parco: hip-hop, funk e band emergenti del territorio salgono sul palco di Proxima.","Ingresso gratuito, area food e drink sul posto."],
-    cta:"Vuoi suonare? Scrivici",poster:"img/summer-live.jpg"}
-};
-function qp(n){return new URLSearchParams(location.search).get(n);}
-var key=qp("e")||"gorgo-jam";
-var e=EVENTS[key]||EVENTS["gorgo-jam"];
-document.documentElement.style.setProperty("--theme",e.theme);
-document.getElementById("cat").innerHTML=e.cat;
-document.getElementById("title").innerHTML=e.title;
-document.title=e.title.replace(/&[a-z]+;/g,"")+" — Proxima";
-document.getElementById("when").innerHTML=e.when;
-document.getElementById("where").innerHTML=e.where;
-document.getElementById("who").innerHTML=e.who;
-document.getElementById("desc").innerHTML=e.desc.map(function(p){return "<p>"+p+"</p>"}).join("");
-var cta=document.getElementById("cta");cta.innerHTML=e.cta;cta.href="contatti.html";
-if(e.extra)document.getElementById("extra").innerHTML=e.extra;
-// locandina: prova a caricare l'immagine, altrimenti placeholder
-var img=new Image();
-img.onload=function(){var p=document.getElementById("poster");p.innerHTML="";p.appendChild(img);};
-img.onerror=function(){};
-img.alt=e.title;img.src=e.poster;
+(function(){
+  var TEMI={orange:"#ff6a2b",blue:"#4a3cec",grape:"#9b3cff",neutro:"#4a3cec"};
+  var CAT={iscrizioni:"Iscrizioni aperte","in-corso":"In corso","in-programma":"In programma",archivio:"Evento passato"};
+  function qp(n){return new URLSearchParams(location.search).get(n);}
+  var slug=qp("e");
+  fetch("data/eventi.json").then(function(r){return r.json()}).then(function(d){
+    var list=d.eventi||[];
+    var e=list.filter(function(x){return x.slug===slug})[0] || list[0];
+    if(!e){return;}
+    var theme=TEMI[e.tema]||TEMI.neutro;
+    document.documentElement.style.setProperty("--theme",theme);
+    document.getElementById("cat").innerHTML=CAT[e.stato]||"Evento";
+    document.getElementById("title").innerHTML=e.titolo;
+    document.title=e.titolo+" — Proxima";
+    document.getElementById("when").innerHTML=e.quando||e.data_label||"—";
+    document.getElementById("where").innerHTML=e.dove||"—";
+    document.getElementById("who").innerHTML=e.per_chi||"—";
+    document.getElementById("desc").innerHTML=(e.descrizione||"").split("\n").map(function(p){return "<p>"+p+"</p>"}).join("");
+    var cta=document.getElementById("cta");cta.innerHTML=e.cta||"Iscriviti";cta.href="contatti.html";
+    if(e.locandina){
+      var img=new Image();
+      img.onload=function(){var p=document.getElementById("poster");p.innerHTML="";img.alt=e.titolo;p.appendChild(img);};
+      img.src=e.locandina;
+    }
+  });
+})();
 </script>
+<!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
+<script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

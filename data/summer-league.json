@@ -1,0 +1,35 @@
+{
+  "titolo": "Gorgo Summer League",
+  "sottotitolo": "Il campionato estivo di Proxima: 16 squadre divise in 4 gironi, partite ogni settimana. Ecco le classifiche aggiornate.",
+  "gironi": [
+    {"nome": "A", "squadre": [
+      {"team": "Martesana Ballers", "g": 4, "v": 4, "pt": 12},
+      {"team": "Gorgo Wolves", "g": 4, "v": 3, "pt": 9},
+      {"team": "Naviglio Kings", "g": 4, "v": 1, "pt": 3},
+      {"team": "Centro Storico FC", "g": 4, "v": 0, "pt": 0}
+    ]},
+    {"nome": "B", "squadre": [
+      {"team": "Proxima Stars", "g": 4, "v": 3, "pt": 9},
+      {"team": "East Side Crew", "g": 4, "v": 2, "pt": 6},
+      {"team": "Villa Sola Team", "g": 4, "v": 2, "pt": 6},
+      {"team": "I Soliti Ignoti", "g": 4, "v": 1, "pt": 3}
+    ]},
+    {"nome": "C", "squadre": [
+      {"team": "Stazione Crew", "g": 4, "v": 4, "pt": 12},
+      {"team": "Bastogi Ballers", "g": 4, "v": 2, "pt": 6},
+      {"team": "Argentia All Stars", "g": 4, "v": 1, "pt": 3},
+      {"team": "Quartiere Nord", "g": 4, "v": 1, "pt": 3}
+    ]},
+    {"nome": "D", "squadre": [
+      {"team": "Officine Giovani", "g": 4, "v": 3, "pt": 9},
+      {"team": "Pertini Squad", "g": 4, "v": 3, "pt": 9},
+      {"team": "Rockfeller Boys", "g": 4, "v": 1, "pt": 3},
+      {"team": "Cascina United", "g": 4, "v": 0, "pt": 0}
+    ]}
+  ],
+  "partite": [
+    {"data": "Ven 12 Giu · 20:30", "match": "Proxima Stars — Gorgo Wolves"},
+    {"data": "Sab 13 Giu · 18:00", "match": "East Side Crew — Naviglio Kings"},
+    {"data": "Mar 16 Giu · 21:00", "match": "Martesana Ballers — East Side Crew"}
+  ]
+}

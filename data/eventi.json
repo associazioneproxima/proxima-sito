@@ -1,0 +1,46 @@
+{
+  "eventi": [
+    {
+      "slug": "gorgo-jam-2026",
+      "titolo": "Gorgo Jam 2026",
+      "stato": "iscrizioni",
+      "tema": "orange",
+      "data_label": "Giugno 2026",
+      "quando": "Giugno 2026, dalle 10:00 alle 22:00",
+      "dove": "Centro sportivo comunale, Gorgonzola",
+      "per_chi": "Under 25 · squadre 3vs3",
+      "descrizione": "Una giornata intera dedicata al basket di strada: tornei 3vs3, musica dal vivo, street food e premi per le squadre vincenti. Aperto a tutti i ragazzi del territorio, dai principianti agli agonisti.",
+      "cta": "Iscrivi la tua squadra",
+      "locandina": "",
+      "ordine": 1
+    },
+    {
+      "slug": "summer-league-2026",
+      "titolo": "Gorgo Summer League",
+      "stato": "in-corso",
+      "tema": "blue",
+      "data_label": "Giu — Ago 2026",
+      "quando": "Giugno — Agosto 2026, partite settimanali",
+      "dove": "Centro sportivo comunale, Gorgonzola",
+      "per_chi": "16 squadre · 4 gironi",
+      "descrizione": "Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutta l'estate. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.",
+      "cta": "Iscrivi una squadra",
+      "locandina": "",
+      "ordine": 2
+    },
+    {
+      "slug": "summer-live-2026",
+      "titolo": "Summer Live Sessions",
+      "stato": "in-programma",
+      "tema": "grape",
+      "data_label": "Luglio 2026",
+      "quando": "Luglio 2026, serate ore 21:00",
+      "dove": "Parco comunale, Gorgonzola",
+      "per_chi": "Ingresso libero",
+      "descrizione": "Serate di musica dal vivo nel parco: hip-hop, funk e band emergenti del territorio salgono sul palco di Proxima. Ingresso gratuito, area food e drink sul posto.",
+      "cta": "Vuoi suonare? Scrivici",
+      "locandina": "",
+      "ordine": 3
+    }
+  ]
+}
