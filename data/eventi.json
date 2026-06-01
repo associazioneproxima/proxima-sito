@@ -16,17 +16,17 @@
     },
     {
       "per_chi": "16 squadre · 4 gironi",
-      "locandina": "",
+      "locandina": "img/eventi/gorgosummerleague.png",
       "tema": "blue",
       "slug": "summer-league-2026",
-      "descrizione": "Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutta l'estate. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.",
+      "descrizione": "Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutto Giugno. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.",
       "cta": "Iscrivi una squadra",
-      "titolo": "Gorgo Summer League",
+      "titolo": "Gorgo Summer League 2026",
       "dove": "Centro sportivo comunale, Gorgonzola",
       "stato": "in-corso",
-      "quando": "Giugno — Agosto 2026, partite settimanali",
+      "quando": "4 - 26 Giugno 2026, partite settimanali",
       "ordine": 2,
-      "data_label": "Giu — Ago 2026"
+      "data_label": "Giugno 2026"
     },
     {
       "per_chi": "Ingresso libero",
