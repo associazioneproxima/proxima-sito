@@ -6,7 +6,7 @@
       "tema": "orange",
       "slug": "gorgo-jam-2026",
       "descrizione": "Una serata intera dedicata al basket di strada durante la Notte Bianca: tornei 3vs3, musica dal vivo, street food e premi per le squadre vincenti. Aperto a tutti i ragazzi del territorio, dai principianti agli agonisti.",
-      "cta": "Iscrivi la tua squadra",
+      "cta": "",
       "titolo": "Gorgo Jam 2026",
       "dove": "Largo degli Alpini, Gorgonzola",
       "stato": "in-programma",
@@ -23,6 +23,7 @@
       "cta": "Iscrivi una squadra",
       "titolo": "Gorgo Summer League 2026",
       "dove": "Centro sportivo Seven Infinity, Gorgonzola",
+      "link": "https://docs.google.com/forms/d/e/1FAIpQLSc2AqHOEO1V8rAznr14SkvXJMpULUIUAzpPRY-J4fNhzRvksA/viewform",
       "stato": "in-corso",
       "quando": "4 - 26 Giugno 2026, partite settimanali",
       "ordine": 2,
@@ -30,17 +31,18 @@
     },
     {
       "per_chi": "Ingresso libero",
-      "locandina": "",
+      "locandina": "img/eventi/manifesto-notte-bianca-post-instagram-45-.png",
       "tema": "grape",
-      "slug": "summer-live-2026",
-      "descrizione": "Serate di musica dal vivo nel parco: hip-hop, funk e band emergenti del territorio salgono sul palco di Proxima. Ingresso gratuito, area food e drink sul posto.",
-      "cta": "Vuoi suonare? Scrivici",
-      "titolo": "Summer Live Sessions",
-      "dove": "Parco comunale, Gorgonzola",
+      "slug": "notte-bianca-2026",
+      "descrizione": "Da quest'anno Proxima è tra gli organizzatori della Notte Bianca: l′evento di apertura dell′estate all'insegna di musica, sport e gusto diffuso per le vie del centro storico di Gorgonzola.",
+      "cta": "Più informazioni",
+      "titolo": "Notte Bianca 2026",
+      "dove": "Centro Storico di Gorgonzola",
+      "link": "https://comune.gorgonzola.mi.it/vivere-il-comune/evento/gorgonzola-estate-2026/notte-bianca-2026/",
       "stato": "in-programma",
-      "quando": "Luglio 2026, serate ore 21:00",
+      "quando": "6 giugno 2026, 19.00 - all night long",
       "ordine": 3,
-      "data_label": "Luglio 2026"
+      "data_label": "Giugno 2026"
     }
   ]
 }
