@@ -104,7 +104,9 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     document.getElementById("where").innerHTML=e.dove||"—";
     document.getElementById("who").innerHTML=e.per_chi||"—";
     document.getElementById("desc").innerHTML=(e.descrizione||"").split("\n").map(function(p){return "<p>"+p+"</p>"}).join("");
-    var cta=document.getElementById("cta");cta.innerHTML=e.cta||"Iscriviti";cta.href="contatti.html";
+    var cta=document.getElementById("cta");cta.innerHTML=e.cta||"Iscriviti";
+    if(e.link && e.link.trim()){ cta.href=e.link.trim(); cta.target="_blank"; cta.rel="noopener"; }
+    else { cta.href="contatti.html"; cta.removeAttribute("target"); }
     if(e.locandina){
       var img=new Image();
       img.onload=function(){var p=document.getElementById("poster");p.innerHTML="";img.alt=e.titolo;p.appendChild(img);};

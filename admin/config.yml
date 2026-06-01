@@ -50,6 +50,7 @@ collections:
               - {label: "Per chi", name: "per_chi", widget: "string", required: false}
               - {label: "Descrizione", name: "descrizione", widget: "text"}
               - {label: "Testo bottone iscrizione", name: "cta", widget: "string", default: "Iscriviti", required: false}
+              - {label: "Link iscrizione (URL completo, opzionale)", name: "link", widget: "string", required: false, hint: "Es. https://forms.gle/... Se vuoto, il bottone porta alla pagina Contatti."}
               - {label: "Locandina", name: "locandina", widget: "image", required: false}
               - {label: "Slug (identificativo, senza spazi)", name: "slug", widget: "string", hint: "Es. gorgo-jam-2026. Usato nell'indirizzo della pagina evento."}
               - {label: "Ordine", name: "ordine", widget: "number", default: 1, value_type: "int"}
