@@ -2,8 +2,8 @@ backend:
   name: github
   repo: associazioneproxima/proxima-sito
   branch: main
-  base_url: https://associazioneproxima.com
-  # auth_endpoint: /api/auth
+
+site_url: https://associazioneproxima.com
 
 # Le immagini caricate dal pannello finiscono qui
 media_folder: "img/eventi"
