@@ -1,8 +1,12 @@
 {
   "locandine": [
     {
-      "titolo": "Gorgo Summer League 2023",
+      "titolo": "1",
       "img": "/img/locandine/0summer-league-2023.png"
+    },
+    {
+      "titolo": "2",
+      "img": "/img/locandine/1arrosticino-scientifico-2024.png"
     }
   ]
 }
