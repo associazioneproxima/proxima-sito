@@ -62,7 +62,6 @@ td.team{font-weight:600}
 td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
 .lgnote{font-family:'Space Grotesk';font-size:.76rem;opacity:.6;margin-top:18px}
 </style>
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 <div class="nav-scrim" onclick="closeMenu()"></div>
@@ -173,22 +172,6 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
         '<div style="font-weight:600;margin-top:6px">'+p.match+'</div></div>');
     });
   });
-})();
-</script>
-<script>
-if (window.netlifyIdentity) {
-  netlifyIdentity.on("init", function(user){
-    if (!user) {
-      netlifyIdentity.on("login", function(){ document.location.href = "/admin/"; });
-    }
-  });
-}
-// se l'URL contiene un token di invito o recupero, vai al pannello mantenendo il token
-(function(){
-  var h = window.location.hash || "";
-  if (h.indexOf("invite_token=")>-1 || h.indexOf("recovery_token=")>-1 || h.indexOf("confirmation_token=")>-1) {
-    window.location.replace("/admin/" + h);
-  }
 })();
 </script>
 </body>
