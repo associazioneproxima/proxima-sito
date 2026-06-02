@@ -12,11 +12,16 @@
 <style>
 .section{padding:120px 5vw 80px}
 .subhead{font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;color:var(--yellow);margin:50px 0 18px}
-.hscroll{display:flex;gap:18px;overflow-x:auto;padding-bottom:18px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.hscroll{display:flex;gap:18px;overflow-x:auto;padding-bottom:18px;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-width:thin}
+.hscroll.dragging{cursor:grabbing;scroll-behavior:auto}
+.hscroll.dragging .poster{pointer-events:none}
 .hscroll::-webkit-scrollbar{height:8px}.hscroll::-webkit-scrollbar-thumb{background:var(--violet);border-radius:4px}
-.poster{flex:0 0 240px;aspect-ratio:4/5;border-radius:18px 18px 18px 4px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));display:flex;align-items:flex-end;padding:18px;font-family:var(--display);text-transform:uppercase;font-size:1.05rem;scroll-snap-align:start;transition:.3s;cursor:pointer;border:1px solid rgba(246,245,239,.12)}
-.poster:nth-child(3n){background:linear-gradient(135deg,var(--orange),var(--grape))}
-.poster:nth-child(3n+2){background:linear-gradient(135deg,var(--grape),var(--violet-deep))}
+.poster{flex:0 0 240px;aspect-ratio:4/5;border-radius:18px 18px 18px 4px;display:flex;align-items:flex-end;padding:18px;font-family:var(--display);text-transform:uppercase;font-size:1.05rem;transition:transform .3s,border-color .3s;cursor:pointer;border:1px solid rgba(246,245,239,.12);background-size:cover;background-position:center;position:relative;overflow:hidden;user-select:none}
+.poster.ph-empty{background:linear-gradient(135deg,var(--violet),var(--violet-deep))}
+.poster.ph-empty:nth-child(3n){background:linear-gradient(135deg,var(--orange),var(--grape))}
+.poster.ph-empty:nth-child(3n+2){background:linear-gradient(135deg,var(--grape),var(--violet-deep))}
+.poster .cap{position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.6);line-height:1.05}
+.poster.has-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),transparent 55%);z-index:1}
 .poster:hover{transform:scale(1.03);border-color:var(--yellow)}
 .scrollhint{font-family:'Space Grotesk';font-size:.74rem;opacity:.55;margin-top:6px}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;grid-auto-rows:150px}
@@ -43,13 +48,8 @@
   <h1 class="page-h">Archivio</h1>
   <p class="lead">Locandine e foto delle edizioni passate.</p>
   <div class="subhead">Archivio locandine</div>
-  <div class="hscroll">
-    <div class="poster">Gorgo Jam 2025</div><div class="poster">Summer Live 2025</div>
-    <div class="poster">Summer League 2025</div><div class="poster">Lab Creativi 2024</div>
-    <div class="poster">Gorgo Jam 2024</div><div class="poster">Open Day 2024</div>
-    <div class="poster">Notte Bianca 2023</div>
-  </div>
-  <p class="scrollhint">&larr; scorri per vedere tutte le locandine &rarr;</p>
+  <div class="hscroll" id="archivio-track"></div>
+  <p class="scrollhint">trascina con il dito o il mouse per scorrere &middot; scorre da sola</p>
   <div class="subhead">Galleria foto</div>
   <div class="gallery">
     <div>Foto 1</div><div>Foto 2</div><div>Foto 3</div><div>Foto 4</div>
@@ -83,5 +83,88 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
 </script>
 <!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
 <script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  var track=document.getElementById("archivio-track");
+  if(!track) return;
+
+  Promise.all([
+    fetch("data/archivio.json").then(function(r){return r.json()}).catch(function(){return {locandine:[]}}),
+    fetch("data/eventi.json").then(function(r){return r.json()}).catch(function(){return {eventi:[]}})
+  ]).then(function(res){
+    var storiche=(res[0].locandine||[]).map(function(l){return {titolo:l.titolo, img:l.img}});
+    // eventi archiviati: uso la loro locandina (se presente)
+    var archiviati=(res[1].eventi||[])
+      .filter(function(e){return e.stato==="archivio"})
+      .sort(function(a,b){return (a.ordine||0)-(b.ordine||0)})
+      .map(function(e){return {titolo:e.titolo, img:e.locandina||""}});
+    // unione: prima storiche (ordine d'aggiunta), poi eventi archiviati
+    var items=storiche.concat(archiviati);
+    if(!items.length){ track.innerHTML='<p style="opacity:.6">Ancora nessuna locandina in archivio.</p>'; return; }
+
+    function makePoster(it){
+      var d=document.createElement("div");
+      d.className="poster"+(it.img?" has-img":" ph-empty");
+      if(it.img) d.style.backgroundImage="url('"+it.img+"')";
+      d.innerHTML='<span class="cap">'+(it.titolo||"")+'</span>';
+      return d;
+    }
+    // riempio una volta + duplico per il loop continuo
+    items.forEach(function(it){ track.appendChild(makePoster(it)); });
+    items.forEach(function(it){ track.appendChild(makePoster(it)); });
+
+    // larghezza di un "set" (metà del totale, perché duplicato)
+    function setWidth(){ return track.scrollWidth/2; }
+
+    // partenza da punto casuale dentro il primo set
+    requestAnimationFrame(function(){
+      var w=setWidth();
+      track.scrollLeft = Math.random()*w;
+    });
+
+    // --- autoscroll continuo ---
+    var speed=0.6;       // px per tick
+    var paused=false;
+    function step(){
+      if(!paused && !isDragging){
+        var w=setWidth();
+        var nl=track.scrollLeft+speed;
+        if(nl>=w) nl-=w;
+        track.scrollLeft=nl;
+      }
+    }
+    setInterval(step,16);   // ~60fps, robusto anche se la tab perde focus
+
+    // pausa al passaggio del mouse (desktop)
+    track.addEventListener("mouseenter",function(){paused=true;});
+    track.addEventListener("mouseleave",function(){paused=false;});
+
+    // --- drag con mouse e touch ---
+    var isDragging=false, startX=0, startScroll=0, moved=false;
+    function down(x){ isDragging=true; moved=false; startX=x; startScroll=track.scrollLeft; track.classList.add("dragging"); }
+    function move(x){
+      if(!isDragging) return;
+      var dx=x-startX;
+      if(Math.abs(dx)>4) moved=true;
+      track.scrollLeft=startScroll-dx;
+      var w=setWidth();
+      if(track.scrollLeft>=w) { track.scrollLeft-=w; startScroll-=w; }
+      if(track.scrollLeft<0)  { track.scrollLeft+=w; startScroll+=w; }
+    }
+    function up(){ isDragging=false; track.classList.remove("dragging"); }
+
+    // mouse
+    track.addEventListener("mousedown",function(e){ down(e.pageX); });
+    window.addEventListener("mousemove",function(e){ move(e.pageX); });
+    window.addEventListener("mouseup",up);
+    // blocco il click se ho trascinato (evita aperture accidentali)
+    track.addEventListener("click",function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); } },true);
+    // touch
+    track.addEventListener("touchstart",function(e){ down(e.touches[0].pageX); },{passive:true});
+    track.addEventListener("touchmove",function(e){ move(e.touches[0].pageX); },{passive:true});
+    track.addEventListener("touchend",up);
+  });
+})();
+</script>
 </body>
 </html>

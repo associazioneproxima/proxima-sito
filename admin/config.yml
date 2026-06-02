@@ -92,3 +92,24 @@ collections:
             fields:
               - {label: "Data e ora", name: "data", widget: "string"}
               - {label: "Partita (es. Team A — Team B)", name: "match", widget: "string"}
+
+
+  # ---------- ARCHIVIO LOCANDINE (storiche) ----------
+  - name: "archivio"
+    label: "Archivio locandine"
+    description: "Locandine di eventi passati 'storici'. Quelle degli eventi che metti in stato Archivio compaiono gia' da sole."
+    files:
+      - name: "locandine"
+        label: "Locandine storiche"
+        file: "data/archivio.json"
+        media_folder: "/img/locandine"
+        public_folder: "/img/locandine"
+        fields:
+          - label: "Locandine"
+            name: "locandine"
+            widget: "list"
+            label_singular: "Locandina"
+            summary: "{{fields.titolo}}"
+            fields:
+              - {label: "Titolo", name: "titolo", widget: "string"}
+              - {label: "Immagine", name: "img", widget: "image"}
