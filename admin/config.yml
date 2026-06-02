@@ -2,7 +2,7 @@ backend:
   name: github
   repo: associazioneproxima/proxima-sito
   branch: main
- # base_url: https://associazioneproxima.com
+  base_url: https://associazioneproxima.com
   # auth_endpoint: /api/auth
 
 # Le immagini caricate dal pannello finiscono qui
