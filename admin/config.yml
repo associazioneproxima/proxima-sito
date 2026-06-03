@@ -26,7 +26,6 @@ collections:
             label_singular: "Evento"
             summary: "{{fields.titolo}}  —  {{fields.stato}}"
             fields:
-              - {label: "Titolo", name: "titolo", widget: "string"}
               - label: "Stato"
                 name: "stato"
                 widget: "select"
@@ -91,6 +90,7 @@ collections:
             summary: "{{fields.data}} — {{fields.match}}"
             fields:
               - {label: "Data e ora", name: "data", widget: "string"}
+              - {label: "Data calendario (AAAA-MM-GG, per evidenziare le prossime)", name: "iso", widget: "string", required: false, hint: "Es. 2026-06-12"}
               - {label: "Partita (es. Team A — Team B)", name: "match", widget: "string"}
 
 
@@ -109,7 +109,6 @@ collections:
             name: "locandine"
             widget: "list"
             label_singular: "Locandina"
-            summary: "{{fields.titolo}}"
+            summary: "Locandina"
             fields:
-              - {label: "Titolo", name: "titolo", widget: "string"}
               - {label: "Immagine", name: "img", widget: "image"}
