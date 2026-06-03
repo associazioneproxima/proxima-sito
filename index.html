@@ -24,9 +24,9 @@
 .hero .sub{max-width:540px;margin-top:26px;font-size:1.15rem;font-weight:300;opacity:0;animation:rise .9s .6s forwards}
 .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s .75s forwards}
 @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-.marquee{position:absolute;bottom:0;left:0;right:0;background:var(--violet);color:#fff;overflow:hidden;white-space:nowrap;padding:10px 0;font-family:var(--display);font-size:1rem;text-transform:uppercase;letter-spacing:1px}
-.marquee span{display:inline-block;animation:scroll 20s linear infinite}
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee{position:absolute;bottom:0;left:0;right:0;background:var(--violet);color:#fff;overflow:hidden;white-space:nowrap;padding:10px 0;font-family:var(--display);font-size:1rem;text-transform:uppercase;letter-spacing:1px;display:flex}
+.marquee .mq{display:inline-block;white-space:nowrap;padding-right:1ch;animation:scroll 30s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 
 .up-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:8px}
 .up-head a.seeall{font-family:'Space Grotesk';font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);border-bottom:2px solid var(--yellow);padding-bottom:3px;white-space:nowrap}
@@ -85,7 +85,7 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <a href="#prossimi" class="btn fill">Scopri gli eventi</a>
     <a href="contatti.html" class="btn">Diventa volontario</a>
   </div>
-  <div class="marquee"><span>EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span></div>
+  <div class="marquee"><span class="mq">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span><span class="mq" aria-hidden="true">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span></div>
 </header>
 
 <section class="section" id="prossimi">
@@ -172,7 +172,6 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     function dOf(p){ return p.iso? new Date(p.iso+"T00:00:00") : null; }
     var future=all.filter(function(p){var dt=dOf(p);return !dt || dt>=oggi;});
     var prossimoIso = future.length? future[0].iso : null;
-    // lista "ridotta": prossime 6 (o ultime 3 se finite); lista "completa": tutte
     var ridotta = future.length? future.slice(0,6) : all.slice(-3);
 
     function fxHtml(p){
@@ -189,7 +188,6 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     function render(list){ pbox.innerHTML = list.length? list.map(fxHtml).join("") : '<p style="opacity:.6">Calendario in arrivo.</p>'; }
 
     render(ridotta);
-    // mostro il bottone solo se ci sono piu' partite della lista ridotta
     var espanso=false;
     if(all.length > ridotta.length){
       toggle.style.display="";
