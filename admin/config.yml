@@ -112,3 +112,22 @@ collections:
             summary: "Locandina"
             fields:
               - {label: "Immagine", name: "img", widget: "image"}
+
+
+  # ---------- GALLERIA FOTO ----------
+  - name: "galleria"
+    label: "Galleria foto"
+    description: "Foto selezionate per la griglia dell'archivio. Carica le immagini (anche piu' insieme) e ordinale."
+    files:
+      - name: "foto"
+        label: "Foto galleria"
+        file: "data/galleria.json"
+        media_folder: "/img/galleria"
+        public_folder: "/img/galleria"
+        fields:
+          - label: "Foto"
+            name: "foto"
+            widget: "list"
+            label_singular: "Foto"
+            summary: "Foto"
+            field: {label: "Immagine", name: "img", widget: "image"}
