@@ -13,17 +13,19 @@
 .section{padding:110px 5vw 70px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:34px}
 .card{display:block;color:inherit;border:1px solid rgba(246,245,239,.16);padding:28px;transition:.3s;position:relative;overflow:hidden;background:rgba(255,255,255,.025);border-radius:24px 24px 24px 4px}
-/* card con locandina: lascio spazio a sinistra e non taglio la locandina */
-.card.has-poster{overflow:visible;padding-left:130px;min-height:180px}
-.card .poster-thumb{position:absolute;left:-18px;top:50%;width:120px;aspect-ratio:4/5;transform:translateY(-50%) rotate(-7deg);
-  border-radius:10px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.45);border:3px solid var(--paper);
+/* card con locandina: lascio spazio a sinistra. overflow nascosto SOLO in alto-dx via badge clip */
+.card.has-poster{overflow:visible;padding-left:130px;min-height:150px}
+.card .poster-thumb{position:absolute;left:-14px;top:50%;width:118px;aspect-ratio:4/5;transform:translateY(-50%) rotate(-6deg);
+  border-radius:12px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.5);border:1px solid rgba(246,245,239,.18);
   background:linear-gradient(150deg,var(--violet),var(--ink));transition:transform .3s}
 .card .poster-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.card.has-poster:hover .poster-thumb{transform:translateY(-50%) rotate(-3deg) scale(1.04)}
+.card.has-poster:hover .poster-thumb{transform:translateY(-50%) rotate(-2deg) scale(1.04)}
+/* badge: lo tengo dentro i bordi della card */
+.card .badge{position:absolute;top:14px;right:14px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.6rem;padding:5px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;transform:none;max-width:60%;text-align:right;line-height:1.2}
+.card.has-badge .date{padding-top:34px}
 @media(max-width:560px){
-  /* su mobile: locandina dritta e in flusso, niente sovrapposizione */
   .card.has-poster{overflow:hidden;padding:28px}
-  .card .poster-thumb{position:static;transform:none;width:90px;margin-bottom:14px;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+  .card .poster-thumb{position:static;transform:none;width:88px;margin-bottom:14px;box-shadow:0 6px 16px rgba(0,0,0,.4)}
   .card.has-poster:hover .poster-thumb{transform:none}
 }
 .card:hover{transform:translateY(-6px);border-color:var(--yellow)}
@@ -31,7 +33,6 @@
 .card h3{font-family:'Sora';font-weight:800;font-size:1.4rem;margin:10px 0}
 .card p{font-weight:300;opacity:.8;margin-bottom:14px;font-size:.94rem}
 .card .place{font-family:'Space Grotesk';font-size:.76rem;opacity:.6}
-.card .badge{position:absolute;top:15px;right:-34px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.64rem;padding:5px 40px;transform:rotate(35deg);text-transform:uppercase}
 .card.t-orange{border-color:rgba(255,106,43,.4)}.card.t-orange:hover{border-color:var(--orange)}.card.t-orange .date{color:var(--orange)}.card.t-orange .badge{background:var(--orange)}
 .card.t-blue{border-color:rgba(74,60,236,.45)}.card.t-blue:hover{border-color:var(--violet)}.card.t-blue .date{color:#8aa0ff}.card.t-blue .badge{background:var(--violet)}
 .past{margin-top:80px}.past .card .date{color:var(--grape)}
@@ -105,9 +106,8 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       var badge=STATI[e.stato]?('<span class="badge">'+STATI[e.stato]+'</span>'):"";
       var hasPoster=e.locandina && e.locandina.trim();
       var poster=hasPoster?('<div class="poster-thumb"><img src="'+e.locandina+'" alt="Locandina '+e.titolo+'" loading="lazy"></div>'):"";
-      var card='<a class="card'+tema+(hasPoster?' has-poster':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+
+      var card='<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+
                '<div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
-               '<p>'+(e.descrizione||"").slice(0,120)+((e.descrizione||"").length>120?"…":"")+'</p>'+
                (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</a>';
       if(e.stato==="archivio"){ pass.insertAdjacentHTML("beforeend",card); }
       else { pross.insertAdjacentHTML("beforeend",card); }
