@@ -50,7 +50,7 @@
 .girone{background:rgba(255,255,255,.04);border:1px solid rgba(246,245,239,.12);border-radius:20px 20px 20px 4px;overflow:hidden}
 .girone .gt{font-family:var(--display);text-transform:uppercase;font-size:1.05rem;letter-spacing:1px;padding:14px 18px;background:var(--violet);display:flex;align-items:center;gap:10px}
 .girone .gt .dot{width:12px;height:12px;border-radius:50%}
-.gA .dot{background:var(--violet)} .gB .dot{background:#ff5da2} .gC .dot{background:var(--orange)} .gD .dot{background:#35c759}
+.girone .gt .dot{background:rgba(246,245,239,.5)}
 table{width:100%;border-collapse:collapse}
 th,td{padding:10px 18px;text-align:left;font-size:.9rem}
 thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12)}
@@ -105,6 +105,7 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   <div class="gironi" id="sl-gironi"></div>
   <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Prossime partite</h3>
   <div class="fixtures" id="sl-partite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
+  <div style="margin-top:18px"><button id="sl-toggle" class="btn" style="display:none">Tutte le partite</button></div>
   <p class="lgnote">G = giocate &middot; V = vittorie &middot; Pt = punti. Aggiorna tutto dal pannello /admin.</p>
 </section>
 <footer>
@@ -151,7 +152,7 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     });
   });
   // SUMMER LEAGUE
-  function dotClass(nome){var L=(nome||"").trim().toUpperCase().slice(-1);return "g"+(["A","B","C","D"].indexOf(L)>-1?L:"A");}
+  function dotClass(nome){return "";}
   fetch("data/summer-league.json").then(function(r){return r.json()}).then(function(d){
     if(d.titolo)document.getElementById("sl-title").textContent=d.titolo;
     document.getElementById("sl-sub").textContent=d.sottotitolo||"";
@@ -165,28 +166,39 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
         '<table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th style="text-align:right">Pt</th></tr></thead><tbody>'+rows+'</tbody></table></div>');
     });
     var pbox=document.getElementById("sl-partite");
+    var toggle=document.getElementById("sl-toggle");
     var oggi=new Date(); oggi.setHours(0,0,0,0);
     var all=(d.partite||[]);
-    // separo future (da oggi in poi) e passate, in base al campo iso (YYYY-MM-DD)
     function dOf(p){ return p.iso? new Date(p.iso+"T00:00:00") : null; }
     var future=all.filter(function(p){var dt=dOf(p);return !dt || dt>=oggi;});
-    var passate=all.filter(function(p){var dt=dOf(p);return dt && dt<oggi;});
-    // mostro le prossime (max 6); se non ce ne sono, mostro le ultime giocate
-    var mostra = future.length? future.slice(0,6) : all.slice(-3);
-    // il primo giorno futuro = "prossima giornata", lo evidenzio
     var prossimoIso = future.length? future[0].iso : null;
-    if(!mostra.length){ pbox.innerHTML='<p style="opacity:.6">Calendario in arrivo.</p>'; }
-    mostra.forEach(function(p){
+    // lista "ridotta": prossime 6 (o ultime 3 se finite); lista "completa": tutte
+    var ridotta = future.length? future.slice(0,6) : all.slice(-3);
+
+    function fxHtml(p){
       var isNext = prossimoIso && p.iso===prossimoIso;
+      var passata = dOf(p) && dOf(p)<oggi;
       var bg = isNext ? 'rgba(74,60,236,.18)' : 'rgba(255,255,255,.05)';
       var bd = isNext ? 'var(--violet)' : 'rgba(246,245,239,.12)';
       var tag = isNext ? '<div style="font-family:\'Space Grotesk\';font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:#8aa0ff;font-weight:700;margin-bottom:4px">Prossima giornata</div>' : '';
-      pbox.insertAdjacentHTML("beforeend",
-        '<div class="fx" style="background:'+bg+';border:1px solid '+bd+';padding:18px;border-radius:16px 16px 16px 4px">'+
+      return '<div class="fx" style="background:'+bg+';border:1px solid '+bd+';padding:18px;border-radius:16px 16px 16px 4px;'+(passata?'opacity:.55;':'')+'">'+
         tag+
         '<div style="font-family:\'Space Grotesk\';font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700">'+p.data+'</div>'+
-        '<div style="font-weight:600;margin-top:6px">'+p.match+'</div></div>');
-    });
+        '<div style="font-weight:600;margin-top:6px">'+p.match+'</div></div>';
+    }
+    function render(list){ pbox.innerHTML = list.length? list.map(fxHtml).join("") : '<p style="opacity:.6">Calendario in arrivo.</p>'; }
+
+    render(ridotta);
+    // mostro il bottone solo se ci sono piu' partite della lista ridotta
+    var espanso=false;
+    if(all.length > ridotta.length){
+      toggle.style.display="";
+      toggle.addEventListener("click",function(){
+        espanso=!espanso;
+        render(espanso? all : ridotta);
+        toggle.textContent = espanso? "Mostra meno" : "Tutte le partite";
+      });
+    }
   });
 })();
 </script>
