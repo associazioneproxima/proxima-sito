@@ -1,12 +1,39 @@
 {
   "locandine": [
     {
-      "titolo": "1",
-      "img": "/img/locandine/0summer-league-2023.png"
+      "img": "/img/locandine/0summer-league-2023.png",
+      "titolo": "1"
     },
     {
-      "titolo": "2",
-      "img": "/img/locandine/1arrosticino-scientifico-2024.png"
+      "img": "/img/locandine/1arrosticino-scientifico-2024.png",
+      "titolo": "2"
+    },
+    {
+      "img": "/img/locandine/2europei-2024.png"
+    },
+    {
+      "img": "/img/locandine/3notte-bianca-2024.png"
+    },
+    {
+      "img": "/img/locandine/4summer-league-2024.png"
+    },
+    {
+      "img": "/img/locandine/4winter-league-2024.png"
+    },
+    {
+      "img": "/img/locandine/5parcheggiony-2024.png"
+    },
+    {
+      "img": "/img/locandine/6arrosticino-scientifico-2025.png"
+    },
+    {
+      "img": "/img/locandine/7artiginale-2025.png"
+    },
+    {
+      "img": "/img/locandine/8summer-league-2025.png"
+    },
+    {
+      "img": "/img/locandine/9parcheggiony-2025.png"
     }
   ]
 }
