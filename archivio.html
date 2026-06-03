@@ -23,57 +23,16 @@
 .poster .cap{position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.6);line-height:1.05}
 .poster:hover{transform:scale(1.03);border-color:var(--yellow)}
 .scrollhint{font-family:'Space Grotesk';font-size:.74rem;opacity:.55;margin-top:6px}
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 12px;
-  grid-auto-rows: 150px;
-  /* Forza la griglia a riempire ogni spazio vuoto con le foto successive */
-  grid-auto-flow: dense; 
-}
-
-.gallery .ph-item {
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  background: rgba(255, 255, 255, .05);
-  position: relative;
-}
-
-.gallery .ph-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform .3s;
-}
-
-.gallery .ph-item:hover img {
-  transform: scale(1.06);
-}
-
+.gallery {  display: grid;  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  gap: 12px;  grid-auto-rows: 150px;  /* Forza la griglia a riempire ogni spazio vuoto con le foto successive */  grid-auto-flow: dense; }
+.gallery .ph-item {  border-radius: 12px;  overflow: hidden;  cursor: pointer;  background: rgba(255, 255, 255, .05);  position: relative;}
+.gallery .ph-item img {  width: 100%;  height: 100%;  object-fit: cover;  display: block;  transition: transform .3s;}
+.gallery .ph-item:hover img {  transform: scale(1.06);}
 /* Regole di eccezione ottimizzate per ridurre i conflitti e migliorare l'incastro */
-.gallery .ph-item:nth-child(5n) {
-  grid-row: span 2; /* Foto verticale */
-}
-
-.gallery .ph-item:nth-child(7n) {
-  grid-column: span 2; /* Foto orizzontale */
-}
-
-.gallery .ph-item:nth-child(11n) {
-  grid-row: span 2; /* Foto verticale */
-}
-
+.gallery .ph-item:nth-child(5n) {  grid-row: span 2; /* Foto verticale */}
+.gallery .ph-item:nth-child(7n) {  grid-column: span 2; /* Foto orizzontale */}
+.gallery .ph-item:nth-child(11n) {  grid-row: span 2; /* Foto verticale */}
 /* Messaggio di galleria vuota: spostato fuori dal flusso del mosaico per non rompere la griglia */
-.gallery .empty {
-  grid-column: 1 / -1;
-  opacity: .6;
-  font-family: 'Space Grotesk';
-  font-size: .85rem;
-  padding: 20px 0;
-  text-align: center;
-}
+.gallery .empty {  grid-column: 1 / -1;  opacity: .6;  font-family: 'Space Grotesk';  font-size: .85rem;  padding: 20px 0;  text-align: center;}
 /* lightbox */
 .lb{position:fixed;inset:0;background:rgba(8,8,18,.92);display:none;align-items:center;justify-content:center;z-index:1000;padding:30px}
 .lb.open{display:flex}
