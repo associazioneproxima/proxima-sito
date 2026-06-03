@@ -1,1 +1,13 @@
-{"foto": [{"img": "img/galleria/foto-1.jpg"}, {"img": "img/galleria/foto-2.jpg"}, {"img": "img/galleria/foto-3.jpg"}, {"img": "img/galleria/foto-4.jpg"}, {"img": "img/galleria/foto-5.jpg"}, {"img": "img/galleria/foto-6.jpg"}, {"img": "img/galleria/foto-7.jpg"}]}
+{
+  "foto": [
+    "/img/galleria/pracheggiony2023(1).jpg",
+    "/img/galleria/pracheggiony2023(2).jpg",
+    "/img/galleria/pracheggiony2023(3).jpg",
+    "/img/galleria/pracheggiony2023(4).jpg",
+    "/img/galleria/pracheggiony2023(5).jpg",
+    "/img/galleria/pracheggiony2023(6).jpg",
+    "/img/galleria/pracheggiony2023(7).jpg",
+    "/img/galleria/pracheggiony2023(8).jpg",
+    "/img/galleria/pracheggiony2023(9).jpg"
+  ]
+}
