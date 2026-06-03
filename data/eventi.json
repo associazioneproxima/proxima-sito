@@ -1,48 +1,49 @@
 {
   "eventi": [
     {
-      "per_chi": "16+ anni · squadre 3 - 5 giocatori",
-      "locandina": "img/eventi/gorgo-jam.png",
+      "stato": "in-programma",
       "tema": "orange",
-      "slug": "gorgo-jam-2026",
+      "data_label": "Giugno 2026",
+      "quando": "6 giugno 2026, dalle 17:00 alle 01:00",
+      "dove": "Largo degli Alpini, Gorgonzola",
+      "per_chi": "16+ anni · squadre 3 - 5 giocatori",
       "descrizione": "Una serata intera dedicata al basket di strada durante la Notte Bianca: tornei 3vs3, musica dal vivo, street food e premi per le squadre vincenti. Aperto a tutti i ragazzi del territorio, dai principianti agli agonisti.",
       "cta": "",
-      "titolo": "Gorgo Jam 2026",
-      "dove": "Largo degli Alpini, Gorgonzola",
-      "stato": "in-programma",
-      "quando": "6 giugno 2026, dalle 17:00 alle 01:00",
+      "link": "",
+      "locandina": "img/eventi/gorgo-jam.png",
+      "slug": "gorgo-jam-2026",
       "ordine": 1,
-      "data_label": "Giugno 2026"
+      "titolo": "Gorgo Jam 2026"
     },
     {
-      "per_chi": "16 squadre · 4 gironi",
-      "locandina": "img/eventi/gorgosummerleague.png",
-      "tema": "blue",
-      "slug": "summer-league-2026",
-      "descrizione": "Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutto Giugno. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.",
-      "cta": "Iscrivi una squadra",
-      "titolo": "Gorgo Summer League 2026",
-      "dove": "Centro sportivo Seven Infinity, Gorgonzola",
-      "link": "https://docs.google.com/forms/d/e/1FAIpQLSc2AqHOEO1V8rAznr14SkvXJMpULUIUAzpPRY-J4fNhzRvksA/viewform",
       "stato": "in-corso",
+      "tema": "blue",
+      "data_label": "Giugno 2026",
       "quando": "4 - 26 Giugno 2026, partite settimanali",
+      "dove": "Centro sportivo Seven Infinity, Gorgonzola",
+      "per_chi": "16 squadre · 4 gironi",
+      "descrizione": "Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutto Giugno. Partite ogni settimana, classifiche aggiornate e fase finale a eliminazione.",
+      "cta": "Classifiche e calendario",
+      "link": "https://associazioneproxima.com/#sl-title",
+      "locandina": "img/eventi/gorgosummerleague.png",
+      "slug": "summer-league-2026",
       "ordine": 2,
-      "data_label": "Giugno 2026"
+      "titolo": "Gorgo Summer League 2026"
     },
     {
-      "per_chi": "Ingresso libero",
-      "locandina": "img/eventi/manifesto-notte-bianca-post-instagram-45-.png",
+      "stato": "in-programma",
       "tema": "grape",
-      "slug": "notte-bianca-2026",
+      "data_label": "Giugno 2026",
+      "quando": "6 giugno 2026, 19.00 - all night long",
+      "dove": "Centro Storico di Gorgonzola",
+      "per_chi": "Ingresso libero",
       "descrizione": "Da quest'anno Proxima è tra gli organizzatori della Notte Bianca: l′evento di apertura dell′estate all'insegna di musica, sport e gusto diffuso per le vie del centro storico di Gorgonzola.",
       "cta": "Più informazioni",
-      "titolo": "Notte Bianca 2026",
-      "dove": "Centro Storico di Gorgonzola",
       "link": "https://comune.gorgonzola.mi.it/vivere-il-comune/evento/gorgonzola-estate-2026/notte-bianca-2026/",
-      "stato": "in-programma",
-      "quando": "6 giugno 2026, 19.00 - all night long",
+      "locandina": "img/eventi/manifesto-notte-bianca-post-instagram-45-.png",
+      "slug": "notte-bianca-2026",
       "ordine": 3,
-      "data_label": "Giugno 2026"
+      "titolo": "Notte Bianca 2026"
     }
   ]
 }
