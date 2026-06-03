@@ -51,20 +51,19 @@ form button{margin-top:6px;align-self:flex-start}
 </p>
     </div>
     <div>
-      <form id="f" onsubmit="return invia(event)">
+      <form id="f">
         <div class="field"><label>Nome e cognome</label><input required name="nome" placeholder="Mario Rossi"></div>
         <div class="field"><label>Email</label><input required type="email" name="email" placeholder="tu@email.it"></div>
         <div class="field"><label>Motivo del contatto</label>
           <select name="motivo">
-            <option>Voglio diventare socio</option>
-            <option>Voglio iscrivere una squadra alla Summer League</option>
+            <option>Voglio diventare volontario</option>
             <option>Voglio proporre un evento</option>
-            <option>Voglio fare volontariato</option>
             <option>Informazioni generali</option>
           </select></div>
-        <div class="field"><label>Messaggio</label><textarea name="msg" rows="4" placeholder="Raccontaci..."></textarea></div>
-        <button type="submit" class="btn fill">Invia</button>
-        <div id="ok">&#10003; Grazie! Abbiamo ricevuto il tuo messaggio.</div>
+        <div class="field"><label>Messaggio</label><textarea required name="messaggio" rows="4" placeholder="Raccontaci..."></textarea></div>
+        <button type="submit" class="btn fill" id="send-btn">Invia</button>
+        <div id="ok">&#10003; Grazie! Abbiamo ricevuto il tuo messaggio, ti risponderemo presto.</div>
+        <div id="ko" style="display:none;background:#ff6a2b;color:#fff;padding:16px;border-radius:14px;font-family:'Space Grotesk';font-weight:700;margin-top:10px">Ops, qualcosa &egrave; andato storto. Riprova o scrivici a proxima.associazione@gmail.com</div>
       </form>
     </div>
   </div>
@@ -92,7 +91,29 @@ form button{margin-top:6px;align-self:flex-start}
 function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
-</script><script>function invia(e){e.preventDefault();document.getElementById('ok').style.display='block';document.getElementById('f').reset();return false;}</script>
+</script><script>
+(function(){
+  // SOSTITUISCI il codice qui sotto con il tuo endpoint Formspree (es. https://formspree.io/f/abcdwxyz)
+  var FORMSPREE = "https://formspree.io/f/IL_TUO_CODICE";
+  var f=document.getElementById("f");
+  var ok=document.getElementById("ok"), ko=document.getElementById("ko"), btn=document.getElementById("send-btn");
+  f.addEventListener("submit", function(e){
+    e.preventDefault();
+    ok.style.display="none"; ko.style.display="none";
+    btn.disabled=true; btn.textContent="Invio in corso...";
+    fetch(FORMSPREE, {
+      method:"POST",
+      headers:{"Accept":"application/json"},
+      body:new FormData(f)
+    }).then(function(r){
+      if(r.ok){
+        f.reset(); ok.style.display="block";
+      } else { ko.style.display="block"; }
+    }).catch(function(){ ko.style.display="block"; })
+    .finally(function(){ btn.disabled=false; btn.textContent="Invia"; });
+  });
+})();
+</script>
 <!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
 <script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
