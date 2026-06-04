@@ -6,16 +6,16 @@
       "nome": "A",
       "squadre": [
         {
-          "team": "Zapoiss",
-          "g": 1,
-          "v": 0,
-          "pt": 0
-        },
-        {
           "team": "Cadeo Imbiancature",
           "g": 1,
           "v": 1,
           "pt": 3
+        },
+        {
+          "team": "Zapoiss",
+          "g": 1,
+          "v": 0,
+          "pt": 0
         },
         {
           "team": "Los Intocables",
@@ -64,16 +64,16 @@
       "nome": "C",
       "squadre": [
         {
-          "team": "Estremo Feeling",
-          "g": 0,
-          "v": 0,
-          "pt": 0
-        },
-        {
           "team": "Pozzuolo Vintage",
           "g": 1,
           "v": 1,
           "pt": 3
+        },
+        {
+          "team": "Estremo Feeling",
+          "g": 0,
+          "v": 0,
+          "pt": 0
         },
         {
           "team": "Scan Sarlo",
