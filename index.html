@@ -35,7 +35,7 @@
 .card.has-poster{overflow:visible;padding-left:130px;min-height:150px}
 .card .poster-thumb{position:absolute;left:-14px;top:50%;width:118px;aspect-ratio:4/5;transform:translateY(-50%) rotate(-6deg);border-radius:12px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.5);border:1px solid rgba(246,245,239,.18);background:rgba(255,255,255,.04)}
 .card .poster-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.card .card-body{position:relative;z-index:1;background:#0f0e1a;border-radius:12px;padding:4px 0}
+.card .card-bg{position:absolute;inset:0;background:#0f0e1a;border-radius:inherit;z-index:0}.card .card-body{position:relative;z-index:1}
 .card.has-poster:hover .poster-thumb{transform:translateY(-50%) rotate(-2deg) scale(1.04)}
 .card:hover{transform:translateY(-6px);border-color:var(--yellow)}
 .card .date{font-family:'Space Grotesk';font-size:.76rem;color:var(--yellow);text-transform:uppercase;letter-spacing:2px;font-weight:700}
@@ -152,8 +152,7 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       var hasPoster=e.locandina&&e.locandina.trim();
       var poster=hasPoster?('<div class="poster-thumb"><img src="'+e.locandina+'" alt="Locandina '+e.titolo+'" loading="lazy"></div>'):"";
       box.insertAdjacentHTML("beforeend",
-        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+
-        '<div class="card-body"><div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
+        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+'<div class="card-bg"></div><div class="card-body"><div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
         (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</div></a>');
     });
   });
