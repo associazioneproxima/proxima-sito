@@ -24,9 +24,11 @@
 .card .badge{position:absolute;top:14px;right:14px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.6rem;padding:5px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;transform:none;max-width:60%;text-align:right;line-height:1.2}
 .card.has-badge .date{padding-top:34px}
 @media(max-width:560px){
-  .card.has-poster{overflow:hidden;padding:28px}
-  .card .poster-thumb{position:static;transform:none;width:88px;margin-bottom:14px;box-shadow:0 6px 16px rgba(0,0,0,.4)}
-  .card.has-poster:hover .poster-thumb{transform:none}
+  .card.has-poster{overflow:visible;padding:20px 20px 20px 140px;min-height:120px;margin-top:20px}
+  .card .poster-thumb{position:absolute;left:12px;bottom:-18px;top:auto;transform:rotate(-5deg);width:110px;box-shadow:0 10px 28px rgba(0,0,0,.55);z-index:2}
+  .card.has-poster:hover .poster-thumb{transform:rotate(-2deg) scale(1.03)}
+  .card .badge{top:auto;bottom:calc(100% + 8px);right:auto;left:0;border-radius:50px}
+  .card.has-badge .date{padding-top:0}
 }
 .card:hover{transform:translateY(-6px);border-color:var(--yellow)}
 .card .date{font-family:'Space Grotesk';font-size:.76rem;color:var(--yellow);text-transform:uppercase;letter-spacing:2px;font-weight:700}
