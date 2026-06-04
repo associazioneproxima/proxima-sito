@@ -152,7 +152,7 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       var hasPoster=e.locandina&&e.locandina.trim();
       var poster=hasPoster?('<div class="poster-thumb"><img src="'+e.locandina+'" alt="Locandina '+e.titolo+'" loading="lazy"></div>'):"";
       box.insertAdjacentHTML("beforeend",
-        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+poster+'<div class="card-bg"></div><div class="card-body">'+badge+<div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
+        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+'<div class="card-bg"></div><div class="card-body"><div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
         (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</div></a>');
     });
   });
