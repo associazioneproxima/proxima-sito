@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proxima &mdash; L'associazione pi&ugrave; giovane di Gorgonzola</title>
-<link rel="icon" href="img/logo-neg.svg">
+<link rel="icon" href="img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -32,17 +32,21 @@
 .up-head a.seeall{font-family:'Space Grotesk';font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);border-bottom:2px solid var(--yellow);padding-bottom:3px;white-space:nowrap}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:30px}
 .card{display:block;color:inherit;border:1px solid rgba(246,245,239,.16);padding:28px;transition:.3s;position:relative;overflow:hidden;background:rgba(255,255,255,.025);border-radius:24px 24px 24px 4px}
+.card.has-poster{overflow:visible;padding-left:130px;min-height:150px}
+.card .poster-thumb{position:absolute;left:-14px;top:50%;width:118px;aspect-ratio:4/5;transform:translateY(-50%) rotate(-6deg);border-radius:12px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.5);border:1px solid rgba(246,245,239,.18);background:rgba(255,255,255,.04)}
+.card .poster-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.card.has-poster:hover .poster-thumb{transform:translateY(-50%) rotate(-2deg) scale(1.04)}
+@media(max-width:560px){.card.has-poster{overflow:hidden;padding:28px}.card .poster-thumb{position:static;transform:none;width:88px;margin-bottom:14px;box-shadow:0 6px 16px rgba(0,0,0,.4)}.card.has-poster:hover .poster-thumb{transform:none}}
 .card:hover{transform:translateY(-6px);border-color:var(--yellow)}
 .card .date{font-family:'Space Grotesk';font-size:.76rem;color:var(--yellow);text-transform:uppercase;letter-spacing:2px;font-weight:700}
-.card h3{font-family:'Sora';font-weight:800;font-size:1.35rem;margin:10px 0}
-.card p{font-weight:300;opacity:.8;margin-bottom:14px;font-size:.93rem}
+.card h3{font-family:'Sora';font-weight:800;font-size:1.4rem;margin:10px 0}
 .card .place{font-family:'Space Grotesk';font-size:.76rem;opacity:.6}
-.card .badge{position:absolute;top:15px;right:-34px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.64rem;padding:5px 40px;transform:rotate(35deg);text-transform:uppercase}
+.card .badge{position:absolute;top:14px;right:14px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.6rem;padding:5px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;transform:none;max-width:60%;text-align:right;line-height:1.2}
+.card.has-badge .date{padding-top:34px}
 /* temi colore evento */
-.card.t-orange{border-color:rgba(255,106,43,.4)} .card.t-orange:hover{border-color:var(--orange)}
-.card.t-orange .date{color:var(--orange)} .card.t-orange .badge{background:var(--orange)}
-.card.t-blue{border-color:rgba(74,60,236,.45)} .card.t-blue:hover{border-color:var(--violet)}
-.card.t-blue .date{color:#8aa0ff} .card.t-blue .badge{background:var(--violet)}
+.card.t-orange{border-color:rgba(255,106,43,.4)}.card.t-orange:hover{border-color:var(--orange)}.card.t-orange .date{color:var(--orange)}.card.t-orange .badge{background:var(--orange)}
+.card.t-blue{border-color:rgba(74,60,236,.45)}.card.t-blue:hover{border-color:var(--violet)}.card.t-blue .date{color:#8aa0ff}.card.t-blue .badge{background:var(--violet)}
+.card.t-grape{border-color:rgba(155,60,255,.4)}.card.t-grape:hover{border-color:var(--grape)}.card.t-grape .date{color:#c47aff}.card.t-grape .badge{background:var(--grape)}
 
 .league{background:linear-gradient(165deg,var(--violet-deep),var(--ink));border-top:1px solid rgba(246,245,239,.1)}
 .gironi{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
@@ -144,10 +148,11 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     ev.forEach(function(e){
       var tema=e.tema&&e.tema!=="neutro"?(" t-"+e.tema):"";
       var badge=STATI[e.stato]?('<span class="badge">'+STATI[e.stato]+'</span>'):"";
+      var hasPoster=e.locandina&&e.locandina.trim();
+      var poster=hasPoster?('<div class="poster-thumb"><img src="'+e.locandina+'" alt="Locandina '+e.titolo+'" loading="lazy"></div>'):"";
       box.insertAdjacentHTML("beforeend",
-        '<a class="card'+tema+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+
+        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+
         '<div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
-        '<p>'+(e.descrizione||"").slice(0,110)+((e.descrizione||"").length>110?"…":"")+'</p>'+
         (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</a>');
     });
   });
