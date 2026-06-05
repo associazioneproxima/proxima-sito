@@ -66,21 +66,21 @@ td.team{font-weight:600}
 td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
 .lgnote{font-family:'Space Grotesk';font-size:.76rem;opacity:.6;margin-top:18px}
 
-.gj-league{background:linear-gradient(165deg,#3a2800,var(--ink));border-top:1px solid rgba(246,245,239,.1)}
-.gj-girone .gj-gt{background:var(--orange)}
+.gj-league{background:linear-gradient(165deg,rgba(226,113,56,.55),transparent 55%),radial-gradient(circle at 15% 90%,rgba(44,35,137,.5),transparent 50%),var(--ink);border-top:1px solid rgba(246,245,239,.1)}
+.gj-girone .gj-gt{background:#e27138}
 .gj-dot{background:rgba(246,245,239,.5)}
 .gj-schedule{margin-top:0;overflow-x:auto}
 .gj-table{width:100%;border-collapse:collapse;min-width:420px}
 .gj-table thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12);padding:10px 14px;text-align:left}
 .gj-table tbody tr{border-top:1px solid rgba(246,245,239,.06);transition:.2s}
-.gj-table tbody tr:hover{background:rgba(255,106,43,.06)}
+.gj-table tbody tr:hover{background:rgba(226,113,56,.06)}
 .gj-table tbody td{padding:9px 14px;font-size:.9rem}
-.gj-time{font-family:'Space Grotesk';font-weight:700;color:var(--orange);white-space:nowrap;width:72px}
-.gj-badge{font-family:'Space Grotesk';font-weight:700;font-size:.62rem;text-transform:uppercase;letter-spacing:.5px;padding:4px 10px;border-radius:50px;white-space:nowrap;display:inline-block}
-.gj-badge.bugs{background:rgba(255,106,43,.22);color:var(--orange)}
-.gj-badge.duffy{background:rgba(155,60,255,.22);color:#c47aff}
-.gj-badge.final{background:rgba(74,60,236,.25);color:#8aa0ff}
-.gj-badge.finale-b{background:var(--yellow);color:var(--ink)}
+.gj-time{font-family:'Space Grotesk';font-weight:700;color:#e27138;white-space:nowrap;width:72px}
+.gj-girone-label{font-family:'Space Grotesk';font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.gj-girone-label.bugs{color:#e27138}
+.gj-girone-label.duffy{color:#c47aff}
+.gj-girone-label.final{color:#8aa0ff}
+.gj-girone-label.finale-b{color:var(--yellow);font-weight:800}
 .gj-separator td{border-top:2px solid rgba(246,245,239,.2)!important;padding-top:14px;font-weight:600;color:var(--yellow)}
 .gj-sep-label td{font-family:'Space Grotesk';font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;opacity:.5;padding-top:18px;border-top:none!important}
 .gj-finale{background:rgba(221,235,0,.06)}
@@ -125,28 +125,28 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   <div class="tag">Sport &middot; Notte Bianca 2026</div>
   <h2>Gorgo Jam</h2>
   <div class="league-brand">
-    <div class="league-logo-slot"><img src="img/gorgo-jam-logo.svg" alt="Gorgo Jam" onerror="this.style.display='none'"></div>
+    <div class="league-logo-slot" style="overflow:hidden"><img src="img/gorgo-jam-logo.svg" alt="Gorgo Jam" style="filter:invert(1) brightness(2);width:100%;height:100%;object-fit:contain" onerror="this.parentNode.style.display='none'"></div>
     <p class="lead" style="margin:0">Il torneo di basket 3&times;3 della Notte Bianca di Gorgonzola. Due gironi, tante squadre, una serata indimenticabile.</p>
   </div>
   <div class="gironi" style="margin-top:34px">
     <div class="girone gj-girone">
       <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Bugs Bunny</div>
-      <table><thead><tr><th>#</th><th>Squadra</th></tr></thead><tbody>
-        <tr><td class="pos">1</td><td class="team">La Roja</td></tr>
-        <tr><td class="pos">2</td><td class="team">Inshape</td></tr>
-        <tr><td class="pos">3</td><td class="team">Lapartesana</td></tr>
-        <tr><td class="pos">4</td><td class="team">Brigata dal Carr&eacute;</td></tr>
-        <tr><td class="pos">5</td><td class="team">Lithuanian Kiss</td></tr>
+      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
+        <tr><td class="team">La Roja</td></tr>
+        <tr><td class="team">Inshape</td></tr>
+        <tr><td class="team">Lapartesana</td></tr>
+        <tr><td class="team">Brigata dal Carr&eacute;</td></tr>
+        <tr><td class="team">Lithuanian Kiss</td></tr>
       </tbody></table>
     </div>
     <div class="girone gj-girone">
       <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Duffy Duck</div>
-      <table><thead><tr><th>#</th><th>Squadra</th></tr></thead><tbody>
-        <tr><td class="pos">1</td><td class="team">Boggio FC</td></tr>
-        <tr><td class="pos">2</td><td class="team">Rimbalzisti Anonimi</td></tr>
-        <tr><td class="pos">3</td><td class="team">Hair Ball</td></tr>
-        <tr><td class="pos">4</td><td class="team">Babek boy</td></tr>
-        <tr><td class="pos">5</td><td class="team">Vimogate</td></tr>
+      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
+        <tr><td class="team">Boggio FC</td></tr>
+        <tr><td class="team">Rimbalzisti Anonimi</td></tr>
+        <tr><td class="team">Hair Ball</td></tr>
+        <tr><td class="team">Babek boy</td></tr>
+        <tr><td class="team">Vimogate</td></tr>
       </tbody></table>
     </div>
   </div>
@@ -156,35 +156,35 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <table class="gj-table">
       <thead><tr><th>Orario</th><th>Match</th><th>Girone</th></tr></thead>
       <tbody>
-        <tr><td class="gj-time">17:15</td><td>La Roja &mdash; Inshape</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">17:25</td><td>Boggio FC &mdash; Rimbalzisti Anonimi</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">17:35</td><td>Lapartesana &mdash; Brigata dal Carr&eacute;</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">17:45</td><td>Hair Ball &mdash; Babek boy</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">17:55</td><td>Lithuanian Kiss &mdash; La Roja</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">18:05</td><td>Vimogate &mdash; Boggio FC</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">18:15</td><td>Inshape &mdash; Lapartesana</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">18:25</td><td>Rimbalzisti Anonimi &mdash; Hair Ball</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">18:35</td><td>Brigata dal Carr&eacute; &mdash; Lithuanian Kiss</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">18:45</td><td>Babek boy &mdash; Vimogate</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">18:55</td><td>La Roja &mdash; Lapartesana</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">19:05</td><td>Boggio FC &mdash; Hair Ball</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">19:15</td><td>Brigata dal Carr&eacute; &mdash; Inshape</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">19:25</td><td>Rimbalzisti Anonimi &mdash; Babek boy</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">19:35</td><td>Lapartesana &mdash; Lithuanian Kiss</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">19:45</td><td>Hair Ball &mdash; Vimogate</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">19:55</td><td>La Roja &mdash; Brigata dal Carr&eacute;</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">20:05</td><td>Boggio FC &mdash; Babek boy</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr><td class="gj-time">20:15</td><td>Inshape &mdash; Lithuanian Kiss</td><td class="gj-badge bugs">Bugs</td></tr>
-        <tr><td class="gj-time">20:25</td><td>Vimogate &mdash; Rimbalzisti Anonimi</td><td class="gj-badge duffy">Duffy</td></tr>
-        <tr class="gj-separator"><td class="gj-time">20:35</td><td colspan="2">&#127944; 3 Point Contest</td></tr>
+        <tr><td class="gj-time">17:15</td><td>La Roja &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">17:25</td><td>Boggio FC &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">17:35</td><td>Lapartesana &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">17:45</td><td>Hair Ball &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">17:55</td><td>Lithuanian Kiss &mdash; La Roja</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">18:05</td><td>Vimogate &mdash; Boggio FC</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">18:15</td><td>Inshape &mdash; Lapartesana</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">18:25</td><td>Rimbalzisti Anonimi &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">18:35</td><td>Brigata dal Carr&eacute; &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">18:45</td><td>Babek boy &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">18:55</td><td>La Roja &mdash; Lapartesana</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">19:05</td><td>Boggio FC &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">19:15</td><td>Brigata dal Carr&eacute; &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">19:25</td><td>Rimbalzisti Anonimi &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">19:35</td><td>Lapartesana &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">19:45</td><td>Hair Ball &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">19:55</td><td>La Roja &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">20:05</td><td>Boggio FC &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">20:15</td><td>Inshape &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">20:25</td><td>Vimogate &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr class="gj-separator"><td class="gj-time">20:35</td><td colspan="2">&#127936; 3 Point Contest</td></tr>
         <tr class="gj-sep-label"><td colspan="3">Fase a eliminazione diretta</td></tr>
-        <tr><td class="gj-time">22:25</td><td>1&deg; Bugs &mdash; 4&deg; Duffy (A)</td><td class="gj-badge final">Semifinale</td></tr>
-        <tr><td class="gj-time">22:35</td><td>1&deg; Duffy &mdash; 4&deg; Bugs (C)</td><td class="gj-badge final">Semifinale</td></tr>
-        <tr><td class="gj-time">22:45</td><td>2&deg; Bugs &mdash; 3&deg; Duffy (D)</td><td class="gj-badge final">Semifinale</td></tr>
-        <tr><td class="gj-time">22:55</td><td>2&deg; Duffy &mdash; 3&deg; Bugs (B)</td><td class="gj-badge final">Semifinale</td></tr>
-        <tr><td class="gj-time">23:15</td><td>A &mdash; B</td><td class="gj-badge final">Finale 3°</td></tr>
-        <tr><td class="gj-time">23:25</td><td>C &mdash; D</td><td class="gj-badge final">Finale 3°</td></tr>
-        <tr class="gj-finale"><td class="gj-time">23:45</td><td>&#127942; FINALE</td><td class="gj-badge finale-b">GRANDE FINALE</td></tr>
+        <tr><td class="gj-time">22:25</td><td>1&deg; Bugs &mdash; 4&deg; Duffy (A)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">22:35</td><td>1&deg; Duffy &mdash; 4&deg; Bugs (C)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">22:45</td><td>2&deg; Bugs &mdash; 3&deg; Duffy (D)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">22:55</td><td>2&deg; Duffy &mdash; 3&deg; Bugs (B)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">23:15</td><td>A &mdash; B</td><td><span class="gj-girone-label final">Finale 3°</span></td></tr>
+        <tr><td class="gj-time">23:25</td><td>C &mdash; D</td><td><span class="gj-girone-label final">Finale 3°</span></td></tr>
+        <tr class="gj-finale"><td class="gj-time">23:45</td><td>&#127942; FINALE</td><td><span class="gj-girone-label finale-b">Grande Finale</span></td></tr>
         <tr class="gj-premiazione"><td class="gj-time">00:00</td><td colspan="2">&#127881; Premiazione</td></tr>
       </tbody>
     </table>
