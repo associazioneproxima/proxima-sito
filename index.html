@@ -110,6 +110,11 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Prossime partite</h3>
   <div class="fixtures" id="sl-partite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
   <div style="margin-top:18px"><button id="sl-toggle" class="btn" style="display:none">Tutte le partite</button></div>
+  <div id="sl-giocate-wrap" style="display:none">
+    <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Partite giocate</h3>
+    <div class="fixtures" id="sl-giocate" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
+    <div style="margin-top:18px"><button id="sl-toggle-giocate" class="btn" style="display:none">Tutti i risultati</button></div>
+  </div>
   <p class="lgnote">G = giocate &middot; V = vittorie &middot; Pt = punti.</p>
 </section>
 <footer>
@@ -175,6 +180,7 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     var all=(d.partite||[]);
     function dOf(p){ return p.iso? new Date(p.iso+"T00:00:00") : null; }
     var future=all.filter(function(p){var dt=dOf(p);return !dt || dt>=oggi;});
+    var giocate=all.filter(function(p){var dt=dOf(p);return dt && dt<oggi;}).reverse();
     var prossimoIso = future.length? future[0].iso : null;
     var ridotta = future.length? future.slice(0,6) : all.slice(-3);
 
@@ -191,13 +197,48 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     }
     function render(list){ pbox.innerHTML = list.length? list.map(fxHtml).join("") : '<p style="opacity:.6">Calendario in arrivo.</p>'; }
 
+    // ---- Partite giocate (con punteggio) ----
+    function hasScore(p){ return p.gol_casa!=null && p.gol_casa!=="" && p.gol_ospite!=null && p.gol_ospite!==""; }
+    function giocataHtml(p){
+      var teams = (p.match||"").split("—");
+      var casa = (teams[0]||"").trim();
+      var osp = (teams[1]||"").trim();
+      var score = hasScore(p)
+        ? '<span style="font-family:var(--display);font-size:1.15rem;color:var(--yellow)">'+p.gol_casa+'</span><span style="opacity:.4;margin:0 6px">-</span><span style="font-family:var(--display);font-size:1.15rem;color:var(--yellow)">'+p.gol_ospite+'</span>'
+        : '<span style="font-family:\'Space Grotesk\';font-size:.7rem;opacity:.5">da definire</span>';
+      return '<div class="fx" style="background:rgba(255,255,255,.05);border:1px solid rgba(246,245,239,.12);padding:18px;border-radius:16px 16px 16px 4px">'+
+        '<div style="font-family:\'Space Grotesk\';font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--grape);font-weight:700">'+p.data+'</div>'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px">'+
+          '<div style="font-weight:600;flex:1">'+casa+'</div>'+
+          '<div style="white-space:nowrap">'+score+'</div>'+
+          '<div style="font-weight:600;flex:1;text-align:right">'+osp+'</div>'+
+        '</div></div>';
+    }
+    if(giocate.length){
+      document.getElementById("sl-giocate-wrap").style.display="";
+      var gbox2=document.getElementById("sl-giocate");
+      var tg=document.getElementById("sl-toggle-giocate");
+      var gRidotte=giocate.slice(0,6);
+      function renderG(list){ gbox2.innerHTML=list.map(giocataHtml).join(""); }
+      renderG(gRidotte);
+      var gEspanso=false;
+      if(giocate.length>gRidotte.length){
+        tg.style.display="";
+        tg.addEventListener("click",function(){
+          gEspanso=!gEspanso;
+          renderG(gEspanso? giocate : gRidotte);
+          tg.textContent=gEspanso? "Mostra meno" : "Tutti i risultati";
+        });
+      }
+    }
+
     render(ridotta);
     var espanso=false;
-    if(all.length > ridotta.length){
+    if(future.length > ridotta.length){
       toggle.style.display="";
       toggle.addEventListener("click",function(){
         espanso=!espanso;
-        render(espanso? all : ridotta);
+        render(espanso? future : ridotta);
         toggle.textContent = espanso? "Mostra meno" : "Tutte le partite";
       });
     }

@@ -83,15 +83,17 @@ collections:
                   - {label: "Giocate", name: "g", widget: "number", default: 0, value_type: "int"}
                   - {label: "Vittorie", name: "v", widget: "number", default: 0, value_type: "int"}
                   - {label: "Punti", name: "pt", widget: "number", default: 0, value_type: "int"}
-          - label: "Prossime partite"
+          - label: "Calendario partite"
             name: "partite"
             widget: "list"
             label_singular: "Partita"
-            summary: "{{fields.data}} — {{fields.match}}"
+            summary: "{{fields.data}} — {{fields.match}}{{#if fields.gol_casa}}  ({{fields.gol_casa}}-{{fields.gol_ospite}}){{/if}}"
             fields:
               - {label: "Data e ora", name: "data", widget: "string"}
-              - {label: "Data calendario (AAAA-MM-GG, per evidenziare le prossime)", name: "iso", widget: "string", required: false, hint: "Es. 2026-06-12"}
+              - {label: "Data calendario (AAAA-MM-GG)", name: "iso", widget: "string", required: false, hint: "Es. 2026-06-12. Quando la data è passata, la partita si sposta da sola in 'Partite giocate'."}
               - {label: "Partita (es. Team A — Team B)", name: "match", widget: "string"}
+              - {label: "Gol squadra casa (sinistra)", name: "gol_casa", widget: "number", required: false, value_type: "int", hint: "Compila solo dopo la partita. Lascia vuoto se non ancora giocata."}
+              - {label: "Gol squadra ospite (destra)", name: "gol_ospite", widget: "number", required: false, value_type: "int"}
 
 
   # ---------- ARCHIVIO LOCANDINE (storiche) ----------
