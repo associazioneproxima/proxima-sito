@@ -1,15 +1,15 @@
 {
   "eventi": [
     {
-      "stato": "in-programma",
+      "stato": "in-corso",
       "tema": "orange",
       "data_label": "Giugno 2026",
       "quando": "6 giugno 2026, dalle 17:00 alle 01:00",
       "dove": "Largo degli Alpini, Gorgonzola",
       "per_chi": "16+ anni · squadre 3 - 5 giocatori",
       "descrizione": "Una serata intera dedicata al basket di strada durante la Notte Bianca: tornei 3vs3, musica dal vivo, street food e premi per le squadre vincenti. Aperto a tutti i ragazzi del territorio, dai principianti agli agonisti.",
-      "cta": "",
-      "link": "",
+      "cta": "Gironi e programma della serata",
+      "link": "https://associazioneproxima.com/#home-eventi",
       "locandina": "img/eventi/gorgo-jam.jpg",
       "slug": "gorgo-jam-2026",
       "ordine": 1,
@@ -31,7 +31,7 @@
       "titolo": "Gorgo Summer League 2026"
     },
     {
-      "stato": "in-programma",
+      "stato": "in-corso",
       "tema": "grape",
       "data_label": "Giugno 2026",
       "quando": "6 giugno 2026, 19.00 - all night long",
