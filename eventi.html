@@ -25,6 +25,9 @@
 .card.has-badge .date{padding-top:34px}
 @media(max-width:560px){
   .card.has-poster{overflow:visible;padding:20px;min-height:120px;margin-top:80px;background:transparent}
+  .card .card-bg{position:absolute;inset:0;background:#0f0e1a;border-radius:inherit;z-index:0}
+  .card .card-body{position:relative;z-index:1}
+  .card .badge{z-index:2}
   .card .poster-thumb{position:absolute;left:16px;top:-90px;bottom:auto;transform:rotate(-5deg);width:110px;box-shadow:0 10px 28px rgba(0,0,0,.55);z-index:-1;pointer-events:none}
   .card.has-poster:hover .poster-thumb{transform:rotate(-2deg) scale(1.03)}
   .card.has-badge .date{padding-top:0}
