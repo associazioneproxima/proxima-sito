@@ -73,16 +73,14 @@ collections:
             summary: "Girone {{fields.nome}}"
             fields:
               - {label: "Nome girone (A, B, C, D)", name: "nome", widget: "string"}
-              - label: "Squadre (in ordine di classifica)"
+              - label: "Squadre del girone"
                 name: "squadre"
                 widget: "list"
                 label_singular: "Squadra"
-                summary: "{{fields.team}} — {{fields.pt}} pt"
+                summary: "{{fields.team}}"
+                hint: "Solo l'elenco squadre. La classifica (giocate, vittorie, punti) si calcola da sola dai risultati delle partite."
                 fields:
                   - {label: "Squadra", name: "team", widget: "string"}
-                  - {label: "Giocate", name: "g", widget: "number", default: 0, value_type: "int"}
-                  - {label: "Vittorie", name: "v", widget: "number", default: 0, value_type: "int"}
-                  - {label: "Punti", name: "pt", widget: "number", default: 0, value_type: "int"}
           - label: "Calendario partite"
             name: "partite"
             widget: "list"

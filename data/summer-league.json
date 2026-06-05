@@ -6,28 +6,16 @@
       "nome": "A",
       "squadre": [
         {
-          "team": "Cadeo Imbiancature",
-          "g": 1,
-          "v": 1,
-          "pt": 3
+          "team": "Cadeo Imbiancature"
         },
         {
-          "team": "Zapoiss",
-          "g": 1,
-          "v": 0,
-          "pt": 0
+          "team": "Zapoiss"
         },
         {
-          "team": "Los Intocables",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Los Intocables"
         },
         {
-          "team": "Proxima",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Proxima"
         }
       ]
     },
@@ -35,28 +23,16 @@
       "nome": "B",
       "squadre": [
         {
-          "team": "FC Hesterfield",
-          "g": 1,
-          "v": 1,
-          "pt": 3
+          "team": "FC Hesterfield"
         },
         {
-          "team": "Club Santa Cruz",
-          "g": 1,
-          "v": 0,
-          "pt": 0
+          "team": "Club Santa Cruz"
         },
         {
-          "team": "Olimpo Stahl Service",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Olimpo Stahl Service"
         },
         {
-          "team": "Real Prano",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Real Prano"
         }
       ]
     },
@@ -64,28 +40,16 @@
       "nome": "C",
       "squadre": [
         {
-          "team": "Pozzuolo Vintage",
-          "g": 1,
-          "v": 1,
-          "pt": 3
+          "team": "Pozzuolo Vintage"
         },
         {
-          "team": "Estremo Feeling",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Estremo Feeling"
         },
         {
-          "team": "Scan Sarlo",
-          "g": 1,
-          "v": 0,
-          "pt": 0
+          "team": "Scan Sarlo"
         },
         {
-          "team": "La Maggica 64",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "La Maggica 64"
         }
       ]
     },
@@ -93,28 +57,16 @@
       "nome": "D",
       "squadre": [
         {
-          "team": "FC Fideuram",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "FC Fideuram"
         },
         {
-          "team": "Royal Valtellina",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Royal Valtellina"
         },
         {
-          "team": "Outside the Box",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Outside the Box"
         },
         {
-          "team": "Galacticos",
-          "g": 0,
-          "v": 0,
-          "pt": 0
+          "team": "Galacticos"
         }
       ]
     }

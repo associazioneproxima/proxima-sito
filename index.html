@@ -115,7 +115,7 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <div class="fixtures" id="sl-giocate" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
     <div style="margin-top:18px"><button id="sl-toggle-giocate" class="btn" style="display:none">Tutti i risultati</button></div>
   </div>
-  <p class="lgnote">G = giocate &middot; V = vittorie &middot; Pt = punti.</p>
+  <p class="lgnote">G = giocate &middot; V = vinte &middot; N = pareggi &middot; P = perse &middot; Pt = punti. Le classifiche si aggiornano da sole dai risultati delle partite.</p>
 </section>
 <footer>
   <div class="col">
@@ -165,14 +165,40 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
   fetch("data/summer-league.json").then(function(r){return r.json()}).then(function(d){
     if(d.titolo)document.getElementById("sl-title").textContent=d.titolo;
     document.getElementById("sl-sub").textContent=d.sottotitolo||"";
+
+    // ---- Calcolo classifiche dai risultati ----
+    var all0=(d.partite||[]);
+    function hasScore0(p){ return p.gol_casa!=null && p.gol_casa!=="" && p.gol_ospite!=null && p.gol_ospite!==""; }
+    // mappa squadra -> statistiche
+    var stats={};
+    (d.gironi||[]).forEach(function(g){
+      (g.squadre||[]).forEach(function(t){
+        stats[t.team]={team:t.team,g:0,v:0,n:0,p:0,pt:0};
+      });
+    });
+    all0.forEach(function(p){
+      if(!hasScore0(p)) return;
+      var teams=(p.match||"").split("—");
+      var casa=(teams[0]||"").trim(), osp=(teams[1]||"").trim();
+      var gc=parseInt(p.gol_casa,10), go=parseInt(p.gol_ospite,10);
+      if(!stats[casa]||!stats[osp]||isNaN(gc)||isNaN(go)) return;
+      stats[casa].g++; stats[osp].g++;
+      if(gc>go){ stats[casa].v++; stats[casa].pt+=3; stats[osp].p++; }
+      else if(gc<go){ stats[osp].v++; stats[osp].pt+=3; stats[casa].p++; }
+      else { stats[casa].n++; stats[osp].n++; stats[casa].pt++; stats[osp].pt++; }
+    });
+
     var gbox=document.getElementById("sl-gironi");
     (d.gironi||[]).forEach(function(g,i){
-      var rows=(g.squadre||[]).map(function(t,idx){
-        return '<tr><td class="pos">'+(idx+1)+'</td><td class="team">'+t.team+'</td><td>'+(t.g||0)+'</td><td>'+(t.v||0)+'</td><td class="pts">'+(t.pt||0)+'</td></tr>';
+      // ordina le squadre del girone per punti, poi vittorie
+      var squadre=(g.squadre||[]).map(function(t){ return stats[t.team]||{team:t.team,g:0,v:0,n:0,p:0,pt:0}; });
+      squadre.sort(function(a,b){ return (b.pt-a.pt) || (b.v-a.v) || (a.team.localeCompare(b.team)); });
+      var rows=squadre.map(function(t,idx){
+        return '<tr><td class="pos">'+(idx+1)+'</td><td class="team">'+t.team+'</td><td>'+t.g+'</td><td>'+t.v+'</td><td>'+t.n+'</td><td>'+t.p+'</td><td class="pts">'+t.pt+'</td></tr>';
       }).join("");
       gbox.insertAdjacentHTML("beforeend",
         '<div class="girone '+dotClass(g.nome)+'"><div class="gt"><span class="dot"></span>Girone '+g.nome+'</div>'+
-        '<table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th style="text-align:right">Pt</th></tr></thead><tbody>'+rows+'</tbody></table></div>');
+        '<table><thead><tr><th>#</th><th>Squadra</th><th>G</th><th>V</th><th>N</th><th>P</th><th style="text-align:right">Pt</th></tr></thead><tbody>'+rows+'</tbody></table></div>');
     });
     var pbox=document.getElementById("sl-partite");
     var toggle=document.getElementById("sl-toggle");
