@@ -96,17 +96,23 @@
     {
       "data": "ven 05/06 · 19:30",
       "iso": "2026-06-05",
-      "match": "Olimpo Stahl Service — Real Prano"
+      "match": "Olimpo Stahl Service — Real Prano",
+      "gol_casa": 3,
+      "gol_ospite": 2
     },
     {
       "data": "ven 05/06 · 20:30",
       "iso": "2026-06-05",
-      "match": "La Maggica 64 — Estremo Feeling"
+      "match": "La Maggica 64 — Estremo Feeling",
+      "gol_casa": 3,
+      "gol_ospite": 3
     },
     {
       "data": "ven 05/06 · 21:30",
       "iso": "2026-06-05",
-      "match": "Los Intocables — Proxima"
+      "match": "Los Intocables — Proxima",
+      "gol_casa": 4,
+      "gol_ospite": 4
     },
     {
       "data": "lun 08/06 · 19:30",
