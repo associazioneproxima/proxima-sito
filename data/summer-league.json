@@ -75,17 +75,23 @@
     {
       "data": "gio 04/06 · 19:30",
       "iso": "2026-06-04",
-      "match": "Zapoiss — Cadeo Imbiancature"
+      "match": "Zapoiss — Cadeo Imbiancature",
+      "gol_casa": 0,
+      "gol_ospite": 9
     },
     {
       "data": "gio 04/06 · 20:30",
       "iso": "2026-06-04",
-      "match": "Scan Sarlo — Pozzuolo Vintage"
+      "match": "Scan Sarlo — Pozzuolo Vintage",
+      "gol_casa": 0,
+      "gol_ospite": 5
     },
     {
       "data": "gio 04/06 · 21:30",
       "iso": "2026-06-04",
-      "match": "FC Hesterfield — Club Santa Cruz"
+      "match": "FC Hesterfield — Club Santa Cruz",
+      "gol_casa": 4,
+      "gol_ospite": 2
     },
     {
       "data": "ven 05/06 · 19:30",
