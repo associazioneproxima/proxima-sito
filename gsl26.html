@@ -3,13 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proxima &mdash; L'associazione pi&ugrave; giovane di Gorgonzola</title>
+<title>Gorgo Summer League 2026 &mdash; Proxima</title>
 <link rel="icon" href="img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
+/* Nav trasparente — solo su questa pagina */
+nav{background:transparent!important;backdrop-filter:none!important;border-bottom-color:transparent!important}
+@media(max-width:920px){nav{background:rgba(10,10,22,.92)!important}}
+
+/* Hero full-screen blu */
+.gsl-hero{
+  background:linear-gradient(165deg,var(--violet-deep),var(--ink));
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 5vw 80px;
+  position:relative;overflow:hidden;
+}
+.gsl-hero::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 70% 30%,rgba(74,60,236,.55),transparent 60%),
+             radial-gradient(circle at 10% 80%,rgba(44,35,137,.7),transparent 55%);
+}
+.gsl-hero > *{position:relative;z-index:1}
+.gsl-hero .tag{margin-bottom:20px}
+.gsl-hero h1{font-family:var(--display);font-size:clamp(2.8rem,9vw,7rem);line-height:.9;text-transform:uppercase;margin-bottom:24px}
+.gsl-hero .lead{max-width:560px;font-weight:300;font-size:1.1rem;opacity:.85}
+
+/* Content section */
+.gsl-body{padding:80px 5vw 90px}
+
+
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
   padding:calc(var(--nav-h) + 6vh) 5vw calc(56px + 6vh);
   background:radial-gradient(circle at 80% 20%,rgba(74,60,236,.65),transparent 55%),
@@ -89,10 +115,18 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
 .gj-premiazione td{opacity:.7;font-style:italic}
 
 
-.nav-gsl-pill{background:var(--violet);color:#fff!important;padding:5px 14px!important;border-radius:50px;opacity:1!important}
-.nav-gsl-pill::after{display:none!important}
-.nav-gsl-pill:hover{background:var(--violet-deep)!important}
-@media(max-width:920px){.nav-gsl-pill{background:none!important;color:var(--yellow)!important;border-radius:0!important;padding:14px 0!important}}
+
+/* GSL nav pill */
+nav .links a.gsl-pill{
+  background:var(--violet);color:#fff;
+  padding:5px 14px;border-radius:50px;
+  opacity:1;
+}
+nav .links a.gsl-pill::after{display:none}
+nav .links a.gsl-pill:hover{background:var(--violet-deep)}
+@media(max-width:920px){
+  nav .links a.gsl-pill{background:none;color:var(--yellow);border-bottom:1px solid rgba(246,245,239,.12)!important;border-radius:0;padding:14px 0}
+}
 </style>
 </head>
 <body>
@@ -101,103 +135,38 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:30px"></a>
   <button class="burger" aria-label="Menu" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
   <div class="links" id="navlinks">
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html">Home</a>
     <a href="chi-siamo.html">Chi siamo</a>
     <a href="eventi.html">Eventi</a>
     <a href="archivio.html">Archivio</a>
     <a href="trasparenza.html">Trasparenza</a>
     <a href="contatti.html">Contatti</a>
-    <a href="gsl26.html" class="nav-gsl-pill">GSL26</a>
+    <a href="gsl26.html" class="gsl-pill active">GSL26</a>
   </div>
 </nav>
-<header class="hero">
-  <div class="kicker">L'associazione pi&ugrave; giovane di Gorgonzola</div>
-  <h1><span>Energia </span><span>giovane,</span><span>radici locali</span></h1>
-  <p class="sub">Eventi, musica, sport e cultura per i giovani della Martesana.</p>
-  <div class="cta">
-    <a href="#prossimi" class="btn fill">Scopri gli eventi</a>
-    <a href="contatti.html" class="btn">Diventa volontario</a>
-  </div>
-  <div class="marquee"><span class="mq">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span><span class="mq" aria-hidden="true">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span></div>
-</header>
 
-<section class="section" id="prossimi">
-  <div class="up-head"><div><div class="tag">In arrivo</div><h2>Prossimi eventi</h2></div>
-    <a class="seeall" href="eventi.html">Tutti gli eventi &rarr;</a></div>
-  <p class="lead">Un assaggio di quello che bolle in pentola. Sulla pagina Eventi trovi il calendario completo e l'archivio.</p>
-  <div class="cards" id="home-eventi"></div>
+<div class="gsl-hero">
+  <div class="tag">Sport &middot; Estate 2026</div>
+  <h1>Gorgo Summer League</h1>
+  <p class="lead" id="sl-sub">Il campionato estivo di Proxima: 16 squadre divise in quattro gironi si sfidano per tutto Giugno.</p>
+</div>
+
+<section class="gsl-body">
+  <div class="league-brand" style="margin-bottom:40px">
+    <div class="league-logo-slot"><img src="img/summer-league-logo.svg" alt="" onerror="this.style.display='none';this.parentNode.innerHTML='Logo Summer League'"></div>
+    <div></div>
+  </div>
+  <div class="gironi" id="sl-gironi"></div>
+  <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Prossime partite</h3>
+  <div class="fixtures" id="sl-partite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
+  <div style="margin-top:18px"><button id="sl-toggle" class="btn" style="display:none">Tutte le partite</button></div>
+  <div id="sl-giocate-wrap" style="display:none">
+    <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Partite giocate</h3>
+    <div class="fixtures" id="sl-giocate" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
+    <div style="margin-top:18px"><button id="sl-toggle-giocate" class="btn" style="display:none">Tutti i risultati</button></div>
+  </div>
+  <p class="lgnote">G = giocate &middot; V = vinte &middot; N = pareggi &middot; P = perse &middot; Pt = punti. Le classifiche si aggiornano da sole dai risultati delle partite.</p>
 </section>
-
-<section class="section gj-league">
-  <div class="tag">Sport &middot; Notte Bianca 2026</div>
-  <h2>Gorgo Jam</h2>
-  <div class="league-brand">
-    <div class="league-logo-slot" style="overflow:hidden"><img src="img/gorgo-jam-logo.svg" alt="Gorgo Jam" style="filter:invert(1) brightness(2);width:100%;height:100%;object-fit:contain" onerror="this.parentNode.style.display='none'"></div>
-    <p class="lead" style="margin:0">Il torneo di basket 3v3 della Notte Bianca di Gorgonzola. Due gironi, tanta musica, bere e mangiare per tutti i gusti, una serata indimenticabile.</p>
-  </div>
-  <div class="gironi" style="margin-top:34px">
-    <div class="girone gj-girone">
-      <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Bugs Bunny</div>
-      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
-        <tr><td class="team">La Roja</td></tr>
-        <tr><td class="team">Inshape</td></tr>
-        <tr><td class="team">Lapartesana</td></tr>
-        <tr><td class="team">Brigata dal Carr&eacute;</td></tr>
-        <tr><td class="team">Lithuanian Kiss</td></tr>
-      </tbody></table>
-    </div>
-    <div class="girone gj-girone">
-      <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Duffy Duck</div>
-      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
-        <tr><td class="team">Boggio FC</td></tr>
-        <tr><td class="team">Rimbalzisti Anonimi</td></tr>
-        <tr><td class="team">Hair Ball</td></tr>
-        <tr><td class="team">Babek boy</td></tr>
-        <tr><td class="team">Vimogate</td></tr>
-      </tbody></table>
-    </div>
-  </div>
-
-  <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 18px">Programma della serata</h3>
-  <div class="gj-schedule">
-    <table class="gj-table">
-      <thead><tr><th>Orario</th><th>Match</th><th>Girone</th></tr></thead>
-      <tbody>
-        <tr><td class="gj-time">17:15</td><td>La Roja &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">17:25</td><td>Boggio FC &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">17:35</td><td>Brigata dal Carr&eacute; &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">17:45</td><td>Hair Ball &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">17:55</td><td>La Roja &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">18:05</td><td>Vimogate &mdash; Boggio FC</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">18:15</td><td>Inshape &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">18:25</td><td>Rimbalzisti Anonimi &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">18:35</td><td>La Roja &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">18:45</td><td>Babek boy &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">18:55</td><td>Brigata dal Carr&eacute; &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">19:05</td><td>Boggio FC &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">19:15</td><td>Lapartesana &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">19:25</td><td>Rimbalzisti Anonimi &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">19:35</td><td>Lapartesana &mdash; La Roja</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">19:45</td><td>Hair Ball &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">19:55</td><td>Lapartesana &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">20:05</td><td>Boggio FC &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">20:15</td><td>Inshape &mdash; Lapartesana</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">20:25</td><td>Vimogate &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr class="gj-separator"><td class="gj-time">20:35</td><td colspan="2">&#127936; 3 Point Contest</td></tr>
-        <tr class="gj-sep-label"><td colspan="3">Fase a eliminazione diretta</td></tr>
-        <tr><td class="gj-time">22:25</td><td>1&deg; Bugs &mdash; 4&deg; Duffy (A)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">22:35</td><td>1&deg; Duffy &mdash; 4&deg; Bugs (C)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">22:45</td><td>2&deg; Bugs &mdash; 3&deg; Duffy (D)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">22:55</td><td>2&deg; Duffy &mdash; 3&deg; Bugs (B)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">23:15</td><td>A &mdash; B</td><td><span class="gj-girone-label final">Finale 3°</span></td></tr>
-        <tr><td class="gj-time">23:25</td><td>C &mdash; D</td><td><span class="gj-girone-label final">Finale 3°</span></td></tr>
-        <tr class="gj-finale"><td class="gj-time">23:45</td><td>&#127942; FINALE</td><td><span class="gj-girone-label finale-b">Grande Finale</span></td></tr>
-        <tr class="gj-premiazione"><td class="gj-time">00:00</td><td colspan="2">&#127881; Premiazione</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
 
 <footer>
   <div class="col">
@@ -218,31 +187,126 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <p style="margin-top:14px;font-family:'Space Grotesk';font-size:.75rem">&copy; 2026 Associazione Proxima &middot; C.F. 91603100156</p>
   </div>
 </footer>
+
 <script>
 function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
 </script>
-<!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
 <script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
-  var STATI={"iscrizioni":"Iscrizioni aperte","in-corso":"In corso","in-programma":"In programma","archivio":""};
-  // EVENTI in home: mostro i primi 3 non-archivio
-  fetch("data/eventi.json").then(function(r){return r.json()}).then(function(d){
-    var ev=(d.eventi||[]).filter(function(e){return e.stato!=="archivio"}).sort(function(a,b){return (a.ordine||0)-(b.ordine||0)}).slice(0,3);
-    var box=document.getElementById("home-eventi");
-    ev.forEach(function(e){
-      var tema=e.tema&&e.tema!=="neutro"?(" t-"+e.tema):"";
-      var badge=STATI[e.stato]?('<span class="badge">'+STATI[e.stato]+'</span>'):"";
-      var hasPoster=e.locandina&&e.locandina.trim();
-      var poster=hasPoster?('<div class="poster-thumb"><img src="'+e.locandina+'" alt="Locandina '+e.titolo+'" loading="lazy"></div>'):"";
-      box.insertAdjacentHTML("beforeend",
-        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+'<div class="card-bg"></div><div class="card-body"><div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
-        (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</div></a>');
+  // SUMMER LEAGUE
+  function dotClass(nome){return "";}
+  fetch("data/summer-league.json").then(function(r){return r.json()}).then(function(d){
+    if(d.titolo)document.getElementById("sl-title").textContent=d.titolo;
+    document.getElementById("sl-sub").textContent=d.sottotitolo||"";
+
+    // ---- Calcolo classifiche dai risultati ----
+    var all0=(d.partite||[]);
+    function hasScore0(p){ return p.gol_casa!=null && p.gol_casa!=="" && p.gol_ospite!=null && p.gol_ospite!==""; }
+    // mappa squadra -> statistiche
+    var stats={};
+    (d.gironi||[]).forEach(function(g){
+      (g.squadre||[]).forEach(function(t){
+        stats[t.team]={team:t.team,g:0,v:0,n:0,p:0,pt:0};
+      });
     });
+    all0.forEach(function(p){
+      if(!hasScore0(p)) return;
+      var teams=(p.match||"").split("—");
+      var casa=(teams[0]||"").trim(), osp=(teams[1]||"").trim();
+      var gc=parseInt(p.gol_casa,10), go=parseInt(p.gol_ospite,10);
+      if(!stats[casa]||!stats[osp]||isNaN(gc)||isNaN(go)) return;
+      stats[casa].g++; stats[osp].g++;
+      if(gc>go){ stats[casa].v++; stats[casa].pt+=3; stats[osp].p++; }
+      else if(gc<go){ stats[osp].v++; stats[osp].pt+=3; stats[casa].p++; }
+      else { stats[casa].n++; stats[osp].n++; stats[casa].pt++; stats[osp].pt++; }
+    });
+
+    var gbox=document.getElementById("sl-gironi");
+    (d.gironi||[]).forEach(function(g,i){
+      // ordina le squadre del girone per punti, poi vittorie
+      var squadre=(g.squadre||[]).map(function(t){ return stats[t.team]||{team:t.team,g:0,v:0,n:0,p:0,pt:0}; });
+      squadre.sort(function(a,b){ return (b.pt-a.pt) || (b.v-a.v) || (a.team.localeCompare(b.team)); });
+      var rows=squadre.map(function(t,idx){
+        return '<tr><td class="team">'+t.team+'</td><td>'+t.g+'</td><td>'+t.v+'</td><td>'+t.n+'</td><td>'+t.p+'</td><td class="pts">'+t.pt+'</td></tr>';
+      }).join("");
+      gbox.insertAdjacentHTML("beforeend",
+        '<div class="girone '+dotClass(g.nome)+'"><div class="gt"><span class="dot"></span>Girone '+g.nome+'</div>'+
+        '<table><thead><tr><th>Squadra</th><th>G</th><th>V</th><th>N</th><th>P</th><th style="text-align:right">Pt</th></tr></thead><tbody>'+rows+'</tbody></table></div>');
+    });
+    var pbox=document.getElementById("sl-partite");
+    var toggle=document.getElementById("sl-toggle");
+    var oggi=new Date(); oggi.setHours(0,0,0,0);
+    var all=(d.partite||[]);
+    function dOf(p){ return p.iso? new Date(p.iso+"T00:00:00") : null; }
+    var future=all.filter(function(p){var dt=dOf(p);return !dt || dt>=oggi;});
+    var giocate=all.filter(function(p){var dt=dOf(p);return dt && dt<oggi;}).reverse();
+    var prossimoIso = future.length? future[0].iso : null;
+    var ridotta = future.length? future.slice(0,6) : all.slice(-3);
+
+    function fxHtml(p){
+      var isNext = prossimoIso && p.iso===prossimoIso;
+      var passata = dOf(p) && dOf(p)<oggi;
+      var bg = isNext ? 'rgba(74,60,236,.18)' : 'rgba(255,255,255,.05)';
+      var bd = isNext ? 'var(--violet)' : 'rgba(246,245,239,.12)';
+      var tag = isNext ? '<div style="font-family:\'Space Grotesk\';font-size:.62rem;text-transform:uppercase;letter-spacing:1px;color:#8aa0ff;font-weight:700;margin-bottom:4px">Prossima giornata</div>' : '';
+      return '<div class="fx" style="background:'+bg+';border:1px solid '+bd+';padding:18px;border-radius:16px 16px 16px 4px;'+(passata?'opacity:.55;':'')+'">'+
+        tag+
+        '<div style="font-family:\'Space Grotesk\';font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700">'+p.data+'</div>'+
+        '<div style="font-weight:600;margin-top:6px">'+p.match+'</div></div>';
+    }
+    function render(list){ pbox.innerHTML = list.length? list.map(fxHtml).join("") : '<p style="opacity:.6">Calendario in arrivo.</p>'; }
+
+    // ---- Partite giocate (con punteggio) ----
+    function hasScore(p){ return p.gol_casa!=null && p.gol_casa!=="" && p.gol_ospite!=null && p.gol_ospite!==""; }
+    function giocataHtml(p){
+      var teams = (p.match||"").split("—");
+      var casa = (teams[0]||"").trim();
+      var osp = (teams[1]||"").trim();
+      var score = hasScore(p)
+        ? '<span style="font-family:var(--display);font-size:1.15rem;color:var(--yellow)">'+p.gol_casa+'</span><span style="opacity:.4;margin:0 6px">-</span><span style="font-family:var(--display);font-size:1.15rem;color:var(--yellow)">'+p.gol_ospite+'</span>'
+        : '<span style="font-family:\'Space Grotesk\';font-size:.7rem;opacity:.5">da definire</span>';
+      return '<div class="fx" style="background:rgba(255,255,255,.05);border:1px solid rgba(246,245,239,.12);padding:18px;border-radius:16px 16px 16px 4px">'+
+        '<div style="font-family:\'Space Grotesk\';font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--grape);font-weight:700">'+p.data+'</div>'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px">'+
+          '<div style="font-weight:600;flex:1">'+casa+'</div>'+
+          '<div style="white-space:nowrap">'+score+'</div>'+
+          '<div style="font-weight:600;flex:1;text-align:right">'+osp+'</div>'+
+        '</div></div>';
+    }
+    if(giocate.length){
+      document.getElementById("sl-giocate-wrap").style.display="";
+      var gbox2=document.getElementById("sl-giocate");
+      var tg=document.getElementById("sl-toggle-giocate");
+      var gRidotte=giocate.slice(0,6);
+      function renderG(list){ gbox2.innerHTML=list.map(giocataHtml).join(""); }
+      renderG(gRidotte);
+      var gEspanso=false;
+      if(giocate.length>gRidotte.length){
+        tg.style.display="";
+        tg.addEventListener("click",function(){
+          gEspanso=!gEspanso;
+          renderG(gEspanso? giocate : gRidotte);
+          tg.textContent=gEspanso? "Mostra meno" : "Tutti i risultati";
+        });
+      }
+    }
+
+    render(ridotta);
+    var espanso=false;
+    if(future.length > ridotta.length){
+      toggle.style.display="";
+      toggle.addEventListener("click",function(){
+        espanso=!espanso;
+        render(espanso? future : ridotta);
+        toggle.textContent = espanso? "Mostra meno" : "Tutte le partite";
+      });
+    }
   });
-);
+})(
+})();
 </script>
 </body>
 </html>
