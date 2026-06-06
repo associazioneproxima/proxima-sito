@@ -118,7 +118,7 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     } else {
       cta.style.display="";
       cta.innerHTML=hasText?e.cta.trim():"Iscriviti";   // testo dato, o default se c'e' solo il link
-      if(hasLink){ cta.href=e.link.trim(); cta.target="_blank"; cta.rel="noopener"; }
+      if(hasLink){ cta.href=e.link.trim(); var isExt=e.link.trim().startsWith("http"); cta.target=isExt?"_blank":"_self"; if(isExt){cta.rel="noopener";}else{cta.removeAttribute("rel");} }
       else { cta.href="contatti.html"; cta.removeAttribute("target"); }
     }
     if(e.locandina){
