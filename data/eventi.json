@@ -44,6 +44,20 @@
       "slug": "notte-bianca-2026",
       "ordine": 3,
       "titolo": "Notte Bianca 2026"
+    },
+    {
+      "stato": "in-programma",
+      "tema": "neutro",
+      "data_label": "Coming Soon...",
+      "quando": "Settembre 2026",
+      "dove": "Piazza della Repubblica",
+      "per_chi": "Tutti",
+      "descrizione": "Restate sincronizzati, dopo l'estate vi aspettiamo un appuntamento imperdibile! \n\nVi lasciamo qualche indizio:🔵🔴🔥🔪",
+      "cta": "Iscriviti",
+      "link": "",
+      "locandina": "/img/eventi/nuovo sito.jpg",
+      "slug": "coming-soon",
+      "ordine": 2
     }
   ]
 }
