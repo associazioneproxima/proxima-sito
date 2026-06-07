@@ -55,8 +55,16 @@
       "icona": "cards",
       "albo": [
         {
+          "anno": "2024",
+          "vincitore": "Associazione Feeling (Dina e Drew)"
+        },
+        {
           "anno": "2025",
-          "vincitore": "Inserisci vincitore"
+          "vincitore": "Teo Damiano e Dina"
+        },
+        {
+          "anno": "2026",
+          "vincitore": "Teo Damiano e Drew"
         }
       ]
     }
