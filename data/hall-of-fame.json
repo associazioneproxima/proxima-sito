@@ -7,8 +7,16 @@
       "icona": "soccer",
       "albo": [
         {
+          "anno": "2023",
+          "vincitore": "Ginga Team"
+        },
+        {
+          "anno": "2024",
+          "vincitore": "Ginga Team"
+        },
+        {
           "anno": "2025",
-          "vincitore": "Inserisci vincitore"
+          "vincitore": "FC Hesterfield"
         }
       ]
     },
@@ -19,8 +27,8 @@
       "icona": "soccer",
       "albo": [
         {
-          "anno": "2025",
-          "vincitore": "Inserisci vincitore"
+          "anno": "2024",
+          "vincitore": "Staff"
         }
       ]
     },
