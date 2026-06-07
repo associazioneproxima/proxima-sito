@@ -1,6 +1,7 @@
 {
   "eventi": [
     {
+      "titolo": "Gorgo Jam 2026",
       "stato": "archivio",
       "tema": "orange",
       "data_label": "Giugno 2026",
@@ -12,10 +13,10 @@
       "link": "index.html#gorgo-jam",
       "locandina": "img/eventi/gorgo-jam.jpg",
       "slug": "gorgo-jam-2026",
-      "ordine": 1,
-      "titolo": "Gorgo Jam 2026"
+      "ordine": 1
     },
     {
+      "titolo": "Gorgo Summer League 2026",
       "stato": "in-corso",
       "tema": "blue",
       "data_label": "Giugno 2026",
@@ -27,10 +28,10 @@
       "link": "gsl26.html",
       "locandina": "img/eventi/gorgosummerleague.jpg",
       "slug": "summer-league-2026",
-      "ordine": 2,
-      "titolo": "Gorgo Summer League 2026"
+      "ordine": 2
     },
     {
+      "titolo": "Notte Bianca 2026",
       "stato": "archivio",
       "tema": "grape",
       "data_label": "Giugno 2026",
@@ -42,14 +43,14 @@
       "link": "https://comune.gorgonzola.mi.it/vivere-il-comune/evento/gorgonzola-estate-2026/notte-bianca-2026/",
       "locandina": "img/eventi/manifesto-notte-bianca-post-instagram-45-.jpg",
       "slug": "notte-bianca-2026",
-      "ordine": 3,
-      "titolo": "Notte Bianca 2026"
+      "ordine": 3
     },
     {
+      "titolo": "???",
       "stato": "in-programma",
       "tema": "neutro",
-      "data_label": "Settembre 2026",
-      "quando": "5 Settembre 2026",
+      "data_label": "Coming soon",
+      "quando": "",
       "dove": "Piazza della Repubblica",
       "per_chi": "Tutti",
       "descrizione": "Restate sincronizzati, dopo l'estate vi aspettiamo un appuntamento imperdibile! \n\nVi lasciamo qualche indizio:🔵🔴🔥🔪",
