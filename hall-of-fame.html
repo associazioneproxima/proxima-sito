@@ -62,42 +62,76 @@
 @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.1)}}
 
 /* ---------- CABINETS ---------- */
-.cabinets{padding:80px 5vw 40px;max-width:1100px;margin:0 auto;display:grid;gap:56px}
-.cabinet{
-  position:relative;border-radius:18px;padding:4px;
-  background:linear-gradient(160deg,var(--c1),#05060f 70%);
-  box-shadow:0 0 0 3px #05060f,0 0 0 6px var(--c1),0 24px 50px rgba(0,0,0,.5);
-}
-.cab-inner{background:#070811;border-radius:14px;overflow:hidden}
-.cab-top{
-  position:relative;padding:26px 26px 22px;overflow:hidden;
-  background:
-    repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 8px,transparent 8px 16px),
-    linear-gradient(135deg,var(--c1),var(--c2));
-}
-.cab-sport{font-family:var(--px);font-size:.5rem;letter-spacing:1px;color:rgba(255,255,255,.85);text-transform:uppercase}
-.cab-name{font-family:var(--px);font-size:clamp(.85rem,3.4vw,1.5rem);line-height:1.4;color:#fff;margin-top:14px;
-  text-shadow:3px 3px 0 rgba(0,0,0,.45);text-transform:uppercase}
-.cab-icon{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:74px;height:74px;opacity:.9;
-  image-rendering:pixelated;animation:floaty 3s ease-in-out infinite}
-@keyframes floaty{50%{transform:translateY(-58%)}}
+.cabinets{padding:80px 5vw 40px;max-width:1000px;margin:0 auto;display:grid;gap:64px}
 
-.cab-screen{padding:22px 22px 28px;background:#070811;
-  background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.5) 0 1px,transparent 1px 3px)}
+/* box pixelato: bordo a gradini, niente angoli arrotondati */
+.cabinet{
+  position:relative;background:#000;
+  padding:24px clamp(16px,4vw,34px) 0;
+  box-shadow:
+    0 0 0 4px var(--c1),
+    0 0 0 8px #000,
+    0 0 0 10px var(--c1),
+    0 0 0 16px #000,
+    0 0 0 18px rgba(255,255,255,.12);
+  clip-path:polygon(
+    0 8px,4px 8px,4px 4px,8px 4px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 4px,
+    calc(100% - 4px) 4px,calc(100% - 4px) 8px,100% 8px,
+    100% calc(100% - 8px),calc(100% - 4px) calc(100% - 8px),calc(100% - 4px) calc(100% - 4px),
+    calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,
+    8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px));
+}
+.cab-inner{background:#000}
+
+/* titolo grande centrato */
+.cab-name{font-family:var(--px);text-align:center;text-transform:uppercase;
+  font-size:clamp(1.3rem,6vw,2.6rem);line-height:1.45;
+  padding:18px 4px 8px;word-break:break-word}
+.cab-icon{display:block;margin:14px auto 0;width:60px;height:60px;opacity:.92;
+  image-rendering:pixelated;animation:floaty 3s ease-in-out infinite}
+@keyframes floaty{50%{transform:translateY(-8px)}}
+
+.cab-screen{padding:26px clamp(8px,3vw,22px) 30px;background:#000}
 .score-head{font-family:var(--px);font-size:.5rem;color:var(--c2);letter-spacing:1px;
-  display:flex;justify-content:space-between;padding:0 6px 12px;border-bottom:2px dashed rgba(255,255,255,.12)}
-.score-row{display:flex;align-items:center;gap:12px;padding:14px 6px;border-bottom:1px solid rgba(255,255,255,.06);
+  display:flex;justify-content:space-between;padding:0 6px 12px;border-bottom:2px dashed rgba(255,255,255,.18)}
+.score-row{display:flex;align-items:center;gap:12px;padding:14px 6px;border-bottom:1px solid rgba(255,255,255,.07);
   font-family:var(--px);font-size:.62rem;opacity:0;transform:translateX(-12px);
   animation:rowin .5s forwards}
 .score-row .rank{color:var(--yellow);min-width:48px}
 .score-row .yr{color:var(--c2);min-width:62px}
 .score-row .who{color:#fff;flex:1;line-height:1.5;word-break:break-word}
 .score-row.latest .who{color:var(--yellow)}
-.score-row.latest::after{content:"NEW";font-family:var(--px);font-size:.42rem;color:#05060f;background:var(--yellow);padding:4px 6px;border-radius:3px;animation:blink 1s steps(1) infinite}
+.score-row.latest::after{content:"NEW";font-family:var(--px);font-size:.42rem;color:#000;background:var(--yellow);padding:4px 6px;animation:blink 1s steps(1) infinite}
 @keyframes rowin{to{opacity:1;transform:translateX(0)}}
 .cab-empty{font-family:var(--px);font-size:.55rem;color:rgba(255,255,255,.45);text-align:center;padding:30px 10px;line-height:1.8}
 .cab-foot{font-family:var(--px);font-size:.45rem;color:rgba(255,255,255,.4);text-align:center;padding:14px;letter-spacing:1px;
-  border-top:2px dashed rgba(255,255,255,.1)}
+  border-top:2px dashed rgba(255,255,255,.14)}
+
+/* ===== TITOLI ARTISTICI — uno stile diverso per torneo ===== */
+/* SUMMER — 3D blu esteso (stile DEFENDER) */
+.t-summer .cab-name{color:#fff;
+  text-shadow:2px 2px 0 var(--t-summer),4px 4px 0 var(--t-summer),
+    6px 6px 0 #2c2389,8px 8px 0 #2c2389,10px 10px 0 rgba(0,0,0,.6)}
+/* WINTER — outline rosso + neve */
+.t-winter .cab-name{color:#fff;position:relative;
+  -webkit-text-stroke:2px var(--t-winter);
+  text-shadow:4px 4px 0 rgba(0,0,0,.5),0 0 14px rgba(226,59,59,.5)}
+.t-winter .cab-name::after{content:"\2744 \2744 \2744";position:absolute;left:0;right:0;top:-2px;
+  font-family:var(--px);font-size:.55rem;color:#fff;-webkit-text-stroke:0;text-shadow:none;opacity:.85;letter-spacing:8px}
+/* JAM — graffito arancione sfalsato */
+.t-jam .cab-name{color:var(--t-jam);transform:skewX(-6deg);
+  text-shadow:-3px 0 0 #000,3px 3px 0 #000,6px 6px 0 var(--t-jam-2),-1px -1px 0 #fff}
+/* TIRI DA 3 — neon viola pulsante */
+.t-tiri .cab-name{color:#fff;
+  text-shadow:0 0 6px var(--t-tiri),0 0 14px var(--t-tiri),0 0 26px var(--t-tiri-2),0 0 40px var(--t-tiri);
+  animation:neon 1.8s ease-in-out infinite alternate}
+@keyframes neon{from{text-shadow:0 0 6px var(--t-tiri),0 0 14px var(--t-tiri),0 0 26px var(--t-tiri-2)}
+  to{text-shadow:0 0 10px var(--t-tiri),0 0 22px var(--t-tiri),0 0 40px var(--t-tiri-2),0 0 60px var(--t-tiri)}}
+/* ARROSTICINO — western/saloon rosso su beige */
+.t-arrosticino .cab-name{color:var(--t-arr);letter-spacing:1px;
+  -webkit-text-stroke:1px var(--t-arr-2);
+  text-shadow:3px 3px 0 #000,5px 5px 0 var(--t-arr-2)}
+.t-arrosticino .cab-name::before,.t-arrosticino .cab-name::after{content:"\2660";color:var(--t-arr-2);-webkit-text-stroke:0;margin:0 .4em;font-size:.7em;text-shadow:none;vertical-align:middle}
 
 /* joystick deco bottom */
 .arcade-foot{text-align:center;padding:30px 5vw 90px}
@@ -248,13 +282,10 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       }
 
       box.insertAdjacentHTML('beforeend',
-        '<section class="cabinet" style="--c1:'+tema.c1+';--c2:'+tema.c2+'">'+
+        '<section class="cabinet t-'+t.tema+'" style="--c1:'+tema.c1+';--c2:'+tema.c2+'">'+
           '<div class="cab-inner">'+
-            '<div class="cab-top">'+
-              '<div class="cab-sport">'+(t.sport||'')+'</div>'+
-              '<div class="cab-name">'+t.nome+'</div>'+
-              sprite(t.icona,tema.c1)+
-            '</div>'+
+            '<div class="cab-name">'+t.nome+'</div>'+
+            sprite(t.icona,tema.c1)+
             '<div class="cab-screen">'+
               (albo.length?'<div class="score-head"><span>Pos &middot; Anno</span><span>Campione</span></div>':'')+
               rows+
