@@ -1,0 +1,49 @@
+{
+  "tornei": [
+    {
+      "nome": "Gorgo Summer League",
+      "tema": "summer",
+      "sport": "Calcio",
+      "icona": "soccer",
+      "albo": [
+        { "anno": "2025", "vincitore": "Inserisci vincitore" }
+      ]
+    },
+    {
+      "nome": "Gorgo Winter League",
+      "tema": "winter",
+      "sport": "Calcio",
+      "icona": "soccer",
+      "albo": [
+        { "anno": "2025", "vincitore": "Inserisci vincitore" }
+      ]
+    },
+    {
+      "nome": "Gorgo Jam",
+      "tema": "jam",
+      "sport": "Basket",
+      "icona": "basket",
+      "albo": [
+        { "anno": "2026", "vincitore": "Inserisci vincitore" }
+      ]
+    },
+    {
+      "nome": "Tiri da 3",
+      "tema": "tiri",
+      "sport": "Basket",
+      "icona": "basket",
+      "albo": [
+        { "anno": "2026", "vincitore": "Inserisci vincitore" }
+      ]
+    },
+    {
+      "nome": "Arrosticino Scientifico",
+      "tema": "arrosticino",
+      "sport": "Carte",
+      "icona": "cards",
+      "albo": [
+        { "anno": "2025", "vincitore": "Inserisci vincitore" }
+      ]
+    }
+  ]
+}
