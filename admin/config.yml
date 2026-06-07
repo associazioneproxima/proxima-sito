@@ -132,3 +132,48 @@ collections:
             label_singular: "Foto"
             summary: "Foto"
             field: {label: "Immagine", name: "img", widget: "image"}
+
+
+  # ---------- HALL OF FAME ----------
+  - name: "hall_of_fame"
+    label: "Hall of Fame"
+    description: "Albo d'oro dei tornei. Per ogni torneo aggiungi le edizioni con anno e vincitore (squadra o singolo)."
+    files:
+      - name: "albo"
+        label: "Albo d'oro"
+        file: "data/hall-of-fame.json"
+        fields:
+          - label: "Tornei"
+            name: "tornei"
+            widget: "list"
+            label_singular: "Torneo"
+            summary: "{{fields.nome}}"
+            fields:
+              - {label: "Nome torneo", name: "nome", widget: "string"}
+              - {label: "Sport (es. Calcio, Basket, Carte)", name: "sport", widget: "string", required: false}
+              - label: "Tema colore"
+                name: "tema"
+                widget: "select"
+                options:
+                  - {label: "Blu (Summer League)", value: "summer"}
+                  - {label: "Rosso Natale (Winter League)", value: "winter"}
+                  - {label: "Arancione (Gorgo Jam)", value: "jam"}
+                  - {label: "Viola (Tiri da 3)", value: "tiri"}
+                  - {label: "Rosso/Beige (Arrosticino Scientifico)", value: "arrosticino"}
+                default: "summer"
+              - label: "Icona"
+                name: "icona"
+                widget: "select"
+                options:
+                  - {label: "Pallone da calcio", value: "soccer"}
+                  - {label: "Palla da basket", value: "basket"}
+                  - {label: "Carte da gioco", value: "cards"}
+                default: "soccer"
+              - label: "Albo d'oro (edizioni)"
+                name: "albo"
+                widget: "list"
+                label_singular: "Edizione"
+                summary: "{{fields.anno}} — {{fields.vincitore}}"
+                fields:
+                  - {label: "Anno", name: "anno", widget: "string"}
+                  - {label: "Vincitore (squadra o persona)", name: "vincitore", widget: "string"}
