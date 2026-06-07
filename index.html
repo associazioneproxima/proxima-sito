@@ -19,7 +19,7 @@
 .hero h1{font-family:var(--display);font-size:clamp(2.6rem,10vw,8rem);line-height:.98;text-transform:uppercase;letter-spacing:-1px}
 .hero h1 span{display:block;opacity:0;animation:rise .9s forwards}
 .hero h1 span:nth-child(1){animation-delay:.15s}
-.hero h1 span:nth-child(2){animation-delay:.3s;color:var(--violet)}   /* titolo accento BLU */
+.hero h1 span:nth-child(2){animation-delay:.3s;color:var(--violet)}
 .hero h1 span:nth-child(3){animation-delay:.45s}
 .hero .sub{max-width:540px;margin-top:26px;font-size:1.15rem;font-weight:300;opacity:0;animation:rise .9s .6s forwards}
 .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s .75s forwards}
@@ -27,6 +27,12 @@
 .marquee{position:absolute;bottom:0;left:0;right:0;background:var(--violet);color:#fff;overflow:hidden;white-space:nowrap;padding:10px 0;font-family:var(--display);font-size:1rem;text-transform:uppercase;letter-spacing:1px;display:flex}
 .marquee .mq{display:inline-block;white-space:nowrap;padding-right:1ch;animation:scroll 30s linear infinite}
 @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* Hero Summer League */
+.hero-gsl{overflow:hidden}
+.hero-gsl-logo{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:min(60vw,520px);opacity:.1;pointer-events:none;user-select:none}
+.hero-gsl-logo img{width:100%;height:auto;filter:invert(1) brightness(2)}
+.hero-gsl h1 span:nth-child(2){color:var(--violet)}
 
 .up-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:8px}
 .up-head a.seeall{font-family:'Space Grotesk';font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);border-bottom:2px solid var(--yellow);padding-bottom:3px;white-space:nowrap}
@@ -42,7 +48,6 @@
 .card .place{font-family:'Space Grotesk';font-size:.76rem;opacity:.6}
 .card .badge{position:absolute;top:14px;right:14px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.6rem;padding:5px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;transform:none;max-width:60%;text-align:right;line-height:1.2}
 .card.has-badge .date{padding-top:34px}
-/* temi colore evento */
 .card.t-orange{border-color:rgba(255,106,43,.4)}.card.t-orange:hover{border-color:var(--orange)}.card.t-orange .date{color:var(--orange)}.card.t-orange .badge{background:var(--orange)}
 .card.t-blue{border-color:rgba(74,60,236,.45)}.card.t-blue:hover{border-color:var(--violet)}.card.t-blue .date{color:#8aa0ff}.card.t-blue .badge{background:var(--violet)}
 .card.t-grape{border-color:rgba(155,60,255,.4)}.card.t-grape:hover{border-color:var(--grape)}.card.t-grape .date{color:#c47aff}.card.t-grape .badge{background:var(--grape)}
@@ -88,7 +93,6 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
 .gj-finale td{font-weight:700;color:var(--fg)}
 .gj-premiazione td{opacity:.7;font-style:italic}
 
-
 .nav-gsl-pill{background:var(--violet);color:#fff!important;padding:5px 14px!important;border-radius:50px;opacity:1!important}
 .nav-gsl-pill::after{display:none!important}
 .nav-gsl-pill:hover{background:var(--violet-deep)!important}
@@ -110,7 +114,9 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <a href="gsl26.html" class="nav-gsl-pill">GSL26</a>
   </div>
 </nav>
-<header class="hero">
+
+<!-- HERO ORIGINALE - nascosto, riattivare rimuovendo style="display:none" -->
+<header class="hero" style="display:none">
   <div class="kicker">L'associazione pi&ugrave; giovane di Gorgonzola</div>
   <h1><span>Energia </span><span>giovane,</span><span>radici locali</span></h1>
   <p class="sub">Eventi, musica, sport e cultura per i giovani della Martesana.</p>
@@ -121,6 +127,19 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   <div class="marquee"><span class="mq">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span><span class="mq" aria-hidden="true">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span></div>
 </header>
 
+<!-- HERO SUMMER LEAGUE - nascondere a fine stagione aggiungendo style="display:none" -->
+<header class="hero hero-gsl">
+  <div class="hero-gsl-logo" aria-hidden="true"><img src="img/summer-league-logo.svg" alt=""></div>
+  <div class="kicker">Sport &middot; Estate 2026 &middot; Seven Infinity</div>
+  <h1 style="max-width:700px"><span>&Egrave; tempo</span><span>di Summer</span><span>League.</span></h1>
+  <p class="sub">Sedici squadre, quattro gironi, partite ogni settimana per tutto Giugno al Centro Sportivo Seven Infinity di Gorgonzola. Classifiche e calendario aggiornati in tempo reale sul sito.</p>
+  <div class="cta">
+    <a href="gsl26.html" class="btn fill">Calendario e risultati</a>
+    <a href="eventi.html" class="btn">Tutti gli eventi</a>
+  </div>
+  <div class="marquee"><span class="mq">SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; </span><span class="mq" aria-hidden="true">SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; </span></div>
+</header>
+
 <section class="section" id="prossimi">
   <div class="up-head"><div><div class="tag">In arrivo</div><h2>Prossimi eventi</h2></div>
     <a class="seeall" href="eventi.html">Tutti gli eventi &rarr;</a></div>
@@ -128,7 +147,7 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   <div class="cards" id="home-eventi"></div>
 </section>
 
-<section class="section gj-league" id="gorgo-jam" style="display:none"> 
+<section class="section gj-league" id="gorgo-jam" style="display:none">
   <div class="tag">Sport &middot; Notte Bianca 2026</div>
   <h2>Gorgo Jam</h2>
   <div class="league-brand">
@@ -157,7 +176,6 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
       </tbody></table>
     </div>
   </div>
-
   <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 18px">Programma della serata</h3>
   <div class="gj-schedule">
     <table class="gj-table">
@@ -198,7 +216,6 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
   </div>
 </section>
 
-
 <footer>
   <div class="col">
     <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:34px"></a>
@@ -223,12 +240,10 @@ function toggleMenu(btn){var l=document.getElementById('navlinks');var s=documen
 function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
 </script>
-<!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
 <script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
   var STATI={"iscrizioni":"Iscrizioni aperte","in-corso":"In corso","in-programma":"In programma","archivio":""};
-  // EVENTI in home: mostro i primi 3 non-archivio
   fetch("data/eventi.json").then(function(r){return r.json()}).then(function(d){
     var ev=(d.eventi||[]).filter(function(e){return e.stato!=="archivio"}).sort(function(a,b){return (a.ordine||0)-(b.ordine||0)}).slice(0,3);
     var box=document.getElementById("home-eventi");
