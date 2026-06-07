@@ -24,7 +24,7 @@
   position:relative;min-height:78svh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
   padding:calc(var(--nav-h) + 8vh) 5vw 8vh;overflow:hidden;
-  background:#05060f;
+  background:var(--ink);
 }
 /* griglia prospettica retro */
 .hof-hero::before{
@@ -43,6 +43,8 @@
   background:radial-gradient(circle at 50% 30%,rgba(155,60,255,.25),transparent 60%);
 }
 .hof-hero > *{position:relative;z-index:2}
+.hof-hero .hof-fade{position:absolute;left:0;right:0;bottom:0;height:170px;z-index:3;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,var(--ink))}
 .hof-coin{font-family:var(--px);font-size:.62rem;color:var(--yellow);letter-spacing:1px;margin-bottom:30px;animation:blink 1.1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 .hof-title{font-family:var(--px);line-height:1.5;text-transform:uppercase}
@@ -97,7 +99,6 @@
 .score-row{display:flex;align-items:center;gap:12px;padding:14px 6px;border-bottom:1px solid rgba(255,255,255,.07);
   font-family:var(--px);font-size:.62rem;opacity:0;transform:translateX(-12px);
   animation:rowin .5s forwards}
-.score-row .rank{color:var(--yellow);min-width:48px}
 .score-row .yr{color:var(--c2);min-width:62px}
 .score-row .who{color:#fff;flex:1;line-height:1.5;word-break:break-word}
 .score-row.latest .who{color:var(--yellow)}
@@ -147,7 +148,6 @@
   .cabinets{gap:42px}
   .cab-icon{width:52px;height:52px}
   .score-row{font-size:.55rem;gap:8px}
-  .score-row .rank{min-width:38px}
   .score-row .yr{min-width:50px}
 }
 </style>
@@ -174,6 +174,7 @@
   <h1 class="hof-title"><span class="l1">Proxima</span><span class="l2">Hall of Fame</span></h1>
   <p class="hof-sub">L'albo d'oro dei nostri tornei. Ogni anno una nuova leggenda entra nella tabella dei record. Tu ci sei?</p>
   <div class="hof-blink-arrow">&#9660; Scegli il tuo gioco &#9660;</div>
+  <div class="hof-fade"></div>
 </header>
 
 <main class="cabinets" id="cabinets"></main>
@@ -230,35 +231,82 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     arrosticino:{c1:'var(--t-arr)',c2:'var(--t-arr-2)'}
   };
 
-  // sprite pixel-art SVG inline (semplici, a tema)
+  // sprite pixel-art SVG inline (16x16 grid, stile retro)
   function sprite(tipo,col){
-    if(tipo==='soccer'){
-      return '<svg class="cab-icon" viewBox="0 0 16 16" fill="none">'+
-        '<rect x="5" y="1" width="6" height="1" fill="#fff"/><rect x="3" y="2" width="10" height="1" fill="#fff"/>'+
-        '<rect x="2" y="3" width="12" height="10" fill="#fff"/><rect x="3" y="13" width="10" height="1" fill="#fff"/>'+
-        '<rect x="5" y="14" width="6" height="1" fill="#fff"/>'+
-        '<rect x="7" y="5" width="2" height="2" fill="#111"/><rect x="4" y="7" width="2" height="2" fill="#111"/>'+
-        '<rect x="10" y="7" width="2" height="2" fill="#111"/><rect x="6" y="10" width="2" height="2" fill="#111"/>'+
-        '<rect x="8" y="10" width="2" height="1" fill="#111"/></svg>';
+    if(tipo==='trophy'){
+      return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
+        '<rect x="4" y="2" width="8" height="1" fill="#ffd23f"/>'+
+        '<rect x="3" y="3" width="10" height="4" fill="#ffd23f"/>'+
+        '<rect x="2" y="3" width="1" height="3" fill="#ffd23f"/><rect x="1" y="3" width="1" height="2" fill="#ffd23f"/>'+
+        '<rect x="13" y="3" width="1" height="3" fill="#ffd23f"/><rect x="14" y="3" width="1" height="2" fill="#ffd23f"/>'+
+        '<rect x="4" y="7" width="8" height="1" fill="#e0a800"/>'+
+        '<rect x="6" y="8" width="4" height="2" fill="#ffd23f"/>'+
+        '<rect x="5" y="10" width="6" height="1" fill="#e0a800"/>'+
+        '<rect x="4" y="11" width="8" height="2" fill="#ffd23f"/>'+
+        '<rect x="3" y="13" width="10" height="1" fill="#e0a800"/>'+
+        '<rect x="6" y="4" width="1" height="2" fill="#fff"/></svg>';
+    }
+    if(tipo==='tree'){
+      return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
+        '<rect x="7" y="0" width="2" height="2" fill="#ffd23f"/><rect x="6" y="1" width="4" height="1" fill="#ffd23f"/>'+
+        '<rect x="7" y="2" width="2" height="1" fill="#2fae57"/>'+
+        '<rect x="6" y="3" width="4" height="2" fill="#2fae57"/>'+
+        '<rect x="5" y="5" width="6" height="1" fill="#2fae57"/>'+
+        '<rect x="4" y="6" width="8" height="2" fill="#2fae57"/>'+
+        '<rect x="3" y="8" width="10" height="1" fill="#2fae57"/>'+
+        '<rect x="2" y="9" width="12" height="2" fill="#2fae57"/>'+
+        '<rect x="7" y="11" width="2" height="3" fill="#9a5a2b"/>'+
+        '<rect x="6" y="14" width="4" height="1" fill="#6e3f1d"/>'+
+        '<rect x="5" y="4" width="1" height="1" fill="#e23b3b"/><rect x="10" y="7" width="1" height="1" fill="#e23b3b"/>'+
+        '<rect x="4" y="9" width="1" height="1" fill="#ffd23f"/><rect x="11" y="9" width="1" height="1" fill="#e23b3b"/>'+
+        '<rect x="8" y="6" width="1" height="1" fill="#fff"/></svg>';
     }
     if(tipo==='basket'){
-      return '<svg class="cab-icon" viewBox="0 0 16 16">'+
-        '<rect x="5" y="1" width="6" height="1" fill="#e27138"/><rect x="3" y="2" width="10" height="1" fill="#e27138"/>'+
-        '<rect x="2" y="3" width="12" height="10" fill="#e27138"/><rect x="3" y="13" width="10" height="1" fill="#e27138"/>'+
+      return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
+        '<rect x="5" y="1" width="6" height="1" fill="#e27138"/>'+
+        '<rect x="3" y="2" width="2" height="1" fill="#e27138"/><rect x="11" y="2" width="2" height="1" fill="#e27138"/>'+
+        '<rect x="2" y="3" width="2" height="2" fill="#e27138"/><rect x="12" y="3" width="2" height="2" fill="#e27138"/>'+
+        '<rect x="4" y="2" width="8" height="3" fill="#e27138"/>'+
+        '<rect x="1" y="5" width="14" height="6" fill="#e27138"/>'+
+        '<rect x="2" y="11" width="12" height="2" fill="#e27138"/>'+
+        '<rect x="4" y="13" width="8" height="1" fill="#e27138"/>'+
         '<rect x="5" y="14" width="6" height="1" fill="#e27138"/>'+
-        '<rect x="7" y="2" width="1" height="13" fill="#111"/><rect x="2" y="7" width="12" height="1" fill="#111"/>'+
-        '<rect x="4" y="3" width="1" height="3" fill="#111"/><rect x="3" y="4" width="1" height="2" fill="#111"/>'+
-        '<rect x="11" y="3" width="1" height="3" fill="#111"/><rect x="12" y="4" width="1" height="2" fill="#111"/></svg>';
+        /* linee nere */
+        '<rect x="7" y="1" width="2" height="14" fill="#1a1a1a"/>'+
+        '<rect x="1" y="7" width="14" height="2" fill="#1a1a1a"/>'+
+        '<rect x="3" y="3" width="1" height="2" fill="#1a1a1a"/><rect x="2" y="4" width="1" height="2" fill="#1a1a1a"/>'+
+        '<rect x="12" y="3" width="1" height="2" fill="#1a1a1a"/><rect x="13" y="4" width="1" height="2" fill="#1a1a1a"/>'+
+        '<rect x="3" y="11" width="1" height="2" fill="#1a1a1a"/><rect x="2" y="10" width="1" height="2" fill="#1a1a1a"/>'+
+        '<rect x="12" y="11" width="1" height="2" fill="#1a1a1a"/><rect x="13" y="10" width="1" height="2" fill="#1a1a1a"/>'+
+        /* riflesso */
+        '<rect x="4" y="5" width="1" height="1" fill="#ffb27a"/></svg>';
     }
-    // cards
-    return '<svg class="cab-icon" viewBox="0 0 16 16">'+
-      '<rect x="2" y="2" width="8" height="11" fill="#e8d9b0" transform="rotate(-8 6 7)"/>'+
-      '<rect x="6" y="3" width="8" height="11" fill="#fff"/>'+
-      '<rect x="9" y="6" width="2" height="2" fill="#d9483b"/><rect x="8" y="7" width="4" height="2" fill="#d9483b"/>'+
-      '<rect x="9" y="9" width="2" height="2" fill="#d9483b"/><rect x="9" y="10" width="1" height="2" fill="#d9483b"/></svg>';
+    if(tipo==='hoop'){
+      return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
+        /* tabellone */
+        '<rect x="3" y="1" width="10" height="6" fill="none" stroke="#fff" stroke-width="1"/>'+
+        '<rect x="6" y="3" width="4" height="2" fill="none" stroke="#fff" stroke-width="1"/>'+
+        /* ferro arancione */
+        '<rect x="4" y="7" width="8" height="1" fill="#e27138"/>'+
+        '<rect x="3" y="7" width="1" height="1" fill="#e27138"/><rect x="12" y="7" width="1" height="1" fill="#e27138"/>'+
+        /* retina */
+        '<rect x="4" y="8" width="1" height="3" fill="#ccc"/>'+
+        '<rect x="6" y="8" width="1" height="4" fill="#ccc"/>'+
+        '<rect x="8" y="8" width="1" height="4" fill="#ccc"/>'+
+        '<rect x="10" y="8" width="1" height="4" fill="#ccc"/>'+
+        '<rect x="11" y="8" width="1" height="3" fill="#ccc"/>'+
+        '<rect x="5" y="10" width="6" height="1" fill="#ccc"/>'+
+        '<rect x="6" y="12" width="4" height="1" fill="#ccc"/>'+
+        '<rect x="7" y="13" width="2" height="1" fill="#ccc"/></svg>';
+    }
+    // cards (arrosticino)
+    return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
+      '<rect x="1" y="3" width="7" height="10" fill="#e8d9b0" transform="rotate(-10 4 8)"/>'+
+      '<rect x="7" y="3" width="8" height="11" fill="#fff"/>'+
+      '<rect x="9" y="5" width="2" height="2" fill="#d9483b"/><rect x="8" y="6" width="4" height="2" fill="#d9483b"/>'+
+      '<rect x="9" y="8" width="2" height="2" fill="#d9483b"/><rect x="10" y="9" width="1" height="2" fill="#9a2a20"/>'+
+      '<rect x="8" y="4" width="1" height="1" fill="#d9483b"/><rect x="12" y="12" width="1" height="1" fill="#d9483b"/></svg>';
   }
-
-  var ORD=['1ST','2ND','3RD','4TH','5TH','6TH','7TH','8TH','9TH','10TH'];
 
   fetch('data/hall-of-fame.json').then(function(r){return r.json()}).then(function(d){
     var box=document.getElementById('cabinets');
@@ -272,7 +320,6 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       if(albo.length){
         albo.forEach(function(a,i){
           rows+='<div class="score-row'+(i===0?' latest':'')+'" style="animation-delay:'+(i*0.08)+'s">'+
-                  '<span class="rank">'+(ORD[i]||((i+1)+'TH'))+'</span>'+
                   '<span class="yr">'+a.anno+'</span>'+
                   '<span class="who">'+a.vincitore+'</span>'+
                 '</div>';
@@ -287,7 +334,7 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
             '<div class="cab-name">'+t.nome+'</div>'+
             sprite(t.icona,tema.c1)+
             '<div class="cab-screen">'+
-              (albo.length?'<div class="score-head"><span>Pos &middot; Anno</span><span>Campione</span></div>':'')+
+              (albo.length?'<div class="score-head"><span>Anno</span><span>Campione</span></div>':'')+
               rows+
             '</div>'+
             '<div class="cab-foot">&#9733; Hall of Champions &#9733;</div>'+
