@@ -4,7 +4,7 @@
       "nome": "Gorgo Summer League",
       "sport": "Calcio",
       "tema": "summer",
-      "icona": "soccer",
+      "icona": "trophy",
       "albo": [
         {
           "anno": "2023",
@@ -24,7 +24,7 @@
       "nome": "Gorgo Winter League",
       "sport": "Calcio",
       "tema": "winter",
-      "icona": "soccer",
+      "icona": "tree",
       "albo": [
         {
           "anno": "2024",
@@ -48,7 +48,7 @@
       "nome": "Tiri da 3",
       "sport": "Basket",
       "tema": "tiri",
-      "icona": "basket",
+      "icona": "hoop",
       "albo": [
         {
           "anno": "2026",
