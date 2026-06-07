@@ -165,10 +165,12 @@ collections:
                 name: "icona"
                 widget: "select"
                 options:
-                  - {label: "Pallone da calcio", value: "soccer"}
+                  - {label: "Coppa", value: "trophy"}
+                  - {label: "Albero di Natale", value: "tree"}
                   - {label: "Palla da basket", value: "basket"}
+                  - {label: "Canestro con retina", value: "hoop"}
                   - {label: "Carte da gioco", value: "cards"}
-                default: "soccer"
+                default: "trophy"
               - label: "Albo d'oro (edizioni)"
                 name: "albo"
                 widget: "list"
