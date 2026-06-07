@@ -26,6 +26,7 @@ collections:
             label_singular: "Evento"
             summary: "{{fields.titolo}}  —  {{fields.stato}}"
             fields:
+              - {label: "Titolo", name: "titolo", widget: "string"}
               - label: "Stato"
                 name: "stato"
                 widget: "select"
