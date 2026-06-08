@@ -21,18 +21,6 @@
       ]
     },
     {
-      "nome": "Gorgo Winter League",
-      "sport": "Calcio",
-      "tema": "winter",
-      "icona": "tree",
-      "albo": [
-        {
-          "anno": "2024",
-          "vincitore": "Ginga"
-        }
-      ]
-    },
-    {
       "nome": "Gorgo Jam",
       "sport": "Basket",
       "tema": "jam",
@@ -53,6 +41,18 @@
         {
           "anno": "2026",
           "vincitore": "Luca Arrigotti"
+        }
+      ]
+    },
+    {
+      "nome": "Gorgo Winter League",
+      "sport": "Calcio",
+      "tema": "winter",
+      "icona": "tree",
+      "albo": [
+        {
+          "anno": "2024",
+          "vincitore": "Ginga"
         }
       ]
     },
