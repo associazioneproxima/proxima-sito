@@ -117,22 +117,29 @@
     {
       "data": "lun 08/06 · 19:30",
       "iso": "2026-06-08",
-      "match": "Proxima — Zapoiss"
+      "match": "Proxima — Zapoiss",
+      "gol_casa": 2,
+      "gol_ospite": 2
     },
     {
       "data": "lun 08/06 · 20:30",
       "iso": "2026-06-08",
-      "match": "FC Fideuram — Royal Valtellina"
+      "match": "FC Fideuram — Royal Valtellina",
+      "gol_casa": 3,
+      "gol_ospite": 5
     },
     {
       "data": "lun 08/06 · 21:30",
       "iso": "2026-06-08",
-      "match": "Outside the Box — Galacticos"
+      "match": "Outside the Box — Galacticos",
+      "gol_casa": 2,
+      "gol_ospite": 5
     },
     {
       "data": "mar 09/06 · 19:30",
       "iso": "2026-06-09",
-      "match": "Estremo Feeling — Pozzuolo Vintage"
+      "match": "Estremo Feeling — Pozzuolo Vintage",
+      "gol_casa": null
     },
     {
       "data": "mar 09/06 · 20:30",
