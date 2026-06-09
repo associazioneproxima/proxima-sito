@@ -139,17 +139,22 @@
       "data": "mar 09/06 · 19:30",
       "iso": "2026-06-09",
       "match": "Estremo Feeling — Pozzuolo Vintage",
-      "gol_casa": null
+      "gol_casa": 4,
+      "gol_ospite": 4
     },
     {
       "data": "mar 09/06 · 20:30",
       "iso": "2026-06-09",
-      "match": "Los Intocables — Cadeo Imbiancature"
+      "match": "Los Intocables — Cadeo Imbiancature",
+      "gol_casa": 9,
+      "gol_ospite": 1
     },
     {
       "data": "mar 09/06 · 21:30",
       "iso": "2026-06-09",
-      "match": "Club Santa Cruz — Real Prano"
+      "match": "Club Santa Cruz — Real Prano",
+      "gol_casa": 2,
+      "gol_ospite": 1
     },
     {
       "data": "ven 12/06 · 19:30",
