@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Card Generator &mdash; Proxima</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ============ PLAYER CARD GENERATOR ============ */
+:root{ --jam:#e27138; --acc:var(--violet); --acc-deep:var(--violet-deep); }
+body[data-mode="jam"]{ --acc:#e27138; --acc-deep:#8a3d16; }
+
+.pcg{background:linear-gradient(165deg,var(--acc-deep),var(--ink) 60%);min-height:100vh;
+  padding:calc(var(--nav-h) + 60px) 5vw 80px;transition:background .4s}
+.pcg-inner{max-width:980px;margin:0 auto}
+
+.pcg .coin{font-family:'Press Start 2P',monospace;font-size:.55rem;color:var(--yellow);
+  letter-spacing:1px;animation:pcgblink 1.1s steps(1) infinite}
+@keyframes pcgblink{50%{opacity:0}}
+.pcg h1{font-family:'Press Start 2P',monospace;font-size:clamp(1.1rem,4.5vw,2rem);line-height:1.45;
+  text-transform:uppercase;margin:16px 0 10px;color:#fff;
+  text-shadow:3px 3px 0 var(--acc),6px 6px 0 rgba(0,0,0,.55);transition:text-shadow .4s}
+.pcg .sub{font-family:'Space Grotesk';font-size:.95rem;opacity:.8;max-width:560px;line-height:1.7;margin-bottom:40px}
+
+/* --- step labels --- */
+.pcg-step{font-family:'Press Start 2P',monospace;font-size:.6rem;letter-spacing:1px;
+  color:var(--yellow);margin:38px 0 16px;text-transform:uppercase}
+
+/* --- scelta sport --- */
+.mode-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:640px}
+@media(max-width:560px){.mode-grid{grid-template-columns:1fr}}
+.mode-card{cursor:pointer;background:#05060f;padding:26px 18px;text-align:center;position:relative;
+  border:none;color:var(--paper);transition:.15s;
+  box-shadow:0 0 0 4px rgba(246,245,239,.18);
+  clip-path:polygon(0 8px,4px 8px,4px 4px,8px 4px,8px 0,calc(100% - 8px) 0,calc(100% - 8px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 4px) calc(100% - 8px),calc(100% - 4px) calc(100% - 4px),calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px))}
+.mode-card .mc-ball{font-size:2.2rem;display:block;margin-bottom:14px;image-rendering:pixelated}
+.mode-card .mc-name{font-family:'Press Start 2P',monospace;font-size:.7rem;letter-spacing:1px;display:block;margin-bottom:8px}
+.mode-card .mc-tag{font-family:'Space Grotesk';font-size:.72rem;text-transform:uppercase;letter-spacing:1px;opacity:.6}
+.mode-card:hover{transform:translate(-2px,-2px)}
+.mode-card.summer.sel{box-shadow:0 0 0 4px var(--violet),0 0 0 8px #05060f,0 0 0 10px var(--violet)}
+.mode-card.summer.sel .mc-name{color:#8aa0ff}
+.mode-card.jam.sel{box-shadow:0 0 0 4px var(--jam),0 0 0 8px #05060f,0 0 0 10px var(--jam)}
+.mode-card.jam.sel .mc-name{color:var(--jam)}
+
+/* --- form --- */
+.pcg-form{max-width:640px}
+.pcg-form label{font-family:'Space Grotesk';font-size:.72rem;text-transform:uppercase;
+  letter-spacing:1.2px;font-weight:700;opacity:.75;display:block;margin:22px 0 8px}
+.pcg-form input[type=text]{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(246,245,239,.2);
+  color:var(--paper);font-family:'Sora';font-size:1rem;padding:14px 16px;border-radius:14px 14px 14px 4px;outline:none}
+.pcg-form input[type=text]:focus{border-color:var(--acc)}
+.arch-grid{display:flex;flex-wrap:wrap;gap:10px}
+.arch-pill{cursor:pointer;font-family:'Space Grotesk';font-weight:700;font-size:.78rem;text-transform:uppercase;
+  letter-spacing:.5px;padding:10px 18px;border-radius:50px;border:2px solid rgba(246,245,239,.3);
+  background:transparent;color:var(--paper);transition:.15s}
+.arch-pill:hover{border-color:var(--paper)}
+.arch-pill.sel{background:var(--acc);border-color:var(--acc);color:#fff}
+
+.pcg-go{margin-top:34px;display:inline-block;font-family:'Press Start 2P',monospace;font-size:.62rem;
+  letter-spacing:1px;color:#05060f;background:var(--yellow);padding:18px 28px;text-transform:uppercase;
+  border:none;cursor:pointer;box-shadow:4px 4px 0 var(--acc-deep);transition:.15s}
+.pcg-go:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--acc-deep)}
+.pcg-go:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--acc-deep)}
+.pcg-go:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* --- risultato --- */
+.pcg-result{display:none;margin-top:50px;text-align:center}
+.pcg-result.show{display:block}
+#cardCanvas{width:min(420px,86vw);height:auto;image-rendering:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.pcg-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:28px}
+.pcg-actions .act{font-family:'Press Start 2P',monospace;font-size:.55rem;letter-spacing:1px;
+  text-transform:uppercase;padding:15px 22px;border:none;cursor:pointer;transition:.15s;color:#05060f;
+  box-shadow:4px 4px 0 rgba(0,0,0,.5)}
+.pcg-actions .act:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 rgba(0,0,0,.5)}
+.act.dl{background:var(--yellow)}
+.act.re{background:var(--paper)}
+.act.ed{background:transparent;color:var(--paper);box-shadow:0 0 0 2px rgba(246,245,239,.4)}
+.act.ed:hover{box-shadow:0 0 0 2px var(--paper)}
+.pcg-share{font-family:'Space Grotesk';font-size:.78rem;opacity:.6;margin-top:20px}
+</style>
+</head>
+<body data-mode="summer">
+<div class="nav-scrim" onclick="closeMenu()"></div>
+<nav>
+  <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:30px"></a>
+  <button class="burger" aria-label="Menu" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+  <div class="links" id="navlinks">
+    <a href="index.html">Home</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="eventi.html">Eventi</a>
+    <a href="archivio.html">Archivio</a>
+    <a href="hall-of-fame.html">Hall of Fame</a>
+    <a href="trasparenza.html">Trasparenza</a>
+    <a href="contatti.html">Contatti</a>
+    <a href="gsl26.html" class="nav-gsl-pill">GSL26</a>
+  </div>
+</nav>
+
+<section class="pcg">
+  <div class="pcg-inner">
+    <div class="coin">&#9679; Insert coin &#9679;</div>
+    <h1>Player Card<br>Generator</h1>
+    <p class="sub">Scegli il tuo sport, inserisci il nome e scopri il tuo alter ego da playground. Ogni nome ha il suo destino: la card &egrave; tua, scaricala e condividila.</p>
+
+    <div class="pcg-step">1 &middot; Scegli il campo</div>
+    <div class="mode-grid">
+      <button class="mode-card summer sel" data-mode="summer" onclick="setMode('summer')">
+        <span class="mc-ball">&#9917;</span>
+        <span class="mc-name">Summer League</span>
+        <span class="mc-tag">Calcio &middot; Gorgo Summer League</span>
+      </button>
+      <button class="mode-card jam" data-mode="jam" onclick="setMode('jam')">
+        <span class="mc-ball">&#127936;</span>
+        <span class="mc-name">Gorgo Jam</span>
+        <span class="mc-tag">Basket &middot; Notte Bianca</span>
+      </button>
+    </div>
+
+    <div class="pcg-form">
+      <div class="pcg-step">2 &middot; Chi sei</div>
+      <label for="pcName">Il tuo nome (o come ti chiamano in campo)</label>
+      <input type="text" id="pcName" maxlength="24" placeholder="Es. Marco R." autocomplete="off">
+      <label>Il tuo stile di gioco</label>
+      <div class="arch-grid" id="archGrid"></div>
+      <button class="pcg-go" id="goBtn" onclick="generate(false)" disabled>&#9654; Genera la card</button>
+    </div>
+
+    <div class="pcg-result" id="result">
+      <div class="pcg-step" style="text-align:center">3 &middot; La tua card</div>
+      <canvas id="cardCanvas" width="1080" height="1350"></canvas>
+      <div class="pcg-actions">
+        <button class="act dl" onclick="downloadCard()">&#11015; Scarica PNG</button>
+        <button class="act re" onclick="generate(true)">&#8635; Rigenera</button>
+        <button class="act ed" onclick="document.getElementById('pcName').scrollIntoView({behavior:'smooth'});">&#9998; Modifica</button>
+      </div>
+      <p class="pcg-share">Postala nelle storie e tagga <strong>@associazioneproxima</strong> &#127919;</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="col">
+    <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:34px"></a>
+    <p>L'associazione pi&ugrave; giovane di Gorgonzola</p>
+    <div class="social">
+      <a href="https://www.instagram.com/associazioneproxima/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m4.2 5.15A4.85 4.85 0 1 0 16.85 12 4.85 4.85 0 0 0 12 7.15m0 1.95A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1m5.05-3.6a1.13 1.13 0 1 0 1.13 1.13 1.13 1.13 0 0 0-1.13-1.13"/></svg></a>
+      <a href="https://www.facebook.com/p/Proxima-61557254639725/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"/></svg></a>
+      <a href="https://www.tiktok.com/@associazioneproxima" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.67 5.67 0 0 0-.8-.06 5.66 5.66 0 1 0 5.66 5.66V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.22-1.48"/></svg></a>
+    </div>
+  </div>
+  <div class="col">
+    <nav class="fnav">
+      <a href="chi-siamo.html">Chi siamo</a><a href="eventi.html">Eventi</a>
+      <a href="archivio.html">Archivio</a>
+      <a href="hall-of-fame.html">Hall of Fame</a>
+      <a href="trasparenza.html">Trasparenza</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <p style="margin-top:14px;font-family:'Space Grotesk';font-size:.75rem">&copy; 2026 Associazione Proxima &middot; C.F. 91603100156</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+</script>
+<script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<script>
+/* ================= DATI ================= */
+var DATA = {
+  summer: {
+    label: "GORGO SUMMER LEAGUE",
+    sport: "calcio",
+    accent: "#4a3cec",
+    accentDeep: "#2c2389",
+    stats: ["TIRO","DRIBBLING","VELOCITA'","DIFESA","VISIONE"],
+    archetipi: [
+      {id:"bomber",    nome:"Bomber",    stat:0},
+      {id:"funambolo", nome:"Funambolo", stat:1},
+      {id:"motorino",  nome:"Motorino",  stat:2},
+      {id:"muro",      nome:"Muro",      stat:3},
+      {id:"regista",   nome:"Regista",   stat:4}
+    ],
+    nouns: ["BOMBER","FALCO","PANTERA","TORNADO","MAGO","BARONE","SCERIFFO","FULMINE","MARTELLO","PROFESSORE","FENOMENO","COBRA","CECCHINO","TRENO","CORSARO"],
+    motti: {
+      bomber:    ["Segna anche quando dorme.","Davanti alla porta non perdona.","Un tocco, un gol. Fine.","L'area di rigore \u00E8 casa sua."],
+      funambolo: ["Il pallone gli obbedisce.","Tunnel prima, scuse poi.","Dribbla anche la propria ombra.","Numeri da circo, risultati da campione."],
+      motorino:  ["Parte forte. Non si ferma mai.","Corre pi\u00F9 del tempo di recupero.","Novanta minuti a tutto gas.","Lo vedi passare, non lo vedi tornare."],
+      muro:      ["Di l\u00EC non si passa. Mai.","L'attaccante lo sogna di notte.","Pulisce l'area come casa sua.","Un muro con i tacchetti."],
+      regista:   ["Vede passaggi che non esistono.","Il gioco passa sempre dai suoi piedi.","Pensa due tocchi avanti a tutti.","Detta i tempi come un direttore d'orchestra."]
+    }
+  },
+  jam: {
+    label: "GORGO JAM",
+    sport: "basket",
+    accent: "#e27138",
+    accentDeep: "#8a3d16",
+    stats: ["TIRO","PALLEGGIO","VELOCITA'","DIFESA","SHOWTIME"],
+    archetipi: [
+      {id:"cecchino",  nome:"Cecchino",  stat:0},
+      {id:"playmaker", nome:"Playmaker", stat:1},
+      {id:"lampo",     nome:"Lampo",     stat:2},
+      {id:"lucchetto", nome:"Lucchetto", stat:3},
+      {id:"showman",   nome:"Showman",   stat:4}
+    ],
+    nouns: ["CECCHINO","FALCO","MAMBA","PROFESSORE","SCERIFFO","RAZZO","MAGO","GIGANTE","TORNADO","FULMINE","FANTASMA","COBRA","MARTELLO","FENOMENO","ALIENO"],
+    motti: {
+      cecchino:  ["Tira solo quando \u00E8 impossibile.","Dall'arco non sbaglia mai.","Mano fredda, canestro caldo.","Pi\u00F9 lontano \u00E8, pi\u00F9 gli piace."],
+      playmaker: ["Vede passaggi che non esistono.","Il pallone passa sempre da lui.","Assist prima, applausi poi.","Comanda il campo con lo sguardo."],
+      lampo:     ["Primo passo illegale.","Quando parte \u00E8 gi\u00E0 arrivato.","Contropiede perenne.","Lo marchi? Auguri."],
+      lucchetto: ["Da quella parte non si segna.","Ruba palloni come niente.","Difesa prima di tutto. Sempre.","L'incubo di ogni attaccante."],
+      showman:   ["Gioca per il pubblico. E vince.","Ogni azione \u00E8 uno spettacolo.","Prima la magia, poi i punti.","Il campo \u00E8 il suo palcoscenico."]
+    }
+  }
+};
+
+var AGGETTIVI = ["D'ACCIAIO","INFINITO","SUPREMO","ELETTRICO","SILENZIOSO","DORATO","SELVAGGIO","IMBATTIBILE","LUNARE","GLACIALE"];
+var LUOGHI = ["DI GORGONZOLA","DELLA MARTESANA","DEL NAVIGLIO","DI LARGO ALPINI","DEL PLAYGROUND","DELLA NOTTE BIANCA"];
+
+/* ================= STATO ================= */
+var mode = "summer";
+var arch = null;
+var variant = 0;
+var fontReady = false;
+
+function setMode(m){
+  mode = m;
+  document.body.setAttribute("data-mode", m);
+  document.querySelectorAll(".mode-card").forEach(function(c){
+    c.classList.toggle("sel", c.getAttribute("data-mode") === m);
+  });
+  buildArchPills();
+  checkReady();
+  if(document.getElementById("result").classList.contains("show")) generate(false);
+}
+
+function buildArchPills(){
+  var g = document.getElementById("archGrid");
+  g.innerHTML = "";
+  arch = null;
+  DATA[mode].archetipi.forEach(function(a){
+    var b = document.createElement("button");
+    b.className = "arch-pill";
+    b.textContent = a.nome;
+    b.onclick = function(){
+      arch = a;
+      g.querySelectorAll(".arch-pill").forEach(function(p){p.classList.remove("sel")});
+      b.classList.add("sel");
+      checkReady();
+    };
+    g.appendChild(b);
+  });
+}
+
+function checkReady(){
+  var n = document.getElementById("pcName").value.trim();
+  document.getElementById("goBtn").disabled = !(n.length >= 2 && arch);
+}
+document.getElementById("pcName").addEventListener("input", checkReady);
+
+/* ================= RNG SEEDED ================= */
+function hash(str){
+  var h = 2166136261;
+  for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function rng(seed){
+  var s = seed || 1;
+  return function(){
+    s ^= s << 13; s ^= s >>> 17; s ^= s << 5; s = s >>> 0;
+    return s / 4294967296;
+  };
+}
+
+/* ================= GENERAZIONE ================= */
+function buildPlayer(){
+  var name = document.getElementById("pcName").value.trim();
+  var d = DATA[mode];
+  var seed = hash(name.toUpperCase() + "|" + mode + "|" + arch.id + "|" + variant);
+  var r = rng(seed);
+
+  var noun = d.nouns[Math.floor(r()*d.nouns.length)];
+  var tail = r() < 0.5 ? AGGETTIVI[Math.floor(r()*AGGETTIVI.length)] : LUOGHI[Math.floor(r()*LUOGHI.length)];
+  var art = (noun === "PANTERA") ? "LA" : "IL";
+  var nickname = art + " " + noun + " " + tail;
+
+  var motti = d.motti[arch.id];
+  var motto = motti[Math.floor(r()*motti.length)];
+
+  var stats = d.stats.map(function(){ return 55 + Math.floor(r()*26); }); // 55-80
+  stats[arch.stat] = 85 + Math.floor(r()*15); // 85-99
+  var dump = Math.floor(r()*5);
+  if(dump !== arch.stat) stats[dump] = 40 + Math.floor(r()*16);
+
+  return { name:name, nickname:nickname, motto:motto, stats:stats, archName:arch.nome.toUpperCase(), data:d };
+}
+
+function generate(reroll){
+  if(reroll) variant++;
+  var p = buildPlayer();
+  var draw = function(){ drawCard(p); };
+  if(fontReady){ draw(); }
+  else {
+    Promise.all([
+      document.fonts.load('10px "Press Start 2P"'),
+      document.fonts.load('700 10px "Space Grotesk"'),
+      document.fonts.load('10px "Archivo Black"')
+    ]).then(function(){ fontReady = true; draw(); })
+      .catch(function(){ draw(); });
+  }
+  var res = document.getElementById("result");
+  res.classList.add("show");
+  if(!reroll) setTimeout(function(){ res.scrollIntoView({behavior:"smooth", block:"start"}); }, 80);
+}
+
+/* ================= DISEGNO CARD ================= */
+function pxBorder(ctx, x, y, w, h, t, color){
+  // bordo "pixel" con angoli scalettati
+  ctx.fillStyle = color;
+  ctx.fillRect(x+t*2, y, w-t*4, t);             // top
+  ctx.fillRect(x+t*2, y+h-t, w-t*4, t);         // bottom
+  ctx.fillRect(x, y+t*2, t, h-t*4);             // left
+  ctx.fillRect(x+w-t, y+t*2, t, h-t*4);         // right
+  ctx.fillRect(x+t, y+t, t, t);                 // angoli
+  ctx.fillRect(x+w-t*2, y+t, t, t);
+  ctx.fillRect(x+t, y+h-t*2, t, t);
+  ctx.fillRect(x+w-t*2, y+h-t*2, t, t);
+}
+
+function drawBall(ctx, cx, cy, cell, sport, accent){
+  var R = 6; // raggio in celle, griglia 13x13
+  for(var gy=-R; gy<=R; gy++){
+    for(var gx=-R; gx<=R; gx++){
+      var d = gx*gx + gy*gy;
+      if(d > R*R + 2) continue;
+      var x = cx + gx*cell, y = cy + gy*cell;
+      var col;
+      if(sport === "basket"){
+        if(d >= R*R - 6) col = "#1a0d05";                       // contorno
+        else if(gx === 0 || gy === 0) col = "#1a0d05";          // cuciture
+        else if(Math.abs(gx*gx+gy*gy - 18) <= 2 && gx*gy > 0) col = "#1a0d05"; // archi
+        else col = accent;
+      } else {
+        if(d >= R*R - 6) col = "#111";                          // contorno
+        else if(d <= 2) col = "#111";                           // patch centrale
+        else if((gx===0&&gy===-4)||(gx===-4&&gy===-1)||(gx===4&&gy===-1)||(gx===-3&&gy===3)||(gx===3&&gy===3)||
+                (gx===-1&&gy===-4)||(gx===1&&gy===-4)||(gx===-4&&gy===0)||(gx===4&&gy===0)||
+                (gx===-3&&gy===4)||(gx===3&&gy===4)||(gx===-2&&gy===3)||(gx===2&&gy===3)) col = "#111";
+        else col = "#f6f5ef";
+      }
+      ctx.fillStyle = col;
+      ctx.fillRect(x, y, cell, cell);
+    }
+  }
+}
+
+function fitText(ctx, text, maxW, baseSize, fontTpl, minSize){
+  var size = baseSize;
+  while(size > minSize){
+    ctx.font = fontTpl.replace("{S}", size);
+    if(ctx.measureText(text).width <= maxW) break;
+    size -= 2;
+  }
+  return size;
+}
+
+function wrapLines(ctx, text, maxW){
+  var words = text.split(" "), lines = [], cur = "";
+  words.forEach(function(w){
+    var test = cur ? cur + " " + w : w;
+    if(ctx.measureText(test).width <= maxW){ cur = test; }
+    else { if(cur) lines.push(cur); cur = w; }
+  });
+  if(cur) lines.push(cur);
+  return lines;
+}
+
+function drawCard(p){
+  var cv = document.getElementById("cardCanvas");
+  var ctx = cv.getContext("2d");
+  var W = 1080, H = 1350;
+  var acc = p.data.accent, deep = p.data.accentDeep;
+
+  // sfondo
+  ctx.fillStyle = "#05060f";
+  ctx.fillRect(0,0,W,H);
+  // scanlines
+  ctx.fillStyle = "rgba(255,255,255,.025)";
+  for(var sy=0; sy<H; sy+=8) ctx.fillRect(0, sy, W, 3);
+  // alone colore
+  var grad = ctx.createRadialGradient(W/2, 380, 60, W/2, 380, 700);
+  grad.addColorStop(0, acc + "33");
+  grad.addColorStop(1, "transparent");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,W,H);
+
+  // doppio bordo pixel
+  pxBorder(ctx, 28, 28, W-56, H-56, 10, acc);
+  pxBorder(ctx, 58, 58, W-116, H-116, 8, "rgba(246,245,239,.25)");
+
+  ctx.textAlign = "center";
+
+  // header
+  ctx.fillStyle = "#ddeb00";
+  ctx.font = '26px "Press Start 2P"';
+  ctx.fillText("\u25CF PLAYER CARD \u25CF", W/2, 145);
+
+  ctx.fillStyle = "rgba(246,245,239,.55)";
+  ctx.font = '700 30px "Space Grotesk"';
+  ctx.fillText(p.data.label, W/2, 200);
+
+  // palla pixel
+  drawBall(ctx, W/2, 370, 18, p.data.sport, acc);
+
+  // nickname (con ombra offset) — riduco il corpo finché sta in 2 righe
+  var nick = p.nickname;
+  var sizes = [52, 46, 40, 34, 30];
+  var nickSize = sizes[sizes.length-1], lines = [nick];
+  for(var si=0; si<sizes.length; si++){
+    ctx.font = sizes[si] + 'px "Press Start 2P"';
+    var test = wrapLines(ctx, nick, W-200);
+    if(test.length <= 2){ nickSize = sizes[si]; lines = test; break; }
+    if(si === sizes.length-1){ nickSize = sizes[si]; lines = test; }
+  }
+  ctx.font = nickSize + 'px "Press Start 2P"';
+  var ny = 540;
+  lines.forEach(function(ln){
+    ctx.fillStyle = acc;
+    ctx.fillText(ln, W/2 + 6, ny + 6);
+    ctx.fillStyle = "#fff";
+    ctx.fillText(ln, W/2, ny);
+    ny += nickSize * 1.45;
+  });
+
+  // nome reale + archetipo
+  var infoY = ny + 14;
+  var nameSize = fitText(ctx, p.name.toUpperCase(), W-300, 44, '{S}px "Archivo Black"', 26);
+  ctx.font = nameSize + 'px "Archivo Black"';
+  ctx.fillStyle = "#f6f5ef";
+  ctx.fillText(p.name.toUpperCase(), W/2, infoY);
+
+  ctx.font = '700 28px "Space Grotesk"';
+  ctx.fillStyle = acc;
+  ctx.fillText("\u2014 " + p.archName + " \u2014", W/2, infoY + 48);
+
+  // statistiche
+  var statTop = infoY + 100;
+  var rowH = 58;
+  var barX = 420, barW = 520, segN = 10, segGap = 6;
+  var segW = (barW - segGap*(segN-1)) / segN;
+  ctx.textAlign = "left";
+  p.data.stats.forEach(function(st, i){
+    var y = statTop + i*rowH;
+    ctx.font = '22px "Press Start 2P"';
+    ctx.fillStyle = "rgba(246,245,239,.85)";
+    ctx.fillText(st, 130, y + 30);
+    var val = p.stats[i];
+    var fill = Math.round(val/10);
+    for(var s=0; s<segN; s++){
+      ctx.fillStyle = s < fill ? (val >= 85 ? "#ddeb00" : acc) : "rgba(246,245,239,.12)";
+      ctx.fillRect(barX + s*(segW+segGap), y + 6, segW, 30);
+    }
+    ctx.font = '22px "Press Start 2P"';
+    ctx.fillStyle = val >= 85 ? "#ddeb00" : "#f6f5ef";
+    ctx.textAlign = "right";
+    ctx.fillText(String(val), W - 120, y + 30);
+    ctx.textAlign = "left";
+  });
+
+  // motto
+  ctx.textAlign = "center";
+  var mottoY = statTop + 5*rowH + 46;
+  ctx.font = 'italic 600 34px "Sora"';
+  ctx.fillStyle = "rgba(246,245,239,.9)";
+  var mLines = wrapLines(ctx, "\u201C" + p.motto + "\u201D", W-260);
+  mLines.forEach(function(ln, i){ ctx.fillText(ln, W/2, mottoY + i*44); });
+
+  // footer
+  ctx.font = '20px "Press Start 2P"';
+  ctx.fillStyle = "#ddeb00";
+  ctx.fillText("ASSOCIAZIONEPROXIMA.COM", W/2, H - 110);
+  ctx.font = '700 22px "Space Grotesk"';
+  ctx.fillStyle = "rgba(246,245,239,.5)";
+  ctx.fillText("PROXIMA \u00B7 GORGONZOLA", W/2, H - 72);
+}
+
+function downloadCard(){
+  var cv = document.getElementById("cardCanvas");
+  var a = document.createElement("a");
+  var nm = document.getElementById("pcName").value.trim().toLowerCase().replace(/[^a-z0-9]+/g,"-") || "player";
+  a.download = "proxima-card-" + nm + ".png";
+  a.href = cv.toDataURL("image/png");
+  a.click();
+}
+
+/* init */
+buildArchPills();
+// se arrivo con ?mode=jam apro direttamente sul basket
+if(location.search.indexOf("mode=jam") > -1) setMode("jam");
+</script>
+</body>
+</html>
