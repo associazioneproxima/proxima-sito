@@ -235,7 +235,6 @@ var DATA = {
   }
 };
 
-var AGGETTIVI = ["D'ACCIAIO","INFINITO","SUPREMO","ELETTRICO","SILENZIOSO","DORATO","SELVAGGIO","IMBATTIBILE","LUNARE","GLACIALE"];
 var LUOGHI_GORGO = ["DI PALAZZO PIROLA","DELLA BIBLIO","DI CA' BUSCA","DEL MULINO VECCHIO"];
 var LUOGHI = {
   summer: ["DEL SEVEN INFINITY","DEL SEVEN","DI GORGO","DELLA SUMMER","DELLA MARTESANA","DELLA SERIE A DEI POVERI","DEL NAVIGLIO"].concat(LUOGHI_GORGO),
@@ -250,8 +249,11 @@ var fontReady = false;
 
 /* --- loghi: gli SVG senza width/height non si disegnano sul canvas, li inietto dal viewBox --- */
 var IMGS = {};
-function loadSvg(key, src){
+function loadSvg(key, src, white){
   return fetch(src).then(function(r){return r.text()}).then(function(t){
+    if(white){
+      t = t.replace(/fill="#000000"/g, 'fill="#ffffff"').replace(/fill="#000"/g, 'fill="#fff"').replace(/fill:#000000/g, 'fill:#ffffff');
+    }
     if(!/<svg[^>]*\swidth=/.test(t)){
       var vb = t.match(/viewBox="([\d.\-\s]+)"/);
       if(vb){
@@ -270,7 +272,7 @@ function loadSvg(key, src){
 var logosReady = Promise.all([
   loadSvg("proxima", "img/logo-white.svg"),
   loadSvg("summer", "img/summer-league-logo.svg"),
-  loadSvg("jam", "img/gorgo-jam-logo.svg")
+  loadSvg("jam", "img/gorgo-jam-logo.svg", true)
 ]);
 
 function setMode(m){
@@ -345,7 +347,7 @@ function buildPlayer(){
 
   var noun = d.nouns[Math.floor(r()*d.nouns.length)];
   var pool = LUOGHI[mode];
-  var tail = r() < 0.4 ? AGGETTIVI[Math.floor(r()*AGGETTIVI.length)] : pool[Math.floor(r()*pool.length)];
+  var tail = pool[Math.floor(r()*pool.length)];
   var motti = d.motti[arch.id];
   var motto = motti[Math.floor(r()*motti.length)];
 
