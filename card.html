@@ -53,6 +53,13 @@ body[data-mode="jam"]{ --acc:#e27138; --acc-deep:#8a3d16; }
 .pcg-form input[type=text]{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(246,245,239,.2);
   color:var(--paper);font-family:'Sora';font-size:1rem;padding:14px 16px;border-radius:14px 14px 14px 4px;outline:none}
 .pcg-form input[type=text]:focus{border-color:var(--acc)}
+.pc-select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(246,245,239,.2);
+  color:var(--paper);font-family:'Sora';font-size:.95rem;padding:14px 16px;border-radius:14px 14px 14px 4px;
+  outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f6f5ef' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 18px center}
+.pc-select:focus{border-color:var(--acc)}
+.pc-select option{background:#0a0a16;color:#f6f5ef}
 .arch-grid{display:flex;flex-wrap:wrap;gap:10px}
 .arch-pill{cursor:pointer;font-family:'Space Grotesk';font-weight:700;font-size:.78rem;text-transform:uppercase;
   letter-spacing:.5px;padding:10px 18px;border-radius:50px;border:2px solid rgba(246,245,239,.3);
@@ -127,6 +134,10 @@ body[data-mode="jam"]{ --acc:#e27138; --acc-deep:#8a3d16; }
       <input type="text" id="pcName" maxlength="24" placeholder="Es. Marco R." autocomplete="off">
       <label>Il tuo stile di gioco</label>
       <div class="arch-grid" id="archGrid"></div>
+      <label for="pcTeam">La tua squadra</label>
+      <select id="pcTeam" class="pc-select">
+        <option value="">Free agent (senza squadra)</option>
+      </select>
       <button class="pcg-go" id="goBtn" onclick="generate(false)" disabled>&#9654; Genera la card</button>
     </div>
 
@@ -179,6 +190,8 @@ var DATA = {
     sport: "calcio",
     accent: "#4a3cec",
     accentDeep: "#2c2389",
+    logo: "img/summer-league-logo.svg",
+    teams: ["Cadeo Imbiancature","Zapoiss","Los Intocables","Proxima","FC Hesterfield","Club Santa Cruz","Olimpo Stahl Service","Real Prano","Pozzuolo Vintage","Estremo Feeling","Scan Sarlo","La Maggica 64","FC Fideuram","Royal Valtellina","Outside the Box","Galacticos"],
     stats: ["TIRO","DRIBBLING","VELOCITA'","DIFESA","VISIONE"],
     archetipi: [
       {id:"bomber",    nome:"Bomber",    stat:0},
@@ -201,6 +214,8 @@ var DATA = {
     sport: "basket",
     accent: "#e27138",
     accentDeep: "#8a3d16",
+    logo: "img/gorgo-jam-logo.svg",
+    teams: ["La Roja","Inshape","Lapartesana","Brigata dal Carr\u00E9","Lithuanian Kiss","Boggio FC","Rimbalzisti Anonimi","Hair Ball","Babek boy","Vimogate"],
     stats: ["TIRO","PALLEGGIO","VELOCITA'","DIFESA","SHOWTIME"],
     archetipi: [
       {id:"cecchino",  nome:"Cecchino",  stat:0},
@@ -221,13 +236,42 @@ var DATA = {
 };
 
 var AGGETTIVI = ["D'ACCIAIO","INFINITO","SUPREMO","ELETTRICO","SILENZIOSO","DORATO","SELVAGGIO","IMBATTIBILE","LUNARE","GLACIALE"];
-var LUOGHI = ["DI GORGONZOLA","DELLA MARTESANA","DEL NAVIGLIO","DI LARGO ALPINI","DEL PLAYGROUND","DELLA NOTTE BIANCA"];
+var LUOGHI_GORGO = ["DI PALAZZO PIROLA","DELLA BIBLIO","DI CA' BUSCA","DEL MULINO VECCHIO"];
+var LUOGHI = {
+  summer: ["DEL SEVEN INFINITY","DEL SEVEN","DI GORGO","DELLA SUMMER","DELLA MARTESANA","DELLA SERIE A DEI POVERI","DEL NAVIGLIO"].concat(LUOGHI_GORGO),
+  jam:    ["DI GORGO","DELLA NOTTE BIANCA","DELLA MARTESANA","DELL'NBA DEI POVERI","DEL NAVIGLIO","DEL CAMPETTO"].concat(LUOGHI_GORGO)
+};
 
 /* ================= STATO ================= */
 var mode = "summer";
 var arch = null;
 var variant = 0;
 var fontReady = false;
+
+/* --- loghi: gli SVG senza width/height non si disegnano sul canvas, li inietto dal viewBox --- */
+var IMGS = {};
+function loadSvg(key, src){
+  return fetch(src).then(function(r){return r.text()}).then(function(t){
+    if(!/<svg[^>]*\swidth=/.test(t)){
+      var vb = t.match(/viewBox="([\d.\-\s]+)"/);
+      if(vb){
+        var p = vb[1].trim().split(/\s+/);
+        t = t.replace("<svg", '<svg width="'+p[2]+'" height="'+p[3]+'"');
+      }
+    }
+    return new Promise(function(res){
+      var im = new Image();
+      im.onload = function(){ IMGS[key] = im; res(); };
+      im.onerror = function(){ res(); };
+      im.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(t);
+    });
+  }).catch(function(){});
+}
+var logosReady = Promise.all([
+  loadSvg("proxima", "img/logo-white.svg"),
+  loadSvg("summer", "img/summer-league-logo.svg"),
+  loadSvg("jam", "img/gorgo-jam-logo.svg")
+]);
 
 function setMode(m){
   mode = m;
@@ -236,8 +280,21 @@ function setMode(m){
     c.classList.toggle("sel", c.getAttribute("data-mode") === m);
   });
   buildArchPills();
+  buildTeamSelect();
   checkReady();
   if(document.getElementById("result").classList.contains("show")) generate(false);
+}
+
+function buildTeamSelect(){
+  var sel = document.getElementById("pcTeam");
+  var cur = sel.value;
+  sel.innerHTML = '<option value="">Free agent (senza squadra)</option>';
+  DATA[mode].teams.forEach(function(t){
+    var o = document.createElement("option");
+    o.value = t; o.textContent = t;
+    sel.appendChild(o);
+  });
+  sel.value = ""; // le squadre cambiano tra i due tornei, reset
 }
 
 function buildArchPills(){
@@ -281,39 +338,45 @@ function rng(seed){
 /* ================= GENERAZIONE ================= */
 function buildPlayer(){
   var name = document.getElementById("pcName").value.trim();
+  var team = document.getElementById("pcTeam").value;
   var d = DATA[mode];
-  var seed = hash(name.toUpperCase() + "|" + mode + "|" + arch.id + "|" + variant);
+  var seed = hash(name.toUpperCase() + "|" + mode + "|" + arch.id + "|" + team + "|" + variant);
   var r = rng(seed);
 
   var noun = d.nouns[Math.floor(r()*d.nouns.length)];
-  var tail = r() < 0.5 ? AGGETTIVI[Math.floor(r()*AGGETTIVI.length)] : LUOGHI[Math.floor(r()*LUOGHI.length)];
-  var art = (noun === "PANTERA") ? "LA" : "IL";
-  var nickname = art + " " + noun + " " + tail;
-
+  var pool = LUOGHI[mode];
+  var tail = r() < 0.4 ? AGGETTIVI[Math.floor(r()*AGGETTIVI.length)] : pool[Math.floor(r()*pool.length)];
   var motti = d.motti[arch.id];
   var motto = motti[Math.floor(r()*motti.length)];
+
+  function articleFor(n){
+    if(n === "PANTERA") return "LA ";
+    if(/^[AEIOU]/.test(n)) return "L'";
+    if(/^S[BCDFGHJKLMNPQRSTVWXYZ]/.test(n) || /^Z/.test(n)) return "LO ";
+    return "IL ";
+  }
+  var nickname = articleFor(noun) + noun + " " + tail;
 
   var stats = d.stats.map(function(){ return 55 + Math.floor(r()*26); }); // 55-80
   stats[arch.stat] = 85 + Math.floor(r()*15); // 85-99
   var dump = Math.floor(r()*5);
   if(dump !== arch.stat) stats[dump] = 40 + Math.floor(r()*16);
 
-  return { name:name, nickname:nickname, motto:motto, stats:stats, archName:arch.nome.toUpperCase(), data:d };
+  return { name:name, team:team, nickname:nickname, motto:motto, stats:stats, archName:arch.nome.toUpperCase(), data:d };
 }
 
 function generate(reroll){
   if(reroll) variant++;
   var p = buildPlayer();
   var draw = function(){ drawCard(p); };
-  if(fontReady){ draw(); }
-  else {
-    Promise.all([
-      document.fonts.load('10px "Press Start 2P"'),
-      document.fonts.load('700 10px "Space Grotesk"'),
-      document.fonts.load('10px "Archivo Black"')
-    ]).then(function(){ fontReady = true; draw(); })
-      .catch(function(){ draw(); });
+  var deps = [logosReady];
+  if(!fontReady){
+    deps.push(document.fonts.load('10px "Press Start 2P"'));
+    deps.push(document.fonts.load('700 10px "Space Grotesk"'));
+    deps.push(document.fonts.load('10px "Archivo Black"'));
   }
+  Promise.all(deps).then(function(){ fontReady = true; draw(); })
+    .catch(function(){ draw(); });
   var res = document.getElementById("result");
   res.classList.add("show");
   if(!reroll) setTimeout(function(){ res.scrollIntoView({behavior:"smooth", block:"start"}); }, 80);
@@ -404,6 +467,18 @@ function drawCard(p){
   pxBorder(ctx, 28, 28, W-56, H-56, 10, acc);
   pxBorder(ctx, 58, 58, W-116, H-116, 8, "rgba(246,245,239,.25)");
 
+  // loghi: torneo in alto a sinistra, Proxima in alto a destra
+  var tl = IMGS[p.data.sport === "basket" ? "jam" : "summer"];
+  if(tl && tl.naturalHeight){
+    var th = 120, tw = th * tl.naturalWidth / tl.naturalHeight;
+    ctx.drawImage(tl, 108, 96, tw, th);
+  }
+  var pl = IMGS.proxima;
+  if(pl && pl.naturalHeight){
+    var ph = 52, pw = ph * pl.naturalWidth / pl.naturalHeight;
+    ctx.drawImage(pl, W - 108 - pw, 122, pw, ph);
+  }
+
   ctx.textAlign = "center";
 
   // header
@@ -445,9 +520,11 @@ function drawCard(p){
   ctx.fillStyle = "#f6f5ef";
   ctx.fillText(p.name.toUpperCase(), W/2, infoY);
 
-  ctx.font = '700 28px "Space Grotesk"';
+  var infoLine = p.team ? p.archName + "  \u00B7  " + p.team.toUpperCase() : "\u2014 " + p.archName + " \u2014";
+  var infoSize = fitText(ctx, infoLine, W-260, 28, '700 {S}px "Space Grotesk"', 20);
+  ctx.font = '700 ' + infoSize + 'px "Space Grotesk"';
   ctx.fillStyle = acc;
-  ctx.fillText("\u2014 " + p.archName + " \u2014", W/2, infoY + 48);
+  ctx.fillText(infoLine, W/2, infoY + 48);
 
   // statistiche
   var statTop = infoY + 100;
