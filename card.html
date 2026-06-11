@@ -364,7 +364,9 @@ function buildPlayer(){
   var dump = Math.floor(r()*5);
   if(dump !== arch.stat) stats[dump] = 40 + Math.floor(r()*16);
 
-  return { name:name, team:team, nickname:nickname, motto:motto, stats:stats, archName:arch.nome.toUpperCase(), data:d };
+  var pose = Math.floor(r()*SPRITES[d.sport].length);
+
+  return { name:name, team:team, nickname:nickname, motto:motto, stats:stats, pose:pose, archName:arch.nome.toUpperCase(), data:d };
 }
 
 function generate(reroll){
@@ -398,29 +400,148 @@ function pxBorder(ctx, x, y, w, h, t, color){
   ctx.fillRect(x+w-t*2, y+h-t*2, t, t);
 }
 
-function drawBall(ctx, cx, cy, cell, sport, accent){
-  var R = 6; // raggio in celle, griglia 13x13
-  for(var gy=-R; gy<=R; gy++){
-    for(var gx=-R; gx<=R; gx++){
-      var d = gx*gx + gy*gy;
-      if(d > R*R + 2) continue;
-      var x = cx + gx*cell, y = cy + gy*cell;
-      var col;
-      if(sport === "basket"){
-        if(d >= R*R - 6) col = "#1a0d05";                       // contorno
-        else if(gx === 0 || gy === 0) col = "#1a0d05";          // cuciture
-        else if(Math.abs(gx*gx+gy*gy - 18) <= 2 && gx*gy > 0) col = "#1a0d05"; // archi
-        else col = accent;
-      } else {
-        if(d >= R*R - 6) col = "#111";                          // contorno
-        else if(d <= 2) col = "#111";                           // patch centrale
-        else if((gx===0&&gy===-4)||(gx===-4&&gy===-1)||(gx===4&&gy===-1)||(gx===-3&&gy===3)||(gx===3&&gy===3)||
-                (gx===-1&&gy===-4)||(gx===1&&gy===-4)||(gx===-4&&gy===0)||(gx===4&&gy===0)||
-                (gx===-3&&gy===4)||(gx===3&&gy===4)||(gx===-2&&gy===3)||(gx===2&&gy===3)) col = "#111";
-        else col = "#f6f5ef";
-      }
-      ctx.fillStyle = col;
-      ctx.fillRect(x, y, cell, cell);
+var SPRITES = {
+  calcio: [
+    [ // posa 1: palla al piede
+      "....HHHH....",
+      "....HHHH....",
+      "....SSSS....",
+      "....SWSW....",
+      "....SSSS....",
+      ".....SS.....",
+      "..JJJJJJJJ..",
+      ".JJJJJJJJJJ.",
+      ".SSJJJJJJSS.",
+      ".SS.JJJJ.SS.",
+      "....JJJJ....",
+      "...PPPPPP...",
+      "...PPPPPP...",
+      "...SS..SS...",
+      "...SS..SS...",
+      "...WW..WW...",
+      "..KKK..KKK..",
+      "............",
+      ".......BB...",
+      "......BKBB..",
+      "......BBBB..",
+      ".......BB..."
+    ],
+    [ // posa 2: il tiro
+      "....HHHH........",
+      "....HHHH........",
+      "....SSSS........",
+      "....SWSW........",
+      "....SSSS........",
+      ".....SS.........",
+      "..JJJJJJJJ......",
+      ".SSJJJJJJSS.....",
+      ".SS.JJJJ.SS.....",
+      "....JJJJ........",
+      "...PPPPPP.......",
+      "...PPPPPP.......",
+      "...SS.SSSSKK.BB.",
+      "...SS.......BKBB",
+      "...WW.......BBBB",
+      "..KKK........BB."
+    ],
+    [ // posa 3: esultanza
+      ".SS........SS.",
+      ".SS........SS.",
+      ".JJ..HHHH..JJ.",
+      ".JJ..HHHH..JJ.",
+      ".JJ..SSSS..JJ.",
+      ".JJ..SWSW..JJ.",
+      ".JJJ.SSSS.JJJ.",
+      "..JJJ.SS.JJJ..",
+      "..JJJJJJJJJJ..",
+      "...JJJJJJJJ...",
+      "...JJJJJJJJ...",
+      "....PPPPPP....",
+      "....PPPPPP....",
+      "....SS..SS....",
+      "....SS..SS....",
+      "....WW..WW....",
+      "...KKK..KKK..."
+    ]
+  ],
+  basket: [
+    [ // posa 1: palleggio
+      "....HHHH......",
+      "....HHHH......",
+      "....SSSS......",
+      "....SWSW......",
+      "....SSSS......",
+      ".....SS.......",
+      "..JJJJJJJJ....",
+      ".SJJJJJJJJS...",
+      ".SJJJJJJJJS...",
+      ".S.JJJJJJ.S...",
+      "...JJJJJJ.S...",
+      "...PPPPPP.S...",
+      "...PPPPPP.....",
+      "...SS..SS..BB.",
+      "...SS..SS.BKBB",
+      "...WW..WW.BBBB",
+      "..KKK..KKK.BB."
+    ],
+    [ // posa 2: il tiro
+      ".....BBBB.....",
+      ".....BKBB.....",
+      ".....BBBB.....",
+      "..SS......SS..",
+      "..SS.HHHH.SS..",
+      "..SS.HHHH.SS..",
+      "..SS.SSSS.SS..",
+      "..SS.SWSW.SS..",
+      "..SS.SSSS.SS..",
+      "...JJJJJJJJ...",
+      "...JJJJJJJJ...",
+      "....JJJJJJ....",
+      "....PPPPPP....",
+      "....SS..SS....",
+      "....SS..SS....",
+      "....WW..WW....",
+      "...KKK..KKK..."
+    ],
+    [ // posa 3: difesa
+      "....HHHH....",
+      "....HHHH....",
+      "....SSSS....",
+      "....SWSW....",
+      "....SSSS....",
+      ".....SS.....",
+      "SSJJJJJJJJSS",
+      "SS.JJJJJJ.SS",
+      "...JJJJJJ...",
+      "...PPPPPP...",
+      "...PPPPPP...",
+      "..SS....SS..",
+      "..SS....SS..",
+      "..WW....WW..",
+      ".KKK....KKK."
+    ]
+  ]
+};
+
+function drawSprite(ctx, sport, pose, cx, cy, accent, deep){
+  var grid = SPRITES[sport][pose] || SPRITES[sport][0];
+  var pal = {
+    H: "#1a0d05", S: "#e8b07a", W: "#f6f5ef", K: "#0d0d14",
+    J: accent, P: deep,
+    B: sport === "basket" ? "#e27138" : "#f6f5ef"
+  };
+  var rows = grid.length;
+  var cols = 0;
+  grid.forEach(function(r){ if(r.length > cols) cols = r.length; });
+  var cell = Math.round(220 / rows);           // altezza sprite ~220px
+  var x0 = Math.round(cx - cols*cell/2);
+  var y0 = Math.round(cy - rows*cell/2);
+  for(var y=0; y<rows; y++){
+    for(var x=0; x<grid[y].length; x++){
+      var ch = grid[y][x];
+      if(ch === ".") continue;
+      ctx.fillStyle = pal[ch];
+      ctx.fillRect(x0 + x*cell, y0 + y*cell, cell, cell);
     }
   }
 }
@@ -492,8 +613,8 @@ function drawCard(p){
   ctx.font = '700 30px "Space Grotesk"';
   ctx.fillText(p.data.label, W/2, 200);
 
-  // palla pixel
-  drawBall(ctx, W/2, 370, 18, p.data.sport, acc);
+  // omino pixel stile videogioco
+  drawSprite(ctx, p.data.sport, p.pose, W/2, 365, acc, deep);
 
   // nickname (con ombra offset) — riduco il corpo finché sta in 2 righe
   var nick = p.nickname;
