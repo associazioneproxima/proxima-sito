@@ -159,17 +159,23 @@
     {
       "data": "ven 12/06 · 19:30",
       "iso": "2026-06-12",
-      "match": "Scan Sarlo — La Maggica 64"
+      "match": "Scan Sarlo — La Maggica 64",
+      "gol_casa": 2,
+      "gol_ospite": 5
     },
     {
       "data": "ven 12/06 · 20:30",
       "iso": "2026-06-12",
-      "match": "Galacticos — Royal Valtellina"
+      "match": "Galacticos — Royal Valtellina",
+      "gol_casa": 8,
+      "gol_ospite": 4
     },
     {
       "data": "ven 12/06 · 21:30",
       "iso": "2026-06-12",
-      "match": "Olimpo Stahl Service — FC Hesterfield"
+      "match": "Olimpo Stahl Service — FC Hesterfield",
+      "gol_casa": 4,
+      "gol_ospite": 1
     },
     {
       "data": "mar 16/06 · 19:30",
