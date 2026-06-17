@@ -180,17 +180,23 @@
     {
       "data": "mar 16/06 · 19:30",
       "iso": "2026-06-16",
-      "match": "FC Hesterfield — Real Prano"
+      "match": "FC Hesterfield — Real Prano",
+      "gol_casa": 5,
+      "gol_ospite": 4
     },
     {
       "data": "mar 16/06 · 20:30",
       "iso": "2026-06-16",
-      "match": "Scan Sarlo — Estremo Feeling"
+      "match": "Scan Sarlo — Estremo Feeling",
+      "gol_casa": 2,
+      "gol_ospite": 9
     },
     {
       "data": "mar 16/06 · 21:30",
       "iso": "2026-06-16",
-      "match": "Outside the Box — FC Fideuram"
+      "match": "Outside the Box — FC Fideuram",
+      "gol_casa": 2,
+      "gol_ospite": 2
     },
     {
       "data": "mer 17/06 · 19:30",
