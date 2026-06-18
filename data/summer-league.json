@@ -201,17 +201,23 @@
     {
       "data": "mer 17/06 · 19:30",
       "iso": "2026-06-17",
-      "match": "Club Santa Cruz — Olimpo Stahl Service"
+      "match": "Club Santa Cruz — Olimpo Stahl Service",
+      "gol_casa": 3,
+      "gol_ospite": 3
     },
     {
       "data": "mer 17/06 · 20:30",
       "iso": "2026-06-17",
-      "match": "La Maggica 64 — Pozzuolo Vintage"
+      "match": "La Maggica 64 — Pozzuolo Vintage",
+      "gol_casa": 2,
+      "gol_ospite": 1
     },
     {
       "data": "mer 17/06 · 21:30",
       "iso": "2026-06-17",
-      "match": "Cadeo Imbiancature — Proxima"
+      "match": "Cadeo Imbiancature — Proxima",
+      "gol_casa": 13,
+      "gol_ospite": 3
     },
     {
       "data": "gio 18/06 · 19:30",
