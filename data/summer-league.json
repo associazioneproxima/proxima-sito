@@ -50,8 +50,8 @@
           {
             "casa": "Vincente Q3",
             "ospite": "Vincente Q4",
-            "gol_casa": "",
-            "gol_ospite": "",
+            "gol_casa": null,
+            "gol_ospite": null,
             "data": ""
           }
         ]
@@ -62,8 +62,8 @@
           {
             "casa": "Finalista 1",
             "ospite": "Finalista 2",
-            "gol_casa": "",
-            "gol_ospite": "",
+            "gol_casa": null,
+            "gol_ospite": null,
             "data": ""
           }
         ]
