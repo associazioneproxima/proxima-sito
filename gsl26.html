@@ -36,6 +36,25 @@ td.team{font-weight:600}
 td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
 .lgnote{font-family:'Space Grotesk';font-size:.76rem;opacity:.6;margin-top:18px}
 
+/* Tabellone fase finale */
+.bracket-title{font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:0}
+.bracket-wrap{margin-top:24px;overflow-x:auto;padding-bottom:10px}
+.bracket{display:flex;gap:36px;min-width:min-content;align-items:stretch}
+.bk-col{display:flex;flex-direction:column;flex:1;min-width:200px}
+.bk-phase{font-family:'Space Grotesk';text-transform:uppercase;font-size:.7rem;letter-spacing:1.6px;opacity:.7;text-align:center;margin-bottom:16px}
+.bk-matches{display:flex;flex-direction:column;justify-content:space-around;flex:1;gap:16px}
+.bk-match{position:relative;background:rgba(255,255,255,.04);border:1px solid rgba(246,245,239,.12);border-radius:14px 14px 14px 4px;overflow:hidden}
+.bk-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;font-size:.86rem}
+.bk-row+.bk-row{border-top:1px solid rgba(246,245,239,.08)}
+.bk-team{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bk-score{font-family:var(--display);color:var(--yellow);min-width:18px;text-align:right}
+.bk-win .bk-team{color:var(--yellow)}
+.bk-lose{opacity:.45}
+/* connettori tra le fasi */
+.bk-col:not(:last-child) .bk-match::after{content:"";position:absolute;right:-18px;top:50%;width:18px;height:2px;background:rgba(246,245,239,.18)}
+.bk-col:not(:first-child) .bk-match::before{content:"";position:absolute;left:-18px;top:50%;width:18px;height:2px;background:rgba(246,245,239,.18)}
+@media(max-width:560px){.bk-col{min-width:160px}.bracket{gap:30px}}
+
 /* Box invito Hall of Fame (stile arcade, colori Summer) */
 .hof-invite{max-width:760px;margin:60px auto 10px;text-align:center;background:#05060f;
   padding:38px clamp(20px,5vw,46px);position:relative;
@@ -99,6 +118,11 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
       <span class="cc-btn">&#9654; Press start</span>
     </a>
   </div>
+  <div id="sl-tabellone-wrap" style="display:none;margin-top:10px">
+    <h3 class="bracket-title">Fase finale</h3>
+    <div class="bracket-wrap"><div class="bracket" id="sl-tabellone"></div></div>
+  </div>
+  <h3 class="bracket-title" id="sl-gironi-title" style="margin-top:46px;display:none">Gironi</h3>
   <div class="gironi" id="sl-gironi"></div>
   <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Prossime partite</h3>
   <div class="fixtures" id="sl-partite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
@@ -172,6 +196,32 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       else if(gc<go){ stats[osp].v++; stats[osp].pt+=3; stats[casa].p++; }
       else { stats[casa].n++; stats[osp].n++; stats[casa].pt++; stats[osp].pt++; }
     });
+
+    // ---- Tabellone fase finale (compilabile dal CMS) ----
+    var tb=d.tabellone;
+    if(tb && tb.attivo && (tb.fasi||[]).length){
+      function bkScore(v){ return (v!=null && v!=="") ? v : ""; }
+      var cols=(tb.fasi||[]).map(function(f){
+        var matches=(f.partite||[]).map(function(m){
+          var gc=m.gol_casa, go=m.gol_ospite;
+          var played = gc!=null && gc!=="" && go!=null && go!=="";
+          var cCls="bk-row", oCls="bk-row";
+          if(played){
+            var gci=parseInt(gc,10), goi=parseInt(go,10);
+            if(gci>goi){ cCls+=" bk-win"; oCls+=" bk-lose"; }
+            else if(gci<goi){ oCls+=" bk-win"; cCls+=" bk-lose"; }
+          }
+          return '<div class="bk-match">'+
+            '<div class="'+cCls+'"><span class="bk-team">'+(m.casa||"&mdash;")+'</span><span class="bk-score">'+bkScore(gc)+'</span></div>'+
+            '<div class="'+oCls+'"><span class="bk-team">'+(m.ospite||"&mdash;")+'</span><span class="bk-score">'+bkScore(go)+'</span></div>'+
+          '</div>';
+        }).join("");
+        return '<div class="bk-col"><div class="bk-phase">'+(f.nome||"")+'</div><div class="bk-matches">'+matches+'</div></div>';
+      }).join("");
+      document.getElementById("sl-tabellone").innerHTML=cols;
+      document.getElementById("sl-tabellone-wrap").style.display="";
+      document.getElementById("sl-gironi-title").style.display="";
+    }
 
     var gbox=document.getElementById("sl-gironi");
     (d.gironi||[]).forEach(function(g){
