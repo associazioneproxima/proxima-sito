@@ -7,23 +7,65 @@
       {
         "nome": "Quarti",
         "partite": [
-          { "casa": "1ª Girone A", "ospite": "2ª Girone B", "gol_casa": "", "gol_ospite": "", "data": "" },
-          { "casa": "1ª Girone C", "ospite": "2ª Girone D", "gol_casa": "", "gol_ospite": "", "data": "" },
-          { "casa": "1ª Girone B", "ospite": "2ª Girone A", "gol_casa": "", "gol_ospite": "", "data": "" },
-          { "casa": "1ª Girone D", "ospite": "2ª Girone C", "gol_casa": "", "gol_ospite": "", "data": "" }
+          {
+            "casa": "-",
+            "ospite": "-",
+            "gol_casa": null,
+            "gol_ospite": null,
+            "data": ""
+          },
+          {
+            "casa": "-",
+            "ospite": "-",
+            "gol_casa": null,
+            "gol_ospite": null,
+            "data": ""
+          },
+          {
+            "casa": "-",
+            "ospite": "-",
+            "gol_casa": null,
+            "gol_ospite": null,
+            "data": ""
+          },
+          {
+            "casa": "-",
+            "ospite": "-",
+            "gol_casa": null,
+            "gol_ospite": null,
+            "data": ""
+          }
         ]
       },
       {
         "nome": "Semifinali",
         "partite": [
-          { "casa": "Vincente Q1", "ospite": "Vincente Q2", "gol_casa": "", "gol_ospite": "", "data": "" },
-          { "casa": "Vincente Q3", "ospite": "Vincente Q4", "gol_casa": "", "gol_ospite": "", "data": "" }
+          {
+            "casa": "Vincente Q1",
+            "ospite": "Vincente Q2",
+            "gol_casa": null,
+            "gol_ospite": null,
+            "data": ""
+          },
+          {
+            "casa": "Vincente Q3",
+            "ospite": "Vincente Q4",
+            "gol_casa": "",
+            "gol_ospite": "",
+            "data": ""
+          }
         ]
       },
       {
         "nome": "Finale",
         "partite": [
-          { "casa": "Finalista 1", "ospite": "Finalista 2", "gol_casa": "", "gol_ospite": "", "data": "" }
+          {
+            "casa": "Finalista 1",
+            "ospite": "Finalista 2",
+            "gol_casa": "",
+            "gol_ospite": "",
+            "data": ""
+          }
         ]
       }
     ]
