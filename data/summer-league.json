@@ -222,17 +222,23 @@
     {
       "data": "gio 18/06 · 19:30",
       "iso": "2026-06-18",
-      "match": "Zapoiss — Los Intocables"
+      "match": "Zapoiss — Los Intocables",
+      "gol_casa": 6,
+      "gol_ospite": 4
     },
     {
       "data": "gio 18/06 · 20:30",
       "iso": "2026-06-18",
-      "match": "Outside the Box — Royal Valtellina"
+      "match": "Outside the Box — Royal Valtellina",
+      "gol_casa": 2,
+      "gol_ospite": 5
     },
     {
       "data": "gio 18/06 · 21:30",
       "iso": "2026-06-18",
-      "match": "FC Fideuram — Galacticos"
+      "match": "FC Fideuram — Galacticos",
+      "gol_casa": 1,
+      "gol_ospite": 4
     }
   ]
 }
