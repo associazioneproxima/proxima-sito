@@ -1,6 +1,33 @@
 {
   "titolo": "Gorgo Summer League",
   "sottotitolo": "Il campionato estivo di Proxima: 16 squadre divise in 4 gironi, partite ogni settimana. Ecco le classifiche aggiornate.",
+  "tabellone": {
+    "attivo": true,
+    "fasi": [
+      {
+        "nome": "Quarti",
+        "partite": [
+          { "casa": "1ª Girone A", "ospite": "2ª Girone B", "gol_casa": "", "gol_ospite": "", "data": "" },
+          { "casa": "1ª Girone C", "ospite": "2ª Girone D", "gol_casa": "", "gol_ospite": "", "data": "" },
+          { "casa": "1ª Girone B", "ospite": "2ª Girone A", "gol_casa": "", "gol_ospite": "", "data": "" },
+          { "casa": "1ª Girone D", "ospite": "2ª Girone C", "gol_casa": "", "gol_ospite": "", "data": "" }
+        ]
+      },
+      {
+        "nome": "Semifinali",
+        "partite": [
+          { "casa": "Vincente Q1", "ospite": "Vincente Q2", "gol_casa": "", "gol_ospite": "", "data": "" },
+          { "casa": "Vincente Q3", "ospite": "Vincente Q4", "gol_casa": "", "gol_ospite": "", "data": "" }
+        ]
+      },
+      {
+        "nome": "Finale",
+        "partite": [
+          { "casa": "Finalista 1", "ospite": "Finalista 2", "gol_casa": "", "gol_ospite": "", "data": "" }
+        ]
+      }
+    ]
+  },
   "gironi": [
     {
       "nome": "A",
