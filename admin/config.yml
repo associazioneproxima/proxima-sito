@@ -67,6 +67,33 @@ collections:
         fields:
           - {label: "Titolo", name: "titolo", widget: "string"}
           - {label: "Sottotitolo", name: "sottotitolo", widget: "text"}
+          - label: "Tabellone fase finale"
+            name: "tabellone"
+            widget: "object"
+            required: false
+            collapsed: false
+            hint: "Quarti, semifinali e finale. Compare sopra ai gironi quando è attivo."
+            fields:
+              - {label: "Mostra il tabellone", name: "attivo", widget: "boolean", default: false}
+              - label: "Fasi (Quarti, Semifinali, Finale)"
+                name: "fasi"
+                widget: "list"
+                label_singular: "Fase"
+                summary: "{{fields.nome}}"
+                required: false
+                fields:
+                  - {label: "Nome fase (es. Quarti, Semifinali, Finale)", name: "nome", widget: "string"}
+                  - label: "Partite"
+                    name: "partite"
+                    widget: "list"
+                    label_singular: "Partita"
+                    summary: "{{fields.casa}} — {{fields.ospite}}{{#if fields.gol_casa}}  ({{fields.gol_casa}}-{{fields.gol_ospite}}){{/if}}"
+                    fields:
+                      - {label: "Squadra casa (sinistra)", name: "casa", widget: "string"}
+                      - {label: "Squadra ospite (destra)", name: "ospite", widget: "string"}
+                      - {label: "Gol casa", name: "gol_casa", widget: "number", required: false, value_type: "int", hint: "Compila solo dopo la partita. La squadra vincente viene evidenziata."}
+                      - {label: "Gol ospite", name: "gol_ospite", widget: "number", required: false, value_type: "int"}
+                      - {label: "Data e ora (opzionale)", name: "data", widget: "string", required: false}
           - label: "Gironi"
             name: "gironi"
             widget: "list"
