@@ -69,8 +69,8 @@ body{background:#05030d}
   text-shadow:3px 3px 0 var(--neon-pink),6px 6px 0 rgba(0,0,0,.4)}
 .glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;
   overflow:hidden;clip-path:inset(0 0 0 0)}
-.glitch::before{color:var(--neon-cyan);transform:translate(-3px,0);animation:gl1 2.4s infinite linear alternate}
-.glitch::after{color:var(--neon-pink);transform:translate(3px,0);animation:gl2 3.1s infinite linear alternate}
+.glitch::before{color:var(--neon-cyan);transform:translate(-3px,0);animation:gl1 6s infinite linear alternate}
+.glitch::after{color:var(--neon-pink);transform:translate(3px,0);animation:gl2 7.5s infinite linear alternate}
 @keyframes gl1{0%{clip-path:inset(0 0 82% 0)}20%{clip-path:inset(40% 0 38% 0)}40%{clip-path:inset(70% 0 8% 0)}60%{clip-path:inset(15% 0 60% 0)}80%{clip-path:inset(88% 0 2% 0)}100%{clip-path:inset(50% 0 30% 0)}}
 @keyframes gl2{0%{clip-path:inset(85% 0 5% 0)}25%{clip-path:inset(10% 0 70% 0)}50%{clip-path:inset(55% 0 22% 0)}75%{clip-path:inset(30% 0 48% 0)}100%{clip-path:inset(5% 0 80% 0)}}
 
@@ -187,7 +187,7 @@ body.party .scene,body.party .games{animation:party 4s linear infinite}
 
   <div class="arc-foot">
     <p class="insert">&#9654; More games loading&hellip; &#9664;</p>
-    <p class="hint">Suggerimento da vero smanettone: prova il codice &uarr;&uarr;&darr;&darr;&larr;&rarr;&larr;&rarr; B A</p>
+    <p class="hint">Codice segreto &mdash; tastiera: &uarr;&uarr;&darr;&darr;&larr;&rarr;&larr;&rarr; B A<br>su mobile: scorri le frecce nello stesso ordine e poi tocca due volte lo schermo</p>
   </div>
 </div>
 
@@ -311,34 +311,60 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     box.appendChild(el);
   });
 
-  // ---- easter egg: codice Konami -> party mode ----
+  // ---- easter egg: codice Konami -> party mode (tastiera + mobile) ----
+  // Su mobile: swipe nelle 4 direzioni per le frecce, poi due tap per "B A".
   var seq=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
   var pos=0;
+
+  function activate(){
+    document.body.classList.add('party');
+    var t=document.getElementById('cheat');
+    t.classList.add('show');
+    for(var j=0;j<24;j++){
+      var s=document.createElement('span');
+      s.className='pix-star';
+      s.style.left=(Math.random()*100)+'%';
+      s.style.top=(Math.random()*92)+'%';
+      s.style.background=['var(--neon-cyan)','var(--neon-pink)','var(--yellow)','var(--neon-lime)'][j%4];
+      s.style.animationDelay=(Math.random()*1.5)+'s';
+      scene.appendChild(s);
+    }
+    setTimeout(function(){t.classList.remove('show')},3200);
+  }
+
+  // 'tap' vale come token jolly per le due lettere finali (B/A)
+  function feed(tok){
+    var want=seq[pos];
+    var ok = (tok===want) || (tok==='tap' && (want==='b'||want==='a'));
+    if(ok){
+      pos++;
+      if(pos===seq.length){ pos=0; activate(); }
+    } else {
+      pos=(tok===seq[0])?1:0;
+    }
+  }
+
   document.addEventListener('keydown',function(e){
     var k=(e.key||'').length===1?e.key.toLowerCase():e.key;
-    if(k===seq[pos]){
-      pos++;
-      if(pos===seq.length){
-        pos=0;
-        document.body.classList.add('party');
-        var t=document.getElementById('cheat');
-        t.classList.add('show');
-        // pioggia di stelle bonus
-        for(var j=0;j<24;j++){
-          var s=document.createElement('span');
-          s.className='pix-star';
-          s.style.left=(Math.random()*100)+'%';
-          s.style.top=(Math.random()*92)+'%';
-          s.style.background=['var(--neon-cyan)','var(--neon-pink)','var(--yellow)','var(--neon-lime)'][j%4];
-          s.style.animationDelay=(Math.random()*1.5)+'s';
-          scene.appendChild(s);
-        }
-        setTimeout(function(){t.classList.remove('show')},3200);
-      }
-    } else {
-      pos=(k===seq[0])?1:0;
-    }
+    feed(k);
   });
+
+  // gesti touch: swipe direzionale oppure tap
+  var sx=0, sy=0, st=0;
+  document.addEventListener('touchstart',function(e){
+    var t=e.changedTouches[0]; sx=t.clientX; sy=t.clientY; st=Date.now();
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    var t=e.changedTouches[0];
+    var dx=t.clientX-sx, dy=t.clientY-sy;
+    var adx=Math.abs(dx), ady=Math.abs(dy);
+    if(adx<24 && ady<24 && (Date.now()-st)<500){
+      feed('tap');                                  // tocco = B / A
+    } else if(Math.max(adx,ady)>=30){
+      if(adx>ady) feed(dx>0?'ArrowRight':'ArrowLeft');
+      else        feed(dy>0?'ArrowDown':'ArrowUp');
+    }
+  },{passive:true});
 })();
 </script>
 </body>
