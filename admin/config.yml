@@ -91,9 +91,10 @@ collections:
                     fields:
                       - {label: "Squadra casa (sinistra)", name: "casa", widget: "string"}
                       - {label: "Squadra ospite (destra)", name: "ospite", widget: "string"}
+                      - {label: "Data e ora (es. 'mar 23/06 · 21:00')", name: "data", widget: "string", required: false, hint: "Se compilata, la partita compare anche nel calendario in fondo alla pagina."}
+                      - {label: "Data calendario (AAAA-MM-GG)", name: "iso", widget: "string", required: false, hint: "Es. 2026-06-23. Necessaria perché la partita entri nel calendario e, a data passata, si sposti in 'Partite giocate'."}
                       - {label: "Gol casa", name: "gol_casa", widget: "number", required: false, value_type: "int", hint: "Compila solo dopo la partita. La squadra vincente viene evidenziata."}
                       - {label: "Gol ospite", name: "gol_ospite", widget: "number", required: false, value_type: "int"}
-                      - {label: "Data e ora (opzionale)", name: "data", widget: "string", required: false}
           - label: "Gironi"
             name: "gironi"
             widget: "list"
