@@ -238,7 +238,17 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     var pbox=document.getElementById("sl-partite");
     var toggle=document.getElementById("sl-toggle");
     var oggi=new Date(); oggi.setHours(0,0,0,0);
-    var all=(d.partite||[]);
+    // Le partite della fase finale (con data) entrano nel calendario come quelle dei gironi
+    var koPartite=[];
+    (d.tabellone && d.tabellone.fasi || []).forEach(function(f){
+      (f.partite||[]).forEach(function(m){
+        if(m.iso){
+          koPartite.push({ data:m.data||"", iso:m.iso, match:(m.casa||"")+" — "+(m.ospite||""), gol_casa:m.gol_casa, gol_ospite:m.gol_ospite });
+        }
+      });
+    });
+    var all=(d.partite||[]).concat(koPartite);
+    all.sort(function(a,b){ var ai=a.iso||"9999", bi=b.iso||"9999"; return ai<bi?-1:(ai>bi?1:0); });
     function dOf(p){ return p.iso? new Date(p.iso+"T00:00:00") : null; }
     var future=all.filter(function(p){var dt=dOf(p);return !dt || dt>=oggi;});
     var giocate=all.filter(function(p){var dt=dOf(p);return dt && dt<oggi;}).reverse();
