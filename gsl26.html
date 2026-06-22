@@ -122,8 +122,6 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <h3 class="bracket-title">Fase finale</h3>
     <div class="bracket-wrap"><div class="bracket" id="sl-tabellone"></div></div>
   </div>
-  <h3 class="bracket-title" id="sl-gironi-title" style="margin-top:46px;display:none">Gironi</h3>
-  <div class="gironi" id="sl-gironi"></div>
   <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 0">Prossime partite</h3>
   <div class="fixtures" id="sl-partite" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
   <div style="margin-top:18px"><button id="sl-toggle" class="btn" style="display:none">Tutte le partite</button></div>
@@ -132,6 +130,8 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <div class="fixtures" id="sl-giocate" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:18px"></div>
     <div style="margin-top:18px"><button id="sl-toggle-giocate" class="btn" style="display:none">Tutti i risultati</button></div>
   </div>
+  <h3 class="bracket-title" id="sl-gironi-title" style="margin-top:46px">Gironi</h3>
+  <div class="gironi" id="sl-gironi"></div>
   <p class="lgnote">G = giocate &middot; V = vinte &middot; N = pareggi &middot; P = perse &middot; Pt = punti. Le classifiche si aggiornano da sole dai risultati delle partite.</p>
 
   <div class="hof-invite">
@@ -220,7 +220,6 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
       }).join("");
       document.getElementById("sl-tabellone").innerHTML=cols;
       document.getElementById("sl-tabellone-wrap").style.display="";
-      document.getElementById("sl-gironi-title").style.display="";
     }
 
     var gbox=document.getElementById("sl-gironi");
