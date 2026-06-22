@@ -8,8 +8,8 @@
         "nome": "Quarti",
         "partite": [
           { "casa": "Estremo Feeling", "ospite": "Galacticos", "iso": "2026-06-23", "data": "mar 23/06 · 21:00", "gol_casa": "", "gol_ospite": "" },
-          { "casa": "Cadeo Imbiancature", "ospite": "FC Hesterfield", "iso": "2026-06-23", "data": "mar 23/06 · 22:00", "gol_casa": "", "gol_ospite": "" },
           { "casa": "Royal Valtellina", "ospite": "La Maggica 64", "iso": "2026-06-25", "data": "gio 25/06 · 20:30", "gol_casa": "", "gol_ospite": "" },
+          { "casa": "Cadeo Imbiancature", "ospite": "FC Hesterfield", "iso": "2026-06-23", "data": "mar 23/06 · 22:00", "gol_casa": "", "gol_ospite": "" },
           { "casa": "Olimpo Stahl Service", "ospite": "Zapoiss", "iso": "2026-06-25", "data": "gio 25/06 · 21:30", "gol_casa": "", "gol_ospite": "" }
         ]
       },
