@@ -157,17 +157,20 @@ body.party .scene,body.party .games{animation:party 4s linear infinite}
   background:rgba(5,3,13,0);animation:launchBg .22s ease-out forwards}
 @keyframes launchBg{to{background:rgba(5,3,13,.85)}}
 
-/* la cartuccia: vola al centro + flip 3D */
-.cart-fly{position:fixed;inset:0;margin:auto;width:132px;height:172px;z-index:2;
+/* palco che ritaglia tutto sotto la fessura: la cartuccia sparisce, non spunta sotto */
+.cart-stage{position:fixed;inset:0;z-index:2;animation:stageClip .01s .78s forwards}
+@keyframes stageClip{to{clip-path:inset(0 0 calc(50% + 34px) 0)}}
+/* la cartuccia: vola al centro + un flip 3D */
+.cart-fly{position:absolute;inset:0;margin:auto;width:124px;height:162px;
   transform-style:preserve-3d;
   transform:translate(var(--dx),var(--dy)) scale(.32) rotateY(0deg);
   animation:cartFly .66s cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes cartFly{60%{transform:translate(0,0) scale(1.08) rotateY(540deg)}
-  100%{transform:translate(0,0) scale(1) rotateY(720deg)}}
+@keyframes cartFly{60%{transform:translate(0,0) scale(1.08) rotateY(300deg)}
+  100%{transform:translate(0,0) scale(1) rotateY(360deg)}}
 /* scivola dentro la fessura */
 .cart-drop{width:100%;height:100%;transform:translateY(0);
   animation:cartDrop .42s .8s cubic-bezier(.55,.05,.7,.25) forwards}
-@keyframes cartDrop{to{transform:translateY(80px) scaleY(.98)}}
+@keyframes cartDrop{to{transform:translateY(84px) scaleY(.98)}}
 
 .cartridge{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;
   border-radius:12px 12px 6px 6px;background:linear-gradient(160deg,#241a55,#0b0820);
@@ -183,14 +186,14 @@ body.party .scene,body.party .games{animation:party 4s linear infinite}
   background:repeating-linear-gradient(90deg,var(--acc) 0 5px,transparent 5px 10px)}
 
 /* la console / il "letto" con la fessura */
-.console{position:fixed;left:50%;top:50%;width:min(86vw,340px);height:224px;z-index:3;
-  transform:translate(-50%,70px);opacity:0;
-  background:linear-gradient(180deg,#16122e,#0a0716);border:2px solid #2a2350;border-radius:16px;
+.console{position:fixed;left:50%;top:50%;width:min(72vw,250px);height:118px;z-index:3;
+  transform:translate(-50%,44px);opacity:0;
+  background:linear-gradient(180deg,#16122e,#0a0716);border:2px solid #2a2350;border-radius:14px;
   box-shadow:0 16px 40px rgba(0,0,0,.6),inset 0 2px 0 rgba(255,255,255,.06);
   animation:consoleIn .3s .48s ease-out forwards}
-@keyframes consoleIn{to{transform:translate(-50%,-36px);opacity:1}}
-.console-mouth{position:absolute;top:-7px;left:50%;transform:translateX(-50%);
-  width:150px;height:12px;background:#05030d;border-radius:4px;box-shadow:inset 0 3px 5px rgba(0,0,0,.85)}
+@keyframes consoleIn{to{transform:translate(-50%,-34px);opacity:1}}
+.console-mouth{position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:128px;height:11px;background:#05030d;border-radius:4px;box-shadow:inset 0 3px 5px rgba(0,0,0,.85)}
 .console-led{position:absolute;bottom:14px;right:18px;width:11px;height:11px;border-radius:50%;
   background:#3a3a55;animation:led .4s 1.15s steps(1) forwards}
 @keyframes led{to{background:var(--neon-lime);box-shadow:0 0 10px var(--neon-lime)}}
@@ -354,11 +357,11 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     wrap.style.setProperty('--dy',dy+'px');
     wrap.style.setProperty('--acc',tile.dataset.acc||'var(--neon-cyan)');
     wrap.innerHTML=
-      '<div class="cart-fly"><div class="cart-drop"><div class="cartridge">'+
+      '<div class="cart-stage"><div class="cart-fly"><div class="cart-drop"><div class="cartridge">'+
         '<div class="cart-lip"></div>'+
         '<div class="cart-label">'+iconHTML+'</div>'+
         '<div class="cart-ridges"></div>'+
-      '</div></div></div>'+
+      '</div></div></div></div>'+
       '<div class="console"><div class="console-mouth"></div><div class="console-led"></div></div>'+
       '<div class="flash"></div>';
     document.body.appendChild(wrap);
