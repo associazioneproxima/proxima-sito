@@ -7,23 +7,72 @@
       {
         "nome": "Quarti",
         "partite": [
-          { "casa": "Estremo Feeling", "ospite": "Galacticos", "iso": "2026-06-23", "data": "mar 23/06 · 21:00", "gol_casa": "", "gol_ospite": "" },
-          { "casa": "Royal Valtellina", "ospite": "La Maggica 64", "iso": "2026-06-25", "data": "gio 25/06 · 20:30", "gol_casa": "", "gol_ospite": "" },
-          { "casa": "Cadeo Imbiancature", "ospite": "FC Hesterfield", "iso": "2026-06-23", "data": "mar 23/06 · 22:00", "gol_casa": "", "gol_ospite": "" },
-          { "casa": "Olimpo Stahl Service", "ospite": "Zapoiss", "iso": "2026-06-25", "data": "gio 25/06 · 21:30", "gol_casa": "", "gol_ospite": "" }
+          {
+            "casa": "Estremo Feeling",
+            "ospite": "Galacticos",
+            "data": "mar 23/06 · 21:00",
+            "iso": "2026-06-23",
+            "gol_casa": 5,
+            "gol_ospite": 4
+          },
+          {
+            "casa": "Royal Valtellina",
+            "ospite": "La Maggica 64",
+            "data": "gio 25/06 · 20:30",
+            "iso": "2026-06-25",
+            "gol_casa": null,
+            "gol_ospite": null
+          },
+          {
+            "casa": "Cadeo Imbiancature",
+            "ospite": "FC Hesterfield",
+            "data": "mar 23/06 · 22:00",
+            "iso": "2026-06-23",
+            "gol_casa": 2,
+            "gol_ospite": 4
+          },
+          {
+            "casa": "Olimpo Stahl Service",
+            "ospite": "Zapoiss",
+            "data": "gio 25/06 · 21:30",
+            "iso": "2026-06-25",
+            "gol_casa": null,
+            "gol_ospite": null
+          }
         ]
       },
       {
         "nome": "Semifinali",
         "partite": [
-          { "casa": "Vincente Q1", "ospite": "Vincente Q2", "iso": "", "data": "", "gol_casa": "", "gol_ospite": "" },
-          { "casa": "Vincente Q3", "ospite": "Vincente Q4", "iso": "", "data": "", "gol_casa": "", "gol_ospite": "" }
+          {
+            "casa": "Vincente Q1",
+            "ospite": "Vincente Q2",
+            "data": "",
+            "iso": "",
+            "gol_casa": "",
+            "gol_ospite": ""
+          },
+          {
+            "casa": "Vincente Q3",
+            "ospite": "Vincente Q4",
+            "data": "",
+            "iso": "",
+            "gol_casa": "",
+            "gol_ospite": ""
+          }
         ]
       },
       {
         "nome": "Finale",
         "partite": [
-          { "casa": "Finalista 1", "ospite": "Finalista 2", "iso": "", "data": "", "gol_casa": "", "gol_ospite": "" }
+          {
+            "casa": "Finalista 1",
+            "ospite": "Finalista 2",
+            "data": "",
+            "iso": "",
+            "gol_casa": "",
+            "gol_ospite": ""
+          }
         ]
       }
     ]
