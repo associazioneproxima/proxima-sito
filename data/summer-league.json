@@ -28,8 +28,8 @@
             "ospite": "FC Hesterfield",
             "data": "mar 23/06 · 22:00",
             "iso": "2026-06-23",
-            "gol_casa": 2,
-            "gol_ospite": 4
+            "gol_casa": 4,
+            "gol_ospite": 2
           },
           {
             "casa": "Olimpo Stahl Service",
@@ -53,7 +53,7 @@
             "gol_ospite": null
           },
           {
-            "casa": "FC Hesterfield",
+            "casa": "Cadeo Imbiancature",
             "ospite": "Vincente Q4",
             "data": "",
             "iso": "",
