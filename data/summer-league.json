@@ -45,15 +45,15 @@
         "nome": "Semifinali",
         "partite": [
           {
-            "casa": "Vincente Q1",
+            "casa": "Estremo Feeling",
             "ospite": "Vincente Q2",
             "data": "",
             "iso": "",
-            "gol_casa": "",
-            "gol_ospite": ""
+            "gol_casa": null,
+            "gol_ospite": null
           },
           {
-            "casa": "Vincente Q3",
+            "casa": "FC Hesterfield",
             "ospite": "Vincente Q4",
             "data": "",
             "iso": "",
