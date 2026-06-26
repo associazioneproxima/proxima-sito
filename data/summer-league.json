@@ -20,8 +20,8 @@
             "ospite": "La Maggica 64",
             "data": "gio 25/06 · 20:30",
             "iso": "2026-06-25",
-            "gol_casa": null,
-            "gol_ospite": null
+            "gol_casa": 4,
+            "gol_ospite": 2
           },
           {
             "casa": "Cadeo Imbiancature",
@@ -36,8 +36,8 @@
             "ospite": "Zapoiss",
             "data": "gio 25/06 · 21:30",
             "iso": "2026-06-25",
-            "gol_casa": null,
-            "gol_ospite": null
+            "gol_casa": 6,
+            "gol_ospite": 2
           }
         ]
       },
@@ -46,7 +46,7 @@
         "partite": [
           {
             "casa": "Estremo Feeling",
-            "ospite": "Vincente Q2",
+            "ospite": "Royal Valtellina",
             "data": "",
             "iso": "",
             "gol_casa": null,
@@ -54,10 +54,10 @@
           },
           {
             "casa": "Cadeo Imbiancature",
-            "ospite": "Vincente Q4",
+            "ospite": "Olimpo Stahl Service",
             "data": "",
             "iso": "",
-            "gol_casa": "",
+            "gol_casa": null,
             "gol_ospite": ""
           }
         ]
