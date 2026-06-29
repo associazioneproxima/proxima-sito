@@ -8,12 +8,12 @@
         "nome": "Quarti",
         "partite": [
           {
-            "casa": "Estremo Feeling",
-            "ospite": "Galacticos",
-            "data": "mar 23/06 · 21:00",
+            "casa": "Cadeo Imbiancature",
+            "ospite": "FC Hesterfield",
+            "data": "mar 23/06 · 22:00",
             "iso": "2026-06-23",
-            "gol_casa": 6,
-            "gol_ospite": 5
+            "gol_casa": 4,
+            "gol_ospite": 2
           },
           {
             "casa": "Royal Valtellina",
@@ -24,20 +24,20 @@
             "gol_ospite": 2
           },
           {
-            "casa": "Cadeo Imbiancature",
-            "ospite": "FC Hesterfield",
-            "data": "mar 23/06 · 22:00",
-            "iso": "2026-06-23",
-            "gol_casa": 4,
-            "gol_ospite": 2
-          },
-          {
             "casa": "Olimpo Stahl Service",
             "ospite": "Zapoiss",
             "data": "gio 25/06 · 21:30",
             "iso": "2026-06-25",
             "gol_casa": 6,
             "gol_ospite": 2
+          },
+          {
+            "casa": "Estremo Feeling",
+            "ospite": "Galacticos",
+            "data": "mar 23/06 · 21:00",
+            "iso": "2026-06-23",
+            "gol_casa": 6,
+            "gol_ospite": 5
           }
         ]
       },
@@ -45,19 +45,19 @@
         "nome": "Semifinali",
         "partite": [
           {
-            "casa": "Estremo Feeling",
+            "casa": "Cadeo Imbiancature",
             "ospite": "Royal Valtellina",
-            "data": "",
-            "iso": "",
-            "gol_casa": null,
-            "gol_ospite": null
+            "data": "lun 29/06 · 21:00",
+            "iso": "2026-06-29",
+            "gol_casa": "",
+            "gol_ospite": ""
           },
           {
-            "casa": "Cadeo Imbiancature",
-            "ospite": "Olimpo Stahl Service",
-            "data": "",
-            "iso": "",
-            "gol_casa": null,
+            "casa": "Olimpo Stahl Service",
+            "ospite": "Estremo Feeling",
+            "data": "lun 29/06 · 22:00",
+            "iso": "2026-06-29",
+            "gol_casa": "",
             "gol_ospite": ""
           }
         ]
