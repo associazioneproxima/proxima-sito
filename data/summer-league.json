@@ -66,12 +66,12 @@
         "nome": "Finale",
         "partite": [
           {
-            "casa": "Finalista 1",
-            "ospite": "Finalista 2",
+            "casa": "Cadeo Imbiancature",
+            "ospite": "Olimpo Stahl Service",
             "data": "",
             "iso": "",
-            "gol_casa": "",
-            "gol_ospite": ""
+            "gol_casa": null,
+            "gol_ospite": null
           }
         ]
       }
