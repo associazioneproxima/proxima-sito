@@ -57,8 +57,8 @@
             "ospite": "Estremo Feeling",
             "data": "lun 29/06 · 22:00",
             "iso": "2026-06-29",
-            "gol_casa": "",
-            "gol_ospite": ""
+            "gol_casa": 3,
+            "gol_ospite": 1
           }
         ]
       },
