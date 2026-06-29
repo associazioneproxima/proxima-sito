@@ -1,0 +1,320 @@
+{
+  "titolo": "Gorgo Summer League",
+  "sottotitolo": "Il campionato estivo di Proxima: 16 squadre divise in 4 gironi, partite ogni settimana. Ecco le classifiche aggiornate.",
+  "tabellone": {
+    "attivo": true,
+    "fasi": [
+      {
+        "nome": "Quarti",
+        "partite": [
+          {
+            "casa": "Cadeo Imbiancature",
+            "ospite": "FC Hesterfield",
+            "data": "mar 23/06 · 22:00",
+            "iso": "2026-06-23",
+            "gol_casa": 4,
+            "gol_ospite": 2
+          },
+          {
+            "casa": "Royal Valtellina",
+            "ospite": "La Maggica 64",
+            "data": "gio 25/06 · 20:30",
+            "iso": "2026-06-25",
+            "gol_casa": 4,
+            "gol_ospite": 2
+          },
+          {
+            "casa": "Olimpo Stahl Service",
+            "ospite": "Zapoiss",
+            "data": "gio 25/06 · 21:30",
+            "iso": "2026-06-25",
+            "gol_casa": 6,
+            "gol_ospite": 2
+          },
+          {
+            "casa": "Estremo Feeling",
+            "ospite": "Galacticos",
+            "data": "mar 23/06 · 21:00",
+            "iso": "2026-06-23",
+            "gol_casa": 6,
+            "gol_ospite": 5
+          }
+        ]
+      },
+      {
+        "nome": "Semifinali",
+        "partite": [
+          {
+            "casa": "Cadeo Imbiancature",
+            "ospite": "Royal Valtellina",
+            "data": "lun 29/06 · 21:00",
+            "iso": "2026-06-29",
+            "gol_casa": "",
+            "gol_ospite": ""
+          },
+          {
+            "casa": "Olimpo Stahl Service",
+            "ospite": "Estremo Feeling",
+            "data": "lun 29/06 · 22:00",
+            "iso": "2026-06-29",
+            "gol_casa": "",
+            "gol_ospite": ""
+          }
+        ]
+      },
+      {
+        "nome": "Finale",
+        "partite": [
+          {
+            "casa": "Finalista 1",
+            "ospite": "Finalista 2",
+            "data": "",
+            "iso": "",
+            "gol_casa": "",
+            "gol_ospite": ""
+          }
+        ]
+      }
+    ]
+  },
+  "gironi": [
+    {
+      "nome": "A",
+      "squadre": [
+        {
+          "team": "Cadeo Imbiancature"
+        },
+        {
+          "team": "Zapoiss"
+        },
+        {
+          "team": "Los Intocables"
+        },
+        {
+          "team": "Proxima"
+        }
+      ]
+    },
+    {
+      "nome": "B",
+      "squadre": [
+        {
+          "team": "FC Hesterfield"
+        },
+        {
+          "team": "Club Santa Cruz"
+        },
+        {
+          "team": "Olimpo Stahl Service"
+        },
+        {
+          "team": "Real Prano"
+        }
+      ]
+    },
+    {
+      "nome": "C",
+      "squadre": [
+        {
+          "team": "Pozzuolo Vintage"
+        },
+        {
+          "team": "Estremo Feeling"
+        },
+        {
+          "team": "Scan Sarlo"
+        },
+        {
+          "team": "La Maggica 64"
+        }
+      ]
+    },
+    {
+      "nome": "D",
+      "squadre": [
+        {
+          "team": "FC Fideuram"
+        },
+        {
+          "team": "Royal Valtellina"
+        },
+        {
+          "team": "Outside the Box"
+        },
+        {
+          "team": "Galacticos"
+        }
+      ]
+    }
+  ],
+  "partite": [
+    {
+      "data": "gio 04/06 · 19:30",
+      "iso": "2026-06-04",
+      "match": "Zapoiss — Cadeo Imbiancature",
+      "gol_casa": 0,
+      "gol_ospite": 9
+    },
+    {
+      "data": "gio 04/06 · 20:30",
+      "iso": "2026-06-04",
+      "match": "Scan Sarlo — Pozzuolo Vintage",
+      "gol_casa": 0,
+      "gol_ospite": 5
+    },
+    {
+      "data": "gio 04/06 · 21:30",
+      "iso": "2026-06-04",
+      "match": "FC Hesterfield — Club Santa Cruz",
+      "gol_casa": 4,
+      "gol_ospite": 2
+    },
+    {
+      "data": "ven 05/06 · 19:30",
+      "iso": "2026-06-05",
+      "match": "Olimpo Stahl Service — Real Prano",
+      "gol_casa": 3,
+      "gol_ospite": 2
+    },
+    {
+      "data": "ven 05/06 · 20:30",
+      "iso": "2026-06-05",
+      "match": "La Maggica 64 — Estremo Feeling",
+      "gol_casa": 3,
+      "gol_ospite": 3
+    },
+    {
+      "data": "ven 05/06 · 21:30",
+      "iso": "2026-06-05",
+      "match": "Los Intocables — Proxima",
+      "gol_casa": 4,
+      "gol_ospite": 4
+    },
+    {
+      "data": "lun 08/06 · 19:30",
+      "iso": "2026-06-08",
+      "match": "Proxima — Zapoiss",
+      "gol_casa": 2,
+      "gol_ospite": 2
+    },
+    {
+      "data": "lun 08/06 · 20:30",
+      "iso": "2026-06-08",
+      "match": "FC Fideuram — Royal Valtellina",
+      "gol_casa": 3,
+      "gol_ospite": 5
+    },
+    {
+      "data": "lun 08/06 · 21:30",
+      "iso": "2026-06-08",
+      "match": "Outside the Box — Galacticos",
+      "gol_casa": 2,
+      "gol_ospite": 5
+    },
+    {
+      "data": "mar 09/06 · 19:30",
+      "iso": "2026-06-09",
+      "match": "Estremo Feeling — Pozzuolo Vintage",
+      "gol_casa": 4,
+      "gol_ospite": 4
+    },
+    {
+      "data": "mar 09/06 · 20:30",
+      "iso": "2026-06-09",
+      "match": "Los Intocables — Cadeo Imbiancature",
+      "gol_casa": 1,
+      "gol_ospite": 9
+    },
+    {
+      "data": "mar 09/06 · 21:30",
+      "iso": "2026-06-09",
+      "match": "Club Santa Cruz — Real Prano",
+      "gol_casa": 2,
+      "gol_ospite": 1
+    },
+    {
+      "data": "ven 12/06 · 19:30",
+      "iso": "2026-06-12",
+      "match": "Scan Sarlo — La Maggica 64",
+      "gol_casa": 2,
+      "gol_ospite": 5
+    },
+    {
+      "data": "ven 12/06 · 20:30",
+      "iso": "2026-06-12",
+      "match": "Galacticos — Royal Valtellina",
+      "gol_casa": 8,
+      "gol_ospite": 4
+    },
+    {
+      "data": "ven 12/06 · 21:30",
+      "iso": "2026-06-12",
+      "match": "Olimpo Stahl Service — FC Hesterfield",
+      "gol_casa": 4,
+      "gol_ospite": 1
+    },
+    {
+      "data": "mar 16/06 · 19:30",
+      "iso": "2026-06-16",
+      "match": "FC Hesterfield — Real Prano",
+      "gol_casa": 5,
+      "gol_ospite": 4
+    },
+    {
+      "data": "mar 16/06 · 20:30",
+      "iso": "2026-06-16",
+      "match": "Scan Sarlo — Estremo Feeling",
+      "gol_casa": 2,
+      "gol_ospite": 9
+    },
+    {
+      "data": "mar 16/06 · 21:30",
+      "iso": "2026-06-16",
+      "match": "Outside the Box — FC Fideuram",
+      "gol_casa": 2,
+      "gol_ospite": 2
+    },
+    {
+      "data": "mer 17/06 · 19:30",
+      "iso": "2026-06-17",
+      "match": "Club Santa Cruz — Olimpo Stahl Service",
+      "gol_casa": 3,
+      "gol_ospite": 3
+    },
+    {
+      "data": "mer 17/06 · 20:30",
+      "iso": "2026-06-17",
+      "match": "La Maggica 64 — Pozzuolo Vintage",
+      "gol_casa": 2,
+      "gol_ospite": 1
+    },
+    {
+      "data": "mer 17/06 · 21:30",
+      "iso": "2026-06-17",
+      "match": "Cadeo Imbiancature — Proxima",
+      "gol_casa": 13,
+      "gol_ospite": 3
+    },
+    {
+      "data": "gio 18/06 · 19:30",
+      "iso": "2026-06-18",
+      "match": "Zapoiss — Los Intocables",
+      "gol_casa": 6,
+      "gol_ospite": 4
+    },
+    {
+      "data": "gio 18/06 · 20:30",
+      "iso": "2026-06-18",
+      "match": "Outside the Box — Royal Valtellina",
+      "gol_casa": 2,
+      "gol_ospite": 5
+    },
+    {
+      "data": "gio 18/06 · 21:30",
+      "iso": "2026-06-18",
+      "match": "FC Fideuram — Galacticos",
+      "gol_casa": 1,
+      "gol_ospite": 4
+    }
+  ]
+}
