@@ -49,8 +49,8 @@
             "ospite": "Royal Valtellina",
             "data": "lun 29/06 · 21:00",
             "iso": "2026-06-29",
-            "gol_casa": "",
-            "gol_ospite": ""
+            "gol_casa": 5,
+            "gol_ospite": 1
           },
           {
             "casa": "Olimpo Stahl Service",
