@@ -315,6 +315,13 @@
       "match": "FC Fideuram — Galacticos",
       "gol_casa": 1,
       "gol_ospite": 4
+    },
+    {
+      "data": "3/4 POSTO· ven 03/07 · 22:00",
+      "iso": "2026-07-03",
+      "match": "Royal Valtellina - Estremo Feeling",
+      "gol_casa": null,
+      "gol_ospite": null
     }
   ]
 }
