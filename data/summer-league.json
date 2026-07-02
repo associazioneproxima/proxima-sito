@@ -68,7 +68,7 @@
           {
             "casa": "Cadeo Imbiancature",
             "ospite": "Olimpo Stahl Service",
-            "data": "FINALE · ven 03/07 · 22:00",
+            "data": "FINALE · ven 03/07 · 21:00",
             "iso": "2026-07-03",
             "gol_casa": null,
             "gol_ospite": null
@@ -317,7 +317,7 @@
       "gol_ospite": 4
     },
     {
-      "data": "3/4 POSTO· ven 03/07 · 21:00",
+      "data": "3/4 POSTO· ven 03/07 · 20:00",
       "iso": "2026-07-03",
       "match": "Royal Valtellina - Estremo Feeling",
       "gol_casa": null,
