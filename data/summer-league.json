@@ -70,8 +70,8 @@
             "ospite": "Olimpo Stahl Service",
             "data": "FINALE · ven 03/07 · 21:00",
             "iso": "2026-07-03",
-            "gol_casa": null,
-            "gol_ospite": null
+            "gol_casa": 5,
+            "gol_ospite": 2
           }
         ]
       }
