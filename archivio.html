@@ -24,8 +24,11 @@
 .poster:hover{transform:scale(1.07);border-color:var(--yellow);z-index:3;box-shadow:0 14px 32px rgba(0,0,0,.55)}
 /* archivio tornei */
 .tornei{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
-.torneo-btn{display:flex;flex-direction:column;gap:4px;min-width:240px;padding:20px 22px;border-radius:16px 16px 16px 4px;border:1px solid rgba(74,60,236,.45);background:rgba(74,60,236,.08);transition:.25s;color:inherit}
-.torneo-btn:hover{transform:translateY(-4px);border-color:var(--yellow);background:rgba(74,60,236,.14)}
+.torneo-btn{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:4px;min-width:290px;padding:22px 24px;border-radius:16px 16px 16px 4px;border:1px solid rgba(74,60,236,.45);background:linear-gradient(120deg,rgba(74,60,236,.16),rgba(74,60,236,.05));transition:.25s;color:inherit}
+.torneo-btn>span{position:relative;z-index:1}
+.torneo-btn .tb-logo{position:absolute;right:-16px;top:50%;transform:translateY(-50%);height:150%;width:auto;opacity:.14;filter:invert(1) brightness(2);pointer-events:none;z-index:0;transition:opacity .25s,transform .25s}
+.torneo-btn:hover{transform:translateY(-4px);border-color:var(--yellow);background:linear-gradient(120deg,rgba(74,60,236,.22),rgba(74,60,236,.08))}
+.torneo-btn:hover .tb-logo{opacity:.22;transform:translateY(-50%) scale(1.05)}
 .torneo-btn .tb-k{font-family:'Space Grotesk';font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:#8aa0ff;font-weight:700}
 .torneo-btn .tb-name{font-family:var(--display);text-transform:uppercase;font-size:1.25rem;line-height:1.05}
 .torneo-btn .tb-go{font-family:'Space Grotesk';font-size:.78rem;font-weight:700;color:var(--yellow);margin-top:4px}
@@ -81,6 +84,7 @@
   <p class="lead" style="margin-top:-6px">Rivivi classifiche e risultati delle edizioni passate.</p>
   <div class="tornei">
     <a href="gsl26.html" class="torneo-btn">
+      <img class="tb-logo" src="img/summer-league-logo.svg" alt="" aria-hidden="true" onerror="this.style.display='none'">
       <span class="tb-k">Risultati &amp; tabellone</span>
       <span class="tb-name">Gorgo Summer League</span>
       <span class="tb-go">Consulta i risultati &rarr;</span>
