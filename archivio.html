@@ -12,7 +12,7 @@
 <style>
 .section{padding:120px 5vw 80px}
 .subhead{font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;color:var(--yellow);margin:50px 0 18px}
-.hscroll{display:flex;gap:18px;overflow-x:auto;padding-bottom:18px;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-width:thin}
+.hscroll{display:flex;gap:18px;overflow-x:auto;padding:26px 4px 30px;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-width:thin}
 .hscroll.dragging{cursor:grabbing;scroll-behavior:auto}
 .hscroll.dragging .poster{pointer-events:none}
 .hscroll::-webkit-scrollbar{height:8px}.hscroll::-webkit-scrollbar-thumb{background:var(--violet);border-radius:4px}
@@ -21,7 +21,14 @@
 .poster.ph-empty:nth-child(3n){background:linear-gradient(135deg,var(--orange),var(--grape))}
 .poster.ph-empty:nth-child(3n+2){background:linear-gradient(135deg,var(--grape),var(--violet-deep))}
 .poster .cap{position:relative;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.6);line-height:1.05}
-.poster:hover{transform:scale(1.03);border-color:var(--yellow)}
+.poster:hover{transform:scale(1.07);border-color:var(--yellow);z-index:3;box-shadow:0 14px 32px rgba(0,0,0,.55)}
+/* archivio tornei */
+.tornei{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
+.torneo-btn{display:flex;flex-direction:column;gap:4px;min-width:240px;padding:20px 22px;border-radius:16px 16px 16px 4px;border:1px solid rgba(74,60,236,.45);background:rgba(74,60,236,.08);transition:.25s;color:inherit}
+.torneo-btn:hover{transform:translateY(-4px);border-color:var(--yellow);background:rgba(74,60,236,.14)}
+.torneo-btn .tb-k{font-family:'Space Grotesk';font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:#8aa0ff;font-weight:700}
+.torneo-btn .tb-name{font-family:var(--display);text-transform:uppercase;font-size:1.25rem;line-height:1.05}
+.torneo-btn .tb-go{font-family:'Space Grotesk';font-size:.78rem;font-weight:700;color:var(--yellow);margin-top:4px}
 .scrollhint{font-family:'Space Grotesk';font-size:.74rem;opacity:.55;margin-top:6px}
 .gallery {  display: grid;  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  gap: 12px;  grid-auto-rows: 150px;  /* Forza la griglia a riempire ogni spazio vuoto con le foto successive */  grid-auto-flow: dense; }
 .gallery .ph-item {  border-radius: 12px;  overflow: hidden;  cursor: pointer;  background: rgba(255, 255, 255, .05);  position: relative;}
@@ -70,6 +77,15 @@
   <div class="subhead">Archivio locandine</div>
   <div class="hscroll" id="archivio-track"></div>
   <p class="scrollhint">trascina con il dito o il mouse per scorrere</p>
+  <div class="subhead">Archivio tornei</div>
+  <p class="lead" style="margin-top:-6px">Rivivi classifiche e risultati delle edizioni passate.</p>
+  <div class="tornei">
+    <a href="gsl26.html" class="torneo-btn">
+      <span class="tb-k">Risultati &amp; tabellone</span>
+      <span class="tb-name">Gorgo Summer League</span>
+      <span class="tb-go">Consulta i risultati &rarr;</span>
+    </a>
+  </div>
   <div class="subhead">Galleria foto</div>
   <div class="gallery" id="galleria-grid"></div>
 </section>
