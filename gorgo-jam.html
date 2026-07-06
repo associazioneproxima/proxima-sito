@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Gorgo Jam &mdash; Proxima</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* --- base tabelle/gironi (da index) --- */
+.gj-league{background:radial-gradient(circle at 80% 20%,rgba(226,113,56,.55),transparent 55%),radial-gradient(circle at 15% 80%,rgba(226,113,56,.35),transparent 50%),var(--ink);border-top:1px solid rgba(246,245,239,.1)}
+.gironi{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
+@media(max-width:760px){.gironi{grid-template-columns:1fr}}
+.girone{background:rgba(255,255,255,.04);border:1px solid rgba(246,245,239,.12);border-radius:20px 20px 20px 4px;overflow:hidden}
+.girone .gt{font-family:var(--display);text-transform:uppercase;font-size:1.05rem;letter-spacing:1px;padding:14px 18px;background:var(--violet);display:flex;align-items:center;gap:10px}
+.girone .gt .dot{width:12px;height:12px;border-radius:50%;background:rgba(246,245,239,.5)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 18px;text-align:left;font-size:.9rem}
+thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12)}
+tbody tr{border-top:1px solid rgba(246,245,239,.07)}
+td.team{font-weight:600}
+
+/* --- Gorgo Jam --- */
+.gj-girone .gj-gt{background:#e27138}
+.gj-dot{background:rgba(246,245,239,.5)}
+.gj-schedule{margin-top:0;overflow-x:auto}
+.gj-table{width:100%;border-collapse:collapse;min-width:420px}
+.gj-table thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12);padding:10px 14px;text-align:left}
+.gj-table tbody tr{border-top:1px solid rgba(246,245,239,.06);transition:.2s}
+.gj-table tbody tr:hover{background:rgba(226,113,56,.06)}
+.gj-table tbody td{padding:9px 14px;font-size:.9rem}
+.gj-time{font-family:'Space Grotesk';font-weight:700;color:#e27138;white-space:nowrap;width:72px}
+.gj-girone-label{font-family:'Space Grotesk';font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.gj-girone-label.bugs{color:#e27138}
+.gj-girone-label.duffy{color:#c47aff}
+.gj-girone-label.final{color:#8aa0ff}
+.gj-girone-label.finale-b{color:var(--yellow);font-weight:800}
+.gj-separator td{border-top:2px solid rgba(246,245,239,.2)!important;padding-top:14px;font-weight:600}
+.gj-sep-label td{font-family:'Space Grotesk';font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;opacity:.5;padding-top:18px;border-top:none!important}
+.gj-finale{background:rgba(246,245,239,.04)}
+.gj-finale td{font-weight:700}
+.gj-premiazione td{opacity:.7;font-style:italic}
+
+/* nav pill */
+.nav-gsl-pill{background:var(--violet);color:#fff!important;padding:5px 14px!important;border-radius:50px;opacity:1!important}
+.nav-gsl-pill::after{display:none!important}
+.nav-gsl-pill:hover{background:var(--violet-deep)!important}
+@media(max-width:920px){.nav-gsl-pill{background:var(--violet)!important;color:#fff!important;border-radius:50px!important;padding:8px 18px!important;margin:8px 0!important;display:inline-block!important;border-bottom:none!important}}
+</style>
+</head>
+<body>
+<div class="nav-scrim" onclick="closeMenu()"></div>
+<nav>
+  <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:30px"></a>
+  <button class="burger" aria-label="Menu" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+  <div class="links" id="navlinks">
+    <a href="index.html">Home</a>
+    <a href="chi-siamo.html">Chi siamo</a>
+    <a href="eventi.html">Eventi</a>
+    <a href="archivio.html" class="active">Archivio</a>
+    <a href="hall-of-fame.html">Hall of Fame</a>
+    <a href="trasparenza.html">Trasparenza</a>
+    <a href="contatti.html">Contatti</a>
+    <a href="gsl26.html" class="nav-gsl-pill">GSL26</a>
+  </div>
+</nav>
+
+<section class="section gj-league" style="padding-top:calc(var(--nav-h) + 40px)">
+  <div class="tag">Sport &middot; Notte Bianca 2026</div>
+  <h2>Gorgo Jam</h2>
+  <div class="league-brand">
+    <div class="league-logo-slot" style="overflow:hidden"><img src="img/gorgo-jam-logo.svg" alt="Gorgo Jam" style="filter:invert(1) brightness(2);width:100%;height:100%;object-fit:contain" onerror="this.parentNode.style.display='none'"></div>
+    <p class="lead" style="margin:0">Il torneo di basket 3v3 della Notte Bianca di Gorgonzola. Due gironi, tanta musica, bere e mangiare per tutti i gusti, una serata indimenticabile.</p>
+  </div>
+  <div class="gironi" style="margin-top:34px">
+    <div class="girone gj-girone">
+      <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Bugs Bunny</div>
+      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
+        <tr><td class="team">La Roja</td></tr>
+        <tr><td class="team">Inshape</td></tr>
+        <tr><td class="team">Lapartesana</td></tr>
+        <tr><td class="team">Brigata dal Carr&eacute;</td></tr>
+        <tr><td class="team">Lithuanian Kiss</td></tr>
+      </tbody></table>
+    </div>
+    <div class="girone gj-girone">
+      <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Duffy Duck</div>
+      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
+        <tr><td class="team">Boggio FC</td></tr>
+        <tr><td class="team">Rimbalzisti Anonimi</td></tr>
+        <tr><td class="team">Hair Ball</td></tr>
+        <tr><td class="team">Babek boy</td></tr>
+        <tr><td class="team">Vimogate</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+  <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 18px">Programma della serata</h3>
+  <div class="gj-schedule">
+    <table class="gj-table">
+      <thead><tr><th>Orario</th><th>Match</th><th>Girone</th></tr></thead>
+      <tbody>
+        <tr><td class="gj-time">17:15</td><td>La Roja &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">17:25</td><td>Boggio FC &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">17:35</td><td>Brigata dal Carr&eacute; &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">17:45</td><td>Hair Ball &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">17:55</td><td>La Roja &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">18:05</td><td>Vimogate &mdash; Boggio FC</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">18:15</td><td>Inshape &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">18:25</td><td>Rimbalzisti Anonimi &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">18:35</td><td>La Roja &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">18:45</td><td>Babek boy &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">18:55</td><td>Brigata dal Carr&eacute; &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">19:05</td><td>Boggio FC &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">19:15</td><td>Lapartesana &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">19:25</td><td>Rimbalzisti Anonimi &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">19:35</td><td>Lapartesana &mdash; La Roja</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">19:45</td><td>Hair Ball &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">19:55</td><td>Lapartesana &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">20:05</td><td>Boggio FC &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr><td class="gj-time">20:15</td><td>Inshape &mdash; Lapartesana</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
+        <tr><td class="gj-time">20:25</td><td>Vimogate &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
+        <tr class="gj-separator"><td class="gj-time">20:35</td><td colspan="2">&#127936; 3 Point Contest</td></tr>
+        <tr class="gj-sep-label"><td colspan="3">Fase a eliminazione diretta</td></tr>
+        <tr><td class="gj-time">22:25</td><td>1&deg; Bugs &mdash; 4&deg; Duffy (A)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">22:35</td><td>1&deg; Duffy &mdash; 4&deg; Bugs (C)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">22:45</td><td>2&deg; Bugs &mdash; 3&deg; Duffy (D)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">22:55</td><td>2&deg; Duffy &mdash; 3&deg; Bugs (B)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
+        <tr><td class="gj-time">23:15</td><td>A &mdash; B</td><td><span class="gj-girone-label final">Finale 3&deg;</span></td></tr>
+        <tr><td class="gj-time">23:25</td><td>C &mdash; D</td><td><span class="gj-girone-label final">Finale 3&deg;</span></td></tr>
+        <tr class="gj-finale"><td class="gj-time">23:45</td><td>&#127942; FINALE</td><td><span class="gj-girone-label finale-b">Grande Finale</span></td></tr>
+        <tr class="gj-premiazione"><td class="gj-time">00:00</td><td colspan="2">&#127881; Premiazione</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:26px"><a href="archivio.html" class="btn">&larr; Torna all'archivio</a></p>
+</section>
+
+<footer>
+  <div class="col">
+    <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:34px"></a>
+    <p>L'associazione pi&ugrave; giovane di Gorgonzola</p>
+    <div class="social">
+      <a href="https://www.instagram.com/associazioneproxima/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m4.2 5.15A4.85 4.85 0 1 0 16.85 12 4.85 4.85 0 0 0 12 7.15m0 1.95A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1m5.05-3.6a1.13 1.13 0 1 0 1.13 1.13 1.13 1.13 0 0 0-1.13-1.13"/></svg></a>
+      <a href="https://www.facebook.com/p/Proxima-61557254639725/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"/></svg></a>
+      <a href="https://www.tiktok.com/@associazioneproxima" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.67 5.67 0 0 0-.8-.06 5.66 5.66 0 1 0 5.66 5.66V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.22-1.48"/></svg></a>
+    </div>
+  </div>
+  <div class="col">
+    <nav class="fnav">
+      <a href="chi-siamo.html">Chi siamo</a><a href="eventi.html">Eventi</a>
+      <a href="archivio.html">Archivio</a>
+      <a href="hall-of-fame.html">Hall of Fame</a>
+      <a href="trasparenza.html">Trasparenza</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <p style="margin-top:14px;font-family:'Space Grotesk';font-size:.75rem">&copy; 2026 Associazione Proxima &middot; C.F. 91603100156</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+</script>
+<script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

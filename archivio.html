@@ -32,6 +32,9 @@
 .torneo-btn .tb-k{font-family:'Space Grotesk';font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:#8aa0ff;font-weight:700}
 .torneo-btn .tb-name{font-family:var(--display);text-transform:uppercase;font-size:1.25rem;line-height:1.05}
 .torneo-btn .tb-go{font-family:'Space Grotesk';font-size:.78rem;font-weight:700;color:var(--yellow);margin-top:4px}
+.torneo-btn.t-jam{border-color:rgba(226,113,56,.5);background:linear-gradient(120deg,rgba(226,113,56,.16),rgba(226,113,56,.05))}
+.torneo-btn.t-jam:hover{border-color:var(--yellow);background:linear-gradient(120deg,rgba(226,113,56,.24),rgba(226,113,56,.08))}
+.torneo-btn.t-jam .tb-k{color:#ffb27a}
 .scrollhint{font-family:'Space Grotesk';font-size:.74rem;opacity:.55;margin-top:6px}
 .gallery {  display: grid;  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  gap: 12px;  grid-auto-rows: 150px;  /* Forza la griglia a riempire ogni spazio vuoto con le foto successive */  grid-auto-flow: dense; }
 .gallery .ph-item {  border-radius: 12px;  overflow: hidden;  cursor: pointer;  background: rgba(255, 255, 255, .05);  position: relative;}
@@ -88,6 +91,12 @@
       <span class="tb-k">Risultati &amp; tabellone</span>
       <span class="tb-name">Gorgo Summer League</span>
       <span class="tb-go">Consulta i risultati &rarr;</span>
+    </a>
+    <a href="gorgo-jam.html" class="torneo-btn t-jam">
+      <img class="tb-logo" src="img/gorgo-jam-logo.svg" alt="" aria-hidden="true" onerror="this.style.display='none'">
+      <span class="tb-k">Gironi &amp; programma</span>
+      <span class="tb-name">Gorgo Jam</span>
+      <span class="tb-go">Consulta il programma &rarr;</span>
     </a>
   </div>
   <div class="subhead">Galleria foto</div>
