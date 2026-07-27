@@ -46,19 +46,19 @@
       "ordine": 3
     },
     {
-      "titolo": "?????",
+      "titolo": "Salamell Chef",
       "stato": "in-programma",
       "tema": "neutro",
-      "data_label": "Coming soon",
-      "quando": "",
+      "data_label": "Settembre 2026",
+      "quando": "5 settembre 2026, 19.00",
       "dove": "Piazza della Repubblica",
       "per_chi": "Tutti",
-      "descrizione": "Restate sincronizzati, dopo l'estate vi aspettiamo con un appuntamento imperdibile! \n\nVi lasciamo qualche indizio:🔵🔴🔥🔪",
-      "cta": "",
-      "link": "",
+      "descrizione": "Torna Salamell Chef, per la 7a edizione!\n\nAndrea e i Porci Comodi difendono il titolo. Riuscirà la squadra di Eduard a strapparglielo?!🔵🔴🔥🔪",
+      "cta": "Scopri i dettagli",
+      "link": "associazioneproxima.com",
       "locandina": "/img/eventi/nuovo sito.jpg",
-      "slug": "coming-soon",
-      "ordine": 2
+      "slug": "salamell-chef",
+      "ordine": 1
     }
   ]
 }
