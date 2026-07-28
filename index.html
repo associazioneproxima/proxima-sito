@@ -93,15 +93,6 @@
 .salamell-page .prog{position:fixed;top:0;left:0;height:4px;width:0;z-index:210;background:linear-gradient(90deg,var(--red),var(--yellow),var(--blue));box-shadow:0 0 10px rgba(255,200,0,.5)}
 .salamell-page #sparks{position:fixed;inset:0;z-index:90;pointer-events:none}
 
-/* ===== MARQUEE ===== */
-.salamell-page .marquee{position:relative;z-index:6;overflow:hidden;white-space:nowrap;display:flex;
-  background:var(--yellow);color:var(--ink);padding:12px 0}
-.salamell-page .marquee .mq{display:inline-block;white-space:nowrap;padding-right:1ch;
-  font-family:var(--disp);text-transform:uppercase;font-size:1.05rem;letter-spacing:1px;
-  animation:marqueeScroll 26s linear infinite}
-@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
-@media(prefers-reduced-motion:reduce){.salamell-page .marquee .mq{animation:none}}
-
 /* ===== VERSUS ===== */
 .salamell-page .versus-head{text-align:center;margin-bottom:52px}
 .salamell-page .versus-head .display{font-size:clamp(2.4rem,8vw,5.5rem)}
@@ -204,10 +195,13 @@
 @media(prefers-reduced-motion:reduce){.salamell-page .swipe-hint,.salamell-page .swipe-hint .arrow{animation:none!important}.salamell-page .step{transition:none}}
 
 /* ===== MINIGIOCO ===== */
+/* stesso trattamento della card finale: fondo nero con luci rossa e blu ai lati */
 .salamell-page .arcade{position:relative;overflow:hidden;text-align:center;
-  background:linear-gradient(115deg,var(--red-d) 0%,var(--red) 42%,var(--blue) 58%,var(--blue-d) 100%)}
-.salamell-page .arcade::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.42))}
+  background:
+    radial-gradient(ellipse 62% 58% at 0% 30%, rgba(255,46,46,.60), rgba(255,46,46,.16) 46%, transparent 74%),
+    radial-gradient(ellipse 62% 58% at 100% 70%, rgba(47,67,255,.60), rgba(47,67,255,.16) 46%, transparent 74%),
+    radial-gradient(ellipse 75% 45% at 50% 112%, rgba(255,140,20,.24), transparent 66%),
+    #100d15}
 .salamell-page .arcade .container{position:relative;z-index:2}
 .salamell-page .arcade .eyebrow{color:var(--yellow)}
 .salamell-page .arcade .display{font-size:clamp(2.2rem,7.5vw,4.6rem);color:#fff;text-shadow:0 5px 0 rgba(0,0,0,.25)}
@@ -290,13 +284,6 @@
 .salamell-page .drama .rr{color:var(--red)}.salamell-page .drama .bb{color:var(--blue)}
 .salamell-page .drama .sub{font-family:var(--mono);letter-spacing:2px;text-transform:uppercase;font-size:.8rem;margin-top:22px;opacity:.7}
 
-/* ===== CTA FINALE ===== */
-.salamell-page .final{text-align:center}
-.salamell-page .final .display{font-size:clamp(2.6rem,9vw,6.4rem);color:var(--yellow)}
-.salamell-page .final .when{font-family:var(--disp);font-size:clamp(1.6rem,5vw,2.6rem);margin-top:14px;color:#fff}
-.salamell-page .final .place{opacity:.75;margin-top:6px}
-.salamell-page .final .free{margin-top:16px;font-family:var(--mono);font-size:.74rem;letter-spacing:2px;opacity:.6;text-transform:uppercase}
-
 /* ===== SPONSOR ===== */
 .salamell-page .p-label{font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.6;margin-bottom:20px;text-align:center}
 .salamell-page .sponsors{display:flex;flex-wrap:wrap;gap:26px 34px;justify-content:center;align-items:center}
@@ -351,12 +338,6 @@
   </div>
 </header>
 
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <span class="mq">SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; </span>
-  <span class="mq" aria-hidden="true">SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; </span>
-</div>
-
 <!-- REGOLE -->
 <section class="section sec-dark rules">
   <div class="container">
@@ -410,18 +391,6 @@
       <div class="step gold reveal stack-2" data-delay="2"><div class="k">03</div><h4>Decreta il campione</h4><p>Esprimi il tuo voto. Ogni palato conta: sarai tu, con la piazza, a incoronare il Salamell Chef.</p></div>
     </div>
     <div class="swipe-hint">Trascina la carta per continuare <span class="arrow">&#8594;</span></div>
-  </div>
-</section>
-
-<!-- MINIGIOCO -->
-<section class="section arcade">
-  <div class="container">
-    <div class="eyebrow reveal">Mettiti alla prova</div>
-    <h2 class="display reveal" data-delay="1">Sai grigliare?<br><span class="y">Dimostralo.</span></h2>
-    <p class="reveal" data-delay="2">Tocca quando la salamella &egrave; nella zona dorata. Sbagli il tempo? Cruda o carbonizzata. Fai il tuo record e sfida gli amici prima del 5 settembre.</p>
-    <div class="demobar reveal" data-delay="2" aria-hidden="true"><i></i><b></b></div>
-    <div class="demolbl reveal" data-delay="2">&#9650; Tocca nella zona dorata</div>
-    <div class="go reveal" data-delay="3"><a href="cottura-perfetta.html" class="btn btn-yellow">Gioca a Cottura Perfetta</a></div>
   </div>
 </section>
 
@@ -493,14 +462,15 @@
   </div>
 </section>
 
-<!-- CTA FINALE -->
-<section class="section sec-dark final" id="quando">
+<!-- MINIGIOCO -->
+<section class="section arcade" id="quando">
   <div class="container">
-    <div class="eyebrow reveal">Segna la data</div>
-    <h2 class="display reveal" data-delay="1">Vieni a decidere</h2>
-    <div class="when reveal" data-delay="2">5 Settembre 2026 &middot; h 19</div>
-    <div class="place reveal" data-delay="2">Piazza della Repubblica, Gorgonzola &middot; Ingresso libero</div>
-    <div class="reveal" data-delay="3" style="margin-top:32px"><a href="#" id="saveDate" class="btn btn-yellow">Salva la data &#128197;</a></div>
+    <div class="eyebrow reveal">Mettiti alla prova</div>
+    <h2 class="display reveal" data-delay="1">Salamellaro<br><span class="y">Simulator</span></h2>
+    <p class="reveal" data-delay="2">Tocca quando la salamella &egrave; nella zona dorata. Sbagli il tempo? Cruda o carbonizzata. Fai il tuo record e sfida gli amici prima del 5 settembre.</p>
+    <div class="demobar reveal" data-delay="2" aria-hidden="true"><i></i><b></b></div>
+    <div class="demolbl reveal" data-delay="2">&#9650; Tocca nella zona dorata</div>
+    <div class="go reveal" data-delay="3"><a href="salamellaro-simulator.html" class="btn btn-yellow">Gioca ora</a></div>
   </div>
 </section>
 
@@ -610,32 +580,6 @@ window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
   }
   tick();
 })();
-
-/* "Salva la data": genera e scarica un evento .ics (Google/Apple/Outlook) */
-var saveDateBtn=document.getElementById('saveDate');
-if(saveDateBtn){
-  saveDateBtn.addEventListener('click',function(e){
-    e.preventDefault();
-    var ics=[
-      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Proxima//Salamell Chef//IT',
-      'BEGIN:VEVENT',
-      'UID:salamell-chef-2026@proxima',
-      'DTSTAMP:20260101T000000Z',
-      'DTSTART:20260905T190000',
-      'DTEND:20260905T235900',
-      'SUMMARY:Salamell Chef — 7ª Edizione',
-      'LOCATION:Piazza della Repubblica\\, Gorgonzola',
-      'DESCRIPTION:Porci Comodi vs Edo the Grill Master. Provale entrambe e decreta il campione. Musica dal vivo\\, birra artigianale e street food.',
-      'END:VEVENT','END:VCALENDAR'
-    ].join('\r\n');
-    var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
-    var url=URL.createObjectURL(blob);
-    var a=document.createElement('a');
-    a.href=url; a.download='salamell-chef.ics';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); },1500);
-  });
-}
 
 /* stack "Il giudice sei tu": trascina/swipe la carta in cima, va sotto e sale la successiva */
 (function(){

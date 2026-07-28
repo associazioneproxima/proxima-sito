@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<title>Salamellaro Simulator &mdash; Salamell Chef</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --yellow:#ffc800; --ink:#141018; --ink2:#201924;
+  --red:#ff2e2e; --red-d:#c01818;
+  --blue:#2f43ff; --blue-d:#1b2aa8;
+  --gold:#ffb020;
+  --disp:'Anton',sans-serif; --body:'Poppins',sans-serif; --mono:'Space Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--ink);color:#fff;font-family:var(--body);overflow:hidden;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
+  user-select:none;-webkit-user-select:none;overscroll-behavior:none}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+.wrap{position:fixed;inset:0;display:flex;flex-direction:column;
+  padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 22% 12%,rgba(255,46,46,.20),transparent 55%),
+    radial-gradient(circle at 82% 88%,rgba(47,67,255,.20),transparent 55%),
+    var(--ink)}
+
+/* ---------- TOP BAR ---------- */
+.top{display:flex;align-items:center;gap:10px;flex:none}
+.back{font-family:var(--mono);font-size:.62rem;letter-spacing:1px;text-transform:uppercase;
+  border:2px solid rgba(255,255,255,.28);padding:7px 11px;border-radius:4px;opacity:.85}
+.back:active{transform:scale(.95)}
+.brandline{font-family:var(--disp);text-transform:uppercase;font-size:.9rem;letter-spacing:1px;
+  color:var(--yellow);margin-left:auto;opacity:.9}
+
+/* ---------- HUD ---------- */
+.hud{display:flex;align-items:stretch;gap:8px;margin-top:10px;flex:none}
+.hbox{flex:1;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);
+  border-radius:6px;padding:7px 9px;text-align:center;min-width:0}
+.hbox .lbl{font-family:var(--mono);font-size:.52rem;letter-spacing:1.5px;text-transform:uppercase;opacity:.6}
+.hbox .val{font-family:var(--disp);font-size:1.5rem;line-height:1.05;letter-spacing:.5px}
+#score{color:var(--yellow)}
+#combo{color:var(--gold)}
+.hbox.pulse{animation:hpulse .3s ease}
+@keyframes hpulse{50%{transform:scale(1.09);border-color:var(--gold)}}
+.lives{display:flex;gap:4px;justify-content:center;align-items:center;height:1.5rem}
+.life{width:15px;height:15px;border-radius:50%;background:var(--red);
+  box-shadow:0 0 0 2px rgba(255,255,255,.18) inset;transition:.3s}
+.life.off{background:rgba(255,255,255,.14);box-shadow:none;transform:scale(.7)}
+
+/* ---------- GRIGLIA ---------- */
+.grill{flex:1;min-height:0;margin-top:10px;position:relative;
+  border:3px solid #3a3040;border-radius:10px;overflow:hidden;
+  background:
+    repeating-linear-gradient(90deg,#241d2b 0 6px,#191320 6px 34px),
+    #191320;
+  box-shadow:inset 0 0 60px rgba(0,0,0,.75)}
+/* bagliore braci */
+.grill::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 50% 115%,rgba(255,90,20,.34),transparent 62%);
+  animation:emb 2.6s ease-in-out infinite}
+@keyframes emb{50%{opacity:.62}}
+
+.slots{position:absolute;inset:0;z-index:2;display:grid;gap:6px;padding:8px;
+  grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr)}
+@media(min-width:620px){
+  .slots{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr)}
+}
+.slot{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-radius:8px;gap:7px}
+.slot.empty>*{display:none}
+/* posto libero sulla griglia: sagoma tratteggiata, cosi' la griglia si legge sempre */
+.slot::before{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(74%,150px);aspect-ratio:5/2;border-radius:999px;
+  border:2px dashed rgba(255,255,255,.13);opacity:0;transition:opacity .25s}
+.slot.empty::before{opacity:1}
+
+/* salamella disegnata in CSS */
+.sal{position:relative;width:min(74%,150px);aspect-ratio:5/2;border-radius:999px;
+  background:linear-gradient(180deg,#f4b58e,#d98a5c 55%,#b96b3f);
+  outline:2px solid rgba(255,255,255,.20);outline-offset:-1px;
+  box-shadow:0 5px 12px rgba(0,0,0,.55), inset 0 -4px 8px rgba(0,0,0,.28), inset 0 3px 6px rgba(255,255,255,.22);
+  will-change:transform,filter}
+.sal::before,.sal::after{content:"";position:absolute;top:50%;width:9%;height:118%;
+  transform:translateY(-50%);border-radius:999px;background:rgba(0,0,0,.16)}
+.sal::before{left:26%} .sal::after{left:62%}
+.sal.pop{animation:salpop .26s cubic-bezier(.2,1.6,.3,1)}
+@keyframes salpop{0%{transform:scale(.5) rotate(-8deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+.sal.perfectglow{box-shadow:0 0 0 3px var(--gold),0 0 22px 5px rgba(255,176,32,.7),0 5px 12px rgba(0,0,0,.5);
+  animation:salbeat .5s ease-in-out infinite}
+@keyframes salbeat{50%{transform:scale(1.06)}}
+
+/* barra di cottura con zona dorata visibile */
+.bar{position:relative;width:min(80%,170px);height:11px;border-radius:999px;
+  background:rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.2);overflow:hidden}
+.zone{position:absolute;top:0;bottom:0;background:linear-gradient(180deg,#ffd257,var(--gold));
+  box-shadow:0 0 9px rgba(255,176,32,.85)}
+.fill{position:absolute;top:0;bottom:0;left:0;width:100%;background:#fff;
+  transform-origin:left center;transform:scaleX(0);mix-blend-mode:overlay}
+.head{position:absolute;top:-3px;bottom:-3px;width:3px;background:#fff;border-radius:2px;
+  box-shadow:0 0 8px #fff;will-change:transform}
+
+/* feedback fluttuante */
+.fx{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);z-index:5;
+  font-family:var(--disp);text-transform:uppercase;font-size:1.15rem;letter-spacing:.5px;
+  white-space:nowrap;pointer-events:none;animation:fxup .72s ease-out forwards;text-shadow:0 2px 6px rgba(0,0,0,.8)}
+@keyframes fxup{0%{opacity:0;transform:translate(-50%,-10%) scale(.7)}
+  22%{opacity:1;transform:translate(-50%,-60%) scale(1.12)}
+  100%{opacity:0;transform:translate(-50%,-150%) scale(1)}}
+.fx.good{color:var(--gold)} .fx.bad{color:#ff6b6b} .fx.meh{color:#ffd9a0}
+
+/* fumo quando brucia */
+.smoke{position:absolute;left:50%;top:40%;width:26px;height:26px;border-radius:50%;
+  background:rgba(190,190,200,.5);pointer-events:none;z-index:4;
+  animation:smk .9s ease-out forwards}
+@keyframes smk{0%{opacity:.75;transform:translate(-50%,0) scale(.4)}
+  100%{opacity:0;transform:translate(-50%,-70px) scale(2.4)}}
+
+.flashbad{position:absolute;inset:0;z-index:6;pointer-events:none;background:rgba(255,46,46,.3);
+  animation:fb .3s ease-out forwards}
+@keyframes fb{to{opacity:0}}
+
+/* ---------- OVERLAY ---------- */
+.ov{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-start;text-align:center;padding:18px;
+  background:rgba(12,9,16,.93);backdrop-filter:blur(7px);overflow-y:auto}
+/* centra verticalmente quando c'e' spazio, ma senza tagliare il contenuto alto (che resta scrollabile) */
+.ov::before,.ov::after{content:"";margin:auto;flex:none}
+.ov>*{flex:none}
+.ov[hidden]{display:none}
+.ov h1{font-family:var(--disp);text-transform:uppercase;line-height:.86;letter-spacing:1px;
+  font-size:clamp(2.1rem,10vw,3.6rem)}
+.ov h1 .y{color:var(--yellow)}
+.ov .sub{font-family:var(--mono);font-size:.66rem;letter-spacing:2px;text-transform:uppercase;
+  opacity:.65;margin-top:10px}
+.rules{margin:20px 0 6px;display:flex;flex-direction:column;gap:9px;width:100%;max-width:330px}
+.rule{display:flex;align-items:center;gap:11px;text-align:left;font-size:.83rem;
+  background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.11);border-radius:7px;padding:9px 11px}
+.rule .ic{width:30px;height:11px;border-radius:999px;flex:none}
+.ic.g{background:linear-gradient(90deg,#ffd257,var(--gold));box-shadow:0 0 9px rgba(255,176,32,.8)}
+.ic.r{background:linear-gradient(180deg,#f4b58e,#c07a4d)}
+.ic.b{background:#2b1a12;border:1px solid #4a3324}
+.play{margin-top:20px;font-family:var(--disp);text-transform:uppercase;font-size:1.5rem;letter-spacing:1.5px;
+  background:var(--yellow);color:var(--ink);border-radius:8px;padding:15px 44px;
+  box-shadow:0 6px 0 #b88c00;transition:.1s}
+.play:active{transform:translateY(4px);box-shadow:0 2px 0 #b88c00}
+.mini{margin-top:14px;font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;
+  text-transform:uppercase;opacity:.55;text-decoration:underline}
+
+/* countdown avvio */
+.cd{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;
+  background:rgba(12,9,16,.72);font-family:var(--disp);font-size:6rem;color:var(--yellow);
+  text-shadow:0 6px 0 rgba(0,0,0,.4)}
+.cd[hidden]{display:none}
+.cd span{animation:cdz .72s ease-out}
+@keyframes cdz{0%{transform:scale(2.2);opacity:0}40%{transform:scale(1);opacity:1}100%{transform:scale(.85);opacity:.5}}
+
+/* ---------- GAME OVER ---------- */
+.rank{font-family:var(--disp);text-transform:uppercase;font-size:clamp(1.6rem,7.5vw,2.5rem);
+  color:var(--gold);line-height:1;margin-top:6px}
+.bigscore{font-family:var(--disp);font-size:clamp(3.4rem,17vw,5.6rem);line-height:.9;color:var(--yellow);
+  margin-top:12px;letter-spacing:1px}
+.newbest{display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:1.5px;
+  text-transform:uppercase;background:var(--red);color:#fff;padding:4px 11px;border-radius:99px;margin-top:8px;
+  animation:nb 1s ease-in-out infinite}
+@keyframes nb{50%{transform:scale(1.08)}}
+.stats{display:flex;gap:8px;margin-top:16px;width:100%;max-width:340px}
+.stat{flex:1;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);
+  border-radius:7px;padding:9px 5px}
+.stat .n{font-family:var(--disp);font-size:1.35rem;color:#fff;line-height:1}
+.stat .l{font-family:var(--mono);font-size:.5rem;letter-spacing:1px;text-transform:uppercase;opacity:.6;margin-top:3px}
+.acts{display:flex;flex-direction:column;gap:9px;margin-top:20px;width:100%;max-width:340px}
+.btn2{font-family:var(--disp);text-transform:uppercase;font-size:1.15rem;letter-spacing:1px;
+  border-radius:8px;padding:14px 20px;transition:.1s}
+.btn2.pri{background:var(--yellow);color:var(--ink);box-shadow:0 5px 0 #b88c00}
+.btn2.sec{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.34)}
+.btn2:active{transform:translateY(3px)}
+.btn2.pri:active{box-shadow:0 2px 0 #b88c00}
+#cardPrev{width:100%;max-width:250px;margin-top:16px;border-radius:9px;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);display:none}
+.hint{font-family:var(--mono);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;
+  opacity:.45;margin-top:12px;max-width:300px;line-height:1.6}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="index.html">&#8592; Esci</a>
+    <div class="brandline">Salamell Chef</div>
+  </div>
+
+  <div class="hud">
+    <div class="hbox" id="boxScore"><div class="lbl">Punti</div><div class="val" id="score">0</div></div>
+    <div class="hbox" id="boxCombo"><div class="lbl">Combo</div><div class="val" id="combo">x1</div></div>
+    <div class="hbox"><div class="lbl">Vite</div>
+      <div class="lives" id="lives"><i class="life"></i><i class="life"></i><i class="life"></i></div>
+    </div>
+  </div>
+
+  <div class="grill">
+    <div class="slots" id="slots"></div>
+
+    <!-- START -->
+    <div class="ov" id="ovStart">
+      <h1>Salamellaro<br><span class="y">Simulator</span></h1>
+      <div class="sub">Riesci a grigliare come un vero salamellaro?</div>
+      <div class="rules">
+        <div class="rule"><span class="ic g"></span><span>Tocca quando l'indicatore &egrave; nella <b>zona dorata</b></span></div>
+        <div class="rule"><span class="ic r"></span><span>Troppo presto? &Egrave; <b>cruda</b>, combo azzerata</span></div>
+        <div class="rule"><span class="ic b"></span><span>Troppo tardi? <b>Carbonizzata</b>, perdi una vita</span></div>
+      </div>
+      <button class="play" id="btnStart">Accendi la griglia</button>
+      <div class="mini" id="bestLine"></div>
+    </div>
+
+    <!-- GAME OVER -->
+    <div class="ov" id="ovEnd" hidden>
+      <div class="sub">Griglia spenta</div>
+      <div class="rank" id="rankTxt">&mdash;</div>
+      <div class="bigscore" id="endScore">0</div>
+      <div id="bestWrap"></div>
+      <div class="stats">
+        <div class="stat"><div class="n" id="stPerf">0</div><div class="l">Perfette</div></div>
+        <div class="stat"><div class="n" id="stCombo">0</div><div class="l">Combo max</div></div>
+        <div class="stat"><div class="n" id="stLvl">1</div><div class="l">Livello</div></div>
+      </div>
+      <img id="cardPrev" alt="La tua card">
+      <div class="acts">
+        <button class="btn2 pri" id="btnAgain">Rigioca</button>
+        <button class="btn2 sec" id="btnShare">&#128228; Condividi la card</button>
+        <button class="btn2 sec" id="btnHome">Torna al sito</button>
+      </div>
+      <div class="hint" id="shareHint">5 Settembre &middot; Piazza della Repubblica &middot; Gorgonzola</div>
+    </div>
+
+    <div class="cd" id="cd" hidden></div>
+  </div>
+</div>
+
+<canvas id="cardCanvas" width="1080" height="1350" style="display:none"></canvas>
+
+<script>
+(function(){
+'use strict';
+
+var SLOTS = 6;
+var LIVES = 3;
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+var RANKS = [
+  {min:0,    t:'Turista della Griglia'},
+  {min:1200, t:'Apprendista Salamellaro'},
+  {min:3000, t:'Grigliatore Provetto'},
+  {min:5200, t:'Maestro della Brace'},
+  {min:8000, t:'Signore del Fuoco'},
+  {min:11500,t:'SALAMELL CHEF'}
+];
+function rankFor(s){ var r=RANKS[0]; for(var i=0;i<RANKS.length;i++){ if(s>=RANKS[i].min) r=RANKS[i]; } return r.t; }
+
+// ---------- elementi ----------
+var elSlots=document.getElementById('slots');
+var elScore=document.getElementById('score'), elCombo=document.getElementById('combo');
+var elLives=document.getElementById('lives');
+var boxScore=document.getElementById('boxScore'), boxCombo=document.getElementById('boxCombo');
+var ovStart=document.getElementById('ovStart'), ovEnd=document.getElementById('ovEnd');
+var cd=document.getElementById('cd'), grill=document.querySelector('.grill');
+
+// ---------- stato ----------
+var slots=[], score=0, combo=0, maxCombo=0, lives=LIVES, perfette=0, level=1, servite=0;
+var playing=false, lastT=0, spawnTimer=0, rafId=0;
+
+// costruzione slot
+for(var i=0;i<SLOTS;i++){
+  var d=document.createElement('div');
+  d.className='slot empty';
+  d.innerHTML='<div class="sal"></div>'+
+    '<div class="bar"><div class="zone"></div><div class="fill"></div><div class="head"></div></div>';
+  elSlots.appendChild(d);
+  slots.push({
+    el:d, sal:d.querySelector('.sal'), bar:d.querySelector('.bar'),
+    zone:d.querySelector('.zone'), fill:d.querySelector('.fill'), head:d.querySelector('.head'),
+    active:false, t:0, dur:0, ps:0, pe:0
+  });
+  (function(s){
+    d.addEventListener('pointerdown', function(ev){ ev.preventDefault(); tap(s); }, {passive:false});
+  })(slots[i]);
+}
+
+// ---------- audio leggero (WebAudio, niente file) ----------
+var actx=null;
+function beep(freq,dur,type,vol){
+  if(!actx) return;
+  try{
+    var o=actx.createOscillator(), g=actx.createGain();
+    o.type=type||'square'; o.frequency.value=freq;
+    g.gain.setValueAtTime(vol||.05, actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.0001, actx.currentTime+dur);
+    o.connect(g); g.connect(actx.destination);
+    o.start(); o.stop(actx.currentTime+dur);
+  }catch(e){}
+}
+function initAudio(){
+  if(actx) return;
+  try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ actx=null; }
+}
+function vibr(ms){ if(navigator.vibrate) { try{ navigator.vibrate(ms); }catch(e){} } }
+
+// ---------- difficoltà ----------
+// durata di cottura e ampiezza della zona dorata si stringono col livello
+function cookDur(){ return Math.max(1250, 2900 - (level-1)*130); }
+function zoneWidth(){ return Math.max(.13, .30 - (level-1)*.017); }
+function spawnGap(){ return Math.max(430, 1250 - (level-1)*70); }
+function maxActive(){ return Math.min(SLOTS, 1 + Math.floor(level/1.7)); }
+
+function setLevel(){
+  var nl = 1 + Math.floor(servite/6);
+  if(nl!==level){ level=nl; beep(880,.09,'sine',.05); }
+}
+
+// ---------- render ----------
+function paint(s){
+  var p = s.t/s.dur;                    // 0..1 avanzamento
+  var st;
+  if(p < s.ps) st='raw';
+  else if(p <= s.pe) st='perfect';
+  else st='over';
+
+  // testa indicatore
+  s.head.style.transform='translateX('+(p*100)+'%)';
+  s.fill.style.transform='scaleX('+p+')';
+
+  // colore salamella per stato di cottura
+  var col;
+  if(st==='raw'){
+    var k=p/s.ps;                       // 0..1 dentro il crudo
+    col='linear-gradient(180deg,'+mix('#f7cdae','#e09a63',k)+','+mix('#d9946a','#b96b3f',k)+' 60%,'+mix('#bd7a52','#8f4d28',k)+')';
+    s.sal.classList.remove('perfectglow');
+  }else if(st==='perfect'){
+    col='linear-gradient(180deg,#e8a355,#c9702b 55%,#a4501c)';
+    s.sal.classList.add('perfectglow');
+  }else{
+    var k2=(p-s.pe)/(1-s.pe);
+    col='linear-gradient(180deg,'+mix('#a4501c','#3a2416',k2)+','+mix('#7d3a12','#221208',k2)+')';
+    s.sal.classList.remove('perfectglow');
+  }
+  s.sal.style.background=col;
+}
+function mix(a,b,k){
+  k=Math.max(0,Math.min(1,k));
+  function h(c){ return [parseInt(c.substr(1,2),16),parseInt(c.substr(3,2),16),parseInt(c.substr(5,2),16)]; }
+  var A=h(a),B=h(b);
+  return 'rgb('+Math.round(A[0]+(B[0]-A[0])*k)+','+Math.round(A[1]+(B[1]-A[1])*k)+','+Math.round(A[2]+(B[2]-A[2])*k)+')';
+}
+
+function spawn(){
+  var free=[];
+  for(var i=0;i<slots.length;i++){ if(!slots[i].active) free.push(slots[i]); }
+  if(!free.length) return;
+  var s=free[(Math.random()*free.length)|0];
+  var w=zoneWidth();
+  // la zona dorata puo' capitare presto o tardi sulla barra: mai due letture uguali
+  var lo=0.26, hi=0.94-w;
+  var start=lo+Math.random()*Math.max(0.04, hi-lo);
+  s.active=true; s.t=0; s.dur=cookDur(); s.ps=start; s.pe=start+w;
+  s.zone.style.left=(s.ps*100)+'%';
+  s.zone.style.width=(w*100)+'%';
+  s.el.classList.remove('empty');
+  s.sal.classList.remove('pop'); void s.sal.offsetWidth; s.sal.classList.add('pop');
+  paint(s);
+}
+
+function clearSlot(s){
+  s.active=false;
+  s.el.classList.add('empty');
+  s.sal.classList.remove('perfectglow');
+}
+
+function fx(s,txt,cls){
+  var f=document.createElement('div');
+  f.className='fx '+cls; f.textContent=txt;
+  s.el.appendChild(f);
+  setTimeout(function(){ if(f.parentNode) f.parentNode.removeChild(f); },740);
+}
+function smoke(s){
+  for(var i=0;i<3;i++){
+    (function(n){
+      setTimeout(function(){
+        var k=document.createElement('div');
+        k.className='smoke';
+        k.style.left=(38+Math.random()*24)+'%';
+        s.el.appendChild(k);
+        setTimeout(function(){ if(k.parentNode) k.parentNode.removeChild(k); },900);
+      }, n*110);
+    })(i);
+  }
+}
+
+function tap(s){
+  if(!playing || !s.active) return;
+  var p=s.t/s.dur;
+  if(p>=s.ps && p<=s.pe){
+    // PERFETTA
+    combo++; if(combo>maxCombo) maxCombo=combo;
+    perfette++;
+    var mult=Math.min(1+Math.floor(combo/3), 8);
+    var pts=Math.round((100 + level*10) * mult);
+    score+=pts;
+    fx(s,'PERFETTA +'+pts,'good');
+    beep(660+Math.min(combo,10)*45,.10,'square',.06);
+    vibr(18);
+    bump(boxScore); if(combo>1) bump(boxCombo);
+  }else if(p<s.ps){
+    // CRUDA
+    combo=0;
+    score=Math.max(0, score-40);
+    fx(s,'CRUDA!','bad');
+    beep(150,.16,'sawtooth',.05);
+    vibr([12,40,12]);
+  }else{
+    // quasi bruciata: pochi punti, combo persa
+    combo=0;
+    var pts2=25;
+    score+=pts2;
+    fx(s,'BRUCIACCHIATA +'+pts2,'meh');
+    beep(300,.11,'triangle',.05);
+    vibr(10);
+  }
+  servite++; setLevel();
+  clearSlot(s);
+  updateHUD();
+}
+
+function burn(s){
+  lives--;
+  combo=0;
+  fx(s,'CARBONIZZATA','bad');
+  smoke(s);
+  beep(90,.30,'sawtooth',.07);
+  vibr([25,60,25]);
+  var fl=document.createElement('div'); fl.className='flashbad';
+  grill.appendChild(fl); setTimeout(function(){ if(fl.parentNode) fl.parentNode.removeChild(fl); },320);
+  servite++; setLevel();
+  clearSlot(s);
+  updateHUD();
+  if(lives<=0) gameOver();
+}
+
+function bump(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
+
+function updateHUD(){
+  elScore.textContent=score;
+  var mult=Math.min(1+Math.floor(combo/3), 8);
+  elCombo.textContent='x'+mult;
+  var ls=elLives.children;
+  for(var i=0;i<ls.length;i++){ ls[i].className='life'+(i<lives?'':' off'); }
+}
+
+// ---------- loop ----------
+function loop(ts){
+  if(!playing) return;
+  if(!lastT) lastT=ts;
+  var dt=Math.min(ts-lastT, 100);   // clamp: evita salti se la tab va in background
+  lastT=ts;
+
+  spawnTimer-=dt;
+  var act=0, i;
+  for(i=0;i<slots.length;i++){ if(slots[i].active) act++; }
+  if(spawnTimer<=0 && act<maxActive()){
+    spawn();
+    spawnTimer=spawnGap();
+  }
+
+  for(i=0;i<slots.length;i++){
+    var s=slots[i];
+    if(!s.active) continue;
+    s.t+=dt;
+    if(s.t>=s.dur){ burn(s); if(!playing) return; continue; }
+    paint(s);
+  }
+  rafId=requestAnimationFrame(loop);
+}
+
+// ---------- flusso ----------
+function reset(){
+  score=0; combo=0; maxCombo=0; lives=LIVES; perfette=0; level=1; servite=0;
+  spawnTimer=0; lastT=0;
+  for(var i=0;i<slots.length;i++){ clearSlot(slots[i]); }
+  updateHUD();
+}
+
+function start(){
+  initAudio();
+  ovStart.hidden=true; ovEnd.hidden=true;
+  reset();
+  var n=3;
+  cd.hidden=false; cd.innerHTML='<span>'+n+'</span>';
+  beep(520,.1,'sine',.05);
+  var iv=setInterval(function(){
+    n--;
+    if(n>0){ cd.innerHTML='<span>'+n+'</span>'; beep(520,.1,'sine',.05); }
+    else{
+      clearInterval(iv);
+      cd.innerHTML='<span>VIA!</span>'; beep(880,.18,'sine',.06);
+      setTimeout(function(){
+        cd.hidden=true;
+        playing=true; lastT=0;
+        rafId=requestAnimationFrame(loop);
+      },420);
+    }
+  },620);
+}
+
+function gameOver(){
+  playing=false;
+  cancelAnimationFrame(rafId);
+  for(var i=0;i<slots.length;i++){ clearSlot(slots[i]); }
+  beep(220,.4,'sawtooth',.06);
+
+  var best=0;
+  try{ best=parseInt(localStorage.getItem('sc_cottura_best')||'0',10)||0; }catch(e){}
+  var isNew=score>best;
+  if(isNew){ try{ localStorage.setItem('sc_cottura_best',String(score)); }catch(e){} best=score; }
+
+  document.getElementById('endScore').textContent=score;
+  document.getElementById('rankTxt').textContent=rankFor(score);
+  document.getElementById('stPerf').textContent=perfette;
+  document.getElementById('stCombo').textContent='x'+Math.min(1+Math.floor(maxCombo/3),8);
+  document.getElementById('stLvl').textContent=level;
+  document.getElementById('bestWrap').innerHTML = isNew
+    ? '<div class="newbest">&#127942; Nuovo record!</div>'
+    : '<div class="sub" style="margin-top:8px">Record personale: '+best+'</div>';
+
+  ovEnd.hidden=false;
+  ovEnd.scrollTop=0;
+  buildCard();
+}
+
+function showBestOnStart(){
+  var best=0;
+  try{ best=parseInt(localStorage.getItem('sc_cottura_best')||'0',10)||0; }catch(e){}
+  document.getElementById('bestLine').textContent = best>0 ? ('Record personale: '+best) : '';
+}
+
+// ---------- CARD condivisibile ----------
+var cardBlob=null;
+// loghi precaricati subito: al game over sono gia' pronti da disegnare
+var LOGO={sc:null, px:null};
+(function preloadLogos(){
+  var a=new Image();
+  a.onload=function(){ LOGO.sc=a; }; a.src='logo_salamell_chef.png';
+  var b=new Image();
+  b.onload=function(){ LOGO.px=b; }; b.src='img/loghi_black/proxima.png';
+})();
+// disegna un'immagine contenuta in un riquadro, mantenendo le proporzioni
+function drawFit(x,img,cx,cy,maxW,maxH){
+  if(!img || !img.naturalWidth) return false;
+  var r=Math.min(maxW/img.naturalWidth, maxH/img.naturalHeight);
+  var w=img.naturalWidth*r, h=img.naturalHeight*r;
+  x.drawImage(img, cx-w/2, cy-h/2, w, h);
+  return true;
+}
+function buildCard(){
+  var cv=document.getElementById('cardCanvas');
+  var x=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var YEL='#ffc800', INK='#100d15';
+  var STRIP=H-138;              // inizio fascia gialla in fondo
+
+  // --- fondo nero ---
+  x.fillStyle=INK; x.fillRect(0,0,W,H);
+
+  // --- luci di scena rossa (sx) e blu (dx) ---
+  function sideLight(cx,cy,rad,rgb){
+    var g=x.createRadialGradient(cx,cy,0,cx,cy,rad);
+    g.addColorStop(0,'rgba('+rgb+',.55)');
+    g.addColorStop(.45,'rgba('+rgb+',.20)');
+    g.addColorStop(1,'rgba('+rgb+',0)');
+    x.fillStyle=g; x.fillRect(0,0,W,H);
+  }
+  sideLight(-60, H*0.34, 640, '255,46,46');
+  sideLight(W+60, H*0.62, 640, '47,67,255');
+  // alone caldo di brace in basso
+  var emb=x.createRadialGradient(W/2,STRIP,0,W/2,STRIP,520);
+  emb.addColorStop(0,'rgba(255,140,20,.20)'); emb.addColorStop(1,'rgba(255,140,20,0)');
+  x.fillStyle=emb; x.fillRect(0,0,W,H);
+
+  // --- bordo giallo sottile ---
+  x.strokeStyle='rgba(255,200,0,.32)'; x.lineWidth=6;
+  x.strokeRect(3,3,W-6,H-6);
+
+  function ctr(t,y,font,fill,glow){
+    x.font=font; x.textAlign='center'; x.textBaseline='alphabetic';
+    if(glow){ x.shadowColor=glow; x.shadowBlur=28; }
+    x.fillStyle=fill; x.fillText(t,W/2,y);
+    x.shadowBlur=0;
+  }
+
+  // --- logo Salamell Chef in alto (schiarito come nell'hero, altrimenti si spegne sul nero) ---
+  try{ x.filter='brightness(1.55) saturate(1.85)'; }catch(e){}
+  var okLogo=drawFit(x, LOGO.sc, W/2, 168, 200, 200);
+  try{ x.filter='none'; }catch(e){}
+  if(!okLogo){
+    x.fillStyle=YEL; x.font='700 90px Anton, Impact, sans-serif';
+    x.textAlign='center'; x.fillText('S', W/2, 200);
+  }
+
+  ctr('SALAMELL CHEF', 322, '700 76px Anton, Impact, sans-serif', YEL, 'rgba(255,200,0,.45)');
+  ctr('7ª EDIZIONE · SALAMELLARO SIMULATOR', 366,
+      '700 25px "Space Mono", monospace', 'rgba(255,255,255,.62)');
+
+  // --- filetto separatore ---
+  x.fillStyle='rgba(255,200,0,.30)'; x.fillRect(W/2-170, 400, 340, 3);
+
+  // --- punteggio ---
+  ctr(String(score), 632, '700 250px Anton, Impact, sans-serif', YEL, 'rgba(255,200,0,.55)');
+  ctr('PUNTI', 684, '700 30px "Space Mono", monospace', 'rgba(255,255,255,.55)');
+
+  // --- fascia rank (gialla, testo nero) ---
+  var rk=rankFor(score).toUpperCase(), fs=54;
+  x.font='700 '+fs+'px Anton, Impact, sans-serif';
+  while(x.measureText(rk).width > W-200 && fs>28){    // rimpicciolisce se il titolo e' lungo
+    fs-=2; x.font='700 '+fs+'px Anton, Impact, sans-serif';
+  }
+  var bw=Math.min(W-120, x.measureText(rk).width+96), bx=(W-bw)/2, by=736;
+  x.shadowColor='rgba(255,200,0,.5)'; x.shadowBlur=26;
+  x.fillStyle=YEL; x.fillRect(bx,by,bw,92);
+  x.shadowBlur=0;
+  x.fillStyle=INK; x.textAlign='center'; x.fillText(rk, W/2, by+62);
+
+  // --- statistiche ---
+  var stats=[[String(perfette),'PERFETTE'],
+             ['x'+Math.min(1+Math.floor(maxCombo/3),8),'COMBO MAX'],
+             [String(level),'LIVELLO']];
+  var sw=284, gap=30, tot=sw*3+gap*2, sx=(W-tot)/2, sy=890, sh=158;
+  for(var i=0;i<3;i++){
+    var px=sx+i*(sw+gap);
+    x.fillStyle='rgba(255,200,0,.07)'; x.fillRect(px,sy,sw,sh);
+    x.strokeStyle='rgba(255,200,0,.45)'; x.lineWidth=3; x.strokeRect(px,sy,sw,sh);
+    x.fillStyle=YEL; x.font='700 72px Anton, Impact, sans-serif'; x.textAlign='center';
+    x.fillText(stats[i][0], px+sw/2, sy+88);
+    x.fillStyle='rgba(255,255,255,.60)'; x.font='700 21px "Space Mono", monospace';
+    x.fillText(stats[i][1], px+sw/2, sy+128);
+  }
+
+  // --- invito + data ---
+  ctr('BATTI IL MIO RECORD', 1112, '700 50px Anton, Impact, sans-serif', YEL);
+  ctr('ASSOCIAZIONEPROXIMA.COM', 1168,
+      '700 28px "Space Mono", monospace', 'rgba(255,255,255,.78)');
+
+  // --- fascia gialla in fondo con logo Proxima ---
+  x.fillStyle=YEL; x.fillRect(0,STRIP,W,H-STRIP);
+  if(!drawFit(x, LOGO.px, W/2, STRIP+(H-STRIP)/2, 330, 78)){
+    x.fillStyle=INK; x.font='700 44px Anton, Impact, sans-serif'; x.textAlign='center';
+    x.fillText('PROXIMA', W/2, STRIP+82);
+  }
+
+  // anteprima + blob per la condivisione
+  try{
+    var img=document.getElementById('cardPrev');
+    img.src=cv.toDataURL('image/png'); img.style.display='block';
+  }catch(e){}
+  if(cv.toBlob){ cv.toBlob(function(b){ cardBlob=b; },'image/png'); }
+}
+
+function shareCard(){
+  var cv=document.getElementById('cardCanvas');
+  var txt='Ho fatto '+score+' punti a Salamellaro Simulator — '+rankFor(score)+'! Salamell Chef, 5 settembre a Gorgonzola. Batti il mio record 🔥';
+  function fallbackDownload(){
+    try{
+      var a=document.createElement('a');
+      a.href=cv.toDataURL('image/png');
+      a.download='salamell-chef-'+score+'.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      document.getElementById('shareHint').textContent='Card scaricata! Postala e tagga @associazioneproxima';
+    }catch(e){
+      document.getElementById('shareHint').textContent='Fai uno screenshot della card per condividerla!';
+    }
+  }
+  function doShare(blob){
+    var file=null;
+    try{ file=new File([blob],'salamell-chef-'+score+'.png',{type:'image/png'}); }catch(e){}
+    if(file && navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+      navigator.share({files:[file], text:txt}).catch(function(){});
+    }else if(navigator.share){
+      navigator.share({title:'Salamell Chef', text:txt, url:'https://associazioneproxima.com/'})
+        .catch(function(){ fallbackDownload(); });
+    }else{
+      fallbackDownload();
+    }
+  }
+  if(cardBlob){ doShare(cardBlob); }
+  else if(cv.toBlob){ cv.toBlob(function(b){ cardBlob=b; b?doShare(b):fallbackDownload(); },'image/png'); }
+  else{ fallbackDownload(); }
+}
+
+// ---------- eventi ----------
+document.getElementById('btnStart').addEventListener('click',start);
+document.getElementById('btnAgain').addEventListener('click',start);
+document.getElementById('btnShare').addEventListener('click',shareCard);
+document.getElementById('btnHome').addEventListener('click',function(){ window.location.href='index.html'; });
+
+// se l'utente cambia scheda durante il gioco: pausa "morbida" (niente salti di tempo)
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){ lastT=0; }
+});
+
+// niente zoom da doppio tap
+document.addEventListener('dblclick',function(e){ e.preventDefault(); },{passive:false});
+
+showBestOnStart();
+updateHUD();
+})();
+</script>
+</body>
+</html>
