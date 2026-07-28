@@ -208,17 +208,6 @@
 .salamell-page .arcade .display .y{color:var(--yellow)}
 .salamell-page .arcade p{max-width:540px;margin:16px auto 0;color:rgba(255,255,255,.9)}
 .salamell-page .arcade .go{margin-top:30px}
-/* mini anteprima della barra di cottura, spiega il gioco a colpo d'occhio */
-.salamell-page .demobar{width:min(260px,80%);height:16px;margin:26px auto 0;border-radius:999px;
-  background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.32);position:relative;overflow:hidden}
-.salamell-page .demobar i{position:absolute;top:0;bottom:0;left:58%;width:22%;
-  background:linear-gradient(180deg,#ffd257,var(--yellow));box-shadow:0 0 10px rgba(255,200,0,.9)}
-.salamell-page .demobar b{position:absolute;top:-3px;bottom:-3px;width:4px;border-radius:2px;background:#fff;
-  box-shadow:0 0 8px #fff;animation:demoRun 2.4s cubic-bezier(.4,0,.6,1) infinite}
-@keyframes demoRun{0%{left:0}62%{left:66%}72%{left:66%}100%{left:100%}}
-.salamell-page .demolbl{font-family:var(--mono);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--yellow);margin-top:12px}
-@media(prefers-reduced-motion:reduce){.salamell-page .demobar b{animation:none;left:66%}}
 
 /* ===== MENU ===== */
 .salamell-page .menu-head{margin-bottom:34px}
@@ -467,9 +456,7 @@
   <div class="container">
     <div class="eyebrow reveal">Mettiti alla prova</div>
     <h2 class="display reveal" data-delay="1">Salamellaro<br><span class="y">Simulator</span></h2>
-    <p class="reveal" data-delay="2">Tocca quando la salamella &egrave; nella zona dorata. Sbagli il tempo? Cruda o carbonizzata. Fai il tuo record e sfida gli amici prima del 5 settembre.</p>
-    <div class="demobar reveal" data-delay="2" aria-hidden="true"><i></i><b></b></div>
-    <div class="demolbl reveal" data-delay="2">&#9650; Tocca nella zona dorata</div>
+    <p class="reveal" data-delay="2">Sai grigliare? Dimostralo.</p>
     <div class="go reveal" data-delay="3"><a href="salamellaro-simulator.html" class="btn btn-yellow">Gioca ora</a></div>
   </div>
 </section>
