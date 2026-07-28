@@ -3,168 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proxima &mdash; L'associazione pi&ugrave; giovane di Gorgonzola</title>
+<title>Proxima &mdash; Salamell Chef, 7&ordf; Edizione</title>
 <link rel="icon" href="img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding:calc(var(--nav-h) + 6vh) 5vw calc(56px + 6vh);
-  background:radial-gradient(circle at 80% 20%,rgba(74,60,236,.65),transparent 55%),
-             radial-gradient(circle at 15% 90%,rgba(44,35,137,.6),transparent 50%),
-             var(--ink)}
-.hero .kicker{font-family:'Space Grotesk';color:var(--yellow);text-transform:uppercase;letter-spacing:3px;font-size:.82rem;font-weight:700;margin-bottom:20px;opacity:0;animation:rise .8s .1s forwards}
-.hero h1{font-family:var(--display);font-size:clamp(2.6rem,10vw,8rem);line-height:.98;text-transform:uppercase;letter-spacing:-1px}
-.hero h1 span{display:block;opacity:0;animation:rise .9s forwards}
-.hero h1 span:nth-child(1){animation-delay:.15s}
-.hero h1 span:nth-child(2){animation-delay:.3s;color:var(--violet)}
-.hero h1 span:nth-child(3){animation-delay:.45s}
-.hero .sub{max-width:540px;margin-top:26px;font-size:1.15rem;font-weight:300;opacity:0;animation:rise .9s .6s forwards}
-.hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s .75s forwards}
-@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-.marquee{position:absolute;bottom:0;left:0;right:0;background:var(--violet);color:#fff;overflow:hidden;white-space:nowrap;padding:10px 0;font-family:var(--display);font-size:1rem;text-transform:uppercase;letter-spacing:1px;display:flex}
-.marquee .mq{display:inline-block;white-space:nowrap;padding-right:1ch;animation:scroll 30s linear infinite}
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
-
-/* Hero Summer League */
-.hero-gsl{overflow:hidden}
-.hero-gsl-logo{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:min(60vw,520px);opacity:.1;pointer-events:none;user-select:none}
-.hero-gsl-logo img{width:100%;height:auto;filter:invert(1) brightness(2)}
-.hero-gsl h1 span:nth-child(2){color:var(--violet)}
-
-.up-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:8px}
-.up-head a.seeall{font-family:'Space Grotesk';font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);border-bottom:2px solid var(--yellow);padding-bottom:3px;white-space:nowrap}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:22px;margin-top:30px}
-.card{display:block;color:inherit;border:1px solid rgba(246,245,239,.16);padding:28px;transition:.3s;position:relative;overflow:hidden;background:rgba(255,255,255,.025);border-radius:24px 24px 24px 4px}
-.card.has-poster{overflow:visible;padding-left:130px;min-height:150px}
-.card .poster-thumb{position:absolute;left:-14px;top:50%;width:118px;aspect-ratio:4/5;transform:translateY(-50%) rotate(-6deg);border-radius:12px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.5);border:1px solid rgba(246,245,239,.18);background:rgba(255,255,255,.04)}
-.card .poster-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.card.has-poster:hover .poster-thumb{transform:translateY(-50%) rotate(-2deg) scale(1.04)}
-.card:hover{transform:translateY(-6px);border-color:var(--yellow)}
-.card .date{font-family:'Space Grotesk';font-size:.76rem;color:var(--yellow);text-transform:uppercase;letter-spacing:2px;font-weight:700}
-.card h3{font-family:'Sora';font-weight:800;font-size:1.4rem;margin:10px 0}
-.card .place{font-family:'Space Grotesk';font-size:.76rem;opacity:.6}
-.card .badge{position:absolute;top:14px;right:14px;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:.6rem;padding:5px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.5px;transform:none;max-width:60%;text-align:right;line-height:1.2}
-.card.has-badge .date{padding-top:34px}
-.card.t-orange{border-color:rgba(255,106,43,.4)}.card.t-orange:hover{border-color:var(--orange)}.card.t-orange .date{color:var(--orange)}.card.t-orange .badge{background:var(--orange)}
-.card.t-blue{border-color:rgba(74,60,236,.45)}.card.t-blue:hover{border-color:var(--violet)}.card.t-blue .date{color:#8aa0ff}.card.t-blue .badge{background:var(--violet)}
-.card.t-grape{border-color:rgba(155,60,255,.4)}.card.t-grape:hover{border-color:var(--grape)}.card.t-grape .date{color:#c47aff}.card.t-grape .badge{background:var(--grape)}
-@media(max-width:560px){.card.has-poster{overflow:visible;padding:20px;min-height:120px;margin-top:80px;background:transparent}.card .poster-thumb{position:absolute;left:16px;top:-90px;bottom:auto;transform:rotate(-5deg);width:110px;box-shadow:0 10px 28px rgba(0,0,0,.55);z-index:-1;pointer-events:none}.card.has-poster:hover .poster-thumb{transform:rotate(-2deg) scale(1.03)}.card.has-badge .date{padding-top:0}.card .card-bg{position:absolute;inset:0;background:#0f0e1a;border-radius:inherit;z-index:0}.card .card-body{position:relative;z-index:1}.card .badge{z-index:2}}
-
-.league{background:linear-gradient(165deg,var(--violet-deep),var(--ink));border-top:1px solid rgba(246,245,239,.1)}
-.gironi{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
-@media(max-width:760px){.gironi{grid-template-columns:1fr}}
-.girone{background:rgba(255,255,255,.04);border:1px solid rgba(246,245,239,.12);border-radius:20px 20px 20px 4px;overflow:hidden}
-.girone .gt{font-family:var(--display);text-transform:uppercase;font-size:1.05rem;letter-spacing:1px;padding:14px 18px;background:var(--violet);display:flex;align-items:center;gap:10px}
-.girone .gt .dot{width:12px;height:12px;border-radius:50%}
-.girone .gt .dot{background:rgba(246,245,239,.5)}
-table{width:100%;border-collapse:collapse}
-@media(max-width:560px){.league .girone td:not(.team):not(.pts),.league .girone th:not(:first-child):not(:last-child){display:none}}
-th,td{padding:10px 18px;text-align:left;font-size:.9rem}
-thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12)}
-tbody tr{border-top:1px solid rgba(246,245,239,.07)}
-tbody tr:hover{background:rgba(221,235,0,.05)}
-td.pos{font-family:var(--display);width:42px;opacity:.8}
-tbody tr:nth-child(1) td.pos{color:var(--yellow);opacity:1}
-td.team{font-weight:600}
-td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
-.lgnote{font-family:'Space Grotesk';font-size:.76rem;opacity:.6;margin-top:18px}
-
-.gj-league{background:radial-gradient(circle at 80% 20%,rgba(226,113,56,.55),transparent 55%),radial-gradient(circle at 15% 80%,rgba(226,113,56,.35),transparent 50%),var(--ink);border-top:1px solid rgba(246,245,239,.1)}
-.gj-girone .gj-gt{background:#e27138}
-.gj-dot{background:rgba(246,245,239,.5)}
-.gj-schedule{margin-top:0;overflow-x:auto}
-.gj-table{width:100%;border-collapse:collapse;min-width:420px}
-.gj-table thead th{font-family:'Space Grotesk';text-transform:uppercase;font-size:.66rem;letter-spacing:1.2px;opacity:.7;border-bottom:1px solid rgba(246,245,239,.12);padding:10px 14px;text-align:left}
-.gj-table tbody tr{border-top:1px solid rgba(246,245,239,.06);transition:.2s}
-.gj-table tbody tr:hover{background:rgba(226,113,56,.06)}
-.gj-table tbody td{padding:9px 14px;font-size:.9rem}
-.gj-time{font-family:'Space Grotesk';font-weight:700;color:#e27138;white-space:nowrap;width:72px}
-.gj-girone-label{font-family:'Space Grotesk';font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-.gj-girone-label.bugs{color:#e27138}
-.gj-girone-label.duffy{color:#c47aff}
-.gj-girone-label.final{color:#8aa0ff}
-.gj-girone-label.finale-b{color:var(--yellow);font-weight:800}
-.gj-separator td{border-top:2px solid rgba(246,245,239,.2)!important;padding-top:14px;font-weight:600;color:var(--fg)}
-.gj-sep-label td{font-family:'Space Grotesk';font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;opacity:.5;padding-top:18px;border-top:none!important}
-.gj-finale{background:rgba(246,245,239,.04)}
-.gj-finale td{font-weight:700;color:var(--fg)}
-.gj-premiazione td{opacity:.7;font-style:italic}
-
 .nav-gsl-pill{background:var(--violet);color:#fff!important;padding:5px 14px!important;border-radius:50px;opacity:1!important}
 .nav-gsl-pill::after{display:none!important}
 .nav-gsl-pill:hover{background:var(--violet-deep)!important}
 @media(max-width:920px){.nav-gsl-pill{background:var(--violet)!important;color:#fff!important;border-radius:50px!important;padding:8px 18px!important;margin:8px 0!important;display:inline-block!important;border-bottom:none!important}}
 
-/* ===== HERO FINALE (finalissima GSL) ===== */
-.hero-finale{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding:calc(var(--nav-h) + 6vh) 5vw calc(56px + 6vh);overflow:hidden;
-  background:radial-gradient(circle at 78% 16%,rgba(74,60,236,.7),transparent 55%),
-             radial-gradient(circle at 10% 90%,rgba(221,235,0,.12),transparent 45%),
-             radial-gradient(circle at 50% 55%,rgba(44,35,137,.5),transparent 70%),
-             var(--ink)}
-.ff-trophy{position:absolute;right:-3%;top:50%;transform:translateY(-50%);font-size:min(48vw,560px);line-height:1;
-  opacity:.08;z-index:1;pointer-events:none;user-select:none;animation:ffbob 6s ease-in-out infinite}
-@keyframes ffbob{50%{transform:translateY(calc(-50% - 20px))}}
-.ff-rays{position:absolute;left:50%;top:45%;width:150vmax;height:150vmax;transform:translate(-50%,-50%);z-index:0;pointer-events:none;
-  background:repeating-conic-gradient(from 0deg,rgba(221,235,0,.05) 0deg 6deg,transparent 6deg 18deg);
-  -webkit-mask-image:radial-gradient(circle,#000 0,transparent 42%);mask-image:radial-gradient(circle,#000 0,transparent 42%);
-  animation:ffspin 60s linear infinite;opacity:.6}
-@keyframes ffspin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.ff-inner{position:relative;z-index:3;max-width:920px}
-.ff-kicker{font-family:'Space Grotesk';color:var(--yellow);text-transform:uppercase;letter-spacing:3px;font-size:.82rem;font-weight:700;margin-bottom:16px;opacity:0;animation:rise .8s .1s forwards}
-.ff-title{font-family:var(--display);font-size:clamp(2.2rem,8vw,6.4rem);line-height:.92;text-transform:uppercase;letter-spacing:-1px;opacity:0;animation:rise .9s .2s forwards}
-.ff-title .l1{display:block;font-size:.42em;color:#fff;opacity:.9}
-.ff-title .l2{display:block;
-  background:linear-gradient(180deg,#fff 0%,var(--yellow) 52%,#b7a600 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:ffglow 2.8s ease-in-out infinite}
-@keyframes ffglow{0%,100%{filter:drop-shadow(0 4px 0 rgba(44,35,137,.65)) drop-shadow(0 0 12px rgba(221,235,0,.22))}
-  50%{filter:drop-shadow(0 4px 0 rgba(44,35,137,.65)) drop-shadow(0 0 30px rgba(221,235,0,.55))}}
-.ff-when{margin-top:18px;font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;color:#8aa0ff;opacity:0;animation:rise .9s .35s forwards}
-.ff-vs{display:flex;align-items:center;gap:16px;margin-top:28px;flex-wrap:wrap;opacity:0;animation:rise .9s .5s forwards}
-.ff-team{font-family:var(--display);text-transform:uppercase;font-size:clamp(1rem,3vw,1.6rem);
-  padding:14px 22px;border:2px solid rgba(246,245,239,.18);border-radius:14px 14px 14px 4px;
-  background:rgba(255,255,255,.04);min-width:190px;text-align:center}
-.ff-team.tbd{color:#8aa0ff;border-style:dashed}
-.ff-vsbadge{font-family:var(--display);color:var(--ink);background:var(--yellow);
-  width:58px;height:58px;display:grid;place-items:center;border-radius:50%;font-size:1.1rem;flex:none;
-  box-shadow:0 0 0 4px rgba(221,235,0,.22);animation:vspulse 1.8s ease-in-out infinite}
-@keyframes vspulse{50%{transform:scale(1.08);box-shadow:0 0 0 9px rgba(221,235,0,.14)}}
-.ff-cd{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;opacity:0;animation:rise .9s .62s forwards}
-.ff-cd>div{background:rgba(255,255,255,.05);border:1px solid rgba(246,245,239,.14);border-radius:12px;padding:12px 14px;min-width:76px;text-align:center}
-.ff-cd b{font-family:var(--display);font-size:clamp(1.5rem,5vw,2.4rem);color:var(--yellow);display:block;line-height:1}
-.ff-cd span{font-family:'Space Grotesk';font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;opacity:.65;margin-top:6px;display:block}
-.ff-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s .76s forwards}
+/* ============ SALAMELL CHEF (blocco centrale) ============ */
+.salamell-page{
+  --yellow:#ffc800; --ink:#141018; --ink2:#201924;
+  --red:#ff2e2e; --red-d:#c01818;
+  --blue:#2f43ff; --blue-d:#1b2aa8;
+  --paper:#ffffff;
+  --disp:'Anton',sans-serif; --body:'Poppins',sans-serif; --mono:'Space Mono',monospace;
+  position:relative;background:var(--yellow);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.salamell-page ::selection{background:var(--ink);color:var(--yellow)}
 
-/* ===== HERO CAMPIONE (It came home) ===== */
-.hero-champ{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  padding:calc(var(--nav-h) + 6vh) 5vw calc(56px + 6vh);overflow:hidden;
-  background:radial-gradient(circle at 50% 8%,rgba(255,210,63,.22),transparent 45%),
-             radial-gradient(circle at 82% 24%,rgba(74,60,236,.6),transparent 55%),
-             radial-gradient(circle at 12% 88%,rgba(44,35,137,.6),transparent 55%),
-             var(--ink)}
-.hero-champ #confetti{position:absolute;inset:0;z-index:1;pointer-events:none}
-.ch-trophy{position:absolute;right:-4%;top:50%;transform:translateY(-50%);font-size:min(50vw,600px);line-height:1;
-  opacity:.07;z-index:0;pointer-events:none;user-select:none;animation:chbob 6s ease-in-out infinite}
-@keyframes chbob{50%{transform:translateY(calc(-50% - 18px))}}
-.ch-in{position:relative;z-index:3;max-width:960px}
-.ch-kicker{font-family:'Space Grotesk';color:#ffd23f;text-transform:uppercase;letter-spacing:3px;font-size:.82rem;font-weight:700;margin-bottom:14px;opacity:0;animation:rise .8s .1s forwards}
-.ch-title{font-family:var(--display);text-transform:uppercase;line-height:.86;letter-spacing:-1px;opacity:0;animation:rise .9s .2s forwards;font-size:clamp(2.6rem,12vw,8.5rem)}
-.ch-title .l1{display:block;color:#fff}
-.ch-title .l2{display:block;background:linear-gradient(180deg,#fff 0%,#ffd23f 48%,#c79a12 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 rgba(44,35,137,.6));animation:chglow 2.8s ease-in-out infinite}
-@keyframes chglow{0%,100%{filter:drop-shadow(0 3px 0 rgba(44,35,137,.6)) drop-shadow(0 0 12px rgba(255,210,63,.25))}50%{filter:drop-shadow(0 3px 0 rgba(44,35,137,.6)) drop-shadow(0 0 30px rgba(255,210,63,.6))}}
-.champ{margin-top:28px;opacity:0;animation:rise .9s .45s forwards}
-.champ-badge{display:inline-flex;align-items:center;gap:8px;font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.72rem;color:var(--ink);background:#ffd23f;padding:7px 14px;border-radius:50px;box-shadow:0 0 0 4px rgba(255,210,63,.18)}
-.champ-name{font-family:var(--display);text-transform:uppercase;font-size:clamp(1.6rem,6vw,3.4rem);line-height:1;margin-top:14px;letter-spacing:.5px;background:linear-gradient(90deg,#f7e7a6,#fff 30%,#ffd23f 55%,#f7e7a6);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:chshine 4s linear infinite}
-@keyframes chshine{to{background-position:220% 0}}
-.champ-sub{font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;color:#c9c4ff;margin-top:8px}
-.ch-tagline{max-width:600px;margin-top:22px;font-weight:300;font-size:clamp(1rem,2.5vw,1.25rem);opacity:0;animation:rise .9s .6s forwards}
-.ch-tagline b{font-weight:700;color:#ffd23f}
-.ch-cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:rise .9s .75s forwards}
-.hero-champ .btn.fill{background:#ffd23f;border-color:#ffd23f;color:var(--ink)}
-.hero-champ .marquee{background:#ffd23f;color:var(--ink)}
+.salamell-page .display{font-family:var(--disp);text-transform:uppercase;line-height:.9;letter-spacing:.5px;text-wrap:balance}
+.salamell-page .section{padding:clamp(70px,12vh,120px) 5vw;position:relative}
+.salamell-page .container{max-width:1120px;margin:0 auto}
+.salamell-page .sec-yellow{background:var(--yellow);color:var(--ink)}
+.salamell-page .sec-dark{background:var(--ink);color:var(--paper)}
+.salamell-page .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;display:inline-block;margin-bottom:14px}
+.salamell-page .sec-yellow .eyebrow{color:var(--red-d)}
+.salamell-page .sec-dark .eyebrow{color:var(--yellow)}
+
+.salamell-page .btn{display:inline-block;font-family:var(--disp);text-transform:uppercase;letter-spacing:1px;font-size:1.05rem;padding:15px 32px;transition:.16s;border:3px solid var(--ink);cursor:pointer}
+.salamell-page .btn-dark{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
+.salamell-page .btn-dark:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--red)}
+.salamell-page .btn-yellow{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.salamell-page .btn-yellow:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--blue)}
+
+.salamell-page .ph{border:2px dashed;border-radius:3px;display:grid;place-items:center;text-align:center;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:1px;text-transform:uppercase;padding:16px;
+  background:repeating-linear-gradient(45deg,currentColor 0 0,transparent 0);}
+.salamell-page .sec-yellow .ph,.salamell-page .hero .ph{border-color:rgba(20,16,24,.35);color:rgba(20,16,24,.55);background:repeating-linear-gradient(45deg,rgba(20,16,24,.04) 0 14px,transparent 14px 28px)}
+.salamell-page .sec-dark .ph{border-color:rgba(255,255,255,.28);color:rgba(255,255,255,.55);background:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 14px,transparent 14px 28px)}
+
+.salamell-page .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.salamell-page .reveal.l{transform:translateX(-60px)}.salamell-page .reveal.r{transform:translateX(60px)}.salamell-page .reveal.z{transform:scale(.9)}
+.salamell-page .reveal.in{opacity:1;transform:none}
+.salamell-page [data-delay="1"]{transition-delay:.1s}.salamell-page [data-delay="2"]{transition-delay:.2s}.salamell-page [data-delay="3"]{transition-delay:.3s}.salamell-page [data-delay="4"]{transition-delay:.4s}
+
+/* ===== HERO (schermo rosso|blu, assetto centrale) ===== */
+.salamell-page .hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:calc(var(--nav-h) + 6vh) 5vw 9vh}
+.salamell-page .hero .split{position:absolute;inset:0;z-index:0}
+.salamell-page .split-red{background:radial-gradient(circle at 28% 36%,#ff6060,var(--red) 62%),var(--red-d);clip-path:polygon(0 0,58% 0,42% 100%,0 100%)}
+.salamell-page .split-blue{background:radial-gradient(circle at 72% 36%,#5a6bff,var(--blue) 62%),var(--blue-d);clip-path:polygon(58% 0,100% 0,100% 100%,42% 100%)}
+.salamell-page .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.42))}
+.salamell-page .hero-center{position:relative;z-index:4;max-width:840px}
+.salamell-page .hero .event-logo{width:118px;aspect-ratio:1/1;object-fit:contain;margin:0 auto 18px;opacity:0;animation:rise .7s .05s forwards;filter:brightness(1.55) saturate(1.85) contrast(1.05) drop-shadow(0 6px 14px rgba(0,0,0,.4))}
+@media(max-width:900px){.salamell-page .hero .event-logo{width:84px}}
+.salamell-page .hero-title{font-family:var(--disp);text-transform:uppercase;line-height:.8;font-size:clamp(3rem,13vw,8.4rem);opacity:0;animation:rise .8s .12s forwards;text-shadow:0 6px 0 rgba(0,0,0,.22)}
+.salamell-page .hero-title .s1{display:block;color:#fff}
+.salamell-page .hero-title .s2{display:block;color:var(--yellow)}
+.salamell-page .hero-ed{font-family:var(--disp);text-transform:uppercase;font-size:clamp(1.5rem,6vw,3rem);margin-top:6px;color:#fff;opacity:0;animation:rise .8s .22s forwards;text-shadow:0 3px 0 rgba(0,0,0,.25)}
+.salamell-page .hero-meta{font-weight:700;font-size:clamp(.95rem,2.4vw,1.25rem);margin-top:16px;color:#fff;opacity:0;animation:rise .8s .34s forwards;text-shadow:0 2px 8px rgba(0,0,0,.45)}
+.salamell-page .hero-meta i{font-style:normal;color:var(--yellow);margin:0 8px;font-weight:700}
+.salamell-page .hero-fighter{position:absolute;bottom:0;z-index:2;width:min(36vw,440px);aspect-ratio:3/4;
+  display:flex;align-items:flex-end;justify-content:center;
+  border:2px dashed rgba(255,255,255,.5);color:rgba(255,255,255,.85);border-radius:4px 4px 0 0;
+  font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:1px;text-align:center;padding:14px;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 14px,transparent 14px 28px)}
+.salamell-page .hero-fighter.l{left:7%;bottom:-42px}
+.salamell-page .hero-fighter.r{right:2.5%;z-index:5}
+.salamell-page .hero-fighter:has(img){border:none;padding:0;background:none}
+.salamell-page .hero-fighter img{width:auto;height:132%;max-width:none;display:block;
+  filter:drop-shadow(0 16px 28px rgba(0,0,0,.5))}
+@media(max-width:900px){
+  .salamell-page .hero-fighter{display:none}
+  .salamell-page .hero{min-height:auto;padding:calc(var(--nav-h) + 5vh) 5vw 0}
+}
+.salamell-page .hero-mobile-photo{display:none}
+@media(max-width:900px){
+  .salamell-page .hero-mobile-photo{display:block;margin:22px auto 0;width:100%;max-width:460px;height:auto;
+    filter:drop-shadow(0 16px 26px rgba(0,0,0,.5));
+    opacity:0;animation:rise .8s .5s forwards}
+}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+.salamell-page .prog{position:fixed;top:0;left:0;height:4px;width:0;z-index:210;background:linear-gradient(90deg,var(--red),var(--yellow),var(--blue));box-shadow:0 0 10px rgba(255,200,0,.5)}
+.salamell-page #sparks{position:fixed;inset:0;z-index:90;pointer-events:none}
+
+/* ===== MARQUEE ===== */
+.salamell-page .marquee{position:relative;z-index:6;overflow:hidden;white-space:nowrap;display:flex;
+  background:var(--yellow);color:var(--ink);padding:12px 0}
+.salamell-page .marquee .mq{display:inline-block;white-space:nowrap;padding-right:1ch;
+  font-family:var(--disp);text-transform:uppercase;font-size:1.05rem;letter-spacing:1px;
+  animation:marqueeScroll 26s linear infinite}
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.salamell-page .marquee .mq{animation:none}}
+
+/* ===== VERSUS ===== */
+.salamell-page .versus-head{text-align:center;margin-bottom:52px}
+.salamell-page .versus-head .display{font-size:clamp(2.4rem,8vw,5.5rem)}
+.salamell-page .teams{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:26px;overflow:visible}
+@media(max-width:820px){.salamell-page .teams{grid-template-columns:1fr;gap:30px}}
+.salamell-page .team{position:relative;overflow:visible;background:var(--ink);color:var(--paper);border-radius:4px;padding:22px 24px 26px;
+  border:3px solid;margin-top:190px;text-align:center;cursor:pointer;
+  transition:transform .32s cubic-bezier(.2,.8,.25,1),box-shadow .32s ease,background .32s ease}
+.salamell-page .team.red{border-color:var(--red)}
+.salamell-page .team.blue{border-color:var(--blue)}
+.salamell-page .team.red:hover,.salamell-page .team.red.flip{transform:translateY(-8px);box-shadow:0 18px 34px rgba(255,46,46,.32);background:#1a0f10}
+.salamell-page .team.blue:hover,.salamell-page .team.blue.flip{transform:translateY(-8px);box-shadow:0 18px 34px rgba(47,67,255,.32);background:#0f1230}
+.salamell-page .team-photo{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);width:min(78%,250px);
+  aspect-ratio:4/5;margin-bottom:-2px;z-index:2;pointer-events:none;overflow:visible;
+  transition:transform .32s cubic-bezier(.2,.8,.25,1)}
+.salamell-page .team:hover .team-photo,.salamell-page .team.flip .team-photo{transform:translateX(-50%) scale(1.05)}
+.salamell-page .team-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;
+  display:block;filter:drop-shadow(0 12px 22px rgba(0,0,0,.45))}
+.salamell-page .team-photo .tp-base{opacity:1;transition:opacity 0s steps(1,end) .06s}
+.salamell-page .team-photo .tp-alt{opacity:0;transition:opacity 0s steps(1,end) .06s}
+.salamell-page .team:hover .team-photo .tp-base,.salamell-page .team.flip .team-photo .tp-base{opacity:0}
+.salamell-page .team:hover .team-photo .tp-alt,.salamell-page .team.flip .team-photo .tp-alt{opacity:1}
+.salamell-page .team-photo::after{content:"";position:absolute;inset:-6% -18%;z-index:3;pointer-events:none;opacity:0;
+  background:linear-gradient(105deg,transparent 34%,rgba(255,255,255,.95) 47%,rgba(255,255,255,.95) 53%,transparent 66%);
+  mix-blend-mode:screen}
+.salamell-page .team:hover .team-photo::after,.salamell-page .team.flip .team-photo::after{animation:tpFlash .28s ease-out}
+@keyframes tpFlash{0%{opacity:0;transform:translateX(-60%)}18%{opacity:1}45%{opacity:1}100%{opacity:0;transform:translateX(60%)}}
+.salamell-page .team-photo .ph{position:static;aspect-ratio:3/4;border-radius:4px 4px 0 0;font-size:.68rem}
+.salamell-page .team.red .team-photo .ph{border-color:rgba(255,46,46,.75);color:rgba(20,16,24,.6);background:repeating-linear-gradient(45deg,rgba(255,46,46,.10) 0 14px,transparent 14px 28px)}
+.salamell-page .team.blue .team-photo .ph{border-color:rgba(47,67,255,.75);color:rgba(20,16,24,.6);background:repeating-linear-gradient(45deg,rgba(47,67,255,.10) 0 14px,transparent 14px 28px)}
+.salamell-page .team .role{font-family:var(--mono);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;padding:6px 12px;display:inline-block;color:#fff}
+.salamell-page .team.red .role{background:var(--red)}
+.salamell-page .team.blue .role{background:var(--blue)}
+.salamell-page .team h3{font-family:var(--disp);text-transform:uppercase;font-size:clamp(1.6rem,4.4vw,2.5rem);margin:12px 0 4px;letter-spacing:.5px;line-height:1.02}
+.salamell-page .team .who{font-family:var(--mono);font-size:.74rem;color:rgba(255,255,255,.6);letter-spacing:1px;transition:color .3s ease}
+.salamell-page .team.red:hover .who,.salamell-page .team.red.flip .who{color:rgba(255,120,120,.85)}
+.salamell-page .team.blue:hover .who,.salamell-page .team.blue.flip .who{color:rgba(140,155,255,.85)}
+@media(max-width:820px){.salamell-page .team{margin-top:198px}.salamell-page .team-photo{width:min(58%,182px)}}
+@media(prefers-reduced-motion:reduce){.salamell-page .team,.salamell-page .team-photo,.salamell-page .team-photo .tp-alt,.salamell-page .team .who{transition:none!important}}
+.salamell-page .clash{font-family:var(--disp);font-size:clamp(1.8rem,5vw,2.8rem);color:#fff;text-align:center;
+  width:82px;height:82px;display:grid;place-items:center;border-radius:50%;background:var(--ink);margin:0 auto;letter-spacing:1px}
+
+/* ===== REGOLE ===== */
+.salamell-page .rules .container{max-width:920px;text-align:center}
+.salamell-page .rules .display{font-size:clamp(2rem,6.5vw,4.2rem)}
+.salamell-page .rules .display .r{color:var(--red)}.salamell-page .rules .display .b{color:var(--blue)}
+.salamell-page .rules .quote{font-size:clamp(1rem,2.4vw,1.32rem);line-height:1.7;margin-top:26px;font-weight:300}
+.salamell-page .rules .quote b{font-weight:700;color:var(--yellow)}
+.salamell-page .rules .provider{margin-top:24px;font-family:var(--mono);font-size:.74rem;letter-spacing:2px;text-transform:uppercase;opacity:.6}
+
+/* ===== GIURIA ===== */
+.salamell-page .jury-head{text-align:center;margin-bottom:34px}
+.salamell-page .jury-head .display{font-size:clamp(2rem,6.5vw,4.4rem)}
+.salamell-page .jury-head p{max-width:600px;margin:16px auto 0;opacity:.8}
+.salamell-page .jury-head b{color:var(--red-d);font-weight:700}
+.salamell-page .crits{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:44px}
+.salamell-page .crit{font-family:var(--mono);font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;border:2px solid var(--ink);padding:8px 16px}
+.salamell-page .jury-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:760px;margin:0 auto}
+@media(max-width:680px){.salamell-page .jury-grid{grid-template-columns:1fr}}
+.salamell-page .jmember{text-align:center}
+.salamell-page .jmember .ph{aspect-ratio:4/5}
+.salamell-page .jname{font-family:var(--mono);font-size:.75rem;letter-spacing:1px;opacity:.6;margin-top:12px;text-transform:uppercase}
+
+/* ===== COME SI VINCE ===== */
+.salamell-page .how-head{text-align:center;margin-bottom:52px}
+.salamell-page .how-head .display{font-size:clamp(2.2rem,7vw,4.6rem)}
+.salamell-page .how-head p{opacity:.8;max-width:520px;margin:16px auto 0}
+.salamell-page .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.salamell-page .step{padding:30px;border:none;user-select:none;box-shadow:0 12px 26px rgba(0,0,0,.28);
+  transition:transform .3s ease}
+.salamell-page .step:hover{transform:translateY(-6px)}
+.salamell-page .step.red{background:linear-gradient(155deg,var(--red),#c81f1f);color:#fff}
+.salamell-page .step.blue{background:linear-gradient(155deg,var(--blue),#1a2ad6);color:#fff}
+.salamell-page .step.gold{background:linear-gradient(155deg,var(--yellow),#e0b400);color:var(--ink)}
+.salamell-page .step .k{font-family:var(--disp);font-size:2.1rem;letter-spacing:0;color:inherit;opacity:.5;line-height:1}
+.salamell-page .step h4{font-family:var(--disp);text-transform:uppercase;font-size:1.5rem;letter-spacing:.5px;margin:10px 0 8px;color:inherit}
+.salamell-page .step p{opacity:.92;font-size:.95rem;color:inherit}
+.salamell-page .swipe-hint{display:none}
+
+@media(max-width:820px){
+  .salamell-page .steps{display:block;position:relative;max-width:420px;margin:0 auto;height:300px;touch-action:pan-y}
+  .salamell-page .step{position:absolute;inset:0;padding:34px 30px;cursor:grab;
+    display:flex;flex-direction:column;justify-content:center;
+    box-shadow:0 18px 34px rgba(0,0,0,.35);
+    transition:transform .35s cubic-bezier(.2,.8,.25,1),opacity .35s ease}
+  .salamell-page .step:hover{transform:none}
+  .salamell-page .step:active{cursor:grabbing}
+  .salamell-page .step .k{font-size:2.3rem}
+  .salamell-page .step.stack-0{transform:translateY(0) scale(1) rotate(0deg);z-index:3}
+  .salamell-page .step.stack-1{transform:translateY(16px) scale(.95) rotate(-3deg);z-index:2;pointer-events:none}
+  .salamell-page .step.stack-2{transform:translateY(30px) scale(.9) rotate(3deg);z-index:1;opacity:.85;pointer-events:none}
+  .salamell-page .swipe-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:26px;
+    font-family:var(--mono);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;opacity:.65;
+    animation:swipeBob 1.4s ease-in-out infinite}
+  .salamell-page .swipe-hint .arrow{display:inline-block;animation:swipeArrow 1.4s ease-in-out infinite}
+  @keyframes swipeBob{50%{opacity:.35}}
+  @keyframes swipeArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+}
+@media(max-width:560px){.salamell-page .steps{height:320px}}
+@media(prefers-reduced-motion:reduce){.salamell-page .swipe-hint,.salamell-page .swipe-hint .arrow{animation:none!important}.salamell-page .step{transition:none}}
+
+/* ===== MENU ===== */
+.salamell-page .menu-head{margin-bottom:34px}
+.salamell-page .menu-head .display{font-size:clamp(2rem,6.5vw,4rem)}
+.salamell-page .menu-head p{max-width:560px;margin-top:14px;opacity:.75}
+.salamell-page .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+.salamell-page .mcard{background:#fff;border:2px solid var(--ink);padding:26px 20px;text-align:center;transition:.2s}
+.salamell-page .mcard:hover{transform:translateY(-6px);box-shadow:6px 6px 0 var(--ink)}
+.salamell-page .mcard .mi{font-size:2.4rem;margin-bottom:10px;line-height:1}
+.salamell-page .mcard h4{font-family:var(--disp);text-transform:uppercase;font-size:1.35rem;letter-spacing:.5px}
+.salamell-page .mcard p{font-size:.88rem;margin-top:6px;color:rgba(20,16,24,.7)}
+.salamell-page .mcard b{color:var(--red-d);font-weight:700}
+.salamell-page .wheel-hint{display:none}
+.salamell-page .menu-provider{display:none}
+@media(max-width:820px){
+  .salamell-page .menu-grid{position:relative;display:block;width:100vw;max-width:460px;height:230px;
+    margin:0 calc(50% - 50vw);overflow:hidden;touch-action:pan-y}
+  .salamell-page .mcard{position:absolute;top:50%;left:50%;width:128px;height:128px;margin:-64px 0 0 -64px;
+    border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:10px;text-align:center;cursor:grab;box-shadow:0 10px 22px rgba(0,0,0,.3);
+    transition:transform .5s cubic-bezier(.16,.8,.2,1),opacity .5s ease,box-shadow .5s ease;
+    will-change:transform}
+  .salamell-page .mcard:hover{transform:none;box-shadow:0 10px 22px rgba(0,0,0,.3)}
+  .salamell-page .mcard:active{cursor:grabbing}
+  .salamell-page .mcard .mi{font-size:1.9rem;margin-bottom:5px}
+  .salamell-page .mcard h4{font-size:.82rem;letter-spacing:.2px;line-height:1.15}
+  .salamell-page .mcard p{display:none}
+  .salamell-page .mcard.wheel-front{box-shadow:6px 6px 0 var(--ink),0 18px 34px rgba(0,0,0,.4)}
+  .salamell-page .menu-provider{display:block;text-align:center;margin-top:14px;font-family:var(--mono);font-size:.72rem;
+    letter-spacing:1px;text-transform:uppercase;color:var(--red-d);font-weight:700;
+    opacity:0;transform:translateY(-4px);transition:opacity .3s ease,transform .3s ease}
+  .salamell-page .menu-provider.show{opacity:1;transform:none}
+  .salamell-page .wheel-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;
+    font-family:var(--mono);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;opacity:.65;
+    animation:swipeBob 1.4s ease-in-out infinite}
+  .salamell-page .wheel-hint .arrow{display:inline-block;animation:wheelSlide 1.6s ease-in-out infinite}
+  @keyframes wheelSlide{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+}
+@media(prefers-reduced-motion:reduce){.salamell-page .wheel-hint,.salamell-page .wheel-hint .arrow{animation:none!important}.salamell-page .mcard{transition:none}}
+
+/* ===== SERATA ===== */
+.salamell-page .serata-head{text-align:center;margin-bottom:44px}
+.salamell-page .serata-head .display{font-size:clamp(2rem,6.5vw,4.4rem)}
+.salamell-page .serata-head p{opacity:.8;max-width:520px;margin:14px auto 0}
+.salamell-page .serata-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:820px){.salamell-page .serata-grid{grid-template-columns:1fr}}
+.salamell-page .bigcard{border:2px solid rgba(255,255,255,.18);overflow:hidden;transition:.3s}
+.salamell-page .bigcard:hover{transform:translateY(-6px);border-color:var(--yellow)}
+.salamell-page .bigcard .ph{border:none;aspect-ratio:16/9}
+.salamell-page .bigcard .cover{aspect-ratio:16/9;overflow:hidden;background:#000}
+.salamell-page .bigcard .cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.salamell-page .bigcard:hover .cover img{transform:scale(1.04)}
+.salamell-page .bigcard .cap{padding:22px 24px}
+.salamell-page .bigcard .k{font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase}
+.salamell-page .bigcard.red .k{color:var(--red)}.salamell-page .bigcard.blue .k{color:var(--blue)}
+.salamell-page .bigcard h4{font-family:var(--disp);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.5px;margin:6px 0}
+.salamell-page .bigcard p{opacity:.75}
+.salamell-page .bigcard b{color:#fff}
+
+/* ===== DRAMA ===== */
+.salamell-page .drama{text-align:center}
+.salamell-page .drama .display{font-size:clamp(2.4rem,8vw,6rem)}
+.salamell-page .drama .rr{color:var(--red)}.salamell-page .drama .bb{color:var(--blue)}
+.salamell-page .drama .sub{font-family:var(--mono);letter-spacing:2px;text-transform:uppercase;font-size:.8rem;margin-top:22px;opacity:.7}
+
+/* ===== CTA FINALE ===== */
+.salamell-page .final{text-align:center}
+.salamell-page .final .display{font-size:clamp(2.6rem,9vw,6.4rem);color:var(--yellow)}
+.salamell-page .final .when{font-family:var(--disp);font-size:clamp(1.6rem,5vw,2.6rem);margin-top:14px;color:#fff}
+.salamell-page .final .place{opacity:.75;margin-top:6px}
+.salamell-page .final .free{margin-top:16px;font-family:var(--mono);font-size:.74rem;letter-spacing:2px;opacity:.6;text-transform:uppercase}
+
+/* ===== SPONSOR ===== */
+.salamell-page .p-label{font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.6;margin-bottom:20px;text-align:center}
+.salamell-page .sponsors{display:flex;flex-wrap:wrap;gap:26px 34px;justify-content:center;align-items:center}
+.salamell-page .sponsors .slot{display:grid;place-items:center;min-width:110px;min-height:70px;padding:0 6px;
+  font-family:var(--mono);font-size:.64rem;letter-spacing:1px;text-align:center;text-transform:uppercase;
+  color:rgba(20,16,24,.55);transition:.2s}
+.salamell-page .sponsors .slot img{max-height:70px;max-width:190px;width:auto;height:auto;object-fit:contain;
+  opacity:.88;transition:.2s}
+.salamell-page .sponsors .slot:hover img{opacity:1;transform:scale(1.05)}
+.salamell-page .sponsors a.slot{cursor:pointer}
+.salamell-page .sponsors .slot.big img{max-height:84px;max-width:230px}
+.salamell-page .sponsors .slot.sm img{max-height:56px;max-width:160px}
+.salamell-page .sponsors .slot.xl img{max-height:104px;max-width:270px}
+.salamell-page .sponsor-row{display:flex;flex-wrap:wrap;gap:40px 60px;justify-content:center;align-items:center;margin-bottom:40px}
+.salamell-page .sponsor-row .p-label{margin-bottom:16px}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.salamell-page .reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -180,157 +306,198 @@ td.pts{font-family:var(--display);text-align:right;color:var(--yellow)}
     <a href="hall-of-fame.html">Hall of Fame</a>
     <a href="trasparenza.html">Trasparenza</a>
     <a href="contatti.html">Contatti</a>
-    <a href="gsl26.html" class="nav-gsl-pill">GSL26</a>
   </div>
 </nav>
 
-<!-- HERO ORIGINALE - nascosto, riattivare rimuovendo style="display:none" -->
-<header class="hero" style="display:none">
-  <div class="kicker">L'associazione pi&ugrave; giovane di Gorgonzola</div>
-  <h1><span>Energia </span><span>giovane,</span><span>radici locali</span></h1>
-  <p class="sub">Eventi, musica, sport e cultura per i giovani della Martesana.</p>
-  <div class="cta">
-    <a href="#prossimi" class="btn fill">Scopri gli eventi</a>
-    <a href="contatti.html" class="btn">Diventa volontario</a>
+<div class="salamell-page">
+<div class="prog" id="prog"></div>
+<canvas id="sparks" aria-hidden="true"></canvas>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="split split-red" aria-hidden="true"></div>
+  <div class="split split-blue" aria-hidden="true"></div>
+  <div class="hero-fighter l" aria-hidden="true"><img src="img/salamell_chef/andrea1.png" alt="" onerror="this.parentNode.innerHTML='Foto sfidante&lt;br&gt;Rosso'"></div>
+  <div class="hero-fighter r" aria-hidden="true"><img src="img/salamell_chef/edo1_fixed.png" alt="" onerror="this.parentNode.innerHTML='Foto sfidante&lt;br&gt;Blu'"></div>
+  <div class="hero-center">
+    <img class="event-logo" src="logo_salamell_chef.png" alt="Salamell Chef" onerror="this.outerHTML='&lt;div class=\'event-logo ph\'&gt;Logo evento&lt;/div&gt;'">
+    <h1 class="hero-title"><span class="s1">Salamell</span><span class="s2">Chef</span></h1>
+    <div class="hero-ed">7&ordf; Edizione</div>
+    <div class="hero-meta">5 Settembre <i>|</i> h 19 <i>|</i> Piazza della Repubblica, Gorgonzola</div>
+    <img class="hero-mobile-photo" src="img/salamell_chef/hero_mobile.png" alt="" onerror="this.outerHTML='&lt;div class=\'hero-mobile-photo ph\'&gt;Foto hero (mobile)&lt;/div&gt;'">
   </div>
-  <div class="marquee"><span class="mq">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span><span class="mq" aria-hidden="true">EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; EVENTI &#9733; MUSICA &#9733; SPORT &#9733; CULTURA &#9733; COMUNIT&Agrave; &#9733; </span></div>
 </header>
 
-<!-- HERO SUMMER LEAGUE - nascosto durante la fase finale (riattivare rimuovendo style="display:none") -->
-<header class="hero hero-gsl" style="display:none">
-  <div class="hero-gsl-logo" aria-hidden="true"><img src="img/summer-league-logo.svg" alt=""></div>
-  <div class="kicker">Sport &middot; Estate 2026 &middot; Seven Infinity</div>
-  <h1 style="max-width:800px"><span>&Egrave; tempo</span><span>di Summer.</span></span></h1>
-  <p class="sub">Il torneo più atteso dell'anno è tornato. Trovi le classifiche e il calendario aggiornati in tempo reale nella pagina dedicata.</p>
-  <div class="cta">
-    <a href="gsl26.html" class="btn fill">Calendario e risultati</a>
-    <a href="eventi.html" class="btn">Tutti gli eventi</a>
-  </div>
-  <div class="marquee"><span class="mq">SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; </span><span class="mq" aria-hidden="true">SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; SUMMER LEAGUE &#9733; SEVEN INFINITY &#9733; GORGONZOLA &#9733; SPORT &#9733; ESTATE 2026 &#9733; </span></div>
-</header>
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <span class="mq">SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; </span>
+  <span class="mq" aria-hidden="true">SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; SALAMELL CHEF &#9733; 7&ordf; EDIZIONE &#9733; 5 SETTEMBRE &#9733; PORCI COMODI VS EDO THE GRILL MASTER &#9733; PIAZZA DELLA REPUBBLICA &#9733; </span>
+</div>
 
-<!-- HERO FINALE GSL - nascosto: finale conclusa (riattivare rimuovendo style="display:none") -->
-<header class="hero-finale" style="display:none">
-  <div class="ff-rays" aria-hidden="true"></div>
-  <div class="ff-trophy" aria-hidden="true">&#127942;</div>
-  <div class="ff-inner">
-    <div class="ff-kicker">Gorgo Summer League &middot; Atto finale</div>
-    <h1 class="ff-title"><span class="l1">&Egrave; tempo di</span><span class="l2">Finalissima</span></h1>
-    <p class="ff-when">Venerd&igrave; 3 luglio &middot; ore 21:00 &middot; Seven Infinity</p>
-    <div class="ff-vs">
-      <div class="ff-team tbd" id="finA">Finalista 1</div>
-      <div class="ff-vsbadge">VS</div>
-      <div class="ff-team tbd" id="finB">Finalista 2</div>
-    </div>
-    <div class="ff-cd">
-      <div><b id="cd-d">--</b><span>giorni</span></div>
-      <div><b id="cd-h">--</b><span>ore</span></div>
-      <div><b id="cd-m">--</b><span>min</span></div>
-      <div><b id="cd-s">--</b><span>sec</span></div>
-    </div>
-    <div class="ff-cta">
-      <a href="gsl26.html" class="btn fill">Vai al tabellone</a>
-      <a href="gsl26.html" class="btn">Calendario e risultati</a>
-    </div>
+<!-- REGOLE -->
+<section class="section sec-dark rules">
+  <div class="container">
+    <div class="eyebrow reveal">Le regole del duello</div>
+    <h2 class="display reveal" data-delay="1">Stessi ingredienti,<br>sfida <span class="r">alla</span> <span class="b">pari</span></h2>
+    <p class="quote reveal" data-delay="2">Ogni squadra avr&agrave; gli stessi identici ingredienti: le salamelle fornite da <b>Carne del Bergamasco</b> e il pane del <b>Panificio Motta</b>, per una sfida alla pari. Ma il vero segreto sar&agrave; nella loro arte alla griglia, nei dettagli, nella passione&hellip;</p>
   </div>
-  <div class="marquee"><span class="mq">GRAN FINALE &#9733; GORGO SUMMER LEAGUE &#9733; VENERD&Igrave; 3 LUGLIO &#9733; SEVEN INFINITY &#9733; GRAN FINALE &#9733; GORGO SUMMER LEAGUE &#9733; VENERD&Igrave; 3 LUGLIO &#9733; SEVEN INFINITY &#9733; </span><span class="mq" aria-hidden="true">GRAN FINALE &#9733; GORGO SUMMER LEAGUE &#9733; VENERD&Igrave; 3 LUGLIO &#9733; SEVEN INFINITY &#9733; GRAN FINALE &#9733; GORGO SUMMER LEAGUE &#9733; VENERD&Igrave; 3 LUGLIO &#9733; SEVEN INFINITY &#9733; </span></div>
-</header>
-
-<!-- HERO CAMPIONE GSL "It came home" - nascondere dopo la celebrazione aggiungendo style="display:none" -->
-<header class="hero-champ">
-  <canvas id="confetti"></canvas>
-  <div class="ch-trophy" aria-hidden="true">&#127942;</div>
-  <div class="ch-in">
-    <div class="ch-kicker">Gorgo Summer League 2026 &middot; Il verdetto</div>
-    <h1 class="ch-title"><span class="l1">It came</span><span class="l2">home.</span></h1>
-    <div class="champ">
-      <span class="champ-badge">&#127942; Campioni 2026</span>
-      <div class="champ-name">Cadeo Imbiancature</div>
-      <div class="champ-sub">Si riprende il trono</div>
-    </div>
-    <p class="ch-tagline">Il titolo torna dove era gi&agrave; stato: <b>Cadeo Imbiancature</b> vince la Gorgo Summer League e riconquista la corona. Campioni, di nuovo.</p>
-    <div class="ch-cta">
-      <a href="gsl26.html" class="btn fill">Tabellone e risultati</a>
-    </div>
-  </div>
-  <div class="marquee"><span class="mq">&#127942; CAMPIONI 2026 &middot; CADEO IMBIANCATURE &middot; IT CAME HOME &middot; GORGO SUMMER LEAGUE &middot; &#127942; CAMPIONI 2026 &middot; CADEO IMBIANCATURE &middot; IT CAME HOME &middot; GORGO SUMMER LEAGUE &middot; </span><span class="mq" aria-hidden="true">&#127942; CAMPIONI 2026 &middot; CADEO IMBIANCATURE &middot; IT CAME HOME &middot; GORGO SUMMER LEAGUE &middot; &#127942; CAMPIONI 2026 &middot; CADEO IMBIANCATURE &middot; IT CAME HOME &middot; GORGO SUMMER LEAGUE &middot; </span></div>
-</header>
-
-<section class="section" id="prossimi">
-  <div class="up-head"><div><div class="tag">In arrivo</div><h2>Prossimi eventi</h2></div>
-    <a class="seeall" href="eventi.html">Tutti gli eventi &rarr;</a></div>
-  <p class="lead">Un assaggio di quello che bolle in pentola. Sulla pagina Eventi trovi il calendario completo e l'archivio.</p>
-  <div class="cards" id="home-eventi"></div>
 </section>
 
-<section class="section gj-league" id="gorgo-jam" style="display:none">
-  <div class="tag">Sport &middot; Notte Bianca 2026</div>
-  <h2>Gorgo Jam</h2>
-  <div class="league-brand">
-    <div class="league-logo-slot" style="overflow:hidden"><img src="img/gorgo-jam-logo.svg" alt="Gorgo Jam" style="filter:invert(1) brightness(2);width:100%;height:100%;object-fit:contain" onerror="this.parentNode.style.display='none'"></div>
-    <p class="lead" style="margin:0">Il torneo di basket 3v3 della Notte Bianca di Gorgonzola. Due gironi, tanta musica, bere e mangiare per tutti i gusti, una serata indimenticabile.</p>
-  </div>
-  <div class="gironi" style="margin-top:34px">
-    <div class="girone gj-girone">
-      <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Bugs Bunny</div>
-      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
-        <tr><td class="team">La Roja</td></tr>
-        <tr><td class="team">Inshape</td></tr>
-        <tr><td class="team">Lapartesana</td></tr>
-        <tr><td class="team">Brigata dal Carr&eacute;</td></tr>
-        <tr><td class="team">Lithuanian Kiss</td></tr>
-      </tbody></table>
+<!-- VERSUS -->
+<section class="section sec-yellow">
+  <div class="container">
+    <div class="versus-head reveal">
+      <div class="eyebrow">Il faccia a faccia</div>
+      <h2 class="display">I contendenti</h2>
     </div>
-    <div class="girone gj-girone">
-      <div class="gt gj-gt"><span class="dot gj-dot"></span>Girone Duffy Duck</div>
-      <table><thead><tr><th>Squadra</th></tr></thead><tbody>
-        <tr><td class="team">Boggio FC</td></tr>
-        <tr><td class="team">Rimbalzisti Anonimi</td></tr>
-        <tr><td class="team">Hair Ball</td></tr>
-        <tr><td class="team">Babek boy</td></tr>
-        <tr><td class="team">Vimogate</td></tr>
-      </tbody></table>
+    <div class="teams">
+      <div class="team red reveal l">
+        <div class="team-photo">
+          <img class="tp-base" src="img/salamell_chef/andrea2.png" alt="Andrea" onerror="this.parentNode.innerHTML='&lt;div class=\'ph\'&gt;Foto Andrea&lt;br&gt;(mezzo busto)&lt;/div&gt;'">
+          <img class="tp-alt" src="img/salamell_chef/andrea2b.png" alt="" aria-hidden="true" onerror="this.remove()">
+        </div>
+        <span class="role">Campione in carica</span>
+        <h3>Porci Comodi</h3>
+        <div class="who">Capitano Andrea &middot; Team Rosso</div>
+      </div>
+      <div class="team blue reveal r" data-delay="1">
+        <div class="team-photo">
+          <img class="tp-base" src="img/salamell_chef/edo2.png" alt="Eduard" onerror="this.parentNode.innerHTML='&lt;div class=\'ph\'&gt;Foto Eduard&lt;br&gt;(mezzo busto)&lt;/div&gt;'">
+          <img class="tp-alt" src="img/salamell_chef/edo2b.png" alt="" aria-hidden="true" onerror="this.remove()">
+        </div>
+        <span class="role">Lo sfidante</span>
+        <h3>Edo the Grill Master</h3>
+        <div class="who">Capitano Eduard &middot; Team Blu</div>
+      </div>
     </div>
-  </div>
-  <h3 style="font-family:var(--display);text-transform:uppercase;font-size:1.3rem;margin:46px 0 18px">Programma della serata</h3>
-  <div class="gj-schedule">
-    <table class="gj-table">
-      <thead><tr><th>Orario</th><th>Match</th><th>Girone</th></tr></thead>
-      <tbody>
-        <tr><td class="gj-time">17:15</td><td>La Roja &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">17:25</td><td>Boggio FC &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">17:35</td><td>Brigata dal Carr&eacute; &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">17:45</td><td>Hair Ball &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">17:55</td><td>La Roja &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">18:05</td><td>Vimogate &mdash; Boggio FC</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">18:15</td><td>Inshape &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">18:25</td><td>Rimbalzisti Anonimi &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">18:35</td><td>La Roja &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">18:45</td><td>Babek boy &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">18:55</td><td>Brigata dal Carr&eacute; &mdash; Inshape</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">19:05</td><td>Boggio FC &mdash; Hair Ball</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">19:15</td><td>Lapartesana &mdash; Lithuanian Kiss</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">19:25</td><td>Rimbalzisti Anonimi &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">19:35</td><td>Lapartesana &mdash; La Roja</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">19:45</td><td>Hair Ball &mdash; Vimogate</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">19:55</td><td>Lapartesana &mdash; Brigata dal Carr&eacute;</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">20:05</td><td>Boggio FC &mdash; Babek boy</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr><td class="gj-time">20:15</td><td>Inshape &mdash; Lapartesana</td><td><span class="gj-girone-label bugs">Bugs Bunny</span></td></tr>
-        <tr><td class="gj-time">20:25</td><td>Vimogate &mdash; Rimbalzisti Anonimi</td><td><span class="gj-girone-label duffy">Duffy Duck</span></td></tr>
-        <tr class="gj-separator"><td class="gj-time">20:35</td><td colspan="2">&#127936; 3 Point Contest</td></tr>
-        <tr class="gj-sep-label"><td colspan="3">Fase a eliminazione diretta</td></tr>
-        <tr><td class="gj-time">22:25</td><td>1&deg; Bugs &mdash; 4&deg; Duffy (A)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">22:35</td><td>1&deg; Duffy &mdash; 4&deg; Bugs (C)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">22:45</td><td>2&deg; Bugs &mdash; 3&deg; Duffy (D)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">22:55</td><td>2&deg; Duffy &mdash; 3&deg; Bugs (B)</td><td><span class="gj-girone-label final">Semifinale</span></td></tr>
-        <tr><td class="gj-time">23:15</td><td>A &mdash; B</td><td><span class="gj-girone-label final">Finale 3°</span></td></tr>
-        <tr><td class="gj-time">23:25</td><td>C &mdash; D</td><td><span class="gj-girone-label final">Finale 3°</span></td></tr>
-        <tr class="gj-finale"><td class="gj-time">23:45</td><td>&#127942; FINALE</td><td><span class="gj-girone-label finale-b">Grande Finale</span></td></tr>
-        <tr class="gj-premiazione"><td class="gj-time">00:00</td><td colspan="2">&#127881; Premiazione</td></tr>
-      </tbody>
-    </table>
   </div>
 </section>
+
+<!-- COME SI VINCE -->
+<section class="section sec-dark">
+  <div class="container">
+    <div class="how-head reveal">
+      <div class="eyebrow">Come si vince</div>
+      <h2 class="display">Il giudice sei tu</h2>
+      <p>Provale entrambe, poi decreta il migliore. Semplice: vince chi conquista i palati.</p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="step red reveal stack-0" data-delay="0"><div class="k">01</div><h4>Assaggia il Rosso</h4><p>Alla griglia dei Porci Comodi: prova la loro salamella. Occhi chiusi, papille aperte.</p></div>
+      <div class="step blue reveal stack-1" data-delay="1"><div class="k">02</div><h4>Assaggia il Blu</h4><p>Ora tocca agli sfidanti. Stesso rito, altra ricetta. Senti la differenza.</p></div>
+      <div class="step gold reveal stack-2" data-delay="2"><div class="k">03</div><h4>Decreta il campione</h4><p>Esprimi il tuo voto. Ogni palato conta: sarai tu, con la piazza, a incoronare il Salamell Chef.</p></div>
+    </div>
+    <div class="swipe-hint">Trascina la carta per continuare <span class="arrow">&#8594;</span></div>
+  </div>
+</section>
+
+<!-- GIURIA (nascosta) -->
+<section class="section sec-yellow" style="display:none">
+  <div class="container">
+    <div class="jury-head reveal">
+      <div class="eyebrow">Non solo il pubblico</div>
+      <h2 class="display">La Giuria d'Onore</h2>
+      <p>Oltre al verdetto della piazza, una <b>giuria d'onore</b> assaggia, valuta e assegna <b>punti extra</b>. Il pubblico incorona, la giuria pesa: insieme decretano il vero Salamell Chef.</p>
+    </div>
+    <div class="crits reveal" data-delay="1">
+      <span class="crit">Cottura</span>
+      <span class="crit">Tecnica</span>
+      <span class="crit">Presentazione</span>
+      <span class="crit">Originalit&agrave;</span>
+    </div>
+    <div class="jury-grid">
+      <div class="jmember reveal" data-delay="0"><div class="ph">Foto giurato</div><div class="jname">Giurato d'onore</div></div>
+      <div class="jmember reveal" data-delay="1"><div class="ph">Foto giurato</div><div class="jname">Giurato d'onore</div></div>
+      <div class="jmember reveal" data-delay="2"><div class="ph">Foto giurato</div><div class="jname">Giurato d'onore</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="section sec-yellow">
+  <div class="container">
+    <div class="menu-head reveal">
+      <div class="eyebrow">Cosa si mangia (e si beve)</div>
+      <h2 class="display">Il menu della sfida</h2>
+    </div>
+    <div class="menu-grid" id="menuWheel">
+      <div class="mcard reveal" data-delay="0" data-provider="Gli sfidanti"><div class="mi">&#127789;</div><h4>Salamella</h4><p>Singola o <b>Combo Sfida</b>: provi quella rossa e quella blu, poi voti.</p></div>
+      <div class="mcard reveal" data-delay="1" data-provider="Proxima"><div class="mi">&#127839;</div><h4>Patatine fritte</h4><p>Il contorno d'ordinanza, dalle mani esperte dello staff Proxima.</p></div>
+      <div class="mcard reveal" data-delay="2" data-provider="Gorgonziner"><div class="mi">&#127866;</div><h4>Birra artigianale</h4><p>Alla spina, firmata <b>Gorgonziner</b>.</p></div>
+      <div class="mcard reveal" data-delay="3" data-provider="Piccola Champagneria"><div class="mi">&#127864;</div><h4>Drink &amp; analcolici</h4><p>Per tutti i gusti, by <b>Piccola Champagneria</b>.</p></div>
+      <div class="mcard reveal" data-delay="4" data-provider="Mara"><div class="mi">&#127849;</div><h4>Frittelle &amp; dolci</h4><p>Il gran finale dolce, <b>di Mara</b>.</p></div>
+    </div>
+    <div class="menu-provider" id="menuProvider">by Gli sfidanti</div>
+    <div class="wheel-hint">Trascina per sfogliare <span class="arrow">&#8635;</span></div>
+  </div>
+</section>
+
+<!-- SERATA -->
+<section class="section sec-dark">
+  <div class="container">
+    <div class="serata-head reveal">
+      <div class="eyebrow">Quando cala la sera</div>
+      <h2 class="display">La festa continua</h2>
+    </div>
+    <div class="serata-grid">
+      <div class="bigcard red reveal l">
+        <div class="cover"><img src="img/rea_dea_cover.png" alt="Rea Dea" onerror="this.parentNode.outerHTML='&lt;div class=\'ph\'&gt;Foto Rea Dea&lt;/div&gt;'"></div>
+        <div class="cap"><h4>Musica dal vivo</h4><p>Sul palco i <b>Rea Dea</b>: la colonna sonora perfetta per far ballare la piazza e festeggiare il campione.</p></div>
+      </div>
+      <div class="bigcard blue reveal r" data-delay="1">
+        <div class="cover"><img src="img/gonfiabili_cover.jpg" alt="Gonfiabili" onerror="this.parentNode.outerHTML='&lt;div class=\'ph\'&gt;Foto area bimbi&lt;/div&gt;'"></div>
+        <div class="cap"><h4>Gonfiabili per i pi&ugrave; piccoli</h4><p>Un'area dedicata ai bambini con gonfiabili e giochi, mentre i grandi pensano alla griglia.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRAMA -->
+<section class="section sec-yellow drama">
+  <div class="container">
+    <h2 class="display reveal z">Andrea e i <span class="rr">Porci Comodi</span> difendono il titolo. Riuscir&agrave; la squadra di <span class="bb">Eduard</span> a strapparglielo?</h2>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="section sec-dark final" id="quando">
+  <div class="container">
+    <div class="eyebrow reveal">Segna la data</div>
+    <h2 class="display reveal" data-delay="1">Vieni a decidere</h2>
+    <div class="when reveal" data-delay="2">5 Settembre 2026 &middot; h 19</div>
+    <div class="place reveal" data-delay="2">Piazza della Repubblica, Gorgonzola &middot; Ingresso libero</div>
+    <div class="reveal" data-delay="3" style="margin-top:32px"><a href="#" id="saveDate" class="btn btn-yellow">Salva la data &#128197;</a></div>
+  </div>
+</section>
+
+<!-- SPONSOR -->
+<section class="section sec-yellow">
+  <div class="container">
+    <div class="sponsor-row">
+      <div class="reveal">
+        <div class="p-label">Un evento di</div>
+        <div class="sponsors">
+          <div class="slot sm"><img src="img/loghi_black/proxima.png" alt="Proxima" onerror="this.outerHTML='Proxima'"></div>
+          <a class="slot" href="https://www.fieridellafiera.it/wp/" target="_blank" rel="noopener"><img src="img/loghi_black/fieri_della_fiera.png" alt="Fieri della Fiera" onerror="this.outerHTML='Fieri della Fiera'"></a>
+        </div>
+      </div>
+      <div class="reveal" data-delay="1">
+        <div class="p-label">Con il patrocinio di</div>
+        <div class="sponsors">
+          <a class="slot xl" href="https://comune.gorgonzola.mi.it/" target="_blank" rel="noopener"><img src="img/loghi_black/comune_gorgonzola.png" alt="Comune di Gorgonzola" onerror="this.outerHTML='Comune di Gorgonzola'"></a>
+        </div>
+      </div>
+    </div>
+    <div class="p-label reveal">Con il supporto di</div>
+    <div class="sponsors reveal" data-delay="1">
+      <a class="slot" href="https://www.facebook.com/PanificioPasticceriaMotta/?locale=it_IT" target="_blank" rel="noopener"><img src="img/loghi_black/motta.png" alt="Panificio Motta" onerror="this.outerHTML='Panificio Motta'"></a>
+      <a class="slot" href="https://www.lacarnedelbergamasco.com/" target="_blank" rel="noopener"><img src="img/loghi_black/bergamasco.png" alt="Carne del Bergamasco" onerror="this.outerHTML='Carne del Bergamasco'"></a>
+      <a class="slot" href="https://www.martelab.it/" target="_blank" rel="noopener"><img src="img/loghi_black/martelab.png" alt="Martelab" onerror="this.outerHTML='Martelab'"></a>
+      <a class="slot" href="https://gorgonziner.com/" target="_blank" rel="noopener"><img src="img/loghi_black/gorgonziner.png" alt="Gorgonziner" onerror="this.outerHTML='Gorgonziner'"></a>
+      <a class="slot" href="https://www.instagram.com/piccola.champagneria/" target="_blank" rel="noopener"><img src="img/loghi_black/champagneria.png" alt="Piccola Champagneria" onerror="this.outerHTML='Piccola Champagneria'"></a>
+    </div>
+  </div>
+</section>
+</div><!-- /.salamell-page -->
 
 <footer>
   <div class="col">
@@ -359,96 +526,214 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
 </script>
 <script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
-(function(){
-  var STATI={"iscrizioni":"Iscrizioni aperte","in-corso":"In corso","in-programma":"In programma","archivio":""};
-  fetch("data/eventi.json").then(function(r){return r.json()}).then(function(d){
-    var ev=(d.eventi||[]).filter(function(e){return e.stato!=="archivio"}).sort(function(a,b){return (a.ordine||0)-(b.ordine||0)}).slice(0,3);
-    var box=document.getElementById("home-eventi");
-    ev.forEach(function(e){
-      var tema=e.tema&&e.tema!=="neutro"?(" t-"+e.tema):"";
-      var badge=STATI[e.stato]?('<span class="badge">'+STATI[e.stato]+'</span>'):"";
-      var hasPoster=e.locandina&&e.locandina.trim();
-      var poster=hasPoster?('<div class="poster-thumb"><img src="'+e.locandina+'" alt="Locandina '+e.titolo+'" loading="lazy"></div>'):"";
-      box.insertAdjacentHTML("beforeend",
-        '<a class="card'+tema+(hasPoster?' has-poster':'')+(STATI[e.stato]?' has-badge':'')+'" href="evento.html?e='+encodeURIComponent(e.slug)+'">'+badge+poster+'<div class="card-bg"></div><div class="card-body"><div class="date">'+(e.data_label||"")+'</div><h3>'+e.titolo+'</h3>'+
-        (e.dove?'<div class="place">&#128205; '+e.dove.split(",")[0]+'</div>':'')+'</div></a>');
-    });
-  });
-})();
-</script>
-<script>
-(function(){
-  // ---- Countdown alla finale ----
-  var FINALE=new Date('2026-07-03T21:00:00');
-  function pad(n){return (n<10?'0':'')+n;}
-  function tick(){
-    var el=document.getElementById('cd-d'); if(!el) return;
-    var diff=FINALE-new Date(); if(diff<0)diff=0;
-    el.textContent=Math.floor(diff/864e5);
-    document.getElementById('cd-h').textContent=pad(Math.floor(diff%864e5/36e5));
-    document.getElementById('cd-m').textContent=pad(Math.floor(diff%36e5/6e4));
-    document.getElementById('cd-s').textContent=pad(Math.floor(diff%6e4/1e3));
-  }
-  tick(); setInterval(tick,1000);
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.16});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  // ---- Finalisti automatici dal tabellone (Finale esplicita o vincitori delle semifinali) ----
-  var A=document.getElementById('finA'), B=document.getElementById('finB');
-  function isPlaceholder(n){ return !n || /finalist|vincente|\?/i.test(n); }
-  function winner(p){
-    if(!p) return null;
-    var gc=p.gol_casa, go=p.gol_ospite;
-    if(gc==null||gc===""||go==null||go==="") return null;
-    gc=parseInt(gc,10); go=parseInt(go,10);
-    if(isNaN(gc)||isNaN(go)||gc===go) return null;
-    return gc>go ? p.casa : p.ospite;
-  }
-  function setTeam(el,name){
-    if(!el) return;
-    if(name){ el.textContent=name; el.classList.remove('tbd'); }
-  }
-  if(A&&B){
-    fetch('data/summer-league.json').then(function(r){return r.json()}).then(function(d){
-      var fasi=(d.tabellone&&d.tabellone.fasi)||[];
-      var finale=null, semi=null;
-      fasi.forEach(function(f){
-        if(/final/i.test(f.nome)&&!/semi/i.test(f.nome)) finale=f;
-        if(/semifinal/i.test(f.nome)) semi=f;
-      });
-      var a=finale&&finale.partite&&finale.partite[0]?finale.partite[0].casa:null;
-      var b=finale&&finale.partite&&finale.partite[0]?finale.partite[0].ospite:null;
-      if(isPlaceholder(a)&&semi&&semi.partite) a=winner(semi.partite[0]);
-      if(isPlaceholder(b)&&semi&&semi.partite) b=winner(semi.partite[1]);
-      setTeam(A,a); setTeam(B,b);
-    }).catch(function(){});
-  }
-})();
-</script>
-<script>
+/* ---- barra avanzamento + parallax hero (testo vs immagini a velocita' diverse) ---- */
+var prog=document.getElementById('prog');
+var hf=document.querySelectorAll('.hero-fighter');
+var heroCenter=document.querySelector('.hero-center');
+var heroMobilePhoto=document.querySelector('.hero-mobile-photo');
+function onScroll(){
+  var d=document.documentElement;
+  var max=d.scrollHeight-d.clientHeight;
+  prog.style.width=(max>0?(d.scrollTop/max*100):0)+'%';
+  if(reduce) return;
+  var y=d.scrollTop;
+  for(var i=0;i<hf.length;i++){ hf[i].style.transform='translateY('+(y*0.22)+'px)'; }
+  if(heroCenter) heroCenter.style.transform='translateY('+(y*0.08)+'px)';
+  if(heroMobilePhoto) heroMobilePhoto.style.transform='translateY('+(y*0.18)+'px)';
+}
+window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+/* ---- scintille che salgono (ambient) ---- */
 (function(){
-  var hero=document.querySelector('.hero-champ');
-  if(!hero || !hero.offsetHeight || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var cv=document.getElementById('confetti'); if(!cv) return;
-  var ctx=cv.getContext('2d'),W,H,parts=[];
-  function resize(){ W=cv.width=hero.clientWidth; H=cv.height=hero.clientHeight; }
-  resize(); window.addEventListener('resize',resize);
-  var COLORS=['#ddeb00','#4a3cec','#ffd23f','#ffffff','#9b3cff','#ff6a2b'];
-  function make(y){ return {x:Math.random()*W,y:y!=null?y:-20,w:Math.random()*8+4,h:Math.random()*5+4,
-    vy:Math.random()*1.6+1,vx:(Math.random()-0.5)*1.2,rot:Math.random()*6.28,vr:(Math.random()-0.5)*0.2,
-    c:COLORS[Math.floor(Math.random()*COLORS.length)],sway:Math.random()*2}; }
-  for(var i=0;i<130;i++){ parts.push(make(Math.random()*H)); }
+  if(reduce) return;
+  var cv=document.getElementById('sparks'), ctx=cv.getContext('2d'), W,H, ps=[];
+  function rs(){ W=cv.width=innerWidth; H=cv.height=innerHeight; }
+  rs(); window.addEventListener('resize',rs);
+  var COL=['#ff7a18','#ff2e2e','#ffd23f','#2f43ff','#ffffff'];
+  function mk(y){ return {x:Math.random()*W,y:(y==null?H+10:y),r:Math.random()*2.2+.8,
+    vy:-(Math.random()*.8+.3),vx:(Math.random()-.5)*.3,a:0,mx:Math.random()*2,
+    c:COL[Math.random()*COL.length|0]}; }
+  for(var i=0;i<58;i++){ ps.push(mk(Math.random()*H)); }
   function tick(){
     ctx.clearRect(0,0,W,H);
-    parts.forEach(function(p){
-      p.y+=p.vy; p.x+=p.vx+Math.sin((p.y*0.02)+p.sway)*0.6; p.rot+=p.vr;
-      if(p.y>H+20){ Object.assign(p,make(-20)); }
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
-      ctx.fillStyle=p.c; ctx.globalAlpha=.9; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-      ctx.restore();
-    });
+    for(var i=0;i<ps.length;i++){
+      var p=ps[i];
+      p.y+=p.vy; p.x+=p.vx+Math.sin((p.y*.03)+p.mx)*.3; p.a=Math.min(p.a+.02,.7);
+      if(p.y<-12){ Object.assign(p,mk(H+10)); }
+      ctx.globalAlpha=p.a*(0.55+0.45*Math.sin((p.y+p.x)*.05));
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28);
+      ctx.fillStyle=p.c; ctx.shadowBlur=8; ctx.shadowColor=p.c; ctx.fill();
+    }
+    ctx.globalAlpha=1; ctx.shadowBlur=0;
     requestAnimationFrame(tick);
   }
   tick();
 })();
+
+/* "Salva la data": genera e scarica un evento .ics (Google/Apple/Outlook) */
+var saveDateBtn=document.getElementById('saveDate');
+if(saveDateBtn){
+  saveDateBtn.addEventListener('click',function(e){
+    e.preventDefault();
+    var ics=[
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Proxima//Salamell Chef//IT',
+      'BEGIN:VEVENT',
+      'UID:salamell-chef-2026@proxima',
+      'DTSTAMP:20260101T000000Z',
+      'DTSTART:20260905T190000',
+      'DTEND:20260905T235900',
+      'SUMMARY:Salamell Chef — 7ª Edizione',
+      'LOCATION:Piazza della Repubblica\\, Gorgonzola',
+      'DESCRIPTION:Porci Comodi vs Edo the Grill Master. Provale entrambe e decreta il campione. Musica dal vivo\\, birra artigianale e street food.',
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url; a.download='salamell-chef.ics';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); },1500);
+  });
+}
+
+/* stack "Il giudice sei tu": trascina/swipe la carta in cima, va sotto e sale la successiva */
+(function(){
+  var stack=document.getElementById('steps');
+  if(!stack) return;
+  var order=Array.prototype.slice.call(stack.querySelectorAll('.step'));
+  function layout(){
+    order.forEach(function(card,i){
+      card.classList.remove('stack-0','stack-1','stack-2');
+      card.classList.add('stack-'+i);
+    });
+  }
+  function advance(){
+    order.push(order.shift());
+    layout();
+  }
+  var dragging=false, startX=0, curX=0;
+  function front(){ return order[0]; }
+  function onDown(e){
+    if(!window.matchMedia('(max-width: 820px)').matches) return;
+    var f=front();
+    if(!f || (e.target && e.target.closest && e.target.closest('.step')!==f)) return;
+    dragging=true; startX=e.clientX; curX=startX;
+    f.style.transition='none';
+    stack.setPointerCapture&&e.pointerId!=null&&stack.setPointerCapture(e.pointerId);
+  }
+  function onMove(e){
+    if(!dragging) return;
+    var f=front(); if(!f) return;
+    curX=e.clientX;
+    var dx=curX-startX;
+    f.style.transform='translateX('+dx+'px) rotate('+(dx*0.06)+'deg)';
+  }
+  function onUp(){
+    if(!dragging) return;
+    dragging=false;
+    var f=front(); if(!f) return;
+    var dx=curX-startX;
+    f.style.transition='transform .32s cubic-bezier(.2,.8,.25,1),opacity .32s ease';
+    if(Math.abs(dx)>64){
+      var dir=dx>0?1:-1;
+      f.style.transform='translateX('+(dir*560)+'px) rotate('+(dir*24)+'deg)';
+      f.style.opacity='0';
+      setTimeout(function(){
+        f.style.transition='none'; f.style.opacity=''; f.style.transform='';
+        advance();
+      },260);
+    } else {
+      f.style.transform='';
+    }
+  }
+  stack.addEventListener('pointerdown',onDown);
+  window.addEventListener('pointermove',onMove);
+  window.addEventListener('pointerup',onUp);
+  window.addEventListener('pointercancel',onUp);
+})();
+
+/* menu "Il menu della sfida": carosello ad arco, tutte le card visibili, loop circolare trascinando col dito, su mobile */
+(function(){
+  var wheel=document.getElementById('menuWheel');
+  if(!wheel) return;
+  var provEl=document.getElementById('menuProvider');
+  var items=Array.prototype.slice.call(wheel.querySelectorAll('.mcard'));
+  var n=items.length;
+  var spacing=128, dragUnit=110;
+  var pos=0;
+  function layout(){
+    if(!window.matchMedia('(max-width: 820px)').matches){
+      items.forEach(function(card){
+        card.style.transform=''; card.style.opacity=''; card.style.zIndex='';
+        card.classList.remove('wheel-front');
+      });
+      if(provEl) provEl.classList.remove('show');
+      return;
+    }
+    items.forEach(function(card,i){
+      var raw=i-pos;
+      var off=((raw+n/2)%n+n)%n-n/2;
+      var a=Math.abs(off);
+      var x=off*spacing;
+      var y=Math.pow(a,1.4)*6.5;
+      var scale=Math.max(.5,1-a*.22);
+      var opacity=Math.max(.55,1-a*.12);
+      var rotate=off*5;
+      var z=Math.round(100-a*10);
+      card.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px) scale('+scale.toFixed(3)+') rotate('+rotate.toFixed(1)+'deg)';
+      card.style.opacity=opacity.toFixed(2);
+      card.style.zIndex=z;
+      var isFront=a<.5;
+      card.classList.toggle('wheel-front',isFront);
+      if(isFront && provEl){
+        provEl.textContent='by '+card.getAttribute('data-provider');
+        provEl.classList.add('show');
+      }
+    });
+  }
+  layout();
+  var dragging=false, startX=0, startPos=0;
+  function onDown(e){
+    if(!window.matchMedia('(max-width: 820px)').matches) return;
+    dragging=true; startX=e.clientX; startPos=pos;
+    items.forEach(function(c){ c.style.transition='none'; });
+    wheel.setPointerCapture&&e.pointerId!=null&&wheel.setPointerCapture(e.pointerId);
+  }
+  function onMove(e){
+    if(!dragging) return;
+    var dx=e.clientX-startX;
+    pos=startPos-dx/dragUnit;
+    layout();
+  }
+  function onUp(){
+    if(!dragging) return;
+    dragging=false;
+    pos=Math.round(pos);
+    items.forEach(function(c){ c.style.transition=''; });
+    layout();
+  }
+  wheel.addEventListener('pointerdown',onDown);
+  window.addEventListener('pointermove',onMove);
+  window.addEventListener('pointerup',onUp);
+  window.addEventListener('pointercancel',onUp);
+  window.addEventListener('resize',layout);
+})();
+
+/* card squadra: tap per attivare l'effetto su touch (dove l'hover non esiste) */
+document.querySelectorAll('.team').forEach(function(card){
+  card.addEventListener('click',function(){
+    if(window.matchMedia('(hover: none)').matches){
+      document.querySelectorAll('.team.flip').forEach(function(c){ if(c!==card) c.classList.remove('flip'); });
+      card.classList.toggle('flip');
+    }
+  });
+});
 </script>
 </body>
 </html>
