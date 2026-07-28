@@ -36,7 +36,7 @@
 .salamell-page .sec-yellow .eyebrow{color:var(--red-d)}
 .salamell-page .sec-dark .eyebrow{color:var(--yellow)}
 
-.salamell-page .btn{display:inline-block;font-family:var(--disp);text-transform:uppercase;letter-spacing:1px;font-size:1.05rem;padding:15px 32px;transition:.16s;border:3px solid var(--ink);cursor:pointer}
+.salamell-page .btn{display:inline-block;font-family:var(--disp);text-transform:uppercase;letter-spacing:1px;font-size:1.05rem;padding:15px 32px;transition:.16s;border:3px solid var(--ink);border-radius:0;cursor:pointer}
 .salamell-page .btn-dark{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
 .salamell-page .btn-dark:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--red)}
 .salamell-page .btn-yellow{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
@@ -202,6 +202,29 @@
 }
 @media(max-width:560px){.salamell-page .steps{height:320px}}
 @media(prefers-reduced-motion:reduce){.salamell-page .swipe-hint,.salamell-page .swipe-hint .arrow{animation:none!important}.salamell-page .step{transition:none}}
+
+/* ===== MINIGIOCO ===== */
+.salamell-page .arcade{position:relative;overflow:hidden;text-align:center;
+  background:linear-gradient(115deg,var(--red-d) 0%,var(--red) 42%,var(--blue) 58%,var(--blue-d) 100%)}
+.salamell-page .arcade::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.42))}
+.salamell-page .arcade .container{position:relative;z-index:2}
+.salamell-page .arcade .eyebrow{color:var(--yellow)}
+.salamell-page .arcade .display{font-size:clamp(2.2rem,7.5vw,4.6rem);color:#fff;text-shadow:0 5px 0 rgba(0,0,0,.25)}
+.salamell-page .arcade .display .y{color:var(--yellow)}
+.salamell-page .arcade p{max-width:540px;margin:16px auto 0;color:rgba(255,255,255,.9)}
+.salamell-page .arcade .go{margin-top:30px}
+/* mini anteprima della barra di cottura, spiega il gioco a colpo d'occhio */
+.salamell-page .demobar{width:min(260px,80%);height:16px;margin:26px auto 0;border-radius:999px;
+  background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.32);position:relative;overflow:hidden}
+.salamell-page .demobar i{position:absolute;top:0;bottom:0;left:58%;width:22%;
+  background:linear-gradient(180deg,#ffd257,var(--yellow));box-shadow:0 0 10px rgba(255,200,0,.9)}
+.salamell-page .demobar b{position:absolute;top:-3px;bottom:-3px;width:4px;border-radius:2px;background:#fff;
+  box-shadow:0 0 8px #fff;animation:demoRun 2.4s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes demoRun{0%{left:0}62%{left:66%}72%{left:66%}100%{left:100%}}
+.salamell-page .demolbl{font-family:var(--mono);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--yellow);margin-top:12px}
+@media(prefers-reduced-motion:reduce){.salamell-page .demobar b{animation:none;left:66%}}
 
 /* ===== MENU ===== */
 .salamell-page .menu-head{margin-bottom:34px}
@@ -387,6 +410,18 @@
       <div class="step gold reveal stack-2" data-delay="2"><div class="k">03</div><h4>Decreta il campione</h4><p>Esprimi il tuo voto. Ogni palato conta: sarai tu, con la piazza, a incoronare il Salamell Chef.</p></div>
     </div>
     <div class="swipe-hint">Trascina la carta per continuare <span class="arrow">&#8594;</span></div>
+  </div>
+</section>
+
+<!-- MINIGIOCO -->
+<section class="section arcade">
+  <div class="container">
+    <div class="eyebrow reveal">Mettiti alla prova</div>
+    <h2 class="display reveal" data-delay="1">Sai grigliare?<br><span class="y">Dimostralo.</span></h2>
+    <p class="reveal" data-delay="2">Tocca quando la salamella &egrave; nella zona dorata. Sbagli il tempo? Cruda o carbonizzata. Fai il tuo record e sfida gli amici prima del 5 settembre.</p>
+    <div class="demobar reveal" data-delay="2" aria-hidden="true"><i></i><b></b></div>
+    <div class="demolbl reveal" data-delay="2">&#9650; Tocca nella zona dorata</div>
+    <div class="go reveal" data-delay="3"><a href="cottura-perfetta.html" class="btn btn-yellow">Gioca a Cottura Perfetta</a></div>
   </div>
 </section>
 
