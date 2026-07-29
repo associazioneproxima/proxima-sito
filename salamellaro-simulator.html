@@ -231,12 +231,14 @@ var SLOTS = 6;
 var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 var RANKS = [
-  {min:0,    t:'Turista della Griglia'},
-  {min:1200, t:'Apprendista Salamellaro'},
-  {min:3000, t:'Grigliatore Provetto'},
-  {min:5200, t:'Maestro della Brace'},
-  {min:8000, t:'Signore del Fuoco'},
-  {min:11500,t:'SALAMELL CHEF'}
+  {min:0,     t:'Turista della Griglia'},
+  {min:1000,  t:'Apprendista Salamellaro'},
+  {min:2500,  t:'Grigliatore Provetto'},
+  {min:4500,  t:'Maestro della Brace'},
+  {min:7000,  t:'Signore del Fuoco'},
+  {min:10500, t:'Domatore di Fiamme'},
+  {min:15000, t:'Leggenda della Griglia'},
+  {min:22000, t:'SALAMELL CHEF'}
 ];
 function rankFor(s){ var r=RANKS[0]; for(var i=0;i<RANKS.length;i++){ if(s>=RANKS[i].min) r=RANKS[i]; } return r.t; }
 
