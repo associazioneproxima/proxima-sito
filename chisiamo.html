@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chi siamo &mdash; Proxima</title>
+<link rel="icon" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.section{padding:120px 5vw 80px}
+
+/* ===== INTRO: luce d'ambiente, per non lasciare il nero piatto ===== */
+.intro-sec{position:relative;overflow:hidden}
+.intro-sec::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 52% 58% at 80% 14%, rgba(74,60,236,.34), transparent 66%),
+    radial-gradient(ellipse 46% 52% at 4% 58%, rgba(255,106,43,.13), transparent 70%),
+    radial-gradient(ellipse 70% 34% at 46% -6%, rgba(221,235,0,.07), transparent 68%)}
+.intro-sec>*{position:relative;z-index:1}
+.page-h .hl{color:var(--yellow)}
+
+.intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.intro-grid p{font-size:1.1rem;font-weight:300;margin-bottom:16px}
+@media(max-width:920px){.intro-grid{grid-template-columns:1fr;gap:34px}}
+
+/* pannello numeri: un blocco unico con righe separate da filetti */
+.stats{display:grid;gap:1px;background:rgba(246,245,239,.14);
+  border:1px solid rgba(246,245,239,.16);border-radius:28px 28px 28px 4px;overflow:hidden;
+  box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.stat{position:relative;padding:24px 26px 22px 30px;
+  background:linear-gradient(180deg,rgba(24,21,52,.94),rgba(10,10,22,.94));
+  transition:background .32s ease}
+.stat::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:4px;border-radius:0 4px 4px 0;
+  background:linear-gradient(180deg,var(--yellow),var(--orange));
+  transform:scaleY(.5);transform-origin:center;
+  transition:transform .38s cubic-bezier(.2,.8,.25,1)}
+.stat:hover{background:linear-gradient(180deg,rgba(44,36,110,.94),rgba(14,12,34,.94))}
+.stat:hover::before{transform:scaleY(1)}
+.stat b{font-family:var(--display);font-size:clamp(2.1rem,4vw,2.7rem);display:block;line-height:1;
+  color:var(--yellow);letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.stat small{font-family:'Space Grotesk';text-transform:uppercase;font-size:.74rem;letter-spacing:1.4px;
+  opacity:.72;display:block;margin-top:7px}
+
+/* ===== TEAM ===== */
+.people{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-top:44px}
+.person{width:min(230px,100%);background:rgba(255,255,255,.03);
+  border:1px solid rgba(246,245,239,.12);padding:18px;border-radius:24px 24px 24px 4px;
+  transition:transform .3s cubic-bezier(.2,.8,.25,1),border-color .3s ease,
+             background .3s ease,box-shadow .3s ease}
+.person:hover{transform:translateY(-8px);border-color:var(--yellow);background:rgba(255,255,255,.06);
+  box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 1px rgba(221,235,0,.22)}
+.person .ph{aspect-ratio:1;background:linear-gradient(135deg,var(--violet),var(--grape));display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:14px;border-radius:20px 20px 20px 4px}
+.person .ph span{font-family:var(--display);font-size:.8rem;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:1px}
+.person .ph img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.2,.8,.25,1)}
+.person:hover .ph img{transform:scale(1.07)}
+.person h4{font-family:'Sora';font-weight:800;font-size:1.12rem;transition:color .3s ease}
+.person:hover h4{color:var(--yellow)}
+.person small{font-family:'Space Grotesk';text-transform:uppercase;font-size:.72rem;letter-spacing:1px;color:var(--orange);font-weight:700}
+@media(max-width:520px){.person{width:min(280px,100%)}}
+
+/* blocco volontari: a tutta larghezza, senza effetto di selezione */
+.person.volunteers{width:100%;max-width:620px;margin:28px auto 0;text-align:center}
+.person.volunteers:hover{transform:none;border-color:rgba(246,245,239,.12);
+  background:rgba(255,255,255,.03);box-shadow:none}
+.person.volunteers:hover h4{color:inherit}
+@media(prefers-reduced-motion:reduce){.person,.person .ph img,.stat,.stat::before{transition:none}}
+
+.nav-gsl-pill{background:var(--violet);color:#fff!important;padding:5px 14px!important;border-radius:50px;opacity:1!important}
+.nav-gsl-pill::after{display:none!important}
+.nav-gsl-pill:hover{background:var(--violet-deep)!important}
+@media(max-width:920px){.nav-gsl-pill{background:var(--violet)!important;color:#fff!important;border-radius:50px!important;padding:8px 18px!important;margin:8px 0!important;display:inline-block!important;border-bottom:none!important}}
+</style>
+</head>
+<body>
+<div class="nav-scrim" onclick="closeMenu()"></div>
+<nav>
+  <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:30px"></a>
+  <button class="burger" aria-label="Menu" onclick="toggleMenu(this)"><span></span><span></span><span></span></button>
+  <div class="links" id="navlinks">
+    <a href="index.html">Home</a>
+    <a href="chi-siamo.html" class="active">Chi siamo</a>
+    <a href="eventi.html">Eventi</a>
+    <a href="archivio.html">Archivio</a>
+    <a href="hall-of-fame.html">Hall of Fame</a>
+    <a href="mini-giochi.html">Mini Giochi</a>
+    <a href="trasparenza.html">Trasparenza</a>
+    <a href="contatti.html">Contatti</a>
+  </div>
+</nav>
+<section class="section intro-sec">
+  <div class="tag">Chi siamo</div>
+  <h1 class="page-h">Lo spazio dei giovani<br><span class="hl">&egrave; adesso.</span></h1>
+  <div class="intro-grid" style="margin-top:30px">
+    <div>
+      <p>Proxima &egrave; un'associazione no-profit nata a Gorgonzola per dare voce e spazio ai ragazzi del territorio. Organizziamo eventi, tornei e concerti pensati da giovani per i giovani.</p>
+      <p>Crediamo che la comunit&agrave; si costruisca creando occasioni di incontro reali &mdash; fuori dallo schermo, in piazza, nei campi da gioco, negli spazi della citt&agrave;.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>2024</b><small>Anno di fondazione</small></div>
+      <div class="stat"><b data-count="20" data-suffix="+">0</b><small>Eventi organizzati</small></div>
+      <div class="stat"><b data-count="1500" data-suffix="+">0</b><small>Giovani coinvolti</small></div>
+    </div>
+  </div>
+  <h2 style="margin-top:84px">Il team</h2>
+  <p class="lead">Chi rende possibile tutto questo.</p>
+  <div class="people">
+    <div class="person"><div class="ph"><img src="img/lorenzo-bernucca.jpg" alt="Lorenzo Bernucca"></div><h4>Lorenzo Bernucca</h4><small>Presidente<br>resp GSL</small></div>
+    <div class="person"><div class="ph"><img src="img/giorgia-torella.jpg" alt="Giorgia Torella"></div><h4>Giorgia Torella</h4><small>Vicepresidente<br>resp Comunicazione e Graphic Designer</small></div>
+    <div class="person"><div class="ph"><img src="img/andrea-venturini.jpg" alt="Andrea Venturini"></div><h4>Andrea Venturini</h4><small>Segretario<br>resp Volontari</small></div>
+    <div class="person"><div class="ph"><img src="img/francesco-sarcina.jpg" alt="Francesco Sarcina"></div><h4>Francesco Sarcina</h4><small>Membro del Direttivo<br>resp Tesoreria</small></div>
+    <div class="person"><div class="ph"><img src="img/simona-candiani.jpg" alt="Simona Candiani"></div><h4>Simona Candiani</h4><small>Membro del Direttivo<br>resp Finanziaria</small></div>
+    <div class="person"><div class="ph"><img src="img/lorenzo-venturini.jpg" alt="Lorenzo Venturini"></div><h4>Lorenzo Venturini</h4><small>Membro del Direttivo<br>resp GSL</small></div>
+    <div class="person"><div class="ph"><img src="img/matteo-rella.jpg" alt="Matteo Rella"></div><h4>Matteo Rella</h4><small>Membro del Direttivo<br>Pres della Repubblica</small></div>
+  </div>
+
+  <div class="person volunteers">
+    <!-- foto di gruppo: nascosta finche' non c'e' lo scatto (togliere display:none per riattivarla) -->
+    <div class="ph" style="aspect-ratio:auto;height:220px;display:none"><span>Foto di gruppo</span></div>
+    <h4>...e decine di volontari</h4>
+    <small style="color:var(--violet)">Il cuore di Proxima a ogni evento</small>
+    <p style="font-weight:300;opacity:.8;font-size:.95rem;margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto">Sono loro che, dietro le quinte e in prima linea, rendono possibile ogni iniziativa: senza il loro tempo e la loro energia non potremmo fare nulla.</p>
+  </div>
+</section>
+<footer>
+  <div class="col">
+    <a href="index.html" class="brand"><img src="img/logo-white.svg" alt="Proxima" style="height:34px"></a>
+    <p>L'associazione pi&ugrave; giovane di Gorgonzola</p>
+    <div class="social">
+      <a href="https://www.instagram.com/associazioneproxima/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m4.2 5.15A4.85 4.85 0 1 0 16.85 12 4.85 4.85 0 0 0 12 7.15m0 1.95A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1m5.05-3.6a1.13 1.13 0 1 0 1.13 1.13 1.13 1.13 0 0 0-1.13-1.13"/></svg></a>
+      <a href="https://www.facebook.com/p/Proxima-61557254639725/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"/></svg></a>
+      <a href="https://www.tiktok.com/@associazioneproxima" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .8-5.05V9.7a5.67 5.67 0 0 0-.8-.06 5.66 5.66 0 1 0 5.66 5.66V9.01a7.34 7.34 0 0 0 4.3 1.38V7.3a4.28 4.28 0 0 1-3.22-1.48"/></svg></a>
+    </div>
+  </div>
+  <div class="col">
+    <nav class="fnav">
+      <a href="chi-siamo.html">Chi siamo</a><a href="eventi.html">Eventi</a>
+      <a href="archivio.html">Archivio</a>
+      <a href="hall-of-fame.html">Hall of Fame</a>
+      <a href="mini-giochi.html">Mini Giochi</a>
+      <a href="trasparenza.html">Trasparenza</a><a href="contatti.html">Contatti</a>
+    </nav>
+    <p style="margin-top:14px;font-family:'Space Grotesk';font-size:.75rem">&copy; 2026 Associazione Proxima &middot; C.F. 91603100156</p>
+  </div>
+</footer>
+<script>
+function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
+function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+
+/* numeri che salgono quando il pannello entra in vista */
+(function(){
+  var nums=document.querySelectorAll('.stat b[data-count]');
+  if(!nums.length) return;
+  var fermo=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scrivi(el,v){ el.textContent=v.toLocaleString('it-IT')+(el.getAttribute('data-suffix')||''); }
+  function conta(el){
+    var meta=parseInt(el.getAttribute('data-count'),10), dur=1200, t0=performance.now();
+    (function step(now){
+      var t=Math.min((now-t0)/dur,1);
+      scrivi(el, Math.floor((1-Math.pow(1-t,3))*meta));
+      if(t<1) requestAnimationFrame(step); else scrivi(el,meta);
+    })(t0);
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      fermo ? scrivi(e.target, parseInt(e.target.getAttribute('data-count'),10)) : conta(e.target);
+      io.unobserve(e.target);
+    });
+  },{threshold:.6});
+  nums.forEach(function(n){ io.observe(n); });
+})();
+</script>
+<!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
+<script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
