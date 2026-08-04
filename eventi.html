@@ -11,6 +11,17 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 .section{padding:110px 5vw 70px}
+
+/* ===== INTRO: luce d'ambiente, coerente con le altre pagine ===== */
+.evt-hero{position:relative;overflow:hidden}
+.evt-hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 60% at 100% 8%, rgba(74,60,236,.34), transparent 66%),
+    radial-gradient(ellipse 50% 55% at 96% 74%, rgba(255,106,43,.15), transparent 70%),
+    radial-gradient(ellipse 60% 30% at 100% 42%, rgba(221,235,0,.07), transparent 68%)}
+.evt-hero>*{position:relative;z-index:1}
+
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-top:34px}
 .card{display:block;color:inherit;border:1px solid rgba(246,245,239,.16);padding:28px;transition:.3s;position:relative;overflow:hidden;background:rgba(255,255,255,.025);border-radius:24px 24px 24px 4px}
 /* card con locandina: lascio spazio a sinistra. overflow nascosto SOLO in alto-dx via badge clip */
@@ -40,6 +51,7 @@
 .card.t-orange{border-color:rgba(255,106,43,.4)}.card.t-orange:hover{border-color:var(--orange)}.card.t-orange .date{color:var(--orange)}.card.t-orange .badge{background:var(--orange)}
 .card.t-blue{border-color:rgba(74,60,236,.45)}.card.t-blue:hover{border-color:var(--violet)}.card.t-blue .date{color:#8aa0ff}.card.t-blue .badge{background:var(--violet)}
 .card.t-grape{border-color:rgba(155,60,255,.4)}.card.t-grape:hover{border-color:var(--grape)}.card.t-grape .date{color:#c47aff}.card.t-grape .badge{background:var(--grape)}
+.card.t-red{border-color:rgba(255,59,59,.4)}.card.t-red:hover{border-color:var(--red)}.card.t-red .date{color:#ff7a7a}.card.t-red .badge{background:var(--red)}
 .past{margin-top:80px}.past .card .date{color:var(--grape)}
 .past .tagline{font-family:'Space Grotesk';font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--orange);font-weight:700}
 .divider{height:1px;background:rgba(246,245,239,.12);margin:64px 0 0}
@@ -67,7 +79,7 @@
     <a href="contatti.html">Contatti</a>
   </div>
 </nav>
-<section class="section">
+<section class="section evt-hero">
   <div class="tag">Cosa facciamo</div>
   <h1 class="page-h">Eventi</h1>
   <p class="lead">Il calendario completo delle nostre iniziative. Clicca una scheda per i dettagli e l'iscrizione.</p>
