@@ -21,9 +21,8 @@
 
 /* ---------- HERO ARCADE ---------- */
 .hof-hero{
-  position:relative;min-height:78svh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  padding:calc(var(--nav-h) + 8vh) 5vw 8vh;overflow:hidden;
+  position:relative;text-align:center;
+  padding:calc(var(--nav-h) + 9vh) 5vw 5vh;overflow:hidden;
   background:var(--ink);
 }
 /* griglia prospettica retro */
@@ -45,11 +44,11 @@
 .hof-hero > *{position:relative;z-index:2}
 .hof-hero .hof-fade{position:absolute;left:0;right:0;bottom:0;height:170px;z-index:3;pointer-events:none;
   background:linear-gradient(to bottom,transparent,var(--ink))}
-.hof-coin{font-family:var(--px);font-size:.62rem;color:var(--yellow);letter-spacing:1px;margin-bottom:30px;animation:blink 1.1s steps(1) infinite}
+.hof-coin{font-family:var(--px);font-size:.6rem;color:var(--yellow);letter-spacing:1px;animation:blink 1.1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.hof-title{font-family:var(--px);line-height:1.5;text-transform:uppercase}
-.hof-title .l1{display:block;font-size:clamp(1.1rem,5vw,2.6rem);color:#fff;text-shadow:3px 3px 0 var(--violet),6px 6px 0 rgba(0,0,0,.4)}
-.hof-title .l2{display:block;font-size:clamp(2rem,9vw,5rem);margin-top:14px;
+.hof-title{font-family:var(--px);line-height:1.1;text-transform:uppercase}
+.hof-title .l1{display:block;font-size:clamp(.7rem,3vw,1.2rem);margin:26px 0 16px;color:#fff;text-shadow:2px 2px 0 var(--violet)}
+.hof-title .l2{display:block;font-size:clamp(1.8rem,9vw,4.6rem);line-height:1.1;
   color:var(--yellow);text-shadow:4px 4px 0 var(--orange),8px 8px 0 rgba(0,0,0,.45);
   animation:hue 6s linear infinite}
 @keyframes hue{0%,100%{filter:hue-rotate(0)}50%{filter:hue-rotate(40deg)}}
