@@ -11,11 +11,23 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 .section{padding:120px 5vw 80px}
+
+/* ===== INTRO: luce d'ambiente, coerente con le altre pagine ===== */
+.arc-hero{position:relative;overflow:hidden}
+.arc-hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 52% 58% at 80% 14%, rgba(74,60,236,.34), transparent 66%),
+    radial-gradient(ellipse 46% 52% at 4% 58%, rgba(255,106,43,.13), transparent 70%),
+    radial-gradient(ellipse 70% 34% at 46% -6%, rgba(221,235,0,.07), transparent 68%)}
+.arc-hero>*{position:relative;z-index:1}
+
 .subhead{font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;color:var(--yellow);margin:50px 0 18px}
-.hscroll{display:flex;gap:18px;overflow-x:auto;padding:26px 4px 30px;-webkit-overflow-scrolling:touch;cursor:grab;scrollbar-width:thin}
+.hscroll{display:flex;gap:18px;overflow-x:auto;margin:0 -5vw;padding:26px 0 30px;-webkit-overflow-scrolling:touch;cursor:grab;
+  scrollbar-width:none;-ms-overflow-style:none}
 .hscroll.dragging{cursor:grabbing;scroll-behavior:auto}
 .hscroll.dragging .poster{pointer-events:none}
-.hscroll::-webkit-scrollbar{height:8px}.hscroll::-webkit-scrollbar-thumb{background:var(--violet);border-radius:4px}
+.hscroll::-webkit-scrollbar{display:none}
 .poster{flex:0 0 240px;aspect-ratio:4/5;border-radius:18px 18px 18px 4px;display:flex;align-items:flex-end;padding:18px;font-family:var(--display);text-transform:uppercase;font-size:1.05rem;transition:transform .3s,border-color .3s;cursor:pointer;border: 1px solid rgba(0, 0, 0, 0.3);background-size:cover;background-position:center;background-color:#000;position:relative;overflow:hidden;user-select:none}
 .poster.ph-empty{background:linear-gradient(135deg,var(--violet),var(--violet-deep))}
 .poster.ph-empty:nth-child(3n){background:linear-gradient(135deg,var(--orange),var(--grape))}
@@ -76,15 +88,13 @@
     <a href="contatti.html">Contatti</a>
   </div>
 </nav>
-<section class="section">
-  <div class="tag">Memoria</div>
+<section class="section arc-hero">
+  <div class="tag">Cosa abbiamo portato in citt&agrave;</div>
   <h1 class="page-h">Archivio</h1>
-  <p class="lead">Locandine e foto delle edizioni passate.</p>
   <div class="subhead">Archivio locandine</div>
   <div class="hscroll" id="archivio-track"></div>
   <p class="scrollhint">trascina con il dito o il mouse per scorrere</p>
   <div class="subhead">Archivio tornei</div>
-  <p class="lead" style="margin-top:-6px">Rivivi classifiche e risultati delle edizioni passate.</p>
   <div class="tornei">
     <a href="gsl26.html" class="torneo-btn">
       <img class="tb-logo" src="img/summer-league-logo.svg" alt="" aria-hidden="true" onerror="this.style.display='none'">
