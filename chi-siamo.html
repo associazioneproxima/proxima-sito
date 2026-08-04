@@ -28,7 +28,7 @@
 @media(max-width:920px){.intro-grid{grid-template-columns:1fr;gap:12px}}
 
 /* ===== linea serpentina: entra dal bordo dello schermo e scende agganciando i dati ===== */
-.tl-wrap{position:relative;height:clamp(440px,50vw,560px);margin-right:-5vw}
+.tl-wrap{position:relative;height:clamp(360px,38vw,460px);margin-right:-5vw}
 .tl-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 8px rgba(221,235,0,.28))}
 .tl-path{fill:none;stroke:url(#tlGrad);stroke-width:2;stroke-linecap:round;
   stroke-dasharray:100;stroke-dashoffset:100;
@@ -68,13 +68,13 @@
   opacity:.72;display:block;margin-top:6px}
 .tl-card b,.tl-card small{text-shadow:0 2px 16px rgba(6,6,16,.9),0 0 30px rgba(6,6,16,.7)}
 
-.tl-dot-1{left:70%;top:19%}
-.tl-card-1{top:19%;right:calc(30% + 22px);text-align:right}
-.tl-dot-2{left:17%;top:50%}
-.tl-card-2{top:50%;left:calc(17% + 22px);text-align:left}
-.tl-dot-3{left:65%;top:81%}
-.tl-card-3{top:81%;right:calc(35% + 22px);text-align:right}
-@media(max-width:560px){.tl-card{max-width:132px;font-size:.92rem}.tl-wrap{margin-right:-5vw;height:clamp(400px,86vw,520px)}}
+.tl-dot-1{left:82%;top:15%}
+.tl-card-1{top:15%;right:calc(18% + 34px);text-align:right}
+.tl-dot-2{left:14%;top:50%}
+.tl-card-2{top:50%;left:calc(14% + 34px);text-align:left}
+.tl-dot-3{left:78%;top:85%}
+.tl-card-3{top:85%;right:calc(22% + 34px);text-align:right}
+@media(max-width:560px){.tl-card{max-width:132px;font-size:.92rem}.tl-wrap{margin-right:-5vw;height:clamp(380px,80vw,480px)}}
 @media(prefers-reduced-motion:reduce){
   .tl-path,.tl-dot,.tl-card{transition:none}
   .tl-path{stroke-dashoffset:0}
@@ -147,7 +147,7 @@
             <stop offset="100%" style="stop-color:var(--grape);stop-opacity:0"/>
           </linearGradient>
         </defs>
-        <path class="tl-path" pathLength="100" d="M100,0 C88,9 80,16 70,19 C46,27 20,32 17,50 C14,68 62,64 65,81 C69,92 54,96 48,101 C45,104 40,106 36,109"/>
+        <path class="tl-path" pathLength="100" d="M100,0 C93,7 86,11 82,15 C79,20 78,26 74,32 C58,40 20,36 14,50 C10,60 10,66 15,72 C34,80 66,72 78,85 C82,90 82,94 78,98 C75,101 71,104 68,108"/>
       </svg>
       <span class="tl-dot tl-dot-1"></span>
       <div class="tl-card tl-card-1"><b>2024</b><small>Anno di fondazione</small></div>
