@@ -43,6 +43,7 @@ collections:
                   - {label: "Arancione (Gorgo Jam)", value: "orange"}
                   - {label: "Blu (Summer League)", value: "blue"}
                   - {label: "Viola", value: "grape"}
+                  - {label: "Rosso", value: "red"}
                   - {label: "Neutro", value: "neutro"}
                 default: "neutro"
               - {label: "Etichetta data (breve, es. 'Giugno 2026')", name: "data_label", widget: "string"}
