@@ -273,6 +273,35 @@
 .salamell-page .drama .rr{color:var(--red)}.salamell-page .drama .bb{color:var(--blue)}
 .salamell-page .drama .sub{font-family:var(--mono);letter-spacing:2px;text-transform:uppercase;font-size:.8rem;margin-top:22px;opacity:.7}
 
+/* ===== RADDAR: copia del giornale, cliccabile ===== */
+.salamell-page .news{margin:46px auto 0;max-width:400px}
+.salamell-page .news-lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--red-d);font-weight:700;margin-bottom:16px}
+.salamell-page .paper{display:block;width:100%;background:#fff;padding:10px 10px 34px;border:2px solid var(--ink);
+  box-shadow:8px 8px 0 var(--ink);transform:rotate(-1.4deg);transition:transform .25s ease,box-shadow .25s ease;
+  cursor:zoom-in;position:relative}
+.salamell-page .paper:hover{transform:rotate(0deg) translateY(-6px);box-shadow:12px 12px 0 var(--ink)}
+.salamell-page .paper img{width:100%;height:auto;display:block}
+.salamell-page .paper .go{position:absolute;left:0;right:0;bottom:9px;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:1.5px;text-transform:uppercase;color:rgba(20,16,24,.65)}
+
+/* visore a schermo intero */
+.lightbox{position:fixed;inset:0;z-index:400;background:rgba(8,6,11,.96);display:none}
+.lightbox.open{display:block}
+.lb-scroll{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;
+  display:flex;align-items:flex-start;justify-content:center;padding:56px 10px 20px}
+.lb-scroll img{display:block;max-width:100%;height:auto;cursor:zoom-in;background:#fff}
+/* modalita' ingrandita: l'immagine esce dallo schermo e si scorre per leggere */
+.lightbox.zoom .lb-scroll{display:block}
+.lightbox.zoom .lb-scroll img{max-width:none;width:min(1500px,260vw);margin:0 auto;cursor:zoom-out}
+.lb-bar{position:absolute;top:0;left:0;right:0;height:52px;z-index:2;display:flex;align-items:center;gap:8px;
+  padding:0 10px;background:linear-gradient(180deg,rgba(8,6,11,.95),transparent)}
+.lb-btn{font-family:var(--mono);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;
+  border:2px solid rgba(255,255,255,.3);background:rgba(0,0,0,.35);padding:8px 12px;border-radius:4px;cursor:pointer}
+.lb-btn:hover{border-color:var(--yellow);color:var(--yellow)}
+.lb-btn.x{margin-left:auto}
+@media(prefers-reduced-motion:reduce){.salamell-page .paper{transition:none}}
+
 /* ===== SPONSOR ===== */
 .salamell-page .p-label{font-family:var(--mono);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.6;margin-bottom:20px;text-align:center}
 .salamell-page .sponsors{display:flex;flex-wrap:wrap;gap:26px 34px;justify-content:center;align-items:center}
@@ -449,8 +478,29 @@
 <section class="section sec-yellow drama">
   <div class="container">
     <h2 class="display reveal z">Andrea e i <span class="rr">Porci Comodi</span> difendono il titolo. Riuscir&agrave; la squadra di <span class="bb">Eduard</span> a strapparglielo?</h2>
+
+    <div class="news reveal" data-delay="2">
+      <div class="news-lbl">&#128240; Ne parlano tutti &mdash; Edizione speciale</div>
+      <a class="paper" href="img/salamell_chef/raddar.webp" id="raddarOpen">
+        <img src="img/salamell_chef/raddar-thumb.webp" alt="RADDAR &mdash; edizione speciale Salamell Chef" loading="lazy"
+             onerror="this.parentNode.style.display='none'">
+        <span class="go">Tocca per leggere &#128269;</span>
+      </a>
+    </div>
   </div>
 </section>
+
+<!-- visore del giornale -->
+<div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="RADDAR, edizione speciale">
+  <div class="lb-bar">
+    <button class="lb-btn" id="lbZoom">&#128269; Ingrandisci</button>
+    <a class="lb-btn" id="lbOpen" href="img/salamell_chef/raddar.webp" target="_blank" rel="noopener">Apri originale</a>
+    <button class="lb-btn x" id="lbClose">&#10005; Chiudi</button>
+  </div>
+  <div class="lb-scroll" id="lbScroll">
+    <img src="" alt="RADDAR &mdash; edizione speciale Salamell Chef" id="lbImg">
+  </div>
+</div>
 
 <!-- MINIGIOCO -->
 <section class="section arcade" id="quando">
@@ -482,6 +532,7 @@
     </div>
     <div class="p-label reveal">Con il supporto di</div>
     <div class="sponsors reveal" data-delay="1">
+      <a class="slot" href="https://www.prolocogorgonzola.it/" target="_blank" rel="noopener"><img src="img/loghi_black/proloco.png" alt="Pro Loco Gorgonzola" onerror="this.outerHTML='Pro Loco Gorgonzola'"></a>
       <a class="slot" href="https://www.facebook.com/PanificioPasticceriaMotta/?locale=it_IT" target="_blank" rel="noopener"><img src="img/loghi_black/motta.png" alt="Panificio Motta" onerror="this.outerHTML='Panificio Motta'"></a>
       <a class="slot" href="https://www.lacarnedelbergamasco.com/" target="_blank" rel="noopener"><img src="img/loghi_black/bergamasco.png" alt="Carne del Bergamasco" onerror="this.outerHTML='Carne del Bergamasco'"></a>
       <a class="slot" href="https://www.martelab.it/" target="_blank" rel="noopener"><img src="img/loghi_black/martelab.png" alt="Martelab" onerror="this.outerHTML='Martelab'"></a>
@@ -691,6 +742,42 @@ window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
   window.addEventListener('pointerup',onUp);
   window.addEventListener('pointercancel',onUp);
   window.addEventListener('resize',layout);
+})();
+
+/* visore del giornale RADDAR: apre a schermo intero, con ingrandimento per leggere */
+(function(){
+  var apri=document.getElementById('raddarOpen'), lb=document.getElementById('lb');
+  if(!apri||!lb) return;
+  var img=document.getElementById('lbImg'), scroll=document.getElementById('lbScroll'),
+      bZoom=document.getElementById('lbZoom');
+  var src=apri.getAttribute('href');
+
+  function setZoom(on){
+    lb.classList.toggle('zoom',on);
+    bZoom.innerHTML = on ? '\u21F2 Adatta' : '\uD83D\uDD0D Ingrandisci';
+    if(on){ scroll.scrollTop=0; scroll.scrollLeft=(scroll.scrollWidth-scroll.clientWidth)/2; }
+  }
+  function open(e){
+    if(e) e.preventDefault();
+    if(!img.getAttribute('src')) img.src=src;
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+    setZoom(window.innerWidth < 900);   // su schermi piccoli parte gia' leggibile
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  apri.addEventListener('click',open);
+  document.getElementById('lbClose').addEventListener('click',close);
+  bZoom.addEventListener('click',function(){ setZoom(!lb.classList.contains('zoom')); });
+  img.addEventListener('click',function(){ setZoom(!lb.classList.contains('zoom')); });
+  scroll.addEventListener('click',function(e){ if(e.target===scroll) close(); });
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open')) return;
+    if(e.key==='Escape') close();
+  });
 })();
 
 /* card squadra: tap per attivare l'effetto su touch (dove l'hover non esiste) */
