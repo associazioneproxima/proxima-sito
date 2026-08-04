@@ -17,9 +17,10 @@
 .arc-hero::before{
   content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 55% 60% at 100% 8%, rgba(74,60,236,.34), transparent 66%),
+    radial-gradient(ellipse 42% 46% at 4% 20%, rgba(74,60,236,.32), transparent 68%),
+    radial-gradient(ellipse 55% 60% at 100% 10%, rgba(255,106,43,.18), transparent 66%),
     radial-gradient(ellipse 50% 55% at 96% 74%, rgba(255,106,43,.15), transparent 70%),
-    radial-gradient(ellipse 60% 30% at 100% 42%, rgba(221,235,0,.07), transparent 68%)}
+    radial-gradient(ellipse 60% 30% at 100% 42%, rgba(221,235,0,.08), transparent 68%)}
 .arc-hero>*{position:relative;z-index:1}
 
 .subhead{font-family:'Space Grotesk';font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:.9rem;color:var(--yellow);margin:50px 0 18px}
@@ -36,7 +37,7 @@
 .poster:hover{transform:scale(1.07);border-color:var(--yellow);z-index:3;box-shadow:0 14px 32px rgba(0,0,0,.55)}
 /* archivio tornei */
 .tornei{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px}
-.torneo-btn{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:4px;flex:1 1 290px;padding:22px 24px;border-radius:16px 16px 16px 4px;border:1px solid rgba(74,60,236,.45);background:linear-gradient(120deg,rgba(74,60,236,.16),rgba(74,60,236,.05));transition:.25s;color:inherit}
+.torneo-btn{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:4px;flex:0 1 300px;padding:22px 24px;border-radius:16px 16px 16px 4px;border:1px solid rgba(74,60,236,.45);background:linear-gradient(120deg,rgba(74,60,236,.16),rgba(74,60,236,.05));transition:.25s;color:inherit}
 .torneo-btn>span{position:relative;z-index:1}
 .torneo-btn .tb-logo{position:absolute;right:-16px;top:50%;transform:translateY(-50%);height:150%;width:auto;opacity:.16;filter:brightness(0) invert(1);pointer-events:none;z-index:0;transition:opacity .25s,transform .25s}
 .torneo-btn:hover{transform:translateY(-4px);border-color:var(--yellow);background:linear-gradient(120deg,rgba(74,60,236,.22),rgba(74,60,236,.08))}
