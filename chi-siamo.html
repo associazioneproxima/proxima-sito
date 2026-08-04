@@ -11,20 +11,63 @@
 <link rel="stylesheet" href="css/style.css">
 <style>
 .section{padding:120px 5vw 80px}
-.intro-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+
+/* ===== INTRO: luce d'ambiente, per non lasciare il nero piatto ===== */
+.intro-sec{position:relative;overflow:hidden}
+.intro-sec::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 52% 58% at 80% 14%, rgba(74,60,236,.34), transparent 66%),
+    radial-gradient(ellipse 46% 52% at 4% 58%, rgba(255,106,43,.13), transparent 70%),
+    radial-gradient(ellipse 70% 34% at 46% -6%, rgba(221,235,0,.07), transparent 68%)}
+.intro-sec>*{position:relative;z-index:1}
+.page-h .hl{color:var(--yellow)}
+
+.intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
 .intro-grid p{font-size:1.1rem;font-weight:300;margin-bottom:16px}
-.stats{display:flex;flex-direction:column;gap:20px}
-.stat{border-left:5px solid var(--orange);padding-left:18px}
-.stat b{font-family:var(--display);font-size:2.4rem;display:block;line-height:1;color:var(--yellow)}
-.stat small{font-family:'Space Grotesk';text-transform:uppercase;font-size:.74rem;letter-spacing:1px;opacity:.8}
-@media(max-width:920px){.intro-grid{grid-template-columns:1fr;gap:30px}}
-.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:40px}
-.person{background:rgba(255,255,255,.03);border:1px solid rgba(246,245,239,.12);padding:18px}
+@media(max-width:920px){.intro-grid{grid-template-columns:1fr;gap:34px}}
+
+/* pannello numeri: un blocco unico con righe separate da filetti */
+.stats{display:grid;gap:1px;background:rgba(246,245,239,.14);
+  border:1px solid rgba(246,245,239,.16);border-radius:28px 28px 28px 4px;overflow:hidden;
+  box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.stat{position:relative;padding:24px 26px 22px 30px;
+  background:linear-gradient(180deg,rgba(24,21,52,.94),rgba(10,10,22,.94));
+  transition:background .32s ease}
+.stat::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:4px;border-radius:0 4px 4px 0;
+  background:linear-gradient(180deg,var(--yellow),var(--orange));
+  transform:scaleY(.5);transform-origin:center;
+  transition:transform .38s cubic-bezier(.2,.8,.25,1)}
+.stat:hover{background:linear-gradient(180deg,rgba(44,36,110,.94),rgba(14,12,34,.94))}
+.stat:hover::before{transform:scaleY(1)}
+.stat b{font-family:var(--display);font-size:clamp(2.1rem,4vw,2.7rem);display:block;line-height:1;
+  color:var(--yellow);letter-spacing:-.5px;font-variant-numeric:tabular-nums}
+.stat small{font-family:'Space Grotesk';text-transform:uppercase;font-size:.74rem;letter-spacing:1.4px;
+  opacity:.72;display:block;margin-top:7px}
+
+/* ===== TEAM ===== */
+.people{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-top:44px}
+.person{width:min(230px,100%);background:rgba(255,255,255,.03);
+  border:1px solid rgba(246,245,239,.12);padding:18px;border-radius:24px 24px 24px 4px;
+  transition:transform .3s cubic-bezier(.2,.8,.25,1),border-color .3s ease,
+             background .3s ease,box-shadow .3s ease}
+.person:hover{transform:translateY(-8px);border-color:var(--yellow);background:rgba(255,255,255,.06);
+  box-shadow:0 20px 42px rgba(0,0,0,.55),0 0 0 1px rgba(221,235,0,.22)}
 .person .ph{aspect-ratio:1;background:linear-gradient(135deg,var(--violet),var(--grape));display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:14px;border-radius:20px 20px 20px 4px}
 .person .ph span{font-family:var(--display);font-size:.8rem;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:1px}
-.person .ph img{width:100%;height:100%;object-fit:cover}
-.person h4{font-family:'Sora';font-weight:800;font-size:1.12rem}
+.person .ph img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.2,.8,.25,1)}
+.person:hover .ph img{transform:scale(1.07)}
+.person h4{font-family:'Sora';font-weight:800;font-size:1.12rem;transition:color .3s ease}
+.person:hover h4{color:var(--yellow)}
 .person small{font-family:'Space Grotesk';text-transform:uppercase;font-size:.72rem;letter-spacing:1px;color:var(--orange);font-weight:700}
+@media(max-width:520px){.person{width:min(280px,100%)}}
+
+/* blocco volontari: a tutta larghezza, senza effetto di selezione */
+.person.volunteers{width:100%;max-width:620px;margin:28px auto 0;text-align:center}
+.person.volunteers:hover{transform:none;border-color:rgba(246,245,239,.12);
+  background:rgba(255,255,255,.03);box-shadow:none}
+.person.volunteers:hover h4{color:inherit}
+@media(prefers-reduced-motion:reduce){.person,.person .ph img,.stat,.stat::before{transition:none}}
 
 .nav-gsl-pill{background:var(--violet);color:#fff!important;padding:5px 14px!important;border-radius:50px;opacity:1!important}
 .nav-gsl-pill::after{display:none!important}
@@ -48,9 +91,9 @@
     <a href="contatti.html">Contatti</a>
   </div>
 </nav>
-<section class="section">
+<section class="section intro-sec">
   <div class="tag">Chi siamo</div>
-  <h1 class="page-h">Lo spazio dei giovani<br>&egrave; adesso.</h1>
+  <h1 class="page-h">Lo spazio dei giovani<br><span class="hl">&egrave; adesso.</span></h1>
   <div class="intro-grid" style="margin-top:30px">
     <div>
       <p>Proxima &egrave; un'associazione no-profit nata a Gorgonzola per dare voce e spazio ai ragazzi del territorio. Organizziamo eventi, tornei e concerti pensati da giovani per i giovani.</p>
@@ -58,8 +101,8 @@
     </div>
     <div class="stats">
       <div class="stat"><b>2024</b><small>Anno di fondazione</small></div>
-      <div class="stat"><b>20+</b><small>Eventi organizzati</small></div>
-      <div class="stat"><b>1.500+</b><small>Giovani coinvolti</small></div>
+      <div class="stat"><b data-count="20" data-suffix="+">0</b><small>Eventi organizzati</small></div>
+      <div class="stat"><b data-count="1500" data-suffix="+">0</b><small>Giovani coinvolti</small></div>
     </div>
   </div>
   <h2 style="margin-top:84px">Il team</h2>
@@ -72,13 +115,14 @@
     <div class="person"><div class="ph"><img src="img/simona-candiani.jpg" alt="Simona Candiani"></div><h4>Simona Candiani</h4><small>Membro del Direttivo<br>resp Finanziaria</small></div>
     <div class="person"><div class="ph"><img src="img/lorenzo-venturini.jpg" alt="Lorenzo Venturini"></div><h4>Lorenzo Venturini</h4><small>Membro del Direttivo<br>resp GSL</small></div>
     <div class="person"><div class="ph"><img src="img/matteo-rella.jpg" alt="Matteo Rella"></div><h4>Matteo Rella</h4><small>Membro del Direttivo<br>Pres della Repubblica</small></div>
- 
-    <div class="person" style="grid-column:1/-1;text-align:center;margin-top:8px">
-      <div class="ph" style="aspect-ratio:auto;height:220px"><span>Foto di gruppo</span></div>
-      <h4>...e decine di volontari</h4>
-      <small style="color:var(--violet)">Il cuore di Proxima a ogni evento</small>
-      <p style="font-weight:300;opacity:.8;font-size:.95rem;margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto">Sono loro che, dietro le quinte e in prima linea, rendono possibile ogni iniziativa: senza il loro tempo e la loro energia non potremmo fare nulla.</p>
-    </div>
+  </div>
+
+  <div class="person volunteers">
+    <!-- foto di gruppo: nascosta finche' non c'e' lo scatto (togliere display:none per riattivarla) -->
+    <div class="ph" style="aspect-ratio:auto;height:220px;display:none"><span>Foto di gruppo</span></div>
+    <h4>...e decine di volontari</h4>
+    <small style="color:var(--violet)">Il cuore di Proxima a ogni evento</small>
+    <p style="font-weight:300;opacity:.8;font-size:.95rem;margin-top:8px;max-width:560px;margin-left:auto;margin-right:auto">Sono loro che, dietro le quinte e in prima linea, rendono possibile ogni iniziativa: senza il loro tempo e la loro energia non potremmo fare nulla.</p>
   </div>
 </section>
 <footer>
@@ -106,6 +150,30 @@
 function toggleMenu(btn){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var o=l.classList.toggle('open');btn.classList.toggle('open',o);s.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}
 function closeMenu(){var l=document.getElementById('navlinks');var s=document.querySelector('.nav-scrim');var b=document.querySelector('.burger');l.classList.remove('open');s.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',closeMenu)});
+
+/* numeri che salgono quando il pannello entra in vista */
+(function(){
+  var nums=document.querySelectorAll('.stat b[data-count]');
+  if(!nums.length) return;
+  var fermo=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scrivi(el,v){ el.textContent=v.toLocaleString('it-IT')+(el.getAttribute('data-suffix')||''); }
+  function conta(el){
+    var meta=parseInt(el.getAttribute('data-count'),10), dur=1200, t0=performance.now();
+    (function step(now){
+      var t=Math.min((now-t0)/dur,1);
+      scrivi(el, Math.floor((1-Math.pow(1-t,3))*meta));
+      if(t<1) requestAnimationFrame(step); else scrivi(el,meta);
+    })(t0);
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      fermo ? scrivi(e.target, parseInt(e.target.getAttribute('data-count'),10)) : conta(e.target);
+      io.unobserve(e.target);
+    });
+  },{threshold:.6});
+  nums.forEach(function(n){ io.observe(n); });
+})();
 </script>
 <!-- GoatCounter: conteggio visite (no cookie, GDPR-friendly). Sostituisci CODICE con il tuo. -->
 <script data-goatcounter="https://CODICE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
