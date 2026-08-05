@@ -189,6 +189,7 @@ collections:
                   - {label: "Arancione (Gorgo Jam)", value: "jam"}
                   - {label: "Viola (Tiri da 3)", value: "tiri"}
                   - {label: "Rosso/Beige (Arrosticino Scientifico)", value: "arrosticino"}
+                  - {label: "Oro/Griglia (Salamell Chef)", value: "salamell"}
                 default: "summer"
               - label: "Icona"
                 name: "icona"
@@ -199,7 +200,10 @@ collections:
                   - {label: "Palla da basket", value: "basket"}
                   - {label: "Canestro con retina", value: "hoop"}
                   - {label: "Carte da gioco", value: "cards"}
+                  - {label: "Salamella sulla griglia", value: "salamella"}
                 default: "trophy"
+              - {label: "Collaborazione (es. 'Proxima × Fieri della Fiera')", name: "collab", widget: "string", required: false, hint: "Mostrata sotto il titolo del torneo. Lascia vuoto se non serve."}
+              - {label: "Nota a fondo scheda", name: "nota", widget: "string", required: false, hint: "Sostituisce 'Hall of Champions' in fondo alla scheda."}
               - label: "Albo d'oro (edizioni)"
                 name: "albo"
                 widget: "list"

@@ -1,6 +1,40 @@
 {
   "tornei": [
     {
+      "nome": "Salamell Chef",
+      "sport": "Griglia",
+      "tema": "salamell",
+      "icona": "salamella",
+      "collab": "Proxima × Fieri della Fiera",
+      "nota": "Un'idea dei Fieri della Fiera, ereditata da Proxima",
+      "albo": [
+        {
+          "anno": "2018",
+          "vincitore": "Gianni Radaelli"
+        },
+        {
+          "anno": "2019",
+          "vincitore": "Gianni Radaelli"
+        },
+        {
+          "anno": "2022",
+          "vincitore": "Pink Team (Stefania Pirola)"
+        },
+        {
+          "anno": "2023",
+          "vincitore": "Serial Griller (Jacopo Sala)"
+        },
+        {
+          "anno": "2024",
+          "vincitore": "Serial Griller (Jacopo Sala)"
+        },
+        {
+          "anno": "2025",
+          "vincitore": "Porci Comodi (Andrea Meroni)"
+        }
+      ]
+    },
+    {
       "nome": "Gorgo Summer League",
       "sport": "Calcio",
       "tema": "summer",

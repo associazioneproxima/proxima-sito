@@ -17,6 +17,7 @@
   --t-jam:#e27138;     --t-jam-2:#ffb27a;
   --t-tiri:#9b3cff;    --t-tiri-2:#c47aff;
   --t-arr:#d9483b;     --t-arr-2:#e8d9b0;
+  --t-sala:#ffb01f;    --t-sala-2:#ffd97a;
 }
 
 /* ---------- HERO ARCADE ---------- */
@@ -82,7 +83,47 @@
     calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,
     8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px));
 }
-.cab-inner{background:#000}
+.cab-inner{background:#000;position:relative;overflow:hidden}
+
+/* ---------- HOVER PIXELOSO (discreto) ---------- */
+.cabinet{transition:transform .18s steps(3),box-shadow .25s steps(3)}
+.cabinet:hover{transform:translateY(-6px)}
+.cabinet:hover{
+  box-shadow:
+    0 0 0 4px var(--c1),
+    0 0 0 8px #000,
+    0 0 0 10px var(--c2),
+    0 0 0 16px #000,
+    0 0 0 18px rgba(255,255,255,.28);
+}
+/* scanline pixel che appaiono solo al passaggio */
+.cabinet::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;
+  transition:opacity .28s steps(3);
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.055) 0 2px,transparent 2px 4px)}
+.cabinet:hover::after{opacity:1}
+/* banda di luce che scorre lungo il cabinato */
+.cab-inner::before{content:"";position:absolute;left:0;right:0;top:-40px;height:36px;z-index:4;
+  pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.11),transparent)}
+.cabinet:hover .cab-inner::before{opacity:1;animation:cabsweep 1.9s steps(24) infinite}
+@keyframes cabsweep{from{top:-40px}to{top:100%}}
+/* icona che saltella a scatti (pixel) */
+.cabinet:hover .cab-icon{animation:cabhop .6s steps(3) infinite}
+@keyframes cabhop{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+/* riga evidenziata al passaggio */
+.score-row{transition:background .12s steps(2),padding-left .12s steps(2)}
+.score-row:hover{background:rgba(255,255,255,.06);padding-left:14px}
+.score-row:hover .yr{color:var(--yellow)}
+
+@media(prefers-reduced-motion:reduce){
+  .cabinet,.cabinet::after,.score-row{transition:none}
+  .cabinet:hover{transform:none}
+  .cabinet:hover .cab-inner::before,.cabinet:hover .cab-icon{animation:none}
+}
+
+/* collaborazione (es. Proxima x Fieri della Fiera) */
+.cab-collab{font-family:var(--px);font-size:.5rem;text-align:center;color:var(--c2);
+  letter-spacing:1px;line-height:1.8;padding:2px 10px 0}
 
 /* titolo grande centrato */
 .cab-name{font-family:var(--px);text-align:center;text-transform:uppercase;
@@ -132,6 +173,10 @@
   -webkit-text-stroke:1px var(--t-arr-2);
   text-shadow:3px 3px 0 #000,5px 5px 0 var(--t-arr-2)}
 .t-arrosticino .cab-name::before,.t-arrosticino .cab-name::after{content:"\2660";color:var(--t-arr-2);-webkit-text-stroke:0;margin:0 .4em;font-size:.7em;text-shadow:none;vertical-align:middle}
+/* SALAMELL CHEF — insegna dorata da griglia, con brace calda */
+.t-salamell .cab-name{color:var(--t-sala);
+  -webkit-text-stroke:1px #7a3d00;
+  text-shadow:3px 3px 0 #7a3d00,5px 5px 0 rgba(0,0,0,.55),0 0 18px rgba(255,176,31,.45)}
 
 /* joystick deco bottom */
 .arcade-foot{text-align:center;padding:30px 5vw 90px}
@@ -229,7 +274,8 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
     winter:{c1:'var(--t-winter)',c2:'var(--t-winter-2)'},
     jam:{c1:'var(--t-jam)',c2:'var(--t-jam-2)'},
     tiri:{c1:'var(--t-tiri)',c2:'var(--t-tiri-2)'},
-    arrosticino:{c1:'var(--t-arr)',c2:'var(--t-arr-2)'}
+    arrosticino:{c1:'var(--t-arr)',c2:'var(--t-arr-2)'},
+    salamell:{c1:'var(--t-sala)',c2:'var(--t-sala-2)'}
   };
 
   // sprite pixel-art SVG inline (16x16 grid, stile retro)
@@ -282,6 +328,33 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
         /* riflesso */
         '<rect x="4" y="5" width="1" height="1" fill="#ffb27a"/></svg>';
     }
+    if(tipo==='salamella'){
+      return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
+        /* salamella (ovale, con segni di cottura) */
+        '<rect x="4" y="2" width="8" height="1" fill="#8f3a1e"/>'+
+        '<rect x="2" y="3" width="12" height="1" fill="#c9553a"/>'+
+        '<rect x="1" y="4" width="14" height="2" fill="#c9553a"/>'+
+        '<rect x="2" y="6" width="12" height="1" fill="#c9553a"/>'+
+        '<rect x="4" y="7" width="8" height="1" fill="#8f3a1e"/>'+
+        '<rect x="3" y="4" width="4" height="1" fill="#e07a5f"/>'+
+        '<rect x="5" y="3" width="1" height="4" fill="#6e2a13"/>'+
+        '<rect x="9" y="3" width="1" height="4" fill="#6e2a13"/>'+
+        /* grata */
+        '<rect x="0" y="9" width="16" height="1" fill="#9a9aa4"/>'+
+        /* fiamme */
+        '<rect x="7" y="10" width="2" height="1" fill="#ff6a2b"/>'+
+        '<rect x="2" y="11" width="2" height="1" fill="#ff6a2b"/>'+
+        '<rect x="6" y="11" width="4" height="1" fill="#ff6a2b"/>'+
+        '<rect x="12" y="11" width="2" height="1" fill="#ff6a2b"/>'+
+        '<rect x="1" y="12" width="4" height="1" fill="#ff6a2b"/>'+
+        '<rect x="6" y="12" width="4" height="1" fill="#ff6a2b"/>'+
+        '<rect x="11" y="12" width="4" height="1" fill="#ff6a2b"/>'+
+        '<rect x="1" y="13" width="14" height="2" fill="#ff6a2b"/>'+
+        '<rect x="7" y="12" width="2" height="1" fill="#ffd23f"/>'+
+        '<rect x="2" y="13" width="2" height="2" fill="#ffd23f"/>'+
+        '<rect x="6" y="13" width="4" height="2" fill="#ffd23f"/>'+
+        '<rect x="12" y="13" width="2" height="2" fill="#ffd23f"/></svg>';
+    }
     if(tipo==='hoop'){
       return '<svg class="cab-icon" viewBox="0 0 16 16" shape-rendering="crispEdges">'+
         /* tabellone */
@@ -333,12 +406,13 @@ document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener(
         '<section class="cabinet t-'+t.tema+'" style="--c1:'+tema.c1+';--c2:'+tema.c2+'">'+
           '<div class="cab-inner">'+
             '<div class="cab-name">'+t.nome+'</div>'+
+            (t.collab?'<div class="cab-collab">'+t.collab+'</div>':'')+
             sprite(t.icona,tema.c1)+
             '<div class="cab-screen">'+
               (albo.length?'<div class="score-head"><span>Anno</span><span>Campione</span></div>':'')+
               rows+
             '</div>'+
-            '<div class="cab-foot">&#9733; Hall of Champions &#9733;</div>'+
+            '<div class="cab-foot">&#9733; '+(t.nota||'Hall of Champions')+' &#9733;</div>'+
           '</div>'+
         '</section>');
     });
