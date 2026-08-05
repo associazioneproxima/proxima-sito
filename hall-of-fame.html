@@ -83,7 +83,7 @@
     calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,
     8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px));
 }
-.cab-inner{background:#000;position:relative;overflow:hidden}
+.cab-inner{background:#000}
 
 /* ---------- HOVER PIXELOSO (discreto) ---------- */
 .cabinet{transition:transform .18s steps(3),box-shadow .25s steps(3)}
@@ -101,12 +101,6 @@
   transition:opacity .28s steps(3);
   background:repeating-linear-gradient(0deg,rgba(255,255,255,.055) 0 2px,transparent 2px 4px)}
 .cabinet:hover::after{opacity:1}
-/* banda di luce che scorre lungo il cabinato */
-.cab-inner::before{content:"";position:absolute;left:0;right:0;top:-40px;height:36px;z-index:4;
-  pointer-events:none;opacity:0;
-  background:linear-gradient(180deg,transparent,rgba(255,255,255,.11),transparent)}
-.cabinet:hover .cab-inner::before{opacity:1;animation:cabsweep 1.9s steps(24) infinite}
-@keyframes cabsweep{from{top:-40px}to{top:100%}}
 /* icona che saltella a scatti (pixel) */
 .cabinet:hover .cab-icon{animation:cabhop .6s steps(3) infinite}
 @keyframes cabhop{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
@@ -118,7 +112,7 @@
 @media(prefers-reduced-motion:reduce){
   .cabinet,.cabinet::after,.score-row{transition:none}
   .cabinet:hover{transform:none}
-  .cabinet:hover .cab-inner::before,.cabinet:hover .cab-icon{animation:none}
+  .cabinet:hover .cab-icon{animation:none}
 }
 
 /* collaborazione (es. Proxima x Fieri della Fiera) */
