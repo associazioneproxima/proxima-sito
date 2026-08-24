@@ -266,13 +266,22 @@
 .salamell-page .bigcard h4{font-family:var(--disp);text-transform:uppercase;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.5px;margin:6px 0}
 .salamell-page .bigcard p{opacity:.75}
 .salamell-page .bigcard b{color:#fff}
-/* bollino logo band, appoggiato sulla foto di copertina */
-.salamell-page .bigcard .cover{position:relative}
-.salamell-page .bigcard .band-badge{position:absolute;right:14px;bottom:14px;z-index:2;
-  width:clamp(78px,17%,126px);line-height:0;
-  filter:drop-shadow(0 6px 18px rgba(0,0,0,.6));transition:transform .4s}
-.salamell-page .bigcard:hover .band-badge{transform:scale(1.06) rotate(-4deg)}
-.salamell-page .bigcard .cover .band-badge img{width:100%;height:auto;object-fit:contain;transform:none}
+/* bollino logo band, a cavallo tra foto e testo (fuori da .cover, che taglia) */
+.salamell-page .bigcard .cap{position:relative}
+.salamell-page .bigcard .band-badge{position:absolute;right:24px;top:0;z-index:2;
+  display:block;width:clamp(74px,16%,118px);line-height:0;
+  transform:translateY(-50%);
+  filter:drop-shadow(0 6px 18px rgba(0,0,0,.55));transition:transform .4s,filter .3s}
+.salamell-page .bigcard:hover .band-badge{transform:translateY(-50%) scale(1.06) rotate(-4deg)}
+.salamell-page .bigcard .band-badge:hover{filter:drop-shadow(0 8px 22px rgba(255,200,0,.55))}
+.salamell-page .bigcard .cap .band-badge img{width:100%;height:auto;object-fit:contain;transform:none;display:block}
+/* lascio spazio al bollino perche' non finisca sopra il titolo */
+.salamell-page .bigcard.has-badge .cap h4{padding-right:clamp(74px,20%,136px)}
+/* nome della band cliccabile */
+.salamell-page .bigcard .band-link{color:inherit;text-decoration:none;
+  border-bottom:2px solid var(--red);transition:border-color .25s,color .25s}
+.salamell-page .bigcard .band-link:hover{border-color:var(--yellow)}
+.salamell-page .bigcard .band-link:hover b{color:var(--yellow)}
 
 /* ===== DRAMA ===== */
 .salamell-page .drama{text-align:center}
@@ -469,9 +478,9 @@
       <h2 class="display">La festa continua</h2>
     </div>
     <div class="serata-grid">
-      <div class="bigcard red reveal l">
-        <div class="cover"><img src="img/the-burning-tubes.webp" alt="The Burning Tubes" onerror="this.parentNode.outerHTML='&lt;div class=\'ph\'&gt;Foto The Burning Tubes&lt;/div&gt;'"><span class="band-badge"><img src="img/the-burning-tubes-logo.webp" alt="Logo The Burning Tubes" onerror="this.parentNode.style.display='none'"></span></div>
-        <div class="cap"><h4>Musica dal vivo</h4><p>Sul palco <b>The Burning Tubes</b>: rock'n'roll americano anni '50, la colonna sonora perfetta per far ballare la piazza e festeggiare il campione.</p></div>
+      <div class="bigcard red reveal l has-badge">
+        <div class="cover"><img src="img/the-burning-tubes.webp" alt="The Burning Tubes" onerror="this.parentNode.outerHTML='&lt;div class=\'ph\'&gt;Foto The Burning Tubes&lt;/div&gt;'"></div>
+        <div class="cap"><a class="band-badge" href="https://www.instagram.com/burningtubes/" target="_blank" rel="noopener" aria-label="The Burning Tubes su Instagram"><img src="img/the-burning-tubes-logo.webp" alt="Logo The Burning Tubes" onerror="this.parentNode.style.display='none'"></a><h4>Musica dal vivo</h4><p>Sul palco <a class="band-link" href="https://www.instagram.com/burningtubes/" target="_blank" rel="noopener"><b>The Burning Tubes</b></a>: rock'n'roll americano anni '50, la colonna sonora perfetta per far ballare la piazza e festeggiare il campione.</p></div>
       </div>
       <div class="bigcard blue reveal r" data-delay="1">
         <div class="cover"><img src="img/gonfiabili_cover.jpg" alt="Gonfiabili" onerror="this.parentNode.outerHTML='&lt;div class=\'ph\'&gt;Foto area bimbi&lt;/div&gt;'"></div>
