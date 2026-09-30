@@ -56,8 +56,7 @@
 
 .hero-side{grid-column:2;grid-row:1;align-self:start;justify-self:end;padding-top:.4vw;
   opacity:0;animation:rise .8s 1.15s cubic-bezier(.2,.7,.2,1) forwards}
-.hero-side .sub{font-size:1.1rem;font-weight:300;line-height:1.55;opacity:.9;margin-bottom:22px}
-.hero-side .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-side .cta{display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 .roots-zone{grid-column:1/-1;grid-row:2;height:clamp(150px,27vh,300px)}
 
 /* lo strato delle radici, disegnato via JS dietro al testo */
@@ -80,9 +79,11 @@
 
 /* sotto i 1240px sottotitolo e bottoni scendono sotto le radici */
 @media(max-width:1240px){
+  .hero{min-height:auto}   /* in colonna l'altezza la decide il contenuto: niente vuoto sopra il titolo sui tablet */
   .hero-body{grid-template-columns:1fr;grid-template-rows:auto auto auto;margin-top:6vh}
   .roots-zone{grid-row:2;height:clamp(110px,17vh,190px)}
   .hero-side{grid-column:1;grid-row:3;justify-self:start;padding:6px 0 34px;max-width:460px}
+  .hero-side .cta{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
   .coords{text-align:left}
 }
 /* solo sui telefoni "radici locali" va su due righe */
@@ -178,7 +179,6 @@
       <span class="l3" aria-hidden="true">radici <br class="br-m">locali</span>
     </h1>
     <div class="hero-side">
-      <p class="sub">Eventi, musica, sport e cultura per i giovani della Martesana.</p>
       <div class="cta">
         <a href="#prossimi" class="btn fill">Scopri gli eventi</a>
         <a href="contatti.html" class="btn">Diventa volontario</a>
@@ -260,22 +260,57 @@ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t;
     return ((t^t>>>14)>>>0)/4294967296; }; }
 
-  /* posizioni delle lettere dell'ultima riga, relative all'hero */
+  /* dove una lettera tocca terra davvero: disegno il glifo su un canvas e cerco
+     l'inchiostro appena sopra la linea di base. Cosi' A e R hanno due piedi e
+     nessuna radice parte dal vuoto fra le gambe (il centro del riquadro, in
+     quelle lettere, cade proprio nel buco). */
+  var feetCache={};
+  function glyphFeet(ch,font,fs){
+    var key=font+'|'+ch; if(feetCache[key]) return feetCache[key];
+    var c=document.createElement('canvas'), ctx=c.getContext('2d');
+    ctx.font=font;
+    var m=ctx.measureText(ch);
+    var asc=m.fontBoundingBoxAscent||m.actualBoundingBoxAscent||fs*.9;
+    var w=Math.ceil(m.width+fs*.2);
+    c.width=w; c.height=Math.ceil(asc+fs*.3);
+    ctx.font=font; ctx.textBaseline='alphabetic'; ctx.fillStyle='#000';   /* il resize azzera il contesto */
+    ctx.fillText(ch,0,asc);
+    var px=ctx.getImageData(0,Math.round(asc-fs*.05),w,1).data, runs=[], s=-1;
+    for(var x=0;x<=w;x++){
+      var on=x<w && px[x*4+3]>140;
+      if(on&&s<0) s=x;
+      if(!on&&s>=0){ if(x-s>=fs*.05) runs.push({a:s,b:x}); s=-1; }
+    }
+    return (feetCache[key]={runs:runs,asc:asc});
+  }
+
+  /* i piedi delle lettere dell'ultima riga, in coordinate dell'hero */
   function letterFeet(){
-    var hr=hero.getBoundingClientRect(), out=[], rows=[];
-    var walker=document.createTreeWalker(line,NodeFilter.SHOW_TEXT);
-    var n; while((n=walker.nextNode())){
+    var hr=hero.getBoundingClientRect(), chars=[];
+    var cs=getComputedStyle(line), fs=parseFloat(cs.fontSize);
+    var font=cs.fontStyle+' '+cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
+    var walker=document.createTreeWalker(line,NodeFilter.SHOW_TEXT), n;
+    while((n=walker.nextNode())){
       for(var i=0;i<n.length;i++){
         if(!/\S/.test(n.data[i])) continue;
         var r=document.createRange(); r.setStart(n,i); r.setEnd(n,i+1);
         var b=r.getBoundingClientRect();
-        if(b.width) rows.push({x:b.left+b.width/2-hr.left, y:b.bottom-hr.top, h:b.height, w:b.width});
+        if(b.width) chars.push({ch:n.data[i].toUpperCase(),b:b});   /* a video e' maiuscolo */
       }
     }
-    if(!rows.length) return out;
-    var maxY=Math.max.apply(null,rows.map(function(o){return o.y}));
-    rows.forEach(function(o){ if(Math.abs(o.y-maxY)<o.h*0.4) out.push(o); });
-    return out;
+    if(!chars.length) return null;
+    /* solo l'ultima riga: su mobile "radici" e "locali" stanno su due righe */
+    var maxB=Math.max.apply(null,chars.map(function(c){return c.b.bottom}));
+    chars=chars.filter(function(c){ return maxB-c.b.bottom < fs*.4; });
+    var feet=[], base=0;
+    chars.forEach(function(c,li){
+      var g=glyphFeet(c.ch,font,fs);
+      base=c.b.top+g.asc-hr.top;                     /* linea di base della riga */
+      g.runs.forEach(function(run){
+        feet.push({x:c.b.left+(run.a+run.b)/2-hr.left, w:run.b-run.a, letter:li});
+      });
+    });
+    return {feet:feet,fs:fs,base:base};
   }
 
   /* una radice: scende serpeggiando, si ramifica, si assottiglia */
@@ -309,13 +344,13 @@ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
   function draw(){
-    var feet=letterFeet(); if(!feet.length) return;
+    var L=letterFeet(); if(!L||!L.feet.length) return;
     var hr=hero.getBoundingClientRect(), zr=zone.getBoundingClientRect();
     var yEnd=zr.bottom-hr.top;
     svg.setAttribute('viewBox','0 0 '+hr.width+' '+hr.height);
     while(svg.firstChild) svg.removeChild(svg.firstChild);
 
-    var y0=feet[0].y - feet[0].h*0.24;               /* partono dal piede delle lettere */
+    var y0=L.base-L.fs*.04;                         /* dentro il piede, appena sopra la base: l'attacco resta coperto dalla lettera */
     var defs=document.createElementNS(NS,'defs');
     defs.innerHTML=
       '<linearGradient id="rootGrad" gradientUnits="userSpaceOnUse" x1="0" y1="'+y0+'" x2="0" y2="'+yEnd+'">'+
@@ -329,13 +364,13 @@ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         '<stop offset="1" stop-color="#ddeb00" stop-opacity="0"/></linearGradient>';
     svg.appendChild(defs);
 
-    var rand=seeded(20240501), fs=feet[0].h, all=[];
-    feet.forEach(function(f,i){
-      var main=(i%2===0);                             /* una lettera si' e una no: radice lunga */
+    var rand=seeded(20240501), fs=L.fs, all=[];
+    L.feet.forEach(function(f,i){
+      var main=(i%2===0);                             /* un piede si' e uno no: radice lunga */
       var len=(yEnd-y0)*(main?1.15:0.45+rand()*0.3);
       var list=[];
-      grow(f.x+(rand()-.5)*f.w*0.3, y0, Math.PI/2+(rand()-.5)*0.5, len, Math.max(9,fs*0.1), main?0:1, rand, yEnd, list);
-      list.forEach(function(r){ r.letter=i; r.main=main; });
+      grow(f.x+(rand()-.5)*f.w*0.35, y0, Math.PI/2+(rand()-.5)*0.4, len, Math.max(9,fs*0.11), main?0:1, rand, yEnd, list);
+      list.forEach(function(r){ r.letter=f.letter; r.main=main; });
       all=all.concat(list);
     });
 
@@ -345,7 +380,7 @@ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if(r.pts.length<2) return;
       var p=document.createElementNS(NS,'path');
       var w=r.depth===0?2.2:(r.depth===1?1.3:0.8);
-      var dur=0.9+r.len/(fs*9);
+      var dur=0.9+r.len/(fs*10.5);
       var wait=base+r.letter*0.05+(r.parentAt||0)*0.9;
       p.setAttribute('d',smooth(r.pts));
       p.setAttribute('pathLength','1');
